@@ -40,7 +40,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         <!-- Email Address -->
         <div>
-            <x-input-label class="text-cyan-800 font-bold text-4xl" for="email" :value="__('Email:')" />
+            <x-input-label class="text-cyan-800 font-bold " for="email" :value="__('Email:')" />
             <input wire:model="form.email" id="email" class="block px-1 py-1 w-full border-t-0 border-r-0 border-l-0 border-b-1 focus:border-cyan-800 focus:ring-red-50 focus:border-b-2 border-cyan-800 bg-gray-100" type="email" name="email" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
         </div>
