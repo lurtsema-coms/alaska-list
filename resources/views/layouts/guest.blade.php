@@ -21,7 +21,7 @@
             <div class="w-full sm:w-2/5 p-10 m-auto mx-8 sm:pt-28 sm:pb-20 sm:px-20 sm:mx-11 sm:my-16 bg-gray-100 rounded-lg">
                 {{ $slot }}
             </div>
-            <div class="w-3/5  hidden sm:block relative bg-contain bg-no-repeat bg-center">
+            <div class="w-3/5  hidden sm:block relative bg-contain bg-no-repeat bg-[#246567] bg-center">
                 {{-- <img class="absolute object-cover min-h-full min-w-full top-0 z-10" src="{{asset('img/nurses.png')}}" alt=""> --}}
                 <div class=" w-full h-full absolute inset-0 z-20 opacity-75">
                 </div>
