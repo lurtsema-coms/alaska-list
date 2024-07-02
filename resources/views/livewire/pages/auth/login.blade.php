@@ -41,14 +41,14 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Email Address -->
         <div>
             <x-input-label class="text-[#246567] font-bold " for="email" :value="__('Email:')" />
-            <input wire:model="form.email" id="email" class="block px-1 py-1 w-full border-t-0 border-r-0 border-l-0 border-b-1 focus:border-cyan-800 focus:ring-red-50 focus:border-b-2 border-cyan-800 bg-gray-100" type="email" name="email" required autofocus autocomplete="username" />
+            <input wire:model="form.email" id="email" class="block px-1 py-1 w-full border-t-0 border-r-0 border-l-0 border-b-1 focus:border-cyan-800 focus:ring-gray-50 focus:border-b-2 border-cyan-800 bg-gray-50" type="email" name="email" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
             <x-input-label class="text-[#246567] font-bold" for="password" :value="__('Password:')" />
-            <input wire:model="form.password" id="password" class="block px-1 py-1 w-full border-t-0 border-r-0 border-l-0 border-b-1 focus:border-cyan-800 focus:ring-red-50 focus:border-b-2 border-cyan-800 bg-gray-100" type="password" name="password" required autocomplete="current-password" />
+            <input wire:model="form.password" id="password" class="block px-1 py-1 w-full border-t-0 border-r-0 border-l-0 border-b-1 focus:border-cyan-800 focus:ring-gray-50 focus:border-b-2 border-cyan-800 bg-gray-50" type="password" name="password" required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
         </div>
 
