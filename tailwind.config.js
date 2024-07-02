@@ -16,9 +16,6 @@ export default {
                 poppins: ["Poppins", "sans-serif"],
             },
         },
-        clipPath: {
-            ellipse: "ellipse(100% 100% at top center)",
-        },
     },
 
     plugins: [forms],

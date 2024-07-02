@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'page.welcome');
+Route::view('/categories', 'page.categories');
+Route::view('/about-us', 'page.about-us');
+Route::view('/advertise-with-us', 'page.advertise-with-us');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
