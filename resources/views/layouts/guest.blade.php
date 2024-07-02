@@ -18,7 +18,7 @@
     </head>
     <body class="font-sans text-gray-900 antialiased flex m-auto min-h-screen">
         <div class="w-full max-w-7xl flex flex-row  justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden h-[45rem]">
-            <div class="w-full sm:w-2/5 p-10 m-auto mx-8 sm:pt-28 sm:pb-20 sm:px-20 sm:mx-11 sm:my-16 bg-gray-100 rounded-lg">
+            <div class="w-full sm:w-2/5 p-10 m-auto mx-8 sm:pt-28 sm:pb-20 sm:px-20 sm:mx-11 sm:my-16 bg-gray-50 rounded-3xl">
                 {{ $slot }}
             </div>
             <div class="w-3/5  hidden sm:block relative bg-contain bg-no-repeat bg-[#246567] bg-center">
