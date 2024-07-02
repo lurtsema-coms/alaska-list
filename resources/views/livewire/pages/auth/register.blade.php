@@ -11,8 +11,11 @@ use Livewire\Volt\Component;
 
 new #[Layout('layouts.registration')] class extends Component
 {
-    public string $name = '';
+    public string $first_name = '';
+    public string $last_name = '';
     public string $email = '';
+    public string $contact_number = '';
+    public string $home_address = '';
     public string $password = '';
     public string $password_confirmation = '';
 
@@ -23,12 +26,15 @@ new #[Layout('layouts.registration')] class extends Component
     {
         $validated = $this->validate([
             'first_name' => ['required', 'string', 'max:255'],
-            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'contact_number' => ['required', 'string', 'max:255'],
+            'home_address' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
+        $validated['role'] = 'seller';
 
         event(new Registered($user = User::create($validated)));
 
@@ -41,9 +47,9 @@ new #[Layout('layouts.registration')] class extends Component
 
 <div>
     <div class=" text-center mb-5">
-        <h1 class=" text-3xl font-bold font-poppins">Registration Form</h1>
+        <h1 class=" text-3xl font-bold text-[#246567] font-poppins">Registration Form</h1>
     </div>
-    <form wire:submit="register">
+    <form wire:submit="register" class="text-[#246567]">
         <!-- Name -->
         <div class="flex gap-5">
             <div class="flex-1">
@@ -60,7 +66,7 @@ new #[Layout('layouts.registration')] class extends Component
 
         <div class="mt-4 flex gap-5">
             <div class="flex-1">
-                <x-input-label for="email" :value="__('Email')" />
+                <x-input-label for="email" :value="__('Email:')" />
                 <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="email" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
@@ -83,7 +89,7 @@ new #[Layout('layouts.registration')] class extends Component
         <!-- Password -->
         <div class="mt-4 flex gap-5">
             <div class="flex-1">
-                <x-input-label for="password" :value="__('Password')" />
+                <x-input-label for="password" :value="__('Password:')" />
                 <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
@@ -94,7 +100,7 @@ new #[Layout('layouts.registration')] class extends Component
     
             <!-- Confirm Password -->
             <div class="flex-1">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-input-label for="password_confirmation" :value="__('Confirm Password:')" />
                 <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required autocomplete="new-password" />
@@ -104,7 +110,7 @@ new #[Layout('layouts.registration')] class extends Component
 
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
+            <a class="underline text-sm text-cyan-600  hover:text-cyan-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
                 {{ __('Already registered?') }}
             </a>
 

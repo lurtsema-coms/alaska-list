@@ -12,20 +12,21 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
+
     </head>
     <body class="font-sans text-gray-900 antialiased flex m-auto min-h-screen">
         <div class="w-full max-w-7xl flex flex-row  justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden h-[45rem]">
-            <div class="w-full sm:w-2/5 p-10 m-auto mx-8 sm:pt-28 sm:pb-20 sm:px-20 sm:mx-11 sm:my-16 bg-gray-50 rounded-3xl border  ">
-                {{ $slot }}
+            <div class="w-full sm:w-2/5 p-10 px-20 bg-[#246567] ">
             </div>
-            <div class="w-3/5  hidden sm:block relative bg-contain bg-no-repeat bg-[#246567] bg-center">
-                {{-- <img class="absolute object-cover min-h-full min-w-full top-0 z-10" src="{{asset('img/nurses.png')}}" alt=""> --}}
-                <div class=" w-full h-full absolute inset-0 z-20 opacity-75">
+            <div class="w-3/5 p-10 m-auto mx-16 rounded-lg leading-none bg-gray-50 border  ">
+                <div class=" w-full">
+                    <livewire:pages.auth.register>
                 </div>
             </div>
         </div>
+        @livewireScripts
     </body>
 </html>
