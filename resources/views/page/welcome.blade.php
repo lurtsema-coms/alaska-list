@@ -97,7 +97,7 @@
     </div>
     
     <div id="products" class="py-10 rounded-lg" data-aos="zoom-in">
-        <div class="max-w-6xl mx-8 md:mx-10 lg:mx-20 xl:mx-auto">
+        <div class="contaner mx-8 md:mx-10 lg:mx-20 xl:mx-auto">
 
             <div class="mb-12 space-y-5 md:mb-16 md:text-center">
                 <div class="inline-block px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg md:text-center bg-[#202c47] bg-opacity-80 hover:cursor-pointer hover:bg-opacity-40">
@@ -107,8 +107,8 @@
                     Explore products that have been highlighted for your attention.
                 </h1>
             </div>
-
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            <livewire:frontend.sponsored-listing>
+            {{-- <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
 
                 <!-- Product 1 -->
                 <div class="text-sm leading-6">
@@ -166,7 +166,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@ new class extends Component {
 
 <div class="sticky top-0 z-20" x-data="{ sidebarOpen: false }">
     <div class="bg-white border-b">
-        <div class="container mx-auto py-2 px-5 md:px-0">
+        <div class="container mx-auto py-2 px-2 sm:px-0">
             <div class="flex items-center">
                 <div class="flex items-center w-full gap-5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-dark cursor-pointer hover:opacity-70"
@@ -45,19 +45,19 @@ new class extends Component {
             </svg>
         </div>
         <div class="flex flex-col gap-5 text-white">
-            <a class="relative group px-1" href="/" wire:navigate>
+            <a class="relative group px-1" href="{{ route('welcome') }}" wire:navigate>
                 <span class="transition-opacity group-hover:opacity-70">Home</span>
                 <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
             </a>
-            <a class="relative group px-1" href="/categories" wire:navigate>
+            <a class="relative group px-1" href="{{ route('categories') }}" wire:navigate>
                 <span class="transition-opacity group-hover:opacity-70">Categories</span>
                 <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
             </a>
-            <a class="relative group px-1" href="">
+            <a class="relative group px-1" href="{{ route('listing-page') }}">
                 <span class="transition-opacity group-hover:opacity-70">Listing page</span>
                 <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
             </a>
-            <a class="relative group px-1" href="/about-us" wire:navigate>
+            <a class="relative group px-1" href="{{ route('about-us') }}" wire:navigate>
                 <span class="transition-opacity group-hover:opacity-70">About Us</span>
                 <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
             </a>
@@ -65,7 +65,7 @@ new class extends Component {
                 <span class="transition-opacity group-hover:opacity-70">Get In Touch</span>
                 <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
             </a>
-            <a class="relative group px-1" href="/advertise-with-us" wire:navigate>
+            <a class="relative group px-1" href="{{ route('advertise-with-us') }}" wire:navigate>
                 <span class="transition-opacity group-hover:opacity-70">Advertise With Us</span>
                 <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
             </a>
