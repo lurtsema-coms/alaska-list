@@ -3,10 +3,10 @@
 @section('body-content')
 <div class="my-14 px-5">
     <div class="container mx-auto" data-aos="zoom-in-up">
-        <p class="mb-20 text-4xl">Categories</p>
+        <p class="mb-8 text-4xl">Categories</p>
         <div class="flex flex-wrap gap-6">
             <div class="flex-1 min-w-80 flex flex-col gap-8">
-                <div class="p-7 border border-gray-200 shadow-sm bg-white rounded-lg">
+                <div class="p-7 border border-gray-200 shadow-sm bg-gray-50 rounded-lg">
                     <p class="mb-8 text-slate-600 font-semibold">Community</p>
                     <div class="flex flex-wrap gap-2">
                         <div class="flex-1 min-w-fit space-y-2">
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-7 border border-gray-200 shadow-sm bg-white rounded-lg">
+                <div class="p-7 border border-gray-200 shadow-sm bg-gray-50 rounded-lg">
                     <p class="mb-8 text-slate-600 font-semibold">Services</p>
                     <div class="flex flex-wrap gap-2">
                         <div class="flex-1 min-w-fit space-y-2">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="flex-1 min-w-80 flex flex-col gap-8">
-                <div class="p-7 border border-gray-200 shadow-sm bg-white rounded-lg">
+                <div class="p-7 border border-gray-200 shadow-sm bg-gray-50 rounded-lg">
                     <p class="mb-8 text-slate-600 font-semibold">Community</p>
                     <div class="flex flex-wrap gap-2">
                         <div class="flex-1 min-w-fit space-y-2">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-7 border border-gray-200 shadow-sm rounded-lg">
+                <div class="p-7 border border-gray-200 shadow-sm bg-gray-50 rounded-lg">
                     <p class="mb-8 text-slate-600 font-semibold">Services</p>
                     <div class="flex flex-wrap gap-2">
                         <div class="flex-1 min-w-fit space-y-2">
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="flex-1 min-w-80 flex flex-col gap-8">
-                <div class="p-7 border border-gray-200 shadow-sm rounded-lg">
+                <div class="p-7 border border-gray-200 shadow-sm bg-gray-50 rounded-lg">
                     <p class="mb-8 text-slate-600 font-semibold">Community</p>
                     <div class="flex flex-wrap gap-2">
                         <div class="flex-1 min-w-fit space-y-2">
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-7 border border-gray-200 shadow-sm rounded-lg">
+                <div class="p-7 border border-gray-200 shadow-sm bg-gray-50 rounded-lg">
                     <p class="mb-8 text-slate-600 font-semibold">Services</p>
                     <div class="flex flex-wrap gap-2">
                         <div class="flex-1 min-w-fit space-y-2">

@@ -4,7 +4,7 @@
 <div class="py-14 px-5">
     <div class="container mx-auto space-y-8 sm:px-5" data-aos="zoom-in-up">
         <div>
-            <h2 class=" text-xl font-bold text-gray-800">Listing Page</h2>
+            <h2 class=" text-4xl text-gray-800">Listing Page</h2>
         </div>
         <livewire:frontend.sponsored-listing>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
