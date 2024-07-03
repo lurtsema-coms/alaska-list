@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <div class="bg-white p-10 rounded-3xl border border-gray-200 shadow overflow-x-auto">
+    <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md overflow-x-auto">
         <div class="min-w-[40rem]">
             <div id="chart"></div>
         </div>
