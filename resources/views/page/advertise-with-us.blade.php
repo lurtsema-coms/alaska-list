@@ -5,7 +5,7 @@
     <div class="absolute inset-0 bg-no-repeat bg-cover opacity-25" style="background-image: url('{{ asset('frontend/scattered-forcefields.svg') }}')"></div>
 
     <div id="advertise-with-us" class="container mx-auto" data-aos="zoom-in-up">
-        <h2 class="text-center text-4xl font-bold text-gray-800 mb-4">Advertise with Us</h2>
+        <h2 class="text-center text-4xl font-bold text-gray-800 mb-4">Advertise with us</h2>
         <p class="text-center text-gray-600 mb-4">Boost your listing to the top and gain maximum visibility!</p>
     
         <div class="mb-6">

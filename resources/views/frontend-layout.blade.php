@@ -12,7 +12,13 @@
     <!-- Aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper -->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -29,8 +35,43 @@
         <livewire:frontend.footer>
     </div>
     @livewireScripts
-    <script data-navigated-once>
-        AOS.init();
+    <script data-navigate-once>
+        document.addEventListener('livewire:navigated', () => {
+            AOS.init();
+            
+            const swiper = new Swiper(".swiper", {
+                grabCursor: true,
+                centeredSlides: true,
+                allowTouchMove: false,
+                autoplay: {
+                    delay: 3000, 
+                    disableOnInteraction: false,
+                },
+                loop: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                breakpoints: {
+                    300: {
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                    },
+                    400: {
+                        slidesPerView: 2,
+                        spaceBetween: 0,
+                    },
+                    700: {
+                        slidesPerView: 3,
+                        spaceBetween: 0,
+                    },
+                    1200: {
+                        slidesPerView: 5,
+                        spaceBetween: 0,
+                    },
+                },
+            });
+        })
     </script>
 </body>
 </html>
