@@ -19,7 +19,15 @@
     </head>
     <body class="font-sans text-gray-900 antialiased flex m-auto min-h-screen">
         <div class="w-full max-w-7xl flex flex-row  justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden h-[45rem]">
-            <div class="w-full sm:w-2/5 p-10 px-20 bg-[#246567] ">
+            <div class="w-full sm:w-2/5 p-10 px-20 bg-[#122a30] ">
+                <div>
+                    {{-- <img src="{{ asset('frontend/register2.png') }}" alt="Image" class=""> --}}
+                </div>
+                <div>
+                    <span>
+
+                    </span>
+                </div>
             </div>
             <div class="w-3/5 p-10 m-auto mx-16 rounded-lg leading-none bg-gray-50 border  ">
                 <div class=" w-full">
