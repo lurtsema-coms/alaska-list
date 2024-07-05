@@ -9,7 +9,7 @@
         <div class="space-y-10">
             <livewire:frontend.sponsored-listing>
             <div class="max-h-80 p-4 bg-white w-full mx-auto shadow-md rounded-xl space-y-4 overflow-y-auto">
-                <p class="text-xl font-semibold text-gray-800 mb-4">Categories</p>
+                <p class="text-xl font-medium text-gray-700 mb-4">Sort by categories</p>
                 <div class="flex flex-wrap -mx-2">
                     <!-- First column -->
                     <div class="flex-grow basis-1/3 min-w-fit px-2 mb-4">

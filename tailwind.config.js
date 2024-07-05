@@ -16,6 +16,9 @@ export default {
                 poppins: ["Poppins", "sans-serif"],
             },
         },
+        backgroundImage: {
+            "scattered": "url('../images/scattered-forcefields.svg')",
+        },
     },
 
     plugins: [forms],

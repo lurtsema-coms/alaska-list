@@ -88,8 +88,8 @@
         <svg width="100%" height="24" viewBox="0 0 445 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="paint0_linear" x1="442.073" y1="0.563245" x2="414.515" y2="114.417" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#FFF176"></stop>
-                    <stop offset="100%" stop-color="#FFF176"></stop>
+                    <stop offset="0%" stop-color="#a1ffce"></stop>
+                    <stop offset="100%" stop-color="#faffd1"></stop>
                 </linearGradient>
             </defs>
             <path d="M2.05469 14.4867C101.635 11.2688 220.427 7.27869 321.636 4.51622C339.098 4.03959 405.88 2.2299 435.16 2.4148C469.321 2.63052 367.236 4.76098 333.13 5.23315C287.706 5.862 241.846 5.56207 196.608 7.11433C141.398 9.00879 86.1341 13.2794 32.6894 18.4062C25.661 19.0804 18.1112 19.7952 11.4034 20.8511C10.8564 20.9372 12.5329 21.0395 13.133 21.0441C30.5637 21.177 48.0652 20.9913 65.4387 20.6787C190.017 18.4372 313.48 13.4101 438.301 12.1482" stroke="url(#paint0_linear)" stroke-width="4" stroke-linecap="round"></path>
@@ -125,8 +125,8 @@
             <svg width="100%" height="24" viewBox="0 0 445 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="paint0_linear" x1="442.073" y1="0.563245" x2="414.515" y2="114.417" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#FFF176"></stop>
-                    <stop offset="100%" stop-color="#FFF176"></stop>
+                        <stop offset="0%" stop-color="#a1ffce"></stop>
+                        <stop offset="100%" stop-color="#faffd1"></stop>
                     </linearGradient>
                 </defs>
                 <path d="M2.05469 14.4867C101.635 11.2688 220.427 7.27869 321.636 4.51622C339.098 4.03959 405.88 2.2299 435.16 2.4148C469.321 2.63052 367.236 4.76098 333.13 5.23315C287.706 5.862 241.846 5.56207 196.608 7.11433C141.398 9.00879 86.1341 13.2794 32.6894 18.4062C25.661 19.0804 18.1112 19.7952 11.4034 20.8511C10.8564 20.9372 12.5329 21.0395 13.133 21.0441C30.5637 21.177 48.0652 20.9913 65.4387 20.6787C190.017 18.4372 313.48 13.4101 438.301 12.1482" stroke="url(#paint0_linear)" stroke-width="4" stroke-linecap="round"></path>
@@ -139,35 +139,40 @@
                     Steps
                 </div>
                 <div class="flex gap-16 flex-col lg:flex-row">
+                    <!-- Step 1: Register -->
                     <div class="flex-1 relative">
-                        <p class="relative z-10 text-xl font-medium text-slate-600">Lorem, ipsum.</p>
+                        <p class="relative z-10 text-xl font-medium text-slate-600">Register</p>
                         <p class="relative z-10 text-md text-slate-600 mt-2">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus aspernatur, officiis possimus odit fugit iure.
+                            Join our community and start listing your treasures. Registering is quick and easy. Get started by creating your account and enjoy all the features we offer.
                         </p>
-                        <div class="absolute -top-6 -left-8 text-9xl z-0 text-[#2171a7] opacity-20">
+                        <div class="absolute -top-6 -left-8 text-9xl z-0 text-[#2171a7] opacity-10">
                             1
                         </div>
                     </div>
+                    
+                    <!-- Step 2: Login -->
                     <div class="flex-1 relative">
-                        <p class="relative z-10 text-xl font-medium text-slate-600">Lorem, ipsum.</p>
+                        <p class="relative z-10 text-xl font-medium text-slate-600">Login</p>
                         <p class="relative z-10 text-md text-slate-600 mt-2">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus aspernatur, officiis possimus odit fugit iure.
+                            Access your account to manage your listings. Logging in keeps your information secure and easily accessible.
                         </p>
-                        <div class="absolute -top-6 -left-8 text-9xl z-0 text-[#2171a7] opacity-20">
+                        <div class="absolute -top-6 -left-8 text-9xl z-0 text-[#2171a7] opacity-10">
                             2
                         </div>
                     </div>
+                    
+                    <!-- Step 3: Upload Your Treasures -->
                     <div class="flex-1 relative">
-                        <p class="relative z-10 text-xl font-medium text-slate-600">Lorem, ipsum.</p>
+                        <p class="relative z-10 text-xl font-medium text-slate-600">Upload Your Treasures/Product</p>
                         <p class="relative z-10 text-md text-slate-600 mt-2">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus aspernatur, officiis possimus odit fugit iure.
+                            Ready to sell something? Upload your items and reach potential buyers quickly. Provide clear details and set a fair price to attract interested buyers.
                         </p>
-                        <div class="absolute -top-6 -left-8 text-9xl z-0 text-[#2171a7] opacity-20">
+                        <div class="absolute -top-6 -left-8 text-9xl z-0 text-[#2171a7] opacity-10">
                             3
                         </div>
                     </div>
                 </div>
-                <a class="flex" href="/#get-in-touch">
+                <a class="flex" href="{{ route('login') }}" wire:navigate>
                     <div class="border border-[#2171a7] px-6 py-3 rounded-lg shadow-md hover:bg-[#2171a7] hover:text-white transition-colors duration-300 cursor-pointer">
                         Upload Now
                     </div>
@@ -186,8 +191,8 @@
         <svg width="100%" height="24" viewBox="0 0 445 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="paint0_linear" x1="442.073" y1="0.563245" x2="414.515" y2="114.417" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#FFF176"></stop>
-                    <stop offset="100%" stop-color="#FFF176"></stop>
+                    <stop offset="0%" stop-color="#a1ffce"></stop>
+                    <stop offset="100%" stop-color="#faffd1"></stop>
                 </linearGradient>
             </defs>
             <path d="M2.05469 14.4867C101.635 11.2688 220.427 7.27869 321.636 4.51622C339.098 4.03959 405.88 2.2299 435.16 2.4148C469.321 2.63052 367.236 4.76098 333.13 5.23315C287.706 5.862 241.846 5.56207 196.608 7.11433C141.398 9.00879 86.1341 13.2794 32.6894 18.4062C25.661 19.0804 18.1112 19.7952 11.4034 20.8511C10.8564 20.9372 12.5329 21.0395 13.133 21.0441C30.5637 21.177 48.0652 20.9913 65.4387 20.6787C190.017 18.4372 313.48 13.4101 438.301 12.1482" stroke="url(#paint0_linear)" stroke-width="4" stroke-linecap="round"></path>

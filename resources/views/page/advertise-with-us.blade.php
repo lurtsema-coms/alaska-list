@@ -2,7 +2,7 @@
 
 @section('body-content')
 <div class="relative my-14 px-5">
-    <div class="absolute inset-0 bg-no-repeat bg-cover opacity-25" style="background-image: url('{{ asset('frontend/scattered-forcefields.svg') }}')"></div>
+    <div class="absolute inset-0 bg-no-repeat bg-cover opacity-25 bg-scattered"></div>
 
     <div id="advertise-with-us" class="container mx-auto" data-aos="zoom-in-up">
         <h2 class="text-center text-4xl font-bold text-gray-800 mb-4">Advertise with us</h2>

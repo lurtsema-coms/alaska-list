@@ -16,6 +16,11 @@
             <p class="mb-4 text-slate-600">Place</p>
             <div class="space-y-8">
                 <div class="shadow-md px-5 py-10 rounded-xl">
+                    <p class="text-right mb-4">
+                        <span class="inline-block bg-green-100 text-green-700 rounded-full px-4 py-1 text-sm font-semibold shadow-sm">
+                            Available
+                        </span>
+                    </p>
                     <div class="swiper-product-item swiper w-full">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper" id="lightgallery">
@@ -46,6 +51,10 @@
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
+                </div>
+                <div class="space-y-2">
+                    <p><span class="font-bold">Posted by: </span>lorem</p>
+                    <p><span class="font-bold">Contact: </span>123456</p>
                 </div>
                 <div class="space-y-2">
                     <p class="font-bold">Description</p>
