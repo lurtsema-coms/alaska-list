@@ -7,7 +7,7 @@
         <div class="w-full flex justify-center flex-col gap-8 text-white z-10 px-5 md:px-10 xl:w-1/2">
             <p class="text-3xl font-bold md:text-5xl">Discover Alaska's Hidden Treasures, <span class="border-b-2 border-yellow-300">Sell</span> Your Surprises</p>
             <p class="text-lg text-slate-200">Welcome to Alaska List, your gateway to the Last Frontier's marketplace. Discover stories behind every listing - whether it's rugged gear, cozy cabins, or local services, find it all here.</p>
-            <a class="flex justify-center mt-4" href="#">
+            <a class="flex justify-center mt-4" href="{{ route('listing-page') }}">
                 <div class="bg-[#1F4B55] text-xl px-6 py-3 rounded-lg shadow-md hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">
                     Search Now
                 </div>
@@ -108,65 +108,6 @@
                 </h1>
             </div>
             <livewire:frontend.sponsored-listing>
-            {{-- <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-
-                <!-- Product 1 -->
-                <div class="text-sm leading-6">
-                    <div class="relative group">
-                        <div class="absolute transition rounded-lg opacity-25 -inset-1 duration-400 group-hover:opacity-100 group-hover:duration-200"></div>
-                        <a href="#" class="cursor-pointer">
-                            <div class="relative p-6 space-y-6 leading-none rounded-lg bg-white border transition-all hover:border hover:border-sky-600 shadow-sm">
-                                <div class="flex items-center space-x-4">
-                                    <img src="product-image-1.jpg" class="w-12 h-12 bg-center bg-cover border rounded-full" alt="Product 1">
-                                    <div>
-                                        <h3 class="text-lg font-semibold text-gray-800">Product 1</h3>
-                                        <p class="text-gray-600 text-md">Category</p>
-                                    </div>
-                                </div>
-                                <p class="leading-normal text-gray-700 text-md">Description of Product 1.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="text-sm leading-6">
-                    <div class="relative group">
-                        <div class="absolute transition rounded-lg opacity-25 -inset-1 duration-400 group-hover:opacity-100 group-hover:duration-200"></div>
-                        <a href="#" class="cursor-pointer">
-                            <div class="relative p-6 space-y-6 leading-none rounded-lg bg-white border transition-all hover:border hover:border-sky-600 shadow-sm">
-                                <div class="flex items-center space-x-4">
-                                    <img src="product-image-2.jpg" class="w-12 h-12 bg-center bg-cover border rounded-full" alt="Product 2">
-                                    <div>
-                                        <h3 class="text-lg font-semibold text-gray-800">Product 2</h3>
-                                        <p class="text-gray-600 text-md">Category</p>
-                                    </div>
-                                </div>
-                                <p class="leading-normal text-gray-700 text-md">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum doloribus molestias ullam at minima in reiciendis hic nobis culpa magnam.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="text-sm leading-6">
-                    <div class="relative group">
-                        <div class="absolute transition rounded-lg opacity-25 -inset-1 duration-400 group-hover:opacity-100 group-hover:duration-200"></div>
-                        <a href="#" class="cursor-pointer">
-                            <div class="relative p-6 space-y-6 leading-none rounded-lg bg-white border transition-all hover:border hover:border-sky-600 shadow-sm">
-                                <div class="flex items-center space-x-4">
-                                    <img src="product-image-3.jpg" class="w-12 h-12 bg-center bg-cover border rounded-full" alt="Product 3">
-                                    <div>
-                                        <h3 class="text-lg font-semibold text-gray-800">Product 3</h3>
-                                        <p class="text-gray-600 text-md">Category</p>
-                                    </div>
-                                </div>
-                                <p class="leading-normal text-gray-700 text-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae aut molestias. Facere, sapiente. Animi a quis earum asperiores fugit. Officiis quaerat magni aperiam iste, aliquid corporis perspiciatis! Laborum provident consectetur quo modi sunt in vero accusamus delectus praesentium rem maxime porro explicabo soluta at eos quas nobis, asperiores nisi?</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 </div>

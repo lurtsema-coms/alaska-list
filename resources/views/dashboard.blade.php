@@ -11,8 +11,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md flex items-center justify-between">
                         <div>
-                            <p class="text-gray-600 font-bold">Active Posts</p>
-                            <p class="text-3xl text-gray-400">1</p>
+                            <p class="text-md text-gray-600 font-bold">Active Posts</p>
+                            <p class="text-md text-gray-400">1</p>
                         </div>
                         <div class="bg-blue-100 text-blue-500 rounded-full p-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
@@ -23,8 +23,8 @@
                     <div class="bg-white border border-gray-200 px-6 
                     py-4 rounded-lg shadow-md flex items-center justify-between">
                         <div>
-                            <p class="text-gray-600 font-bold">Transaction Closed</p>
-                            <p class="text-3xl text-gray-400">1</p>
+                            <p class="text-md text-gray-600 font-bold">Transaction Closed</p>
+                            <p class="text-md text-gray-400">1</p>
                         </div>
                         <div class="bg-green-100 text-green-500 rounded-full p-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
@@ -34,8 +34,8 @@
                     </div>
                     <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md flex items-center justify-between">
                         <div>
-                            <p class="text-gray-600 font-bold">Deleted Post</p>
-                            <p class="text-3xl text-gray-400">1</p>
+                            <p class="text-md text-gray-600 font-bold">Deleted Post</p>
+                            <p class="text-md text-gray-400">1</p>
                         </div>
                         <div class="bg-red-100 text-red-500 rounded-full p-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
@@ -45,8 +45,8 @@
                     </div>
                     <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md flex items-center justify-between">
                         <div>
-                            <p class="text-gray-600 font-bold">Total Posts</p>
-                            <p class="text-3xl text-gray-400">1</p>
+                            <p class="text-md text-gray-600 font-bold">Total Posts</p>
+                            <p class="text-md text-gray-400">1</p>
                         </div>
                         <div class="bg-gray-100 text-gray-500 rounded-full p-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">

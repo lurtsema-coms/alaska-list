@@ -1,8 +1,9 @@
 @extends('frontend-layout')
 
 @section('body-content')
-<div class="my-14 px-5">
+<div class="mt-14 mb-28 px-5">
     <div class="container mx-auto" data-aos="zoom-in-up">
+        <p>Explore by</p>
         <p class="mb-8 text-4xl">Categories</p>
         <div class="flex flex-wrap gap-6">
             <div class="flex-1 min-w-80 flex flex-col gap-8">

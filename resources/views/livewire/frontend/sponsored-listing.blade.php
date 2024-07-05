@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <div class="swiper w-full">
+    <div class="sponsored-listing swiper w-full">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <div class="swiper-slide min-w-fit">

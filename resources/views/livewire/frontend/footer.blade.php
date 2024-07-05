@@ -39,7 +39,7 @@ new class extends Component {
                 <ul class="text-md text-center sm:flex flex-wrap items-center justify-center gap-14 lg:gap-10 xl:gap-14 transition-all duration-500">
                     <li><a href="/" wire:navigate class="text-white hover:text-gray-400">Home</a></li>
                     <li><a href="/categories" wire:navigate class="text-white hover:text-gray-400">Categories</a></li>
-                    <li><a href="#" class="text-white hover:text-gray-400">Listing page</a></li>
+                    <li><a href="#" class="text-white hover:text-gray-400">Listing Page</a></li>
                     <li><a href="/about-us" wire:navigate class="text-white hover:text-gray-400">About Us</a></li>
                     <li><a href="/#get-in-touch" class="text-white hover:text-gray-400">Get In Touch</a></li>
                     <li><a href="/advertise-with-us" wire:navigate class="text-white hover:text-gray-400">Advertise with us</a></li>

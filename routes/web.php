@@ -13,11 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth')->group(function (){
+
+});
+
 Route::view('/', 'page.welcome')->name('welcome');
-Route::view('/categories', 'page.categories')->name('categories');
-Route::view('/about-us', 'page.about-us')->name('about-us');
-Route::view('/advertise-with-us', 'page.advertise-with-us')->name('advertise-with-us');
-Route::view('/listing-page', 'page.listing-page')->name('listing-page');
+Route::view('categories', 'page.categories')->name('categories');
+Route::view('about-us', 'page.about-us')->name('about-us');
+Route::view('advertise-with-us', 'page.advertise-with-us')->name('advertise-with-us');
+Route::view('listing-page', 'page.listing-page')->name('listing-page');
+Route::view('listing-page/item/1', 'page.listing-item')->name('listing-page-item');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
