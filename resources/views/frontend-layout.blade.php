@@ -78,8 +78,22 @@
                 },
                 
             });
-            
-        })
+
+            if (window.location.hash === '#get-in-touch') {
+                var element = document.getElementById('get-in-touch');
+                if (element) {
+                    var navbarHeight = 74;
+                    var offsetPosition = element.offsetTop - navbarHeight - 20;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                } 
+            }
+
+        });
+        
     </script>
 </body>
 </html>

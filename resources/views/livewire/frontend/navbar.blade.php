@@ -82,7 +82,7 @@ new class extends Component {
                     <span class="transition-opacity group-hover:opacity-70">About Us</span>
                     <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
                 </a>
-                <a class="relative group px-1" href="/#get-in-touch">
+                <a class="relative group px-1" href="/#get-in-touch" wire:navigate>
                     <span class="transition-opacity group-hover:opacity-70">Get In Touch</span>
                     <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
                 </a>
