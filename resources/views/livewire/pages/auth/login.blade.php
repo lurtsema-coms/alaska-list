@@ -33,7 +33,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         <div class="mb-8">
             <div class="flex flex-col justify-center items-center mb-4">
-                <h1 class="text-4xl font-extrabold text-[#246567]  sm:text-start font-poppins">LOGIN</h1>
+                <h1 class="text-4xl font-extrabold text-[#246567]  sm:text-start font-poppins hidden lg:block">LOGIN</h1>
             </div>
             <span class="font-bold text-[#246567]">Doesn't have an account yet? <a href="/register"  class="text-cyan-600 hover:text-cyan-500 underline font-bold" wire:navigate>Sign Up</a>
         </div>
