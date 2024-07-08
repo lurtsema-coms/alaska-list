@@ -24,12 +24,20 @@ Route::view('advertise-with-us', 'page.advertise-with-us')->name('advertise-with
 Route::view('listing-page', 'page.listing-page')->name('listing-page');
 Route::view('listing-page/item/1', 'page.listing-item')->name('listing-page-item');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::view('dashboard', 'page-backend.b-dashboard')->name('dashboard');
+    Route::view('profile', 'profile')->name('profile');
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+    // Routes for users with 'user' role
+    Route::middleware('role:user')->group(function() {
+        Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
+    });
+
+    // Routes for users with 'admin' role
+    Route::middleware('role:admin')->group(function() {
+        Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
+    });
+
+});
 
 require __DIR__.'/auth.php';

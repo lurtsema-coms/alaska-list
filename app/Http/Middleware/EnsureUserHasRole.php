@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureUserHasRole
@@ -15,6 +16,10 @@ class EnsureUserHasRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
+        if (!Auth::check() || !Auth::user()->hasRole($role)) {
+            abort(404); // Redirect to 404 page if user does not have the required role
+        }
+
         return $next($request);
     }
 }

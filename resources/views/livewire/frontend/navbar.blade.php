@@ -39,6 +39,7 @@ new class extends Component {
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="/register" wire:navigate>Sell</a>
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="/login" wire:navigate>Login</a>
                     @else
+                    <a class="hidden text-slate-100 font-medium hover:text-slate-800 cursor-pointer lg:block" href="{{ route('dashboard') }}" wire:navigate>Dashboard</a>
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 cursor-pointer lg:block" wire:click="logout">Logout</a>
                     @endguest
                 </div>
@@ -91,14 +92,25 @@ new class extends Component {
                     <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
                 </a>
                 <div class="flex flex-col gap-5 mt-10 lg:hidden">
-                    <a class="relative group px-1" href="/register" wire:navigate>
+                @guest
+                    <a class="relative group px-1" href="{{ route('register') }}" wire:navigate>
                         <span class="transition-opacity group-hover:opacity-70">Sell</span>
                         <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
                     </a>
-                    <a class="relative group px-1" href="/login" wire:navigate>
+                    <a class="relative group px-1" href="{{ route('login') }}" wire:navigate>
                         <span class="transition-opacity group-hover:opacity-70">Login</span>
                         <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
                     </a>
+                    @else
+                    <a class="relative group px-1" href="{{ route('dashboard') }}" wire:navigate>
+                        <span class="transition-opacity group-hover:opacity-70">Dashboard</span>
+                        <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
+                    </a>
+                    <a class="relative group px-1" href="{{ route('dashboard') }}" wire:cilck="logout">
+                        <span class="transition-opacity group-hover:opacity-70">Logout</span>
+                        <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
+                    </a>
+                @endguest
                 </div>
             </div>
         </div>

@@ -71,7 +71,7 @@
         <div class="absolute top-0 right-0 z-20"
             x-data="{ ads:true }"
             x-show="ads">
-            <div class="h-auto w-96 bg-white shadow-xl p-5 space-y-4">
+            <div class="h-auto w-80 bg-white shadow-xl p-5 space-y-4 xsm:w-96">
                 <div class="flex justify-between items-center">
                     <p>Some Ads Here</p>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-slate-400 cursor-pointer hover:text-slate-500"

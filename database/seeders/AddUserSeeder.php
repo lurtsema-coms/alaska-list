@@ -22,7 +22,7 @@ class AddUserSeeder extends Seeder
                     'email' => 'test@user.com',
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
-                    'role' => 'USER',
+                    'role' => 'user',
                     'password' => Hash::make('qwerty')
                 ],
                 [
@@ -31,7 +31,7 @@ class AddUserSeeder extends Seeder
                     'email' => 'test@admin.com',
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
-                    'role' => 'ADMIN',
+                    'role' => 'admin',
                     'password' => Hash::make('qwerty')
                 ],
             ]

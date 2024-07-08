@@ -12,12 +12,15 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                sans: ["Figtree", "sans-serif"],
                 poppins: ["Poppins", "sans-serif"],
             },
-        },
-        backgroundImage: {
-            "scattered": "url('../images/scattered-forcefields.svg')",
+            backgroundImage: {
+                scattered: "url('../images/scattered-forcefields.svg')",
+            },
+            screens: {
+                xsm: "400px",
+            },
         },
     },
 
