@@ -16,21 +16,28 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
 
+        <style>
+        .layer1 {
+            background: url('frontend/wave3.svg');
+            background-size: cover; /* Optional: ensures the image covers the entire background */
+            background-repeat: no-repeat; /* Optional: prevents the image from repeating */
+        }
+        .layer2 {
+            background: url('frontend/wave2.svg');
+            background-size: cover; /* Optional: ensures the image covers the entire background */
+            background-repeat: no-repeat; /* Optional: prevents the image from repeating */
+        }
+        .layer3{
+            
+        }
+        </style>
     </head>
     <body class="font-sans text-gray-900 antialiased flex m-auto min-h-screen">
-        <div class="w-full max-w-7xl flex flex-row  justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden h-[45rem]">
-            <div class="w-full sm:w-2/5 p-10 px-20 bg-[#122a30] ">
-                <div>
-                    {{-- <img src="{{ asset('frontend/register2.png') }}" alt="Image" class=""> --}}
-                </div>
-                <div>
-                    <span>
-
-                    </span>
-                </div>
+        <div class="w-full max-w-7xl flex flex-row justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden h-[45rem]  layer1">
+            <div class="w-full hidden sm:block sm:w-2/5">
             </div>
-            <div class="w-3/5 p-10 m-auto mx-16 rounded-lg leading-none bg-gray-50 border  ">
-                <div class=" w-full">
+            <div class="w-full sm:w-3/5 p-10 m-auto mx-1 sm:mx-16 rounded-lg leading-none bg-gray-50 border">
+                <div class="w-full">
                     <livewire:pages.auth.register>
                 </div>
             </div>

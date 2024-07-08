@@ -17,15 +17,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased flex m-auto min-h-screen">
-        <div class="w-full max-w-7xl flex flex-row  justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden h-[45rem] rounded-3xl">
-            <div class="w-full sm:w-2/5 p-10 m-auto mx-8 sm:pt-28 sm:pb-20 sm:px-20 sm:mx-11 sm:my-16 bg-gray-50 rounded-3xl border  ">
+        <div class="w-full max-w-7xl flex flex-col-reverse   justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden h-full lg:h-[45rem] lg:flex-row rounded-3xl">
+            <div class="w-full lg:w-2/5 p-10 m-auto  lg:pt-28 lg:pb-20 lg:px-20 lg:mx-11 lg:my-16 bg-gray-50 rounded-3xl border  ">
                 {{ $slot }}
             </div>
-            <div class="w-full flex-1 hidden sm:block bg-[#122a30] p-20 pt-32">
-                <div class="flex justify-center mb-2">
-                    <img class="" src="{{ asset('frontend/alaska.png') }}" alt="">
+            <div class="w-full flex-1 flex flex-row lg:flex-col bg-[#122a30] p-20 pt-32">
+                <div class="flex justify-center mb-2 w-full">
+                    <img class="w-2/3" src="{{ asset('frontend/alaska.png') }}" alt="">
                 </div>
-                <div class="p-6">
+                <div class="p-6 w-full">
                     <h1 class=" text-xl font-bold text-white mb-2">Your Alaskan Shopping Adventure Starts Here </h1>
                     <div class="flex justify-center text-justify">
                         <span class="text-gray-200 text">Discover the best of Alaska from wherever you are with our curated selection of unique products and essentials. Your Alaskan shopping adventure begins here, bringing the spirit of the Last Frontier to your doorstep.</span>

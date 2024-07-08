@@ -22,7 +22,7 @@ new #[Layout('layouts.registration')] class extends Component
     /**
      * Handle an incoming registration request.
      */
-    public function register(): void
+    public function register()
     {
         $validated = $this->validate([
             'first_name' => ['required', 'string', 'max:255'],
@@ -36,13 +36,17 @@ new #[Layout('layouts.registration')] class extends Component
         $validated['password'] = Hash::make($validated['password']);
         $validated['role'] = 'seller';
 
-        event(new Registered($user = User::create($validated)));
+        $user = User::create($validated);
+        
+        event(new Registered($user));
 
         Auth::login($user);
 
-        $this->redirect(RouteServiceProvider::HOME, navigate: true);
+        // Use Livewire's redirectRoute method
+        $this->redirectRoute('verification.notice');
     }
-}; ?>
+};
+?>
 
 
 <div>
