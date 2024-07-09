@@ -1,0 +1,44 @@
+<?php
+
+use App\Models\Category;
+use Livewire\Volt\Component;
+
+new class extends Component {
+
+    public function with(): array
+    {
+        return [
+            'categories' => $this->loadCategories(),
+        ];
+    }
+
+    public function loadCategories()
+    {
+        return Category::with('subCategories')
+            ->get();
+    }
+}; ?>
+
+<div class="">
+    <p>Explore by</p>
+    <p class="mb-8 text-4xl">Categories</p>
+
+    <div class="flex flex-wrap gap-8">
+        @foreach($categories->chunk(ceil($categories->count() / 3)) as $chunk)
+            <div class="flex-1 min-w-80 flex flex-col gap-8">
+                @foreach($chunk as $category)
+                    <div class="border border-gray-200 shadow-sm bg-gray-50 rounded-lg p-5">
+                        <p class="mb-4 text-slate-600 font-semibold">{{ $category->name }}</p>
+                        <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside">
+                            @foreach($category->subCategories as $subCategory)
+                                <li class="text-gray-800 break-words">
+                                    <span>{{ $subCategory->name }}</span>
+                                </li>
+                            @endforeach
+                        </ol>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
+    </div>
+</div>

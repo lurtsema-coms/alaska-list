@@ -34,6 +34,15 @@ class AddUserSeeder extends Seeder
                     'role' => 'admin',
                     'password' => Hash::make('qwerty')
                 ],
+                [
+                    'first_name' => 'Test',
+                    'last_name' => 'Admin1',
+                    'email' => 'test@admin1.com',
+                    'contact_number' => '09162097072',
+                    'home_address' => 'Alaska',
+                    'role' => 'admin',
+                    'password' => Hash::make('qwerty')
+                ],
             ]
         );
     }
