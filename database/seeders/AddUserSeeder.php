@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Date;
 
 class AddUserSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class AddUserSeeder extends Seeder
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
                     'role' => 'seller',
+                    'email_verified_at' => Date::now(),
                     'password' => Hash::make('password')
                 ],
                 [
@@ -32,6 +34,8 @@ class AddUserSeeder extends Seeder
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
                     'role' => 'admin',
+                    'email_verified_at' => Date::now(),
+
                     'password' => Hash::make('password')
                 ],
                 [
@@ -41,6 +45,7 @@ class AddUserSeeder extends Seeder
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
                     'role' => 'admin',
+                    'email_verified_at' => Date::now(),
                     'password' => Hash::make('password')
                 ],
                 [
@@ -50,6 +55,7 @@ class AddUserSeeder extends Seeder
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
                     'role' => 'approver',
+                    'email_verified_at' => Date::now(),
                     'password' => Hash::make('password')
                 ],
             ]
