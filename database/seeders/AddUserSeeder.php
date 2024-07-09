@@ -22,8 +22,8 @@ class AddUserSeeder extends Seeder
                     'email' => 'test@user.com',
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
-                    'role' => 'user',
-                    'password' => Hash::make('qwerty')
+                    'role' => 'seller',
+                    'password' => Hash::make('password')
                 ],
                 [
                     'first_name' => 'Test',
@@ -32,7 +32,7 @@ class AddUserSeeder extends Seeder
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
                     'role' => 'admin',
-                    'password' => Hash::make('qwerty')
+                    'password' => Hash::make('password')
                 ],
                 [
                     'first_name' => 'Test',
@@ -41,7 +41,16 @@ class AddUserSeeder extends Seeder
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
                     'role' => 'admin',
-                    'password' => Hash::make('qwerty')
+                    'password' => Hash::make('password')
+                ],
+                [
+                    'first_name' => 'Test',
+                    'last_name' => 'Approver',
+                    'email' => 'test@approver.com',
+                    'contact_number' => '09162097072',
+                    'home_address' => 'Alaska',
+                    'role' => 'approver',
+                    'password' => Hash::make('password')
                 ],
             ]
         );

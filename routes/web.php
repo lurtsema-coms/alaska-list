@@ -28,8 +28,13 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::view('dashboard', 'page-backend.b-dashboard')->name('dashboard');
     Route::view('profile', 'profile')->name('profile');
 
-    // Routes for users with 'user' role
-    Route::middleware('role:user')->group(function() {
+    // Routes for users with 'seller' role
+    Route::middleware('role:seller')->group(function() {
+        Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
+    });
+
+    // Routes for users with 'approver' role
+    Route::middleware('role:approver')->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
     });
 
