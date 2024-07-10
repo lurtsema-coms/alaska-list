@@ -6,9 +6,11 @@ use Livewire\Volt\Component;
 new class extends Component {
     public $category_id;
 
-    public function deleteCategory(){
+    public function deleteCategory()
+    {
         Category::find($this->category_id)->delete();
-        return $this->redirect(route('admin-categories'), navigate: true);
+        
+        $this->dispatch('alert-success');
     }
 }; ?>
 

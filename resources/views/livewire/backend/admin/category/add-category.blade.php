@@ -8,8 +8,10 @@ use Livewire\Volt\Component;
 new class extends Component {
     #[Validate('required', message: 'At least one sub-category is required.')]
     public $sub_categories = [];
+    #[Validate('required|unique:categories,name', message: 'Category Name must be unique')]
     public $category_name = '';
     public $sc_title = '';
+    public $add_category_modal = false;
 
     function saveCategory()
     {
@@ -33,7 +35,9 @@ new class extends Component {
 
         SubCategory::insert($sub_category);
 
-        return $this->redirect(route('admin-categories'), navigate: true);
+        $this->add_category_modal = false;
+
+        $this->dispatch('alert-success');
     }
 
     function addSubCategory()
@@ -41,7 +45,7 @@ new class extends Component {
         if(!$this->sc_title) return;
 
         $this->resetValidation(['sub_categories']);
-        $this->sub_categories[] = $this->sc_title;
+        $this->sub_categories[] = trim($this->sc_title);
         $this->resetData(['sc_title']);
     }
 
@@ -58,7 +62,7 @@ new class extends Component {
 }; ?>
 
 <div 
-    x-data="{ addCategory: false }" x-init="$watch('addCategory', value => {
+    x-data="{ add_category_modal: $wire.entangle('add_category_modal') }" x-init="$watch('add_category_modal', value => {
         if (value) {
             document.body.classList.add('overflow-hidden');
         } else {
@@ -66,17 +70,17 @@ new class extends Component {
         }
     })">
     <button class="bg-blue-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-500"
-    @click="addCategory=true">
+    @click="add_category_modal=true">
         New Category
     </button>
     
     <div class="position fixed h-full w-full top-0 left-0 bg-black bg-opacity-30 z-10 overflow-auto"
-        x-show="addCategory"
+        x-show="add_category_modal"
         x-transition
         x-cloak>
         <div class="h-full flex p-5">
             <div class="bg-white w-full max-w-xl m-auto rounded-2xl shadow-lg overflow-hidden"
-            @click.outside="addCategory=false; $wire.call('resetData', ['category_name', 'sc_title', 'sub_categories'])">
+            @click.outside="add_category_modal=false; $wire.call('resetData', ['category_name', 'sc_title', 'sub_categories'])">
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="saveCategory">
                         <p class="font-bold text-lg text-slate-700 tracking-wide mb-6 pointer-events-none">Create Category</p>
@@ -84,6 +88,7 @@ new class extends Component {
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Name</p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="category_name">
+                                <div class="text-sm text-red-500">@error('category_name') {{ $message }} @enderror</div>
                             </div>
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Add Sub Category</p>
@@ -122,7 +127,7 @@ new class extends Component {
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
                             <button class="text-slate-600 shadow py-2 px-4 rounded-lg hover:opacity-70" type="button"
-                                    @click="addCategory = false; $wire.call('resetData', ['category_name', 'sc_title', 'sub_categories'])">
+                                    @click="add_category_modal = false; $wire.call('resetData', ['category_name', 'sc_title', 'sub_categories'])">
                                 Cancel
                             </button>
                             <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Submit</button>

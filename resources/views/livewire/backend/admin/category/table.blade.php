@@ -4,6 +4,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 use App\Models\Category;
 use Livewire\Volt\Component;
+use Livewire\Attributes\On;
 
 new class extends Component {
     use WithPagination;
@@ -18,6 +19,7 @@ new class extends Component {
         ];
     }
 
+    #[On('alert-success')] 
     public function loadCategories()
     {
         return Category::with('subCategories', 'createdBy', 'updatedBy')
@@ -47,6 +49,7 @@ new class extends Component {
                 <input class="text-sm w-full px-4 border border-slate-300 rounded-lg focus:border-none focus:outline-none focus:ring-2 focus:ring-[#1F4B55]" type="search" placeholder="Search..." wire:model.live.debounce.200ms="search">
             </div>
         </div>
+        <livewire:component.alert-messages />
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
@@ -108,8 +111,8 @@ new class extends Component {
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 <div class="flex items-center gap-2">
-                                    <livewire:backend.admin.category.edit-category :key="$category->id" :$category/>
-                                    <livewire:backend.admin.category.delete-category :key="$category->id" :category_id="$category->id"/>
+                                    <livewire:backend.admin.category.edit-category wire:key="{{ 'edit-' . $category->id }}" :category="$category" />
+                                    <livewire:backend.admin.category.delete-category wire:key="{{ 'delete-' . $category->id }}" :category_id="$category->id" />
                                 </div>
                             </td>
                         </tr>

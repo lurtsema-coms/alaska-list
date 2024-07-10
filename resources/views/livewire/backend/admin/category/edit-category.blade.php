@@ -4,6 +4,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use Livewire\Attributes\Validate;
 use Livewire\Attributes\Reactive;
+use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -15,6 +16,7 @@ new class extends Component {
     public $category_id;
     public $initial_sc = [];
     public $initial_cn = '';
+    public $edit_category_modal = false;
 
     function mount($category){
         $this->initial_cn = $category->name;
@@ -58,7 +60,9 @@ new class extends Component {
             );
         }
 
-        return $this->redirect(route('admin-categories'), navigate: true);
+        $this->edit_category_modal = false;
+
+        $this->dispatch('alert-success');
     }
 
     function addSubCategory()
@@ -67,14 +71,13 @@ new class extends Component {
 
         if(!$this->uniqueSubCategoryName($this->sc_title)) return;
 
-        $this->resetValidation(['sub_categories', 'sc_title']);
-
+        $this->resetEditValidation();
 
         // Generate a unique id based on the count of existing sub-categories
         $new_sub_category = [
             'id' => SubCategory::count(),
             'category_id' => $this->category_id,
-            'name' => $this->sc_title,
+            'name' => trim($this->sc_title),
             'created_by' => auth()->user()->id,
             'created_at' => date('Y-m-d H:i:s'),
         ];
@@ -95,7 +98,13 @@ new class extends Component {
         $this->sub_categories = $this->initial_sc;
     }
 
-    function uniqueSubCategoryName($sc_title){
+    function resetEditValidation()
+    {
+        $this->resetValidation(['sub_categories', 'sc_title']);
+    }
+
+    function uniqueSubCategoryName($sc_title)
+    {
         foreach ($this->sub_categories as $sub_category) {
             if ($sub_category['name'] === $sc_title) {
                 $this->addError('sc_title', 'Sub-category name must be unique.');
@@ -109,10 +118,21 @@ new class extends Component {
     {
         $this->reset($data);
     }
+
+    public function rules()
+    {
+        return [
+            'category_name' => [
+                'required',
+                Rule::unique('categories', 'name')->ignore($this->category_id), 
+            ],
+        ];
+    }
+
 }; ?>
 
-<div 
-    x-data="{ editCategory: false }" x-init="$watch('editCategory', value => {
+<div style="font-size: 16px;" 
+    x-data="{ edit_category_modal: $wire.entangle('edit_category_modal') }" x-init="$watch('edit_category_modal', value => {
         if (value) {
             document.body.classList.add('overflow-hidden');
         } else {
@@ -120,17 +140,17 @@ new class extends Component {
         }
     })">
     <button class="bg-green-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-500"
-    @click="editCategory=true">
+    @click="edit_category_modal=true">
         Edit
     </button>
     
     <div class="position fixed h-full w-full top-0 left-0 bg-black bg-opacity-30 z-10 overflow-auto"
-        x-show="editCategory"
+        x-show="edit_category_modal"
         x-transition
         x-cloak>
         <div class="h-full flex p-5">
             <div class="bg-white w-full max-w-xl m-auto rounded-2xl shadow-lg overflow-hidden"
-            @click.outside="editCategory=false;">
+            @click.outside="edit_category_modal=false; $wire.resetSubCategory(); $wire.resetEditValidation()">
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="saveCategory">
                         <p class="font-bold text-lg text-slate-700 tracking-wide mb-6 pointer-events-none">Edit Category</p>
@@ -138,6 +158,7 @@ new class extends Component {
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Name</p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="category_name">
+                                <div class="text-sm text-red-500">@error('category_name') {{ $message }} @enderror</div>
                             </div>
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Add Sub Category</p>
@@ -177,7 +198,7 @@ new class extends Component {
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
                             <button class="text-slate-600 shadow py-2 px-4 rounded-lg hover:opacity-70" type="button"
-                                    @click="editCategory = false; $wire.resetSubCategory()">
+                                @click="edit_category_modal=false; $wire.resetSubCategory(); $wire.resetEditValidation()">
                                 Cancel
                             </button>
                             <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Save</button>
