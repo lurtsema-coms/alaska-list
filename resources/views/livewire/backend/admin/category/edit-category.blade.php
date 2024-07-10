@@ -42,9 +42,10 @@ new class extends Component {
             'name' => $this->category_name,
             'updated_by' => auth()->user()->id
         ]);
-            
+        
+        $new_sc = [];
         foreach ($this->sub_categories as $subCategory) {
-            SubCategory::updateOrCreate(
+            $sub_category = SubCategory::updateOrCreate(
                 [
                     'category_id' => $this->category_id,
                     'name' => $subCategory['name'],
@@ -58,7 +59,12 @@ new class extends Component {
                     'updated_at' => now(),
                 ]
             );
+
+            $new_sc[] = $sub_category;
         }
+
+        $this->initial_sc = $new_sc;
+
 
         $this->edit_category_modal = false;
 
