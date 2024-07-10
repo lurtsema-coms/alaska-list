@@ -39,12 +39,12 @@ new class extends Component {
 
 }; ?>
 
-<div class="my-8">
+<div class="py-8">
     <div class="container bg-white py-8 px-4 sm:rounded-lg mx-auto space-y-8 shadow sm:px-6 lg:px-8">
         <div class="flex justify-between items-center flex-wrap">
             <livewire:backend.admin.category.add-category />
             <div class="relative w-52 p-1 pointer-events-auto overflow-hidden md:max-w-96">
-                <input class="text-sm w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" placeholder="Search..." wire:model.live="search">
+                <input class="text-sm w-full px-4 border border-slate-300 rounded-lg focus:border-none focus:outline-none focus:ring-2 focus:ring-[#1F4B55]" type="search" placeholder="Search..." wire:model.live.debounce.200ms="search">
             </div>
         </div>
         <div class="overflow-x-auto">
@@ -73,39 +73,44 @@ new class extends Component {
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($categories as $category)
-                        <tr class="hover:bg-gray-100">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <tr class="hover:bg-gray-100" wire:key="{{ $category->id }}">
+                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 {{ $category->name }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                @php
-                                    $subCategoriesToShow = $category->subCategories->take(4);
-                                    $remainingCount = $category->subCategories->count() - $subCategoriesToShow->count();
-                                @endphp
-
-                                @foreach ($subCategoriesToShow as $sub_category)
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-500 mr-2 mb-2">
-                                        {{ $sub_category->name }}
-                                    </span>
-                                @endforeach
-                                
-                                @if ($remainingCount > 0)
-                                    <span class="inline-block text-gray-500">
-                                        ...and {{ $remainingCount }} more
-                                    </span>
-                                @endif
+                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center gap-2">
+                                    @php
+                                        $subCategoriesToShow = $category->subCategories->take(4);
+                                        $remainingCount = $category->subCategories->count() - $subCategoriesToShow->count();
+                                    @endphp
+    
+                                    @foreach ($subCategoriesToShow as $sub_category)
+                                        <span class="inline-block bg-gray-200 rounded-full  text-sm font-semibold text-gray-500 px-4 py-2">
+                                            {{ $sub_category->name }}
+                                        </span>
+                                    @endforeach
+                                    
+                                    @if ($remainingCount > 0)
+                                        <span class="inline-block text-gray-500">
+                                            ...and {{ $remainingCount }} more
+                                        </span>
+                                    @endif
+                                </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 {{ $category->createdBy->first_name.' '.$category->createdBy->last_name }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 {{ $category->created_at }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 {{ $category->updatedBy ? $category->updatedBy->first_name.' '.$category->updatedBy->last_name : '' }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <livewire:backend.admin.category.edit-category :category_id="$category->id"/>
+                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center gap-2">
+                                    <livewire:backend.admin.category.edit-category :key="$category->id" :$category/>
+                                    <livewire:backend.admin.category.delete-category :key="$category->id" :category_id="$category->id"/>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

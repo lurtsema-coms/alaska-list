@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\SubCategory;
 use Livewire\Attributes\Validate;
+use Livewire\Attributes\Reactive;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -10,43 +11,74 @@ new class extends Component {
     public $sub_categories = [];
     public $category_name = '';
     public $sc_title = '';
+    public $category;
     public $category_id;
+    public $initial_sc = [];
+    public $initial_cn = '';
 
-    public function mount($category_id){
-        $this->category_id = $category_id;
+    function mount($category){
+        $this->initial_cn = $category->name;
+        $this->category_name = $this->initial_cn;
+        $this->category_id = $category->id;
+        $this->initial_sc = $category->subCategories->toArray();
+        $this->sub_categories = $this->initial_sc;
     }
 
     function saveCategory()
     {
         $this->validate();
 
-        $category =  new Category();
-        $category_id = Category::insertGetId([
+        // Extract unique sub_category names from current sub_categories
+        $subCategoryNames = array_column($this->sub_categories, 'name');
+
+        // Delete subCategories that are not in $subCategoryNames for this category_id
+        SubCategory::where('category_id', $this->category_id)
+            ->whereNotIn('name', $subCategoryNames)
+            ->delete();
+        
+        Category::find($this->category_id)->update([
             'name' => $this->category_name,
-            'created_by' => auth()->user()->id,
-            'created_at' => date('Y-m-d H:i:s'),
+            'updated_by' => auth()->user()->id
         ]);
-
-        $sub_category = array_map(function ($subCategory) use ($category_id) {
-            return [
-                'category_id' => $category_id,
-                'name' => $subCategory,
-                'created_by' => auth()->user()->id,
-                'created_at' => date('Y-m-d H:i:s'),
-            ];
-        }, $this->sub_categories);
-
-        SubCategory::insert($sub_category);
+            
+        foreach ($this->sub_categories as $subCategory) {
+            SubCategory::updateOrCreate(
+                [
+                    'category_id' => $this->category_id,
+                    'name' => $subCategory['name'],
+                ],
+                [
+                    'category_id' => $this->category_id,
+                    'name' => $subCategory['name'],
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
+        }
 
         return $this->redirect(route('admin-categories'), navigate: true);
     }
 
-    function editSubCategory($id)
+    function addSubCategory()
     {
         if(!$this->sc_title) return;
 
-        $this->resetValidation(['sub_categories']);
-        $this->sub_categories[] = $this->sc_title;
+        if(!$this->uniqueSubCategoryName($this->sc_title)) return;
+
+        $this->resetValidation(['sub_categories', 'sc_title']);
+
+
+        // Generate a unique id based on the count of existing sub-categories
+        $new_sub_category = [
+            'id' => SubCategory::count(),
+            'category_id' => $this->category_id,
+            'name' => $this->sc_title,
+            'created_by' => auth()->user()->id,
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
+        $this->sub_categories[] = $new_sub_category; 
         $this->resetData(['sc_title']);
     }
 
@@ -54,6 +86,23 @@ new class extends Component {
     {
         unset($this->sub_categories[$index]);
         $this->sub_categories = array_values($this->sub_categories);
+    }
+
+    function resetSubCategory()
+    {
+        $this->resetData(['sc_title']);
+        $this->category_name = $this->initial_cn;
+        $this->sub_categories = $this->initial_sc;
+    }
+
+    function uniqueSubCategoryName($sc_title){
+        foreach ($this->sub_categories as $sub_category) {
+            if ($sub_category['name'] === $sc_title) {
+                $this->addError('sc_title', 'Sub-category name must be unique.');
+                return false;
+            }
+        }
+        return true;
     }
 
     function resetData($data)
@@ -81,7 +130,7 @@ new class extends Component {
         x-cloak>
         <div class="h-full flex p-5">
             <div class="bg-white w-full max-w-xl m-auto rounded-2xl shadow-lg overflow-hidden"
-            @click.outside="editCategory=false; $wire.call('resetData', ['category_name', 'sc_title', 'sub_categories'])">
+            @click.outside="editCategory=false;">
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="saveCategory">
                         <p class="font-bold text-lg text-slate-700 tracking-wide mb-6 pointer-events-none">Edit Category</p>
@@ -99,6 +148,7 @@ new class extends Component {
                                     wire:keydown.enter.prevent="addSubCategory"
                                 >
                                 <div class="text-sm text-red-500">@error('sub_categories') {{ $message }} @enderror</div>
+                                <div class="text-sm text-red-500">@error('sc_title') {{ $message }} @enderror</div>
                             </div>
                             <button type="button" wire:click="addSubCategory">
                                 <div class="inline-block rounded-full p-2 border border-orange-400 hover:bg-orange-400 cursor-pointer">
@@ -112,8 +162,8 @@ new class extends Component {
                                 <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside">
                                     @foreach ($sub_categories as $index => $sub_category)
                                         <li class="text-gray-800 break-words">
-                                            <span>{{ $sub_category }}</span>
-                                            <button type="button" wire:key="{{ $index }}" wire:click="deleteSubCategory({{ $index }})">
+                                            <span>{{ $sub_category['name'] }}</span>
+                                            <button type="button" wire:key="{{ $sub_category['id'] }}" wire:click="deleteSubCategory({{ $index }})">
                                                 <div class="relative left-1 top-0.5 inline-block rounded-full p-0.5 border border-red-400 hover:bg-red-400 cursor-pointer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-2">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
@@ -127,10 +177,10 @@ new class extends Component {
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
                             <button class="text-slate-600 shadow py-2 px-4 rounded-lg hover:opacity-70" type="button"
-                                    @click="editCategory = false; $wire.call('resetData', ['category_name', 'sc_title', 'sub_categories'])">
+                                    @click="editCategory = false; $wire.resetSubCategory()">
                                 Cancel
                             </button>
-                            <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Submit</button>
+                            <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Save</button>
                         </div>
                     </form>
                 </div>
