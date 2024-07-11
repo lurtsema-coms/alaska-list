@@ -59,24 +59,24 @@
                     prevEl: ".swiper-button-prev",
                 },
                 breakpoints: {
-                    300: {
+                    350:{
                         slidesPerView: 1,
                         spaceBetween: 0,
                     },
-                    400: {
+                    576: {
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                    },
+                    768: {
                         slidesPerView: 2,
                         spaceBetween: 0,
                     },
-                    700: {
+                    1024: {
                         slidesPerView: 3,
                         spaceBetween: 0,
                     },
-                    1200: {
-                        slidesPerView: 5,
-                        spaceBetween: 0,
-                    },
+                    
                 },
-                
             });
 
             if (window.location.hash === '#get-in-touch') {

@@ -15,9 +15,8 @@ new class extends Component {
     public $email = '';
     public $role = '';
     public $initial_data = [];
-    #[Validate('confirmed')]
+    #[Validate('min:6')] 
     public $password = '';
-    public $password_confirmation = '';
     public $add_user_modal = false;
 
     public function mount($user){
@@ -53,6 +52,10 @@ new class extends Component {
         ];
 
         $this->user->update($data);
+
+        if($this->password){
+            $this->user->update(['password' => Hash::make($this->password)]);
+        }
 
         $this->initial_data = $data;
 
@@ -163,10 +166,6 @@ new class extends Component {
                                             type="password"
                                             wire:model="password">
                                         <div class="text-sm text-red-500">@error('password') {{ $message }} @enderror</div>
-                                </div>
-                                <div class="flex-1 space-y-2">
-                                    <p class="font-medium text-slate-700">Password Confirmation</p>
-                                    <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="password" wire:model="password_confirmation">
                                 </div>
                             </div>
                         </div>

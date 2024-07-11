@@ -32,7 +32,9 @@ new class extends Component {
                         <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside">
                             @foreach($category->subCategories as $subCategory)
                                 <li class="text-gray-800 break-words">
-                                    <span>{{ $subCategory->name }}</span>
+                                    <a href="" wire:navigate>
+                                        <span>{{ $subCategory->name }}</span>
+                                    </a>
                                 </li>
                             @endforeach
                         </ol>
