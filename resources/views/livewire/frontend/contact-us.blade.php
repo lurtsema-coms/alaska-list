@@ -2,6 +2,9 @@
 use App\Models\ContactForm;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
+use App\Mail\ContactFormSubmitted;
+use Illuminate\Support\Facades\Mail;
+
 
 
 new class extends Component 
@@ -32,7 +35,12 @@ new class extends Component
         ];
 
         try {
+            // Save to database
             $contact_form = ContactForm::create($inputs);
+
+            // Send email notification
+            Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactFormSubmitted($inputs));
+
             $this->submissionSuccess = true;
             $this->submissionFailed = false;
             $this->reset(['name', 'email', 'message']);
@@ -68,12 +76,12 @@ new class extends Component
                 <button class="text-white bg-[#1F4B55] text-sm px-6 py-3 rounded-lg shadow-md hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">Submit</button>
             </div>
             @if($submissionSuccess)
-                <div class="text-green-500 mt-3" wire:loading.remove>
+                <div class="text-green-500 mt-3 text-end" wire:loading.remove>
                     {{ $successMessage }}
                 </div>
             @endif
             @if($submissionFailed)
-                <div class="text-red-500 mt-3" wire:loading.remove>
+                <div class="text-red-500 mt-3 text-end" wire:loading.remove>
                     {{ $errorMessage }}
                 </div>
             @endif
