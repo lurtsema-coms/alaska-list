@@ -37,9 +37,11 @@ new class extends Component
                 @role('approver')
                 @endrole
                 @role('admin')
-                <!-- Navigation Links -->
                     <x-nav-link :href="route('admin-categories')" :active="request()->routeIs('admin-categories')" wire:navigate>
                         {{ __('Categories') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin-user-control')" :active="request()->routeIs('admin-user-control')" wire:navigate>
+                        {{ __('User Control') }}
                     </x-nav-link>
                 @endrole
                 </div>
@@ -96,6 +98,9 @@ new class extends Component
             @role('admin')
             <x-responsive-nav-link :href="route('admin-categories')" :active="request()->routeIs('admin-categories')" wire:navigate>
                 {{ __('Categories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin-user-control')" :active="request()->routeIs('admin-user-control')" wire:navigate>
+                {{ __('User Control') }}
             </x-responsive-nav-link>
             @endrole
         </div>

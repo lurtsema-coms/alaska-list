@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
     // Routes for users with 'admin' role
     Route::middleware('role:admin')->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
+        Route::view('admin-user-control', 'page-backend.admin.b-user-control')->name('admin-user-control');
     });
 
 });

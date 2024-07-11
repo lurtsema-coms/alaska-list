@@ -8,7 +8,7 @@ new class extends Component {
 
 <div>
     <!-- Success Alert -->
-    <div class="hidden items-center justify-between bg-green-100 border-l-4 border-green-500 text-green-700 p-4"
+    <div class="hidden items-center justify-between bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg"
         role="alert" id="alert-success">
         <div class="flex items-center">
             <svg class="w-6 h-6 mr-2 fill-current text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -26,7 +26,7 @@ new class extends Component {
     </div>
 
     <!-- Info Alert -->
-    <div class="hidden items-center justify-between bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
+    <div class="hidden items-center justify-between bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded-lg"
         role="alert" id="info-message">
         <div class="flex items-center">
             <svg class="w-6 h-6 mr-2 fill-current text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@ new class extends Component {
     </div>
 
     <!-- Error Alert -->
-    <div class="hidden items-center justify-between bg-red-100 border-l-4 border-red-500 text-red-700 p-4"
+    <div class="hidden items-center justify-between bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg"
         role="alert" id="error-message">
         <div class="flex items-center">
             <svg class="w-6 h-6 mr-2 fill-current text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

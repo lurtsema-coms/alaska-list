@@ -20,6 +20,7 @@ class AddUserSeeder extends Seeder
                 [
                     'first_name' => 'Test',
                     'last_name' => 'User',
+                    'status' => 'ACTIVE',
                     'email' => 'test@user.com',
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
@@ -30,6 +31,7 @@ class AddUserSeeder extends Seeder
                 [
                     'first_name' => 'Test',
                     'last_name' => 'Admin',
+                    'status' => 'ACTIVE',
                     'email' => 'test@admin.com',
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
@@ -41,6 +43,7 @@ class AddUserSeeder extends Seeder
                 [
                     'first_name' => 'Test',
                     'last_name' => 'Admin1',
+                    'status' => 'ACTIVE',
                     'email' => 'test@admin1.com',
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',
@@ -51,6 +54,7 @@ class AddUserSeeder extends Seeder
                 [
                     'first_name' => 'Test',
                     'last_name' => 'Approver',
+                    'status' => 'ACTIVE',
                     'email' => 'test@approver.com',
                     'contact_number' => '09162097072',
                     'home_address' => 'Alaska',

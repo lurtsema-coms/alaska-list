@@ -145,9 +145,9 @@ new class extends Component {
             document.body.classList.remove('overflow-hidden');
         }
     })">
-    <button class="bg-green-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-500"
+    <button class="bg-blue-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-500"
     @click="edit_category_modal=true">
-        Edit
+        EDIT
     </button>
     
     <div class="position fixed h-full w-full top-0 left-0 bg-black bg-opacity-30 z-10 overflow-auto"

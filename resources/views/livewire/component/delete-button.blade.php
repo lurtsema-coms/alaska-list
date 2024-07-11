@@ -1,14 +1,16 @@
 <?php
 
+
+use App\Models\User;
 use App\Models\Category;
 use Livewire\Volt\Component;
 
 new class extends Component {
-    public $category_id;
+    public $model;
 
-    public function deleteCategory()
+    public function delete()
     {
-        Category::find($this->category_id)->delete();
+        $this->model->delete();
         
         $this->dispatch('alert-success');
     }
@@ -16,7 +18,7 @@ new class extends Component {
 
 <div>
     <button class="bg-red-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-500"
-        wire:click="deleteCategory">
+        wire:click="delete">
         Delete
     </button>
 </div>
