@@ -35,6 +35,7 @@ new #[Layout('layouts.registration')] class extends Component
 
         $validated['password'] = Hash::make($validated['password']);
         $validated['role'] = 'seller';
+        $validated['status'] = 'ACTIVE';
 
         $user = User::create($validated);
         
