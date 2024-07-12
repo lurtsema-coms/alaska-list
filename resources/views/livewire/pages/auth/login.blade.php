@@ -70,6 +70,11 @@ new #[Layout('layouts.guest')] class extends Component
                 {{ __('Continue') }}
             </x-primary-button>
         </div>
+        <div class="flex items-center justify-center mt-3 ">
+            <a href="/" class="w-full flex items-center h-12 justify-center !text-[#1F4B55] border border-[#1F4B55] font-semibold text-xs uppercase tracking-widest ">
+                {{ __('Go To Home Page') }}
+            </a>
+        </div>
 
 
     </form>
