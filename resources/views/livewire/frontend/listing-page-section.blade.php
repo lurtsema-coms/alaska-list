@@ -27,19 +27,18 @@ new class extends Component {
         <livewire:frontend.sponsored-listing>
         <div class="max-h-80 p-4 bg-white w-full mx-auto shadow-md rounded-xl space-y-4 overflow-y-auto">
             <p class="text-xl font-medium text-gray-700 mb-4">Sort by categories</p>
-            <div class="flex flex-wrap -mx-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 @foreach ($categories as $category)
-                    <div class="flex-grow basis-1/3 px-2 mb-4">
-                        {{-- Category name --}}
+                    <div class="p-4 bg-gray-100 rounded-lg shadow-md">
                         <p class="text-lg font-medium text-gray-700 mb-2">{{ $category->name }}</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Radio buttons from database -->
+                        <div class="flex flex-wrap items-center gap-3">
                             @foreach($category->subCategories as $sub_category)
-                                <label class="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 rounded-lg p-2 transition-all">
-                                    <input type="radio" name="" value="option1" class="form-radio text-blue-600 h-5 w-5">
+                                <label class="inline-flex items-center space-x-2 cursor-pointer">
+                                    <input type="radio" name="category" value="{{ $sub_category->id }}" class="form-radio text-blue-600 h-5 w-5">
                                     <span class="text-gray-600">{{ $sub_category->name }}</span>
                                 </label>
                             @endforeach
+                            
                         </div>
                     </div>
                 @endforeach
