@@ -35,6 +35,8 @@ new class extends Component {
 
         SubCategory::insert($sub_category);
 
+        $this->resetData(['sub_categories', 'category_name']);
+
         $this->add_category_modal = false;
 
         $this->dispatch('alert-success');
