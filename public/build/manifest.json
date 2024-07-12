@@ -1,0 +1,16 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-9edc7111.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/images/scattered-forcefields.svg": {
+    "file": "assets/scattered-forcefields-5d25668c.svg",
+    "src": "resources/images/scattered-forcefields.svg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-33584bf2.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
