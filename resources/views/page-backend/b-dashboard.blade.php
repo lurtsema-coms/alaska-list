@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="">
-        <div class="container py-8 px-4 sm:rounded-lg mx-auto space-y-8 sm:px-6 lg:px-8">
+        <div class="sm:container py-8 px-4 sm:rounded-lg mx-auto space-y-8 sm:px-6 lg:px-8">
             <div class="gap-2 w-full max-w-[56.25rem] space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md flex items-center justify-between">

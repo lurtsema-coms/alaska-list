@@ -15,7 +15,7 @@ new class extends Component {
 
 <div class="sticky top-0 z-20" x-data="{ sidebarOpen: false }">
     <div class="bg-[#246567] border-b">
-        <div class="container mx-auto py-2 px-2 sm:px-0">
+        <div class="sm:container mx-auto py-2 px-2 sm:px-0">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white size-8 text-dark cursor-pointer hover:opacity-70"

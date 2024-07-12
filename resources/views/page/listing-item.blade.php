@@ -99,7 +99,7 @@
                         By boosting your listings, you can ensure that they appear at the top of relevant pages, gaining more visibility and attracting more potential customers.
                     </p>
                     <div class="text-center mt-6 mb-2">
-                        <a href="/advertise-with-us" class="bg-teal-700 text-white py-2 px-4 rounded hover:bg-teal-800">
+                        <a href="{{ route('advertise-with-us') }}" class="bg-teal-700 text-white py-2 px-4 rounded hover:bg-teal-800" wire:navigate>
                             Learn More About Advertising
                         </a>
                     </div>

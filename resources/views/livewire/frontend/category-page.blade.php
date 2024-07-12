@@ -28,10 +28,10 @@ new class extends Component {
             <div class="flex-1 min-w-72 max-w-xl flex flex-col gap-8 xsm:min-w-80">
                 @foreach($chunk as $category)
                     <div class="border border-gray-200 shadow-sm bg-gray-50 rounded-lg p-5">
-                        <p class="mb-4 text-slate-600 font-semibold">{{ $category->name }}</p>
+                        <p class="mb-4 font-medium text-gray-700">{{ $category->name }}</p>
                         <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside">
                             @foreach($category->subCategories as $subCategory)
-                                <li class="text-gray-800 break-words">
+                                <li class="text-gray-600 break-words">
                                     <a href="" wire:navigate>
                                         <span>{{ $subCategory->name }}</span>
                                     </a>

@@ -2,12 +2,12 @@
 
 @section('body-content')
 {{-- hero section --}}
-<div class="relative min-h-[42rem] container mx-auto bg-[#246567] md:rounded-2xl md:mt-5 xl:[clip-path:ellipse(100%_100%_at_top_center)]" data-aos="zoom-in-up">
+<div class="relative min-h-[42rem] w-full sm:container mx-auto bg-[#246567] md:rounded-2xl md:mt-5 xl:[clip-path:ellipse(100%_100%_at_top_center)]" data-aos="zoom-in-up">
     <div class="min-h-[38rem] flex md:p-10" >
         <div class="w-full flex justify-center flex-col gap-8 text-white z-10 px-5 md:px-10 xl:w-1/2">
             <p class="text-3xl font-bold md:text-5xl">Discover Alaska's Hidden Treasures, <span class="border-b-2 border-yellow-300">Sell</span> Your Surprises</p>
             <p class="text-lg text-slate-200">Welcome to Alaska List, your gateway to the Last Frontier's marketplace. Discover stories behind every listing - whether it's rugged gear, cozy cabins, or local services, find it all here.</p>
-            <a class="flex justify-center mt-4" href="{{ route('listing-page') }}">
+            <a class="flex justify-center mt-4" href="{{ route('listing-page') }}" wire:navigate>
                 <div class="bg-[#1F4B55] text-xl px-6 py-3 rounded-lg shadow-md hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">
                     Search Now
                 </div>
@@ -84,7 +84,7 @@
 </div>
 <div class="mt-28 container mx-auto">
     <div class="mb-16 flex flex-col items-center gap-2" data-aos="zoom-in">
-        <h1 class="text-4xl">Featured Products</h1>
+        <h1 class="text-3xl sm:text-4xl">Featured Products</h1>
         <svg width="100%" height="24" viewBox="0 0 445 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="paint0_linear" x1="442.073" y1="0.563245" x2="414.515" y2="114.417" gradientUnits="userSpaceOnUse">
@@ -97,7 +97,7 @@
     </div>
     
     <div id="products" class="py-10 rounded-lg" data-aos="zoom-in">
-        <div class="contaner mx-8 md:mx-10 lg:mx-20 xl:mx-auto">
+        <div class=" mx-8 md:mx-10 lg:mx-20 xl:mx-auto">
 
             <div class="mb-12 space-y-5 md:mb-16 md:text-center">
                 <div class="inline-block px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg md:text-center bg-[#202c47] bg-opacity-80 hover:cursor-pointer hover:bg-opacity-40">
@@ -112,16 +112,16 @@
     </div>
 </div>
 <div class="relative py-28 bg-gradient-to-r" data-aos="zoom-in">
-    <div class="container mx-auto">
+    <div class="sm:container mx-auto">
         <div class="text-center text-4xl px-5 text-[#2171a7] font-bold md:px-24">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium sapiente dolores distinctio qui asperiores enim.
         </div>
     </div>
 </div>
 <div class="py-16 bg-[#246567]">
-    <div class="container mx-auto px-5 md:px-0">
+    <div class="sm:container mx-auto px-5 md:px-0">
         <div class="mb-16 flex flex-col items-center gap-2" data-aos="zoom-in">
-            <h1 class="text-4xl text-white">Upload Your Treasure</h1>
+            <h1 class="text-2xl sm:text-4xl text-white">Upload Your Treasure</h1>
             <svg width="100%" height="24" viewBox="0 0 445 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="paint0_linear" x1="442.073" y1="0.563245" x2="414.515" y2="114.417" gradientUnits="userSpaceOnUse">
@@ -133,7 +133,7 @@
             </svg>
         </div>
 
-        <div class="container mx-auto" data-aos="zoom-in">
+        <div class="sm:container mx-auto" data-aos="zoom-in">
             <div class="max-w-7xl mx-auto flex flex-col gap-16 items-center px-10 py-16 bg-white rounded-xl shadow-md overflow-hidden md:px-20">
                 <div class="text-center bg-[#202c47] bg-opacity-80 text-white inline-block px-3 py-1 rounded-lg text-sm">
                     Steps
@@ -187,7 +187,7 @@
 {{-- Get In Touch --}}
 <div id="get-in-touch" class="mt-14 mb-28 container mx-auto" wire:scroll>
     <div class="mb-16 flex flex-col items-center gap-2" data-aos="zoom-in">
-        <h1 class="text-4xl">Get In Touch</h1>
+        <h1 class="text-3xl sm:text-4xl">Get In Touch</h1>
         <svg width="100%" height="24" viewBox="0 0 445 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="paint0_linear" x1="442.073" y1="0.563245" x2="414.515" y2="114.417" gradientUnits="userSpaceOnUse">

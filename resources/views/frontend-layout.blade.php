@@ -58,11 +58,8 @@
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",
                 },
+                breakpointsBase: 'container',
                 breakpoints: {
-                    350:{
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
                     576: {
                         slidesPerView: 1,
                         spaceBetween: 0,

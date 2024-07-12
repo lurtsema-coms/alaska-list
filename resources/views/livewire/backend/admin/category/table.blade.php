@@ -42,7 +42,7 @@ new class extends Component {
 }; ?>
 
 <div class="py-8">
-    <div class="container bg-white py-8 px-4 sm:rounded-lg mx-auto space-y-8 shadow sm:px-6 lg:px-8">
+    <div class="sm:container bg-white py-8 px-4 sm:rounded-lg mx-auto space-y-8 shadow sm:px-6 lg:px-8">
         <div class="flex justify-between items-center flex-wrap">
             <livewire:backend.admin.category.add-category />
             <div class="relative w-52 p-1 pointer-events-auto overflow-hidden md:max-w-96">
