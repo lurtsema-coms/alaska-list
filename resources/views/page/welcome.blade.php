@@ -172,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="flex" href="{{ route('login') }}" wire:navigate>
+                <a class="flex" href="{{ route('login') }}">
                     <div class="border border-[#2171a7] px-6 py-3 rounded-lg shadow-md hover:bg-[#2171a7] hover:text-white transition-colors duration-300 cursor-pointer">
                         Upload Now
                     </div>
