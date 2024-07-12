@@ -1,12 +1,16 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-fb68561f.css",
+    "file": "assets/app-de089d29.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/images/scattered-forcefields.svg": {
     "file": "assets/scattered-forcefields-5d25668c.svg",
     "src": "resources/images/scattered-forcefields.svg"
+  },
+  "resources/images/wave3.svg": {
+    "file": "assets/wave3-1cc916b9.svg",
+    "src": "resources/images/wave3.svg"
   },
   "resources/js/app.js": {
     "file": "assets/app-33584bf2.js",

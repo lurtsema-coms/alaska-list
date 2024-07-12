@@ -17,7 +17,7 @@ export default {
             },
             backgroundImage: {
                 scattered: "url('../images/scattered-forcefields.svg')",
-                splashed: "url('../images/wave3.svg)",
+                splashed: "url('../images/wave3.svg')",
             },
             screens: {
                 xsm: "400px",
