@@ -28,7 +28,7 @@ new class extends Component {
         <div class="max-h-80 p-4 bg-white w-full mx-auto shadow-md rounded-xl space-y-4 overflow-y-auto">
             <p class="text-xl font-medium text-gray-700 mb-4">Sort by categories</p>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                @foreach ($categories as $category)
+                {{-- @foreach ($categories as $category)
                     <div class="p-4 bg-gray-100 rounded-lg shadow-md">
                         <p class="text-lg font-medium text-gray-700 mb-2">{{ $category->name }}</p>
                         <div class="flex flex-wrap items-center gap-3">
@@ -40,7 +40,7 @@ new class extends Component {
                             @endforeach
                         </div>
                     </div>
-                @endforeach
+                @endforeach --}}
             </div>
         </div>
 
