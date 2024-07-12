@@ -49,9 +49,20 @@ new class extends Component {
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
             <!-- Replace with your product cards or items -->
             <a class="" href="{{ route('listing-page-item') }}" wire:navigate>
-                <div class="bg-gray-50 border border-gray-100 p-4 shadow-md rounded-lg hover:border-blue-400">
-                    <p>Product 1</p>
-                    <p>Product 1</p>
+                <div class="bg-gray-50 border border-gray-100 p-4 shadow-md rounded-lg space-y-4 hover:border-blue-400">
+                    <img class="w-full object-cover cursor-pointer" src="https://picsum.photos/seed/1/576/300" alt="Image 1">
+                    <p class="text-lg font-semibold">Product 1</p>
+                    <div class="space-y-2">
+                        <p class="text-gray-700">This is a brief description of Product 1. It highlights the key features and benefits of the product.</p>
+                        <p class="text-green-600 font-semibold">$19.99</p>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Electronics</span>
+                        </div>
+                        <p class="text-gray-500 text-sm">In Stock: <span class="text-gray-700 font-medium">25</span></p>
+                    </div>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        View Details
+                    </button>
                 </div>
             </a>
             <a class="" href="{{ route('listing-page-item') }}" wire:navigate>
