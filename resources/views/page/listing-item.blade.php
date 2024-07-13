@@ -55,6 +55,7 @@
                 <div class="space-y-2">
                     <p><span class="font-bold">Posted by: </span>lorem</p>
                     <p><span class="font-bold">Contact: </span>123456</p>
+                    <p><span class="font-bold">Price: </span>$123456</p>
                 </div>
                 <div class="space-y-2">
                     <p class="font-bold">Description</p>

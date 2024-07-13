@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::middleware('role:seller')->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
         Route::view('seller-listing', 'page-backend.seller.b-listing')->name('seller-listing');
+        Route::view('seller-listing/add-item', 'page-backend.seller.b-listing-add-item')->name('seller-listing-add');
     });
 
     // Routes for users with 'approver' role

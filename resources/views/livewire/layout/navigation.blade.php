@@ -33,7 +33,7 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 @role('seller')
-                    <x-nav-link :href="route('seller-listing')" :active="request()->routeIs('seller-listing')" wire:navigate>
+                    <x-nav-link :href="route('seller-listing')" :active="request()->routeIs('seller-listing') || request()->routeIs('seller-listing-add') " wire:navigate>
                         {{ __('Listing') }}
                     </x-nav-link>
                 @endrole
