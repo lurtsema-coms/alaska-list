@@ -5,5 +5,5 @@
         </h2>
     </x-slot>
 
-    <livewire:backend.seller.listing.table />
+    <livewire:backend.seller.listing.add-item />
 </x-app-layout>
