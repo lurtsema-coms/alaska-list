@@ -119,7 +119,7 @@ new class extends Component {
                     @endforeach
                 </tbody>
             </table>
-            {{ $categories->links() }}
         </div>
+        {{ $categories->links() }}
     </div>
 </div>

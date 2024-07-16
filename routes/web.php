@@ -22,7 +22,7 @@ Route::view('categories', 'page.categories')->name('categories');
 Route::view('about-us', 'page.about-us')->name('about-us');
 Route::view('advertise-with-us', 'page.advertise-with-us')->name('advertise-with-us');
 Route::view('listing-page', 'page.listing-page')->name('listing-page');
-Route::view('listing-page/item/1', 'page.listing-item')->name('listing-page-item');
+Route::view('listing-page/item/{id}', 'page.listing-item')->name('listing-page-item');
 
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::view('dashboard', 'page-backend.b-dashboard')->name('dashboard');
@@ -33,6 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
         Route::view('seller-listing', 'page-backend.seller.b-listing')->name('seller-listing');
         Route::view('seller-listing/add-item', 'page-backend.seller.b-listing-add-item')->name('seller-listing-add');
+        Route::view('seller-listing/edit-item/{id}', 'page-backend.seller.b-listing-edit-item')->name('seller-listing-edit');
     });
 
     // Routes for users with 'approver' role

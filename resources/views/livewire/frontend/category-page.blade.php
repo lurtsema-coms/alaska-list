@@ -32,7 +32,7 @@ new class extends Component {
                         <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside">
                             @foreach($category->subCategories as $subCategory)
                                 <li class="text-gray-600 break-words">
-                                    <a href="{{ route('listing-page') }}" wire:navigate class="hover:opacity-70">
+                                    <a href="{{ route('listing-page', ['sub_category_name' => $subCategory->name]) }}" wire:navigate class="hover:opacity-70">
                                         <span>{{ $subCategory->name }}</span>
                                     </a>
                                 </li>

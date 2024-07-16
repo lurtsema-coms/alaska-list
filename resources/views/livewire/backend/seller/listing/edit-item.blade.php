@@ -1,60 +1,12 @@
 <?php
 
 use App\Models\Category;
-use App\Models\Product;
-use Livewire\WithFileUploads;
-use Illuminate\Support\Str;
 use Livewire\Volt\Component;
 
 new class extends Component {
 
-    use WithFileUploads;
-
-    public $sub_category = '';
-    public $title_name = '';
-    public $price = '';
-    public $qty = '';
-    public $description = '';
-    public $additional_information = '';
-    public $photos = [];
-
-    public function addItem(){
-
-        $user_id = auth()->user()->id;
-
-        $photo_names = [];
-        $photo_paths = [];
-        $uuid = '';
-
-        if(empty($this->photos)){
-            return $this->dispatch('alert-error');
-        }
-
-        foreach ($this->photos as $photo) {
-            $uuid = substr(Str::uuid()->toString(), 0, 8);
-            $file_name = $uuid . "-" . $photo->getClientOriginalName();
-
-            $path = $photo->storeAs(path: 'public/photos/listing-item', name: $file_name);
-
-            $photo_names[] = $file_name;
-            $photo_paths[] = $path;
-        }
-
-        Product::create([
-            'sub_category_id' => $this->sub_category,
-            'name' => $this->title_name,
-            'uuid' => $uuid,
-            'price' => $this->price,
-            'qty' => $this->qty,
-            'description' => $this->description,
-            'additional_information' => $this->additional_information,
-            'file_name' => implode(",", $photo_names),
-            'file_path' => implode(",", $photo_paths),
-            'created_by' => $user_id
-        ]);
-
-        $this->reset(['sub_category', 'title_name', 'price', 'qty', 'description', 'additional_information', 'photos']);
-        $this->dispatch('alert-success');
+    public function mount(){
+        $id = request()->route('id');
     }
     
     public function with(): array
