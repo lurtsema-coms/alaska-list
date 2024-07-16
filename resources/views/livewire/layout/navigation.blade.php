@@ -43,6 +43,9 @@ new class extends Component
                     <x-nav-link :href="route('admin-categories')" :active="request()->routeIs('admin-categories')" wire:navigate>
                         {{ __('Categories') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin-special-boost')" :active="request()->routeIs('admin-special-boost')" wire:navigate>
+                        {{ __('Special Boost') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin-user-control')" :active="request()->routeIs('admin-user-control')" wire:navigate>
                         {{ __('User Control') }}
                     </x-nav-link>
@@ -101,6 +104,9 @@ new class extends Component
             @role('admin')
             <x-responsive-nav-link :href="route('admin-categories')" :active="request()->routeIs('admin-categories')" wire:navigate>
                 {{ __('Categories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin-special-boost')" :active="request()->routeIs('admin-special-boost')" wire:navigate>
+                {{ __('Special Boost') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-user-control')" :active="request()->routeIs('admin-user-control')" wire:navigate>
                 {{ __('User Control') }}
