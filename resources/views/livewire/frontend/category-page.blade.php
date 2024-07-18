@@ -30,9 +30,13 @@ new class extends Component {
                     <div class="border border-gray-200 shadow-sm bg-gray-50 rounded-lg p-5">
                         <p class="mb-4 font-medium text-gray-700">{{ $category->name }}</p>
                         <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside">
-                            @foreach($category->subCategories as $subCategory)
+                            @foreach($category->subCategories as $index => $subCategory)
                                 <li class="text-gray-600 break-words">
-                                    <a href="{{ route('listing-page', ['sub_category_name' => $subCategory->name]) }}" wire:navigate class="hover:opacity-70">
+                                    @php
+                                        $queryParam = 'sc_names[' . '0' . ']=' . urlencode($subCategory->name);
+                                        $url = route('listing-page') . '?' . $queryParam;
+                                    @endphp
+                                    <a href="{{ $url }}" wire:navigate class="hover:opacity-70">
                                         <span>{{ $subCategory->name }}</span>
                                     </a>
                                 </li>

@@ -31,7 +31,7 @@ new class extends Component {
                     </a>
                 </div>
                 <div class="flex justify-end items-center gap-4 w-full">
-                    <div class="relative w-full max-w-60 p-1 overflow-hidden md:max-w-96 ">
+                    {{-- <div class="relative w-full max-w-60 p-1 overflow-hidden md:max-w-96 ">
                         <input class="w-full rounded-full py-2 pr-12 pl-4 focus:ring-2" type="search" wire:model="search" placeholder="Search..."
                             x-on:change="$dispatch('search-on', { val: $event.target.value})">
                         <button class="absolute inset-y-0 right-2 flex items-center pr-3">
@@ -39,7 +39,7 @@ new class extends Component {
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
                         </button>
-                    </div>
+                    </div> --}}
                     @guest
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="/register" wire:navigate>Sell</a>
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="/login" wire:navigate>Login</a>

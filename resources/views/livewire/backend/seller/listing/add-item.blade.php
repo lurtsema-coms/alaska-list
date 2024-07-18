@@ -4,6 +4,8 @@ use App\Models\Category;
 use App\Models\Product;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
+use Spatie\ImageOptimizer\OptimizerChainFactory;
+use Intervention\Image\Facades\Image as Image;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -17,9 +19,10 @@ new class extends Component {
     public $description = '';
     public $additional_information = '';
     public $photos = [];
+    public $inc = 1;
 
     public function addItem(){
-
+        
         $user_id = auth()->user()->id;
 
         $photo_names = [];
@@ -30,30 +33,47 @@ new class extends Component {
             return $this->dispatch('alert-error');
         }
 
-        foreach ($this->photos as $photo) {
-            $uuid = substr(Str::uuid()->toString(), 0, 8);
-            $file_name = $uuid . "-" . $photo->getClientOriginalName();
-
-            $path = $photo->storeAs(path: 'public/photos/listing-item', name: $file_name);
-
-            $photo_names[] = $file_name;
-            $photo_paths[] = $path;
-        }
-
-        Product::create([
-            'sub_category_id' => $this->sub_category,
+        $product = Product::create([
+            'sub_category_id' => (int)$this->sub_category,
             'name' => $this->title_name,
-            'uuid' => $uuid,
             'price' => $this->price,
             'qty' => $this->qty,
             'description' => $this->description,
             'additional_information' => $this->additional_information,
-            'file_name' => implode(",", $photo_names),
-            'file_path' => implode(",", $photo_paths),
             'created_by' => $user_id
         ]);
 
-        $this->reset(['sub_category', 'title_name', 'price', 'qty', 'description', 'additional_information', 'photos']);
+        foreach ($this->photos as $photo) {
+            $uuid = substr(Str::uuid()->toString(), 0, 8);
+            $file_name = $user_id . "-" . $uuid . "." . $photo->getClientOriginalExtension();
+
+            // Store the file in the public disk
+            $path = $photo->storeAs(
+                path: "public/photos/listing-item/$user_id/$product->id",
+                name: $file_name
+            );
+
+            // Optimize image
+            $file_path = storage_path("app/" . $path);
+            $image = Image::make($file_path);
+            $image->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image->save($file_path, 80);
+
+            $photo_names[] = $file_name;
+            $photo_paths[] = "storage/photos/listing-item/$user_id/$product->id/$file_name";
+        }
+
+
+        $product->update([
+            'uuid' => $uuid,
+            'file_name' => implode(",", $photo_names),
+            'file_path' => implode(",", $photo_paths),
+        ]);
+
+        $this->reset(['photos', 'sub_category', 'title_name', 'price', 'qty', 'description', 'additional_information']);
+        $this->inc++;
         $this->dispatch('alert-success');
     }
     
@@ -108,13 +128,13 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="price">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="price">
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Qty</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="qty" wire:model="qty">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="1">
                             </div>
                         </div>
                     </div>
@@ -130,15 +150,15 @@ new class extends Component {
                             <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information"></textarea>
                         </div>
                     </div>
-                    <div class="space-y-2" x-data="{ files: [] }">
+                    <div class="space-y-2">
                         <label class="font-medium text-slate-700">Upload Photos</label>
-                        <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" multiple wire:model="photos" @click="files=[];" @close="files=[];" @change="files = Array.from($event.target.files).map(file => file.name)" required>
+                        <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" multiple wire:model="photos" id="upload{{ $inc }}" required>
                         
-                        <ul class="mt-2">
+                        {{-- <ul class="mt-2">
                             <template x-for="file in files" :key="file">
                                 <li x-text="file" class="text-slate-700"></li>
                             </template>
-                        </ul>
+                        </ul> --}}
                         @error('photos.*') <div class="mt-4">{{ $message }}</div>@enderror
                     </div>
                     <div class="!mt-8 text-right">

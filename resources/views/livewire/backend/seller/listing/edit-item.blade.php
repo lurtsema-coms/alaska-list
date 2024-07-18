@@ -1,12 +1,52 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Product;
 use Livewire\Volt\Component;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\On; 
 
 new class extends Component {
 
-    public function mount(){
-        $id = request()->route('id');
+    use WithFileUploads;
+
+    public $product_id;
+    public $sub_category = '';
+    public $title_name = '';
+    public $price = '';
+    public $qty = '';
+    public $description = '';
+    public $additional_information = '';
+    public $photos = [];
+    public $photos_file = [];
+    public $inc = 1;
+
+
+    public function mount()
+    {
+        $product_id = request()->route('id');
+        $product = Product::with('subCategory')->find($product_id);
+
+        $this->product_id = $product->id;
+        $this->sub_category = $product->subCategory->id;
+        $this->title_name = $product->name;
+        $this->price = $product->price;
+        $this->qty = $product->qty;
+        $this->description = $product->description;
+        $this->additional_information = $product->additional_information;
+
+        if(!empty($product->file_name)){
+            $file_names = explode(',', $product->file_name);
+            $file_paths = explode(',', $product->file_path);
+            $count = count($file_names);
+
+            for ($i = 0; $i < $count; $i++) {
+                $this->photos_file[$i] = [
+                    'file_names' => $file_names[$i],
+                    'file_paths' => $file_paths[$i],
+                ];
+            }
+        }
     }
     
     public function with(): array
@@ -16,10 +56,115 @@ new class extends Component {
         ];
     }
 
+    public function saveItem()
+    {
+        $user_id = auth()->user()->id;
+
+        $save_photo_names = [];
+        $save_photo_paths = [];
+        $photo_names = [];
+        $photo_paths = [];
+
+        // Collect file_names from $this->photos_file
+        foreach ($this->photos_file as $photo) {
+            $save_photo_names[] = $photo['file_names'];
+            $save_photo_paths[] = $photo['file_paths'];
+        }
+
+        // Directory path where files are stored
+        $directory = storage_path("app/public/photos/listing-item/$user_id/$this->product_id");
+
+        // Get all files in the directory
+        $files = scandir($directory);
+
+        foreach ($files as $file) {
+            if ($file === '.' || $file === '..') {
+                continue;
+            }
+
+            if (!in_array($file, $save_photo_names)) {
+                unlink("$directory/$file");
+            }
+        }
+
+        if(!empty($this->photos)){
+            foreach ($this->photos as $photo) {
+                $uuid = substr(Str::uuid()->toString(), 0, 8);
+                    $file_name = $user_id . "-" . $uuid . "." . $photo->getClientOriginalExtension();
+    
+                $path = $photo->storeAs(
+                    path: "public/photos/listing-item/$user_id/$this->product_id",
+                    name: $file_name
+                );
+
+                // Optimize image
+                $file_path = storage_path("app/" . $path);
+                $image = Image::make($file_path);
+                $image->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $image->save($file_path, 80);
+    
+                $photo_names[] = $file_name;
+                $photo_paths[] = "storage/photos/listing-item/$user_id/$this->product_id/$file_name";
+            }
+        }
+
+        $merged_names = array_merge($save_photo_names, $photo_names);
+        $merged_paths = array_merge($save_photo_paths, $photo_paths);
+
+        $product = Product::find($this->product_id)
+            ->update([
+                'sub_category_id' => (int)$this->sub_category,
+                'name' => $this->title_name,
+                'price' => $this->price,
+                'qty' => $this->qty,
+                'description' => $this->description,
+                'additional_information' => $this->additional_information,
+                'file_name' => implode(",", $merged_names) ?: null,
+                'file_path' => implode(",", $merged_paths) ?: null,
+                'updated_by' => $user_id,
+            ]);
+
+        // Reset Data
+        $this->inc++;
+        $this->resetData(['photos']);
+
+        $count = count($merged_names);
+
+        for ($i = 0; $i < $count; $i++) {
+            $this->photos_file[$i] = [
+                'file_names' => $merged_names[$i],
+                'file_paths' => $merged_paths[$i],
+            ];
+        }
+
+        $this->dispatch('alert-success');
+    }
+
     public function loadCategories()
     {
         return Category::with('subCategories')
             ->get();
+    }
+
+    public function deleteImg($index)
+    {
+        unset($this->photos_file[$index]);
+        $this->photos_file = array_values($this->photos_file);
+        $this->dispatch('new-img');
+    }
+
+    public function deleteTempImg($index)
+    {
+        unset($this->photos[$index]);
+        $this->photos = array_values($this->photos);
+        $this->dispatch('new-img');
+    }
+
+    public function resetData($data)
+    {
+        $this->reset($data);
     }
 }; ?>
 
@@ -34,7 +179,7 @@ new class extends Component {
             </span>
         </a>
         <div class="pb-8">
-            <form action="post" wire:submit="addItem" enctype="multipart/form-data">
+            <form action="post" wire:submit="saveItem" enctype="multipart/form-data">
                 <div class="max-w-4xl space-y-4 m-auto">
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
@@ -60,41 +205,82 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="price">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="price">
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Qty</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="qty" wire:model="qty">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="0">
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Description</p>
-                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description"></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description"></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Additional Information</p>
-                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information"></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information"></textarea>
                         </div>
                     </div>
-                    <div class="space-y-2" x-data="{ files: [] }">
-                        <label class="font-medium text-slate-700">Upload Photos</label>
-                        <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" multiple wire:model="photos" @click="files=[];" @close="files=[];" @change="files = Array.from($event.target.files).map(file => file.name)" required>
+                    <div class="border border-slate-300 rounded-lg p-4">
+                        <div class="flex items-center gap-4 overflow-x-auto" id="lightgallery">
+                            @if (!empty($photos_file))
+                                @foreach ($photos_file as $index => $file)
+                                <div class="relative space-y-2" wire:key="present-img-{{ $index }}">
+                                    <div class="item-img" data-src="{{ asset($file['file_paths']) }}">
+                                        <img class="h-56 max-w-96 object-contain cursor-pointer"
+                                        src="{{ asset($file['file_paths']) }}"
+                                        alt="Image {{ $index }}">
+                                    </div>
+                                    <button class="text-red-600 hover:text-red-700" type="button" wire:click="deleteImg({{ $index }})">
+                                        Delete
+                                    </button>
+                                </div>
+                                @endforeach
+                            @endif
+                            @if ($photos)
+                                @foreach ($photos as $index => $photo)
+                                    <div class="relative space-y-2" wire:key="uploaded-img-{{ $index }}">                                   
+                                        <div class="item-img" data-src="{{ $photo->temporaryUrl() }}">
+                                            <img class="max-w-96 h-56 object-contain cursor-pointer" src="{{ $photo->temporaryUrl() }}">
+                                        </div>
+                                        <button class="text-red-600 hover:text-red-700" type="button" wire:click="deleteTempImg({{ $index }})">
+                                            Delete
+                                        </button>                                
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="space-y-2">
+                            <label class="block font-medium text-slate-700">Upload Photos</label>
+                            <input type="file" multiple wire:model="photos" @change="$dispatch('new-img')" x-ref="fileInput" class="hidden">
+                            <!-- Custom Button -->
+                            <button type="button"
+                                    class="block text-md px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55] text-slate-600 hover:bg-[#246567] hover:text-white cursor-pointer"
+                                    x-on:click="$refs.fileInput.click()">
+                                Upload Photos
+                            </button>
+                        </div>
                         
                         <ul class="mt-2">
-                            <template x-for="file in files" :key="file">
-                                <li x-text="file" class="text-slate-700"></li>
-                            </template>
+                            @foreach($photos as $index => $photo)
+                                <li wire:key="{{ $index }}" class="text-slate-700">
+                                    {{ $photo->getClientOriginalName() }}
+                                </li>
+                            @endforeach
                         </ul>
                         @error('photos.*') <div class="mt-4">{{ $message }}</div>@enderror
                     </div>
                     <div class="!mt-8 text-right">
-                        <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Submit</button>
+                        <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Save</button>
                     </div>
                     <livewire:component.alert-messages />
                 </div>
@@ -102,3 +288,54 @@ new class extends Component {
         </div>
     </div>
 </div>
+
+@script
+<script>
+    let lightGalleryInstance = null;
+
+    // Function to initialize lightGallery
+    function initializeLightGallery() {
+        if (typeof lightGallery !== 'undefined' && document.getElementById('lightgallery')) {
+            lightGalleryInstance = lightGallery(document.getElementById('lightgallery'), {
+                selector: '.item-img',
+                speed: 500,
+                plugins: [lgThumbnail],
+                enableDrag: false,
+                enableSwipe: false
+            });
+        }
+    }
+
+    // Function to destroy lightGallery instance
+    function destroyLightGallery() {
+        if (lightGalleryInstance) {
+            lightGalleryInstance.destroy();
+            lightGalleryInstance = null;
+        }
+    }
+
+    // Initial setup
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeLightGallery();
+    });
+
+    // Reinitialize lightGallery on Livewire navigations
+    document.addEventListener('livewire:navigated', function () {
+        destroyLightGallery();
+        initializeLightGallery();
+    });
+
+    // Example of how to handle 'new-img' event
+    $wire.on('new-img', (event) => {
+        destroyLightGallery();
+        setTimeout(function() {
+            initializeLightGallery();
+        }, 1500);
+    });
+
+    // Destroy lightGallery on Livewire navigating (before navigation)
+    document.addEventListener('livewire:navigating', () => {
+        destroyLightGallery();
+    });
+</script>
+@endscript

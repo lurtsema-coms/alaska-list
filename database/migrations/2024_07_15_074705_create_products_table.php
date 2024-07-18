@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->string('uuid')->nullable();
             $table->text('name');
             $table->string('sub_category_id');
             $table->decimal('price', 10, 2);
             $table->integer('qty');
             $table->text('description');
             $table->text('additional_information')->nullable();
-            $table->text('file_name');
-            $table->text('file_path');
+            $table->text('file_name')->nullable();
+            $table->text('file_path')->nullable();
             $table->unsignedInteger('created_by')->length(10)->nullable();
             $table->unsignedInteger('updated_by')->length(10)->nullable();
             $table->timestamps();

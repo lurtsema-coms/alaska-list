@@ -10,10 +10,17 @@ use Livewire\Volt\Component;
 new class extends Component {
 
     use WithPagination;
-
     #[Url] 
-    public $sub_category_name = '';
+    public $sc_names = [];
+    #[Url] 
     public $search;
+    public $pagination = 10;
+
+    public function updated()
+    {
+        $this->dispatch('load-time-ago');
+
+    }
 
     public function with(): array
     {
@@ -33,20 +40,34 @@ new class extends Component {
     {
         $query = Product::with('subCategory')
             ->where(function ($query) {
-                $query->orderByRaw('RAND('.mt_rand().')');
+                $query->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('description', 'like', '%' . $this->search . '%')
+                    ->orWhere('price', 'like', '%' . $this->search . '%');
             })
-            ->whereRaw('DATEDIFF(NOW(), created_at) > 7')
-            ->orWhereHas('subCategory', function ($subQuery) {
-                $subQuery->where('name', 'like', '%' . $this->sub_category_name . '%');
-            })
-            ->paginate(15);
+            ->orderByRaw('
+                CASE
+                    WHEN created_at >= NOW() - INTERVAL 7 DAY THEN 1
+                    ELSE RAND()
+                END,
+                created_at DESC
+            ');
 
-        return $query;
+        // Apply sub-category filter if there are selected sub-categories
+        if (!empty($this->sc_names)) {
+            $query->whereHas('subCategory', function ($subQuery) {
+                $subQuery->whereIn('name', $this->sc_names);
+            });
+        }else{
+            $query->orWhereHas('subCategory', function ($subQuery) {
+                $subQuery->where('name', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        return $query->paginate($this->pagination);
     }
 
-
-
-    function resetData($data)
+    
+    public function resetData($data)
     {
         $this->reset($data);
     }
@@ -61,23 +82,48 @@ new class extends Component {
         <div class="max-h-80 p-4 bg-white mx-auto shadow-md rounded-xl space-y-4 overflow-y-auto">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-medium text-gray-700">Sort by categories</h2>
-                <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="resetData(['sub_category_name'])">Reset</button>
+                <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="resetData(['sc_names'])">Reset</button>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($categories as $category)
-                    <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+                    <div class="p-4 bg-gray-100 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
                         <h3 class="text-lg font-medium text-gray-700 mb-2">{{ $category->name }}</h3>
                         <div class="flex flex-wrap gap-2">
-                            @foreach($category->subCategories as $sub_category)
-                                <label class="inline-flex items-center space-x-2 cursor-pointer">
-                                    <input type="radio" value="{{ $sub_category->name }}" class="form-radio text-blue-600 h-5 w-5"  wire:model.change="sub_category_name">
-                                    <span class="text-gray-600">{{ $sub_category->name }}</span>
-                                </label>
-                            @endforeach
+                        @foreach($category->subCategories as $sub_category)
+                            <label class="inline-flex items-center space-x-2 cursor-pointer" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                                <input type="checkbox"
+                                    class=" text-blue-600 h-5 w-5"
+                                    wire:model.change="sc_names"
+                                    value="{{ $sub_category->name }}">
+                                <span class="text-gray-600">{{ $sub_category->name }}</span>
+                            </label>
+                        @endforeach
+
                         </div>
                     </div>
                 @endforeach
+            </div>
+        </div>
+
+        <div class="flex items-center justify-end flex-wrap gap-4">
+            <div>
+                <select class="border border-gray-400 rounded-lg" name="" id="" wire:model.change="pagination">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="relative w-full max-w-60 p-1 overflow-hidden md:max-w-96 ">
+                <input class="border border-gray-400 h-14 w-full rounded-full py-2 pr-12 pl-4 focus:ring-2" type="search" wire:model.live.debounce.200ms="search" placeholder="Search...">
+                <button class="absolute inset-y-0 right-2 flex items-center pr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
             </div>
         </div>
         
@@ -86,23 +132,26 @@ new class extends Component {
                 <p>No products to show.</p>
             @else
                 @foreach($products as $product)
-                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-6 hover:no-underline">
+                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
                         <div class="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden transition duration-300 hover:border-blue-400">
                             @php
-                                $images = explode(',', $product->file_name);
+                                $images = explode(',', $product->file_path);
                                 $firstImage = trim($images[0]);
                             @endphp
 
-                            <img class="h-56 w-full object-cover" src="{{ asset('storage/photos/listing-item/'.$firstImage) }}" alt="{{ $product->name }}">
-                            <div class="p-4">
-                                <p class="text-lg font-semibold text-gray-800 mb-2">{{ $product->name }}</p>
-                                <p class="text-gray-700 mb-2">{{ $product->description }}</p>
-                                <p class="text-green-600 font-semibold">${{ $product->price }}</p>
-                                <div class="flex items-center space-x-2 mt-2">
+                            <img class="h-56 w-full object-cover" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
+                            <div class="p-6">
+                                <p class="text-lg font-semibold text-gray-800 mb-4">{{ $product->name }}</p>
+                                <p class="text-gray-700 mb-4">{{ $product->description }}</p>
+                                <p class="text-red-500 font-semibold mb-4">${{ $product->price }}</p>
+                                <div class="flex items-center space-x-2 mt-4 mb-4">
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
                                 </div>
-                                <p class="text-gray-500 text-sm mt-2">Available: <span class="text-gray-700 font-medium">{{ $product->qty }}</span></p>
-                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                                <p class="text-gray-500 text-sm">Available: <span class="text-gray-700 font-medium">{{ $product->qty }}</span></p>
+                            </div>
+                            <div class="p-6 border-t border-gray-200">
+                                <p class="timeago text-md text-green-500 font-bold mb-4" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     View Details
                                 </button>
                             </div>
@@ -114,3 +163,37 @@ new class extends Component {
         {{ $products->links() }}
     </div>
 </div>
+
+@script
+<script >
+    let timeagoInstance;
+    document.addEventListener('livewire:navigated', () => {
+
+        if(timeagoInstance){
+            timeagoInstance = undefined;
+        }
+
+        function initializeTimeago() {
+            const timeagoNodes = document.querySelectorAll('.timeago');
+            if (timeagoNodes.length) {
+                timeagoInstance = timeago.render(timeagoNodes);
+            }
+        }
+
+        Livewire.on('load-time-ago', function(){
+            setTimeout(() => {
+                initializeTimeago();
+            }, 100);
+        });
+
+        initializeTimeago();
+
+    });
+
+    document.addEventListener('livewire:navigating', () => {
+        if (timeagoInstance) {
+            chart = undefined;
+        }
+    });
+</script>
+@endscript
