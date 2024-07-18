@@ -31,7 +31,7 @@ new class extends Component {
                 <input class="text-sm w-full px-4 border border-slate-300 rounded-lg focus:border-none focus:outline-none focus:ring-2 focus:ring-[#1F4B55]" type="search" placeholder="Search..." wire:model.live.debounce.200ms="search">
             </div>
         </div>
-        <livewire:component.alert-messages />
+        <livewire:component.alert-messages/>
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
