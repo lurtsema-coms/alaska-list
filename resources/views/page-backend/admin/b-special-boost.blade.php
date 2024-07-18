@@ -5,5 +5,5 @@
         </h2>
     </x-slot>
     
-    <livewire:backend.admin.user-control.table>
+    <livewire:backend.admin.special-boost.table>
 </x-app-layout>
