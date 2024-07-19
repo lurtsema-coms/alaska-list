@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <footer class="w-full bg-gray-900">
+    <footer class="w-full bg-[#297174]">
         <div class="mx-auto container px-4 sm:px-6 lg:px-8">
             <!--Grid-->
             <div class="py-12 flex flex-wrap justify-between items-center flex-col gap-8 lg:flex-row">

@@ -7,7 +7,7 @@
             <p class="text-4xl mb-4 font-bold">About Us</p>
             <p class="text-slate-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, officiis.</p>
         </div>
-        <div class="flex flex-col gap-8 lg:flex-row">
+        <div class="flex items-center flex-col gap-8 lg:flex-row">
             <div class="max-w-2xl rounded-lg overflow-hidden">
                 <img src="{{ asset('frontend/work-team-digital-art.jpg') }}" alt="">
             </div>

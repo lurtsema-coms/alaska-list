@@ -2,9 +2,10 @@
 
 use App\Models\Category;
 use App\Models\Product;
-use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
 use Livewire\Attributes\On; 
+use Livewire\Volt\Component;
 
 new class extends Component {
 
@@ -20,12 +21,20 @@ new class extends Component {
     public $photos = [];
     public $photos_file = [];
     public $inc = 1;
+    public $status;
 
 
     public function mount()
     {
+        $user_id = auth()->user()->id;
+        
         $product_id = request()->route('id');
         $product = Product::with('subCategory')->find($product_id);
+        
+        // Check if the product exists and if the authenticated user is the owner
+        if (!$product || $product->created_by !== $user_id) {
+            abort(404); // or redirect with an error message
+        }
 
         $this->product_id = $product->id;
         $this->sub_category = $product->subCategory->id;
@@ -34,6 +43,7 @@ new class extends Component {
         $this->qty = $product->qty;
         $this->description = $product->description;
         $this->additional_information = $product->additional_information;
+        $this->status = $product->status;
 
         if(!empty($product->file_name)){
             $file_names = explode(',', $product->file_name);
@@ -58,6 +68,11 @@ new class extends Component {
 
     public function saveItem()
     {
+        if(count($this->photos) == 0 && count($this->photos_file) == 0){
+            $this->addError('no_photo', 'At least one photo');  
+            return;
+        }
+
         $user_id = auth()->user()->id;
 
         $save_photo_names = [];
@@ -142,6 +157,15 @@ new class extends Component {
         $this->dispatch('alert-success');
     }
 
+    public function deleteItem(){
+        Product::find($this->product_id)->update([
+            'status' => 'DELETED',
+            'updated_by' => auth()->user()->id,
+        ]);
+
+        $this->dispatch('alert-success', route: route('seller-listing'));
+    }
+
     public function loadCategories()
     {
         return Category::with('subCategories')
@@ -181,10 +205,18 @@ new class extends Component {
         <div class="pb-8">
             <form action="post" wire:submit="saveItem" enctype="multipart/form-data">
                 <div class="max-w-4xl space-y-4 m-auto">
+                    <div class="bg-yellow-100 border border-yellow-300 text-yellow-800 p-4 rounded-lg shadow-md">
+                        <div class="font-semibold text-lg">
+                            Note:
+                        </div>
+                        <p class="mt-2">
+                            If this post has already been approved, it cannot be edited.
+                        </p>
+                    </div>
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Category</p>
-                            <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="sub_category">
+                            <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="sub_category" {{ $status != 'PENDING' ? 'disabled' : '' }}>
                                 <option value="" disabled selected>Select a sub category...</option>
                                 @foreach ($categories as $category)
                                     <option class="font-medium text-sky-600" value="_" disabled>{{ $category->name }}</option>
@@ -197,7 +229,7 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Title Name</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name" {{ $status != 'PENDING' ? 'disabled' : '' }}>
                             </div>
                         </div>
                     </div>
@@ -205,26 +237,26 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="price">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="price" {{ $status != 'PENDING' ? 'disabled' : '' }}>
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Qty</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="0">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="0" {{ $status != 'PENDING' ? 'disabled' : '' }}>
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Description</p>
-                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description"></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description" {{ $status != 'PENDING' ? 'disabled' : '' }}></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Additional Information</p>
-                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information"></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information" {{ $status != 'PENDING' ? 'disabled' : '' }}></textarea>
                         </div>
                     </div>
                     <div class="border border-slate-300 rounded-lg p-4">
@@ -237,7 +269,7 @@ new class extends Component {
                                         src="{{ asset($file['file_paths']) }}"
                                         alt="Image {{ $index }}">
                                     </div>
-                                    <button class="text-red-600 hover:text-red-700" type="button" wire:click="deleteImg({{ $index }})">
+                                    <button class="text-red-600 hover:text-red-700" type="button" wire:click="deleteImg({{ $index }})" {{ $status != 'PENDING' ? 'disabled' : '' }}>
                                         Delete
                                     </button>
                                 </div>
@@ -256,12 +288,13 @@ new class extends Component {
                                 @endforeach
                             @endif
                         </div>
+                        <div class="text-sm text-red-500">@error('no_photo') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="space-y-2">
                         <div class="space-y-2">
                             <label class="block font-medium text-slate-700">Upload Photos</label>
-                            <input type="file" multiple wire:model="photos" @change="$dispatch('new-img')" x-ref="fileInput" class="hidden">
+                            <input type="file" multiple wire:model="photos" @change="$dispatch('new-img')" x-ref="fileInput" class="hidden" {{ $status != 'PENDING' ? 'disabled' : '' }}>
                             <!-- Custom Button -->
                             <button type="button"
                                     class="block text-md px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55] text-slate-600 hover:bg-[#246567] hover:text-white cursor-pointer"
@@ -279,8 +312,11 @@ new class extends Component {
                         </ul>
                         @error('photos.*') <div class="mt-4">{{ $message }}</div>@enderror
                     </div>
-                    <div class="!mt-8 text-right">
-                        <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Save</button>
+                    <div class="!mt-8 text-right space-x-2">
+                        @if ($status != 'DELETED')                            
+                            <button class="text-white bg-red-500 shadow py-2 px-4 rounded-lg hover:opacity-70" type="button" wire:click="deleteItem">Delete</button>
+                        @endif
+                        <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit" {{ $status != 'PENDING' ? 'disabled' : '' }}>Save</button>
                     </div>
                     <livewire:component.alert-messages />
                 </div>

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->nullable();
+            $table->string('status');
             $table->text('name');
             $table->string('sub_category_id');
             $table->decimal('price', 10, 2);
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->text('file_path')->nullable();
             $table->unsignedInteger('created_by')->length(10)->nullable();
             $table->unsignedInteger('updated_by')->length(10)->nullable();
+            $table->unsignedInteger('approved_by')->length(10)->nullable();
+            $table->timestamp('approved_at')->nullable();
             $table->timestamps();
         });
     }

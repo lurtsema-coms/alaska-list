@@ -64,9 +64,12 @@ new class extends Component {
     <!-- Livewire Event Listeners -->
     <script>
         document.addEventListener('livewire:init', () => {
-            Livewire.on('alert-success', () => {
+            Livewire.on('alert-success', (events) => {
                 document.getElementById('alert-success').classList.remove('hidden');
                 document.getElementById('alert-success').classList.add('flex');
+                if(events.route){
+                    window.location.href = events.route;
+                }
                 setTimeout(() => {
                     document.getElementById('alert-success').classList.remove('flex');
                     document.getElementById('alert-success').classList.add('hidden');

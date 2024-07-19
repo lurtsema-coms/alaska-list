@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
     // Routes for users with 'approver' role
     Route::middleware('role:approver')->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
+        Route::view('approver-listing', 'page-backend.approver.b-approve-listing')->name('approver-listing');
     });
 
     // Routes for users with 'admin' role

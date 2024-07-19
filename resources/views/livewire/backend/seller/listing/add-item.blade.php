@@ -34,6 +34,8 @@ new class extends Component {
         }
 
         $product = Product::create([
+            'status' => 'PENDING',
+            'uuid' => substr(Str::uuid()->toString(), 0, 10),
             'sub_category_id' => (int)$this->sub_category,
             'name' => $this->title_name,
             'price' => $this->price,
@@ -67,7 +69,6 @@ new class extends Component {
 
 
         $product->update([
-            'uuid' => $uuid,
             'file_name' => implode(",", $photo_names),
             'file_path' => implode(",", $photo_paths),
         ]);

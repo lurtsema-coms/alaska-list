@@ -66,7 +66,7 @@ new class extends Component {
                     <p class="text-right mb-4">
                         @if ($qty === 0)                            
                             <span class="inline-block bg-red-100 text-red-700 rounded-full px-4 py-1 text-sm font-semibold shadow-sm">
-                                Sold
+                                Not Available
                             </span>
                         @else
                             <span class="inline-block bg-green-100 text-green-700 rounded-full px-4 py-1 text-sm font-semibold shadow-sm">

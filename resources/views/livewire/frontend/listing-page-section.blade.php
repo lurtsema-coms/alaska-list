@@ -40,9 +40,16 @@ new class extends Component {
     {
         $query = Product::with('subCategory')
             ->where(function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('description', 'like', '%' . $this->search . '%')
-                    ->orWhere('price', 'like', '%' . $this->search . '%');
+                // Apply the status filter
+                $query->where('status', 'APPROVED');
+
+                // Apply the search filter
+                $query->where(function ($searchQuery) {
+                    $searchQuery
+                        ->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('description', 'like', '%' . $this->search . '%')
+                        ->orWhere('price', 'like', '%' . $this->search . '%');
+                });
             })
             ->orderByRaw('
                 CASE
@@ -57,14 +64,16 @@ new class extends Component {
             $query->whereHas('subCategory', function ($subQuery) {
                 $subQuery->whereIn('name', $this->sc_names);
             });
-        }else{
-            $query->orWhereHas('subCategory', function ($subQuery) {
+        } else {
+            // Handle cases where sub-category filter is not applied
+            $query->whereHas('subCategory', function ($subQuery) {
                 $subQuery->where('name', 'like', '%' . $this->search . '%');
             });
         }
 
         return $query->paginate($this->pagination);
     }
+
 
     
     public function resetData($data)
@@ -79,7 +88,7 @@ new class extends Component {
     </div>
     <div class="space-y-10">
         <livewire:frontend.sponsored-listing>
-        <div class="max-h-80 p-4 bg-white mx-auto shadow-md rounded-xl space-y-4 overflow-y-auto">
+        <div class="max-h-80 p-4 bg-white mx-auto border rounded-xl space-y-4 overflow-y-auto">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-medium text-gray-700">Sort by categories</h2>
                 <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="resetData(['sc_names'])">Reset</button>
@@ -108,7 +117,7 @@ new class extends Component {
 
         <div class="flex items-center justify-end flex-wrap gap-4">
             <div>
-                <select class="border border-gray-400 rounded-lg" name="" id="" wire:model.change="pagination">
+                <select class="h-12 border border-gray-300 rounded-lg" name="" id="" wire:model.change="pagination">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
@@ -118,12 +127,19 @@ new class extends Component {
                 </select>
             </div>
             <div class="relative w-full max-w-60 p-1 overflow-hidden md:max-w-96 ">
-                <input class="border border-gray-400 h-14 w-full rounded-full py-2 pr-12 pl-4 focus:ring-2" type="search" wire:model.live.debounce.200ms="search" placeholder="Search...">
-                <button class="absolute inset-y-0 right-2 flex items-center pr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                </button>
+                <div class="relative w-full">
+                    <input
+                        class="h-12 text-md w-full px-4 pr-10 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]"
+                        type="seaerch"
+                        placeholder="Search..."
+                        wire:model.live.debounce.200ms="search"
+                        required>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>                    
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -142,7 +158,7 @@ new class extends Component {
                             <img class="h-56 w-full object-cover" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
                             <div class="p-6">
                                 <p class="text-lg font-semibold text-gray-800 mb-4">{{ $product->name }}</p>
-                                <p class="text-gray-700 mb-4">{{ $product->description }}</p>
+                                <p class="text-gray-700 mb-4">{{ Str::limit($product->description, 200) }}</p>
                                 <p class="text-red-500 font-semibold mb-4">${{ $product->price }}</p>
                                 <div class="flex items-center space-x-2 mt-4 mb-4">
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>

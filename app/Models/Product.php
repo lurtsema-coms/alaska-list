@@ -11,6 +11,7 @@ class Product extends Model
 
     protected $fillable = [
         'uuid',
+        'status',
         'name',
         'sub_category_id',
         'price',
@@ -22,6 +23,8 @@ class Product extends Model
         'images',
         'created_by',
         'updated_by',
+        'approved_by',
+        'approved_at',
     ];
 
     public function subCategory(){

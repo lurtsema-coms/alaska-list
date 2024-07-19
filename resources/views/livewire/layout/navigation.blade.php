@@ -38,6 +38,9 @@ new class extends Component
                     </x-nav-link>
                 @endrole
                 @role('approver')
+                    <x-nav-link :href="route('approver-listing')" :active="request()->routeIs('approver-listing')" wire:navigate>
+                        {{ __('Approve Listing') }}
+                    </x-nav-link>
                 @endrole
                 @role('admin')
                     <x-nav-link :href="route('admin-categories')" :active="request()->routeIs('admin-categories')" wire:navigate>
