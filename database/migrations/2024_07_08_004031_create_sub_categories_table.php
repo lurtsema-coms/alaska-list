@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->unsignedInteger('created_by')->length(10)->nullable();
-            $table->unsignedInteger('updated_by')->length(10)->nullable();
+            $table->unsignedBigInteger('created_by')->length(10)->nullable();
+            $table->unsignedBigInteger('updated_by')->length(10)->nullable();
             $table->timestamps();
         });
     }

@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('advertising_plans', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('created_by')->length(10)->nullable();
-            $table->unsignedBigInteger('updated_by')->length(10)->nullable();
+            $table->integer('duration_days')->nullable();
+            $table->decimal('cost', 8, 2)->nullable();
+            $table->unsignedInteger('created_by')->length(10)->nullable();
+            $table->unsignedInteger('updated_by')->length(10)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('advertising_plans');
     }
 };

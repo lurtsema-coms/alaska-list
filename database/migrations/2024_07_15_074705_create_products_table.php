@@ -23,9 +23,9 @@ return new class extends Migration
             $table->text('additional_information')->nullable();
             $table->text('file_name')->nullable();
             $table->text('file_path')->nullable();
-            $table->unsignedInteger('created_by')->length(10)->nullable();
-            $table->unsignedInteger('updated_by')->length(10)->nullable();
-            $table->unsignedInteger('approved_by')->length(10)->nullable();
+            $table->unsignedBigInteger('created_by')->length(10)->nullable();
+            $table->unsignedBigInteger('updated_by')->length(10)->nullable();
+            $table->unsignedBigInteger('approved_by')->length(10)->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->timestamps();
         });

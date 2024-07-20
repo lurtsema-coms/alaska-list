@@ -23,10 +23,6 @@
                     <h4 class="text-lg font-semibold text-gray-800">Monthly Premium</h4>
                     <p class="text-gray-600">Enjoy top-of-page placement for a whole month. Ideal for long-term promotions and continuous exposure.</p>
                 </div>
-                <div class="bg-gray-50 p-4 rounded-md shadow-md">
-                    <h4 class="text-lg font-semibold text-gray-800">Custom Packages</h4>
-                    <p class="text-gray-600">Need something specific? Contact us for tailored advertising solutions that fit your exact needs.</p>
-                </div>
             </div>
         </div>
 

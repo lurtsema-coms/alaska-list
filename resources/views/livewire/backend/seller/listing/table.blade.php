@@ -99,7 +99,7 @@ new class extends Component {
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($products as $product)
                         <tr class="hover:bg-gray-100" wire:key="{{ $product->id }}">
-                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 whitespace-nowrap text-sm">
                                 <span class="font-bold {{ $product->status == 'APPROVED' ? 'text-green-500' : ($product->status == 'PENDING' ? 'text-yellow-500' : 'text-red-500') }}">
                                     {{ $product->status }}
                                 </span>

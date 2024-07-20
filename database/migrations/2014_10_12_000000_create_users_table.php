@@ -23,8 +23,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->unsignedInteger('created_by')->length(10)->nullable();
-            $table->unsignedInteger('updated_by')->length(10)->nullable();
+            $table->unsignedBigInteger('created_by')->length(10)->nullable();
+            $table->unsignedBigInteger('updated_by')->length(10)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

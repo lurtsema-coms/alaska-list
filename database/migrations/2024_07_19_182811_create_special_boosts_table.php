@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('special_boosts', function (Blueprint $table) {
             $table->id();
-            $table->date('from_date')->nullable();
-            $table->date('to_date')->nullable();
-            $table->string('image_name')->nullable();
-            $table->string('file_path')->nullable();
-            $table->text('link')->nullable();
-            $table->smallInteger('created_by')->unsigned()->nullable();
-            $table->smallInteger('updated_by')->unsigned()->nullable();
+            $table->foreignId('product_id')->constrained('products');
+            $table->date('from_date');
+            $table->date('to_date');
+            $table->text('file_name')->nullable();
+            $table->text('file_path')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

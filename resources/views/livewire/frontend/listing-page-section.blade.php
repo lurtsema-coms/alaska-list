@@ -74,8 +74,6 @@ new class extends Component {
         return $query->paginate($this->pagination);
     }
 
-
-    
     public function resetData($data)
     {
         $this->reset($data);
@@ -90,7 +88,7 @@ new class extends Component {
         <livewire:frontend.sponsored-listing>
         <div class="max-h-80 p-4 bg-white mx-auto border rounded-xl space-y-4 overflow-y-auto">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-medium text-gray-700">Sort by categories</h2>
+                <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
                 <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="resetData(['sc_names'])">Reset</button>
             </div>
 

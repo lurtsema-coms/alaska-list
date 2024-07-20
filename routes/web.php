@@ -48,6 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
         Route::view('admin-special-boost', 'page-backend.admin.b-special-boost')->name('admin-special-boost');
         Route::view('admin-user-control', 'page-backend.admin.b-user-control')->name('admin-user-control');
+        Route::view('admin-advertising-plan', 'page-backend.admin.b-advertising-plan')->name('admin-advertising-plan');
     });
 
 });

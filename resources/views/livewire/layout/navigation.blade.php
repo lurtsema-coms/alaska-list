@@ -52,6 +52,9 @@ new class extends Component
                     <x-nav-link :href="route('admin-user-control')" :active="request()->routeIs('admin-user-control')" wire:navigate>
                         {{ __('User Control') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin-advertising-plan')" :active="request()->routeIs('admin-advertising-plan')" wire:navigate>
+                        {{ __('Advertising Plan') }}
+                    </x-nav-link>
                 @endrole
                 </div>
             </div>
@@ -104,6 +107,16 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @role('seller')
+                <x-responsive-nav-link :href="route('seller-listing')" :active="request()->routeIs('seller-listing')" wire:navigate>
+                    {{ __('Listing') }}
+                </x-responsive-nav-link>
+            @endrole
+            @role('approver')
+                <x-responsive-nav-link :href="route('approver-listing')" :active="request()->routeIs('approver-listing')" wire:navigate>
+                    {{ __('Approve Listing') }}
+                </x-responsive-nav-link>
+            @endrole
             @role('admin')
             <x-responsive-nav-link :href="route('admin-categories')" :active="request()->routeIs('admin-categories')" wire:navigate>
                 {{ __('Categories') }}
@@ -113,6 +126,9 @@ new class extends Component
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-user-control')" :active="request()->routeIs('admin-user-control')" wire:navigate>
                 {{ __('User Control') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin-advertising-plan')" :active="request()->routeIs('admin-advertising-plan')" wire:navigate>
+                {{ __('Advertising Plan') }}
             </x-responsive-nav-link>
             @endrole
         </div>

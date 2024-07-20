@@ -18,11 +18,11 @@ new class extends Component {
 }; ?>
 
 <div class="sticky top-0 z-20" x-data="{ sidebarOpen: false }">
-    <div class="bg-[#297174]">
+    <div class="bg-[#246567]">
         <div class="sm:container mx-auto py-2 px-2 sm:px-0">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white size-8 text-dark cursor-pointer hover:opacity-70 ml-5 lg:hidden"
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white size-8 text-dark cursor-pointer hover:opacity-70"
                         @click="sidebarOpen = true;">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
@@ -40,7 +40,7 @@ new class extends Component {
                             </svg>
                         </button>
                     </div> --}}
-                    <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="{{ route('welcome') }}" wire:navigate>Home</a>
+                    {{-- <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="{{ route('welcome') }}" wire:navigate>Home</a>
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="{{ route('categories') }}" wire:navigate>Categories</a>
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="{{ route('listing-page') }}" wire:navigate>Listing Page</a>
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 lg:block" href="{{ route('about-us') }}" wire:navigate>About Us</a>
@@ -51,7 +51,7 @@ new class extends Component {
                     @endguest
                     @auth
                     <a class="hidden text-slate-100 font-medium hover:text-slate-800 cursor-pointer lg:block" href="{{ route('dashboard') }}" wire:navigate>Dashboard</a>
-                    @endauth
+                    @endauth --}}
                 </div>
             </div>
         </div>
@@ -101,12 +101,14 @@ new class extends Component {
                     <span class="transition-opacity group-hover:opacity-70">Advertise With Us</span>
                     <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
                 </a>
-                <div class="flex flex-col gap-5 mt-10 lg:hidden">
-                @guest
+                @guest                    
                     <a class="relative group px-1" href="{{ route('register') }}" wire:navigate>
                         <span class="transition-opacity group-hover:opacity-70">Sell</span>
                         <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
                     </a>
+                @endguest
+                <div class="flex flex-col gap-5 mt-10">
+                @guest
                     @else
                     <a class="relative group px-1" href="{{ route('dashboard') }}" wire:navigate>
                         <span class="transition-opacity group-hover:opacity-70">Dashboard</span>

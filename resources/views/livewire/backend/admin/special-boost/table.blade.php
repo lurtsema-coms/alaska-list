@@ -15,12 +15,38 @@ new class extends Component {
     public function with(): array
     {
         return [
-            // 'users' => $this->loadUsers(),
+            'sponsors' => $this->loadSpecialBoost(),
         ];
     }
+    
+    #[On('alert-success')] 
+    public function loadSpecialBoost(){
+        $query = SpecialBoost::withTrashed()
+            ->with('product', 'advertisingPlan')
+            ->where(function ($query) {
+                $query->where('id', 'like', '%' . $this->search . '%')
+                    ->orWhere('from_date', 'like', '%' . $this->search . '%')
+                    ->orWhere('to_date', 'like', '%' . $this->search . '%')
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+            })
+            ->orWhereHas('product', function ($product) {
+                $product->where('uuid', 'like', '%' . $this->search . '%')
+                    ->orWhere('name', 'like', '%' . $this->search . '%');
+            })
+            ->orWhereHas('advertisingPlan', function ($advertisingPlan) {
+                $advertisingPlan->where('name', 'like', '%' . $this->search . '%');
+            })
+            ->orWhereHas('createdBy', function ($createdByQuery) {
+                $createdByQuery->whereRaw("CONCAT(first_name, ' ', last_name) like ?", ['%' . $this->search . '%']);
+            })
+            ->orWhereHas('updatedBy', function ($updatedByQuery) {
+                $updatedByQuery->whereRaw("CONCAT(first_name, ' ', last_name) like ?", ['%' . $this->search . '%']);
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
-
-
+        return $query;
+    }
 }; ?>
 
 <div class="py-8">
@@ -37,16 +63,22 @@ new class extends Component {
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            Image Name
+                            Id
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Item Code
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Product Name
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Advertising Plan
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            From Date
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
                             Start Date
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            End Date
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            Link
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
                             Created By
@@ -63,9 +95,46 @@ new class extends Component {
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($sponsors as $sponsor)
+                    <tr class="hover:bg-gray-100" wire:key="sponsor-item-{{ $sponsor->id }}">
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->id }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->product->uuid }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->product->name }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->advertisingPlan->name }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->from_date }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->to_date }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->createdBy->first_name.' '.$sponsor->createdBy->last_name }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->created_at->format('Y-m-d') }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            {{ $sponsor->updatedBy ? $sponsor->updatedBy->first_name.' '.$sponsor->updatedBy->last_name : '' }}
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            <div class="flex items-center gap-2">
+                                <livewire:backend.admin.special-boost.edit-boost wire:key="edit-boosting-{{ $sponsor->id }}" :$sponsor />
+                                <livewire:component.soft-delete-button wire:key="{{ 'soft-delete-boosting-' . $sponsor->id }}" :model="$sponsor" />
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
-            {{-- {{ $users->links() }} --}}
+            {{ $sponsors->links() }}
         </div>
     </div>
 </div>
