@@ -31,12 +31,13 @@ new class extends Component {
                     </a>
                 </div>
                 <div class="flex justify-end items-center gap-4 w-full xl:px-0">
-                <a class="relative" href="{{ route('register') }}" wire:navigate>
+                @guest
+                    <a class="relative" href="{{ route('register') }}" wire:navigate>
                         <div class="font-bold text-white border-2 border-green-300 bg-[#246567] px-4 py-2 rounded-full shadow-md hover:bg-[#1B494D] hover:border-white transition duration-300">
                             POST CLASSIFIEDS
                         </div>
                     </a>
-
+                @endguest
                     {{-- <div class="relative w-full max-w-60 p-1 overflow-hidden md:max-w-96 ">
                         <input class="w-full rounded-full py-2 pr-12 pl-4 focus:ring-2" type="search" wire:model="search" placeholder="Search..."
                             x-on:change="$dispatch('search-on', { val: $event.target.value})">
