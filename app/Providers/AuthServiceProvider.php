@@ -4,6 +4,8 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use App\Policies\DeleteButtonPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Define a generic gate for the delete action
+        Gate::define('delete', function ($user, $model) {
+            return app(DeleteButtonPolicy::class)->delete($user, $model);
+        });
     }
 }

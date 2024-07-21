@@ -9,12 +9,14 @@ use Carbon\Carbon;
 use Livewire\WithFileUploads;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Intervention\Image\Facades\Image as Image;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 
 new class extends Component {
     
     use WithFileUploads;
 
+    public $sponsor;
     public $sponsor_id;
     public $item_code = '';
     public $advertising_plan = '';
@@ -24,6 +26,7 @@ new class extends Component {
     public $file_path;
     public $photo = '';
     public $inc = 1;
+    public $deleted_at;
     public $edit_boost = false;
 
     public function mount($sponsor)
@@ -57,7 +60,7 @@ new class extends Component {
         $photo = $this->photo;
 
         $sp = SpecialBoost::find($this->sponsor_id);
-
+        
         $sp->update([
             'to_date' => $this->to_date,
             'updated_by' => auth()->user()->id
@@ -110,6 +113,10 @@ new class extends Component {
         }
     }
 
+    public function deletedAt(){
+        $this->deleted_at = $this->sponsor->deleted_at;
+    }
+
     public function resetData($data)
     {
         $this->reset($data);
@@ -125,7 +132,7 @@ new class extends Component {
         }
     })">
     <button class="bg-blue-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-500"
-    @click="edit_boost=true">
+    @click="edit_boost=true; $wire.deletedAt()">
         EDIT
     </button>
     
@@ -181,7 +188,9 @@ new class extends Component {
                                 @click="edit_boost=false; $wire.call('resetData', ['photo'])">
                                 Cancel
                             </button>
-                            <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Submit</button>
+                            @if (!$sponsor->deleted_at)                                
+                                <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Save</button>
+                            @endif
                         </div>
                     </form>
                 </div>

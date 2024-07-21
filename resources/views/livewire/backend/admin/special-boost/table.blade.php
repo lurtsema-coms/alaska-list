@@ -19,7 +19,7 @@ new class extends Component {
         ];
     }
     
-    #[On('alert-success')] 
+    #[On('alert-success')]
     public function loadSpecialBoost(){
         $query = SpecialBoost::withTrashed()
             ->with('product', 'advertisingPlan')
@@ -126,7 +126,7 @@ new class extends Component {
                         </td>
                         <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                             <div class="flex items-center gap-2">
-                                <livewire:backend.admin.special-boost.edit-boost wire:key="edit-boosting-{{ $sponsor->id }}" :$sponsor />
+                                <livewire:backend.admin.special-boost.edit-boost x-on:alert-success="$refresh" wire:key="edit-boosting-{{ $sponsor->id }}" :$sponsor />
                                 <livewire:component.soft-delete-button wire:key="{{ 'soft-delete-boosting-' . $sponsor->id }}" :model="$sponsor" />
                             </div>
                         </td>

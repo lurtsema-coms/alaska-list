@@ -10,6 +10,8 @@ new class extends Component {
 
     public function softDeletePost()
     {
+        $this->authorize('delete', $this->model); 
+
         $this->model->update([
             'status' => 'INACTIVE',
             'updated_by' => auth()->user()->id,
@@ -21,6 +23,8 @@ new class extends Component {
 
     public function restorePost()
     {
+        $this->authorize('delete', $this->model); 
+
         $this->model->update([
             'status' => 'ACTIVE',
             'updated_by' => auth()->user()->id,
@@ -34,12 +38,18 @@ new class extends Component {
 <div>
     @if($model->deleted_at)
     <button class="bg-green-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-500"
-        wire:click="restorePost">
+        type="button"
+        wire:click="restorePost"
+        wire:confirm.prompt="Are you sure?\n\nType ACTIVE to confirm|ACTIVE"
+        >
         ACTIVE
     </button>
     @else
     <button class="bg-red-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-500"
-        wire:click="softDeletePost">
+        type="button"
+        wire:click="softDeletePost"
+        wire:confirm.prompt="Are you sure?\n\nType INACTIVE to confirm|INACTIVE"
+        >
         INACTIVE
     </button>
     @endif
