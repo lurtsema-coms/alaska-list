@@ -14,6 +14,7 @@ export default {
             fontFamily: {
                 sans: ["Figtree", "sans-serif"],
                 poppins: ["Poppins", "sans-serif"],
+                darkerGrotesque: ['"Darker Grotesque"', "sans-serif"],
             },
             backgroundImage: {
                 scattered: "url('../images/scattered-forcefields.svg')",

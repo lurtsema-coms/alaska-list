@@ -56,7 +56,7 @@ new class extends Component
 
 <div class="min-h-44 max-w-2xl mx-auto bg-white border shadow-md rounded-lg">
     <form wire:submit.prevent="submitForm">
-        <div class="flex flex-col gap-10 p-10">
+        <div class="flex flex-col gap-10 p-5 sm:p-10">
             <p class="text-slate-700 text-lg font-bold">Email us at help@domain.com</p>
             <div class="flex flex-wrap gap-5">
                 <div class="flex-1 min-w-64 relative z-0">

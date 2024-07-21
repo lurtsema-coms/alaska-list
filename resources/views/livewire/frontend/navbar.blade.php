@@ -30,7 +30,13 @@ new class extends Component {
                         <img class="max-w-24" src="{{ asset('frontend/alaska.png') }}" alt="">
                     </a>
                 </div>
-                <div class="flex justify-end items-center gap-4 w-full px-5 xl:px-0">
+                <div class="flex justify-end items-center gap-4 w-full xl:px-0">
+                <a class="relative" href="{{ route('register') }}" wire:navigate>
+                        <div class="font-bold text-white border-2 border-green-300 bg-[#246567] px-4 py-2 rounded-full shadow-md hover:bg-[#1B494D] hover:border-white transition duration-300">
+                            POST CLASSIFIEDS
+                        </div>
+                    </a>
+
                     {{-- <div class="relative w-full max-w-60 p-1 overflow-hidden md:max-w-96 ">
                         <input class="w-full rounded-full py-2 pr-12 pl-4 focus:ring-2" type="search" wire:model="search" placeholder="Search..."
                             x-on:change="$dispatch('search-on', { val: $event.target.value})">
@@ -101,12 +107,6 @@ new class extends Component {
                     <span class="transition-opacity group-hover:opacity-70">Advertise With Us</span>
                     <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
                 </a>
-                @guest                    
-                    <a class="relative group px-1" href="{{ route('register') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:opacity-70">Sell</span>
-                        <span class="absolute -bottom-3 left-0 w-0 transition-all h-1 bg-white group-hover:w-full"></span>
-                    </a>
-                @endguest
                 <div class="flex flex-col gap-5 mt-10">
                 @guest
                     @else
