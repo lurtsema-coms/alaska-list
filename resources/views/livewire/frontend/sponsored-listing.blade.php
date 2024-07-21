@@ -36,8 +36,8 @@ new class extends Component {
             @foreach ($sponsors as $sponsor)
                 <div class="max-h-[300px] swiper-slide min-w-fit" wire:key="sponsor-listing-{{ $sponsor->id }}">
                     <div class="flex items-center justify-center overflow-hidden">
-                        <a href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate>
-                            <img class="h-[300px] object-contain" src="{{ asset($sponsor->file_path) }}" alt="Image 1">
+                        <a href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate class="relative overflow-hidden">
+                            <img class="h-[300px] object-contain transition-transform duration-300 ease-in-out transform hover:scale-110" src="{{ asset($sponsor->file_path) }}" alt="Image 1">
                         </a>
                     </div>
                 </div>
