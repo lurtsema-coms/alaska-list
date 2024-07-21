@@ -18,7 +18,7 @@ new class extends Component {
 
         return SpecialBoost::with('product')
             ->where('from_date', '<=', $today)
-            ->where('to_date', '>', $today)
+            ->where('to_date', '>=', $today)
             ->whereHas('product', function ($query) {
                 $query->where('status', '!=', 'DELETED');
             })

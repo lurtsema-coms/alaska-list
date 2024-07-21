@@ -1,20 +1,21 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-a1c67fc7.css",
-    "isEntry": true,
-    "src": "resources/css/app.css"
+    "file": "assets/app-DTUf3vGp.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
   },
   "resources/images/scattered-forcefields.svg": {
-    "file": "assets/scattered-forcefields-5d25668c.svg",
+    "file": "assets/scattered-forcefields-DBgI1RH8.svg",
     "src": "resources/images/scattered-forcefields.svg"
   },
   "resources/images/wave3.svg": {
-    "file": "assets/wave3-1cc916b9.svg",
+    "file": "assets/wave3-BoRmNUU9.svg",
     "src": "resources/images/wave3.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-33584bf2.js",
-    "isEntry": true,
-    "src": "resources/js/app.js"
+    "file": "assets/app-C1-XIpUa.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
   }
 }

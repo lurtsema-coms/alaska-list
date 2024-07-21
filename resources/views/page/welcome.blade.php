@@ -124,7 +124,6 @@
         </div>
     </div>
 </div>
-
 <div class="mt-10 relative py-28 bg-gradient-to-r " data-aos="zoom-in">
     <div class="sm:container mx-auto text-center px-5 md:px-24">
         <div class="relative inline-block">
@@ -140,7 +139,6 @@
         </p>
     </div>
 </div>
-
 <div class="py-16 bg-[#246567] relative">
     <div class="sm:container mx-auto px-5 md:px-0">
         <div class="mb-14 flex flex-col items-center gap-2" data-aos="zoom-in">
@@ -195,7 +193,6 @@
         </div>
     </div>
 </div>
-
 <div class="relative -top-1 -z-10">
     <svg id="wave" style="transform:rotate(180deg); transition: 0.3s" viewBox="0 0 1440 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <defs>
