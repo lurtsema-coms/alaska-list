@@ -314,7 +314,10 @@ new class extends Component {
                     </div>
                     <div class="!mt-8 text-right space-x-2">
                         @if ($status != 'DELETED')                            
-                            <button class="text-white bg-red-500 shadow py-2 px-4 rounded-lg hover:opacity-70" type="button" wire:click="deleteItem">Delete</button>
+                            <button class="text-white bg-red-500 shadow py-2 px-4 rounded-lg hover:opacity-70" 
+                            type="button" 
+                            wire:click="deleteItem"
+                            wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE">Delete</button>
                         @endif
                         <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit" {{ $status != 'PENDING' ? 'disabled' : '' }}>Save</button>
                     </div>
