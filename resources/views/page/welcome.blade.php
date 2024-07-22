@@ -216,8 +216,6 @@
                 <livewire:frontend.contact-us>
             </div>
         </div>
-
-
     </div>
 </div>
 @endsection
