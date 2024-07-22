@@ -179,15 +179,15 @@ new class extends Component {
                                     Requirement: For best quality in advertising, the image should be exactly 300px in height and 600px in width.
                                 </p>
                             </div>
-                        </div>
-                        {{-- Loading Animation --}}
-                        <div class="w-full text-center" wire:loading>
-                            <div class="flex justify-center items-center gap-2">
-                                <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
-                                </svg>
-                                <span class="text-md font-medium text-slate-600">Saving post...</span>
+                            {{-- Loading Animation --}}
+                            <div class="w-full text-center" wire:loading>
+                                <div class="flex justify-center items-center gap-2">
+                                    <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
+                                    </svg>
+                                    <span class="text-md font-medium text-slate-600">Saving post...</span>
+                                </div>
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
