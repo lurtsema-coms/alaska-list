@@ -1,8 +1,12 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DTUf3vGp.css",
+    "file": "assets/app-BMX7iaI4.css",
     "src": "resources/css/app.css",
     "isEntry": true
+  },
+  "resources/images/brainstorming.jpg": {
+    "file": "assets/brainstorming-BPbsYebD.jpg",
+    "src": "resources/images/brainstorming.jpg"
   },
   "resources/images/scattered-forcefields.svg": {
     "file": "assets/scattered-forcefields-DBgI1RH8.svg",
