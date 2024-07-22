@@ -65,13 +65,13 @@
             
             const swiper = new Swiper(".sponsored-listing", {
                 grabCursor: true,
-                centeredSlides: true,
+                centeredSlides: false,
                 allowTouchMove: false,
                 autoplay: {
                     delay: 5000, 
                     disableOnInteraction: false,
                 },
-                loop: true,
+                loop: false,
                 navigation: {
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",

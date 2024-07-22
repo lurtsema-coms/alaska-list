@@ -34,15 +34,15 @@ new class extends Component {
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             @foreach ($sponsors as $sponsor)
-                <div class="max-h-[300px] swiper-slide " wire:key="sponsor-listing-{{ $sponsor->id }}">
+                <div class="h-[300px] w-[600px] swiper-slide " wire:key="sponsor-listing-{{ $sponsor->id }}">
                     <div class="flex items-center justify-center overflow-hidden">
                         <a href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate class="relative overflow-hidden">
-                            <img class="h-[300px] object-contain transition-transform duration-300 ease-in-out transform hover:scale-110" src="{{ asset($sponsor->file_path) }}" alt="Image 1">
+                            <img class="h-[300px] object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" src="{{ asset($sponsor->file_path) }}" alt="Image 1">
                         </a>
                     </div>
                 </div>
             @endforeach
-        </div>
+        </div>  
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
         <!-- If we need navigation buttons -->
