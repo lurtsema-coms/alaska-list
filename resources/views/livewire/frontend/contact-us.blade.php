@@ -54,10 +54,10 @@ new class extends Component
 };
 ?>
 
-<div class="min-h-44 max-w-2xl mx-auto bg-white border shadow-md rounded-lg">
+<div class="min-h-44 max-w-2xl ">
     <form wire:submit.prevent="submitForm">
         <div class="flex flex-col gap-10 p-5 sm:p-10">
-            <p class="text-slate-700 text-lg font-bold">Email us at help@domain.com</p>
+            <p class="text-slate-700 text-lg font-bold">Send us your message now!</p>
             <div class="flex flex-wrap gap-5">
                 <div class="flex-1 min-w-64 relative z-0">
                     <input type="text" name="name" wire:model="name"  class="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " required/>

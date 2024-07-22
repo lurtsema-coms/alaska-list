@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
 use Illuminate\Support\Str;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Intervention\Image\Facades\Image as Image;
@@ -18,10 +19,13 @@ new class extends Component {
     public $qty = '';
     public $description = '';
     public $additional_information = '';
+    #[Validate(['photos.*' => 'image|max:5120'])]
     public $photos = [];
     public $inc = 1;
 
     public function addItem(){
+
+        $this->validate();
         
         $user_id = auth()->user()->id;
 
@@ -90,6 +94,11 @@ new class extends Component {
         return Category::with('subCategories')
             ->get();
     }
+
+    public function resetData($data)
+    {
+        $this->reset($data);
+    }
 }; ?>
 
 <div class="py-8">
@@ -129,7 +138,7 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="price">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required step="0.01" wire:model="price">
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
@@ -153,14 +162,26 @@ new class extends Component {
                     </div>
                     <div class="space-y-2">
                         <label class="font-medium text-slate-700">Upload Photos</label>
-                        <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" multiple wire:model="photos" id="upload{{ $inc }}" required>
+                        <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" multiple wire:model="photos" wire:click="resetData(['photos'])" id="upload{{ $inc }}" accept="image/*" required>
                         
-                        {{-- <ul class="mt-2">
-                            <template x-for="file in files" :key="file">
-                                <li x-text="file" class="text-slate-700"></li>
-                            </template>
-                        </ul> --}}
-                        @error('photos.*') <div class="mt-4">{{ $message }}</div>@enderror
+                        <ul class="mt-2">
+                            @foreach(array_reverse($photos) as $index => $photo)
+                                <li wire:key="{{ $index }}" class="text-slate-700">
+                                    {{ $photo->getClientOriginalName() }}
+                                </li>
+                            @endforeach
+                        </ul>
+                        @error('photos.*') <div class="mt-4 text-red-500">{{ $message }}</div>@enderror
+                    </div>
+                    {{-- Loading Animation --}}
+                    <div class="w-full text-center" wire:loading>
+                        <div class="flex justify-center items-center gap-2">
+                            <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
+                            </svg>
+                            <span class="text-md font-medium text-slate-600">Saving post...</span>
+                        </div>
                     </div>
                     <div class="!mt-8 text-right">
                         <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Submit</button>

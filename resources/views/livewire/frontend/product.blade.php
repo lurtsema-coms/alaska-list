@@ -15,6 +15,7 @@ new class extends Component {
     public $additional_information = '';
     public $photos = [];
     public $posted_by;
+    public $posted_at;
     public $contact;
 
     public function mount()
@@ -32,6 +33,7 @@ new class extends Component {
         $this->qty = $product->qty;
         $this->description = $product->description;
         $this->additional_information = $product->additional_information;
+        $this->posted_at = $product->created_at;
 
         if(!empty($product->file_name)){
             $file_names = explode(',', $product->file_name);
@@ -105,6 +107,9 @@ new class extends Component {
                 <div class="space-y-2">
                     <p class="font-bold">Additional Information</p>
                     <p>{!! nl2br(e($additional_information)) !!}</p>
+                </div>
+                <div class="space-y-2">
+                    <p><span class="font-bold">Date Publish: </span>{{ \Carbon\Carbon::parse($posted_at)->format('Y-m-d') }}</p>
                 </div>
             </div>
         </div>

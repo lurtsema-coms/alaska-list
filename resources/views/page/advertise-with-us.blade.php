@@ -10,19 +10,16 @@
     
         <div class="mb-6">
             <h3 class="text-xl font-semibold text-gray-700">Advertising Plans</h3>
+            @php
+                $plans = App\Models\AdvertisingPlan::all(); // Fetch all products
+            @endphp
             <div class="space-y-4 mt-2">
-                <div class="bg-gray-50 p-4 rounded-md shadow-md">
-                    <h4 class="text-lg font-semibold text-gray-800">Daily Boost</h4>
-                    <p class="text-gray-600">Move your listing to the top for 24 hours. Perfect for a quick visibility spike.</p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-md shadow-md">
-                    <h4 class="text-lg font-semibold text-gray-800">Weekly Spotlight</h4>
-                    <p class="text-gray-600">Keep your listing at the top for an entire week. Great for sustained attention.</p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-md shadow-md">
-                    <h4 class="text-lg font-semibold text-gray-800">Monthly Premium</h4>
-                    <p class="text-gray-600">Enjoy top-of-page placement for a whole month. Ideal for long-term promotions and continuous exposure.</p>
-                </div>
+                @foreach ($plans as $plan)
+                    <div class="bg-gray-50 p-4 rounded-md shadow-md">
+                        <h4 class="text-lg font-semibold text-gray-800">{{ $plan->name }}</h4>
+                        <p class="text-gray-600">{{ $plan->description }}.</p>
+                    </div>
+                @endforeach
             </div>
         </div>
 
@@ -39,16 +36,28 @@
         <div class="mb-6">
             <h3 class="text-xl font-semibold text-gray-700">How It Works</h3>
             <ol class="list-decimal pl-5 text-gray-600 mt-2 space-y-2">
-                <li>Choose Your Category</li>
-                <li>Select Your Plan</li>
-                <li>Promote Your Listing</li>
-                <li>Watch the Views Roll In</li>
+                <li>
+                    Go to the Contact Page
+                    <p class="ml-4">Navigate to our contact page to start the process of promoting your product.</p>
+                </li>
+                <li>
+                    Send a Message in the Contact Form
+                    <p class="ml-4">Fill out the contact form with your product details and promotion requirements.</p>
+                </li>
+                <li>
+                    Coordinate with Us
+                    <p class="ml-4">Our team will get in touch with you to discuss the best plan for promoting your product.</p>
+                </li>
+                <li>
+                    Your Product is on the Top of the Listing
+                    <p class="ml-4">After finalizing the details, your product will be prominently displayed at the top of our listings.</p>
+                </li>
             </ol>
         </div>
+
     
         <div class="mt-6">
             <h3 class="text-xl font-semibold text-gray-700">Get Started Today!</h3>
-            <p class="text-gray-600 mb-4">Ready to boost your listing and attract more customers? It’s easy to get started. Just <a href="#" class="text-blue-600 underline">sign in</a> to your account and select the "Advertise with Us" option from your dashboard. Choose your plan, promote your listing, and watch your visibility soar!</p>
             <p class="text-gray-600">For any questions or custom advertising needs, feel free to <a href="/#get-in-touch" class="text-blue-600 underline">contact us</a>. Our team is here to help you succeed.</p>
         </div>
     </div>

@@ -19,7 +19,6 @@ new class extends Component {
     public function updated()
     {
         $this->dispatch('load-time-ago');
-
     }
 
     public function with(): array
@@ -74,6 +73,11 @@ new class extends Component {
         return $query->paginate($this->pagination);
     }
 
+    public function dispatchTimeAgo(){
+        $this->dispatch('load-time-ago');
+        $this->resetData(['sc_names']);
+    }
+
     public function resetData($data)
     {
         $this->reset($data);
@@ -89,7 +93,7 @@ new class extends Component {
         <div class="max-h-80 p-4 bg-white mx-auto border rounded-xl space-y-4 overflow-y-auto">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
-                <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="resetData(['sc_names'])">Reset</button>
+                <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -156,12 +160,12 @@ new class extends Component {
                             <img class="h-56 w-full object-cover" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
                             <div class="p-6">
                                 <p class="text-lg font-semibold text-gray-800 mb-4">{{ $product->name }}</p>
-                                <p class="text-gray-700 mb-4">{{ Str::limit($product->description, 200) }}</p>
-                                <p class="text-gray-700 mb-4">${{ $product->price }}</p>
+                                <p class="text-gray-600 mb-4">{{ Str::limit($product->description, 200) }}</p>
+                                <p class="font-semibold text-gray-800 mb-4">${{ $product->price }}</p>
                                 <div class="flex items-center space-x-2 mt-4 mb-4">
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
                                 </div>
-                                <p class="text-gray-500 text-sm">Available: <span class="text-gray-700 font-medium">{{ $product->qty }}</span></p>
+                                <p class="text-gray-500 text-sm">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
                             </div>
                             <div class="p-6 border-t border-gray-200">
                                 <p class="timeago text-md text-green-500 font-bold mb-4" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>

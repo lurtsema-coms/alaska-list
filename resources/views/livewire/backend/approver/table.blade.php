@@ -104,7 +104,7 @@ new class extends Component {
                                 {{ count(explode(",", $product->file_name)) }}
                             </td>
                             <td class="px-6 py-3 whitespace-normal text-sm text-gray-500 min-w-96">
-                                {{ $product->description }}
+                                {{ Str::limit($product->description, 100) }}
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 {{ $product->created_at->format('Y-m-d') }}

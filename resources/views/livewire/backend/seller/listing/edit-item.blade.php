@@ -18,6 +18,7 @@ new class extends Component {
     public $qty = '';
     public $description = '';
     public $additional_information = '';
+    #[Validate(['photos.*' => 'image|max:5120'])]
     public $photos = [];
     public $photos_file = [];
     public $inc = 1;
@@ -68,6 +69,8 @@ new class extends Component {
 
     public function saveItem()
     {
+        $this->validate();
+        
         if(count($this->photos) == 0 && count($this->photos_file) == 0){
             $this->addError('no_photo', 'At least one photo');  
             return;
@@ -154,6 +157,7 @@ new class extends Component {
             ];
         }
 
+        $this->dispatch('new-img');
         $this->dispatch('alert-success');
     }
 
@@ -237,7 +241,7 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="price" {{ $status != 'PENDING' ? 'disabled' : '' }}>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required step="0.01" wire:model="price" {{ $status != 'PENDING' ? 'disabled' : '' }}>
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
@@ -276,7 +280,7 @@ new class extends Component {
                                 @endforeach
                             @endif
                             @if ($photos)
-                                @foreach ($photos as $index => $photo)
+                                @foreach (array_reverse($photos) as $index => $photo)
                                     <div class="relative space-y-2" wire:key="uploaded-img-{{ $index }}">                                   
                                         <div class="item-img" data-src="{{ $photo->temporaryUrl() }}">
                                             <img class="max-w-96 h-56 object-contain cursor-pointer" src="{{ $photo->temporaryUrl() }}">
@@ -290,11 +294,10 @@ new class extends Component {
                         </div>
                         <div class="text-sm text-red-500">@error('no_photo') {{ $message }} @enderror</div>
                     </div>
-
                     <div class="space-y-2">
                         <div class="space-y-2">
                             <label class="block font-medium text-slate-700">Upload Photos</label>
-                            <input type="file" multiple wire:model="photos" @change="$dispatch('new-img')" x-ref="fileInput" class="hidden" {{ $status != 'PENDING' ? 'disabled' : '' }}>
+                            <input type="file" multiple wire:model="photos" @change="$dispatch('new-img')" x-ref="fileInput" class="hidden" {{ $status != 'PENDING' ? 'disabled' : '' }} accept="image/*">
                             <!-- Custom Button -->
                             <button type="button"
                                     class="block text-md px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55] text-slate-600 hover:bg-[#246567] hover:text-white cursor-pointer"
@@ -304,13 +307,22 @@ new class extends Component {
                         </div>
                         
                         <ul class="mt-2">
-                            @foreach($photos as $index => $photo)
+                            @foreach(array_reverse($photos) as $index => $photo)
                                 <li wire:key="{{ $index }}" class="text-slate-700">
                                     {{ $photo->getClientOriginalName() }}
                                 </li>
                             @endforeach
                         </ul>
                         @error('photos.*') <div class="mt-4">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="w-full text-center" wire:loading>
+                        <div class="flex justify-center items-center gap-2">
+                            <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
+                            </svg>
+                            <span class="text-md font-medium text-slate-600">Saving post...</span>
+                        </div>
                     </div>
                     <div class="!mt-8 text-right space-x-2">
                         @if ($status != 'DELETED')                            

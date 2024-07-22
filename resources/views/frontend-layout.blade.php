@@ -32,7 +32,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="min-h-screen font-sans text-slate-800 antialiased">
+<body class="min-h-screen font-sans bg-gray-50 text-slate-800 antialiased">
     <div class="flex flex-col h-full w-full">
         <!-- Slider main container -->
 
