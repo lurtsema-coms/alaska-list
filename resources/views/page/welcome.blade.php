@@ -134,7 +134,7 @@
 <div class="mt-28 relative h-96 " data-aos="zoom-in">
     <div class="h-full w-full absolute bg-brainstorm bg-cover bg-center brightness-50">
     </div>
-    <div class="absolute top-0 h-full w-full flex flex-col justify-center items-center">
+    <div class="font-darkerGrotesque absolute top-0 h-full w-full flex flex-col justify-center items-center">
         <p class="text-5xl text-white">Find what you need</p>
         <p class="text-5xl text-white">in <span class="text-yellow-200">Alaska</span></p>
     </div>

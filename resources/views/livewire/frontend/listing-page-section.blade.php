@@ -90,7 +90,7 @@ new class extends Component {
     </div>
     <div class="space-y-10">
         <livewire:frontend.sponsored-listing>
-        <div class="max-h-80 p-4 bg-white mx-auto border rounded-xl space-y-4 overflow-y-auto">
+        <div class="max-h-80 p-4 bg-white mx-auto border rounded-2xl space-y-4 overflow-y-auto">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
                 <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
@@ -151,7 +151,7 @@ new class extends Component {
             @else
                 @foreach($products as $product)
                     <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
-                        <div class="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden transition duration-300 hover:border-blue-400">
+                        <div class="bg-white border border-gray-200 shadow-md rounded-2xl overflow-hidden transition duration-300 hover:border-blue-400">
                             @php
                                 $images = explode(',', $product->file_path);
                                 $firstImage = trim($images[0]);
