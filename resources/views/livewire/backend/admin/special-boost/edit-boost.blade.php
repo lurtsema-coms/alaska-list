@@ -22,6 +22,7 @@ new class extends Component {
     public $advertising_plan = '';
     public $from_date = '';
     public $to_date = '';
+    public $to_date_computed = '';
     public $file_name = '';
     public $file_path;
     public $photo = '';
@@ -62,6 +63,7 @@ new class extends Component {
         $sp = SpecialBoost::find($this->sponsor_id);
         
         $sp->update([
+            'from_date' => $this->from_date,
             'to_date' => $this->to_date,
             'updated_by' => auth()->user()->id
         ]);
@@ -94,21 +96,19 @@ new class extends Component {
 
     public function computePlanDate()
     {
-        // Fetch the advertising plan by name
         $ap = AdvertisingPlan::find($this->advertising_plan);
 
-        // Check if $ap is not null and has a duration_days property
+        // Check if $ap is not null and has a duration_day property
         if ($ap && $ap->duration_days) {
-            // If from_date is not set, use the current date
-            $start_date = $this->from_date ? Carbon::parse($this->from_date) : Carbon::now();
             
-            // Calculate the to_date by adding the duration_days to the start_date
-            $to_date = $start_date->copy()->addDays($ap->duration_days);
-
-            // Set the to_date to the computed date
-            $this->to_date = $to_date->toDateString(); // Format as a string
+            $from_date = Carbon::parse($this->from_date);
+            
+            $to_date = $from_date->copy()->addDays($ap->duration_days);
+            
+            $this->from_date = $from_date->format('Y-m-d\TH:i');
+            $this->to_date = $to_date->toDateTimeString();
         } else {
-            // Handle the case where $ap is null or duration_days is not set
+            $this->from_date = null;
             $this->to_date = null;
         }
     }
@@ -131,21 +131,21 @@ new class extends Component {
             document.body.classList.remove('overflow-hidden');
         }
     })">
-    <button class="bg-blue-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-500"
+    <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500"
     @click="edit_boost=true; $wire.deletedAt()">
         EDIT
     </button>
     
-    <div class="position fixed h-full w-full top-0 left-0 bg-black bg-opacity-30 z-10 overflow-auto"
+    <div class="fixed top-0 left-0 z-10 w-full h-full overflow-auto bg-black position bg-opacity-30"
         x-show="edit_boost"
         x-transition
         x-cloak>
-        <div class="h-full flex p-5">
-            <div class="bg-white w-full max-w-xl m-auto rounded-2xl shadow-lg overflow-hidden"
+        <div class="flex h-full p-5">
+            <div class="w-full max-w-xl m-auto overflow-hidden bg-white shadow-lg rounded-2xl"
             @click.outside="edit_boost=false; $wire.call('resetData', ['photo'])">
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="editSpecialBoost">
-                        <p class="font-bold text-lg text-slate-700 tracking-wide mb-6 pointer-events-none">Edit Boost</p>
+                        <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Edit Boost</p>
                         <div class="space-y-4">
                             <div class="flex flex-col gap-4 sm:flex-row">
                                 <div class="flex-1 space-y-2" wire:ignore>
@@ -165,7 +165,7 @@ new class extends Component {
                             <div class="flex flex-col gap-4 sm:flex-row">
                                 <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">From Date</p>
-                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="from_date" readonly required>
+                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="datetime-local" wire:change="computePlanDate" wire:model="from_date" required>
                                 </div>
                                 <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">To Date</p>
@@ -174,7 +174,7 @@ new class extends Component {
                             </div>
                             <div class="flex flex-col space-y-2">
                                 <label class="font-medium text-slate-700">Current Image</label>
-                                    <img class="h-56 w-full object-contain"
+                                    <img class="object-contain w-full h-56"
                                         src="{{ asset($file_path) }}?v={{ md5_file(public_path($file_path)) }}"
                                         alt="Image">
                             </div>
@@ -184,17 +184,17 @@ new class extends Component {
                             </div>
                             {{-- Loading Animation --}}
                             <div class="w-full text-center" wire:loading>
-                                <div class="flex justify-center items-center gap-2">
+                                <div class="flex items-center justify-center gap-2">
                                     <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
                                     </svg>
-                                    <span class="text-md font-medium text-slate-600">Saving post...</span>
+                                    <span class="font-medium text-md text-slate-600">Saving post...</span>
                                 </div>
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
-                            <button class="text-slate-600 shadow py-2 px-4 rounded-lg hover:opacity-70" type="button"
+                            <button class="px-4 py-2 rounded-lg shadow text-slate-600 hover:opacity-70" type="button"
                                 @click="edit_boost=false; $wire.call('resetData', ['photo'])">
                                 Cancel
                             </button>

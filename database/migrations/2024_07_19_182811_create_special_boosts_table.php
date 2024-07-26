@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('special_boosts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
-            $table->date('from_date');
-            $table->date('to_date');
+            $table->datetime('from_date');
+            $table->datetime('to_date');
             $table->text('file_name')->nullable();
             $table->text('file_path')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();

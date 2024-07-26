@@ -38,7 +38,7 @@ new class extends Component {
         }
 
         $product = Product::create([
-            'status' => 'PENDING',
+            'status' => 'ACTIVE',
             'uuid' => substr(Str::uuid()->toString(), 0, 10),
             'sub_category_id' => (int)$this->sub_category,
             'name' => $this->title_name,
@@ -79,7 +79,7 @@ new class extends Component {
 
         $this->reset(['photos', 'sub_category', 'title_name', 'price', 'qty', 'description', 'additional_information']);
         $this->inc++;
-        $this->dispatch('alert-success');
+        $this->dispatch('alert-success', route: route('seller-listing'));
     }
     
     public function with(): array
@@ -102,9 +102,9 @@ new class extends Component {
 }; ?>
 
 <div class="py-8">
-    <div class="sm:container bg-white py-8 px-4 sm:rounded-lg mx-auto space-y-8 shadow sm:px-6 lg:px-8">
-        <a class="inline-block font-medium text-sky-600 mb-4" href="{{ route('seller-listing') }}" wire:navigate>
-            <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer">
+    <div class="px-4 py-8 mx-auto space-y-8 bg-white shadow sm:container sm:rounded-lg sm:px-6 lg:px-8">
+        <a class="inline-block mb-4 font-medium text-sky-600" href="{{ route('seller-listing') }}" wire:navigate>
+            <span class="flex items-center space-x-2 cursor-pointer hover:opacity-70">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -113,7 +113,7 @@ new class extends Component {
         </a>
         <div class="pb-8">
             <form action="post" wire:submit="addItem" enctype="multipart/form-data">
-                <div class="max-w-4xl space-y-4 m-auto">
+                <div class="max-w-4xl m-auto space-y-4">
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Category</p>
@@ -175,12 +175,12 @@ new class extends Component {
                     </div>
                     {{-- Loading Animation --}}
                     <div class="w-full text-center" wire:loading>
-                        <div class="flex justify-center items-center gap-2">
+                        <div class="flex items-center justify-center gap-2">
                             <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
                             </svg>
-                            <span class="text-md font-medium text-slate-600">Saving post...</span>
+                            <span class="font-medium text-md text-slate-600">Saving post...</span>
                         </div>
                     </div>
                     <div class="!mt-8 text-right">

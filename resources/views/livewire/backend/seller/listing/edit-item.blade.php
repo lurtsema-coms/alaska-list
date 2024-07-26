@@ -30,7 +30,7 @@ new class extends Component {
         $user_id = auth()->user()->id;
         
         $product_id = request()->route('id');
-        $product = Product::with('subCategory')->find($product_id);
+        $product = Product::withTrashed()->with('subCategory')->find($product_id);
         
         // Check if the product exists and if the authenticated user is the owner
         if (!$product || $product->created_by !== $user_id) {
@@ -162,10 +162,12 @@ new class extends Component {
     }
 
     public function deleteItem(){
-        Product::find($this->product_id)->update([
+        $product = Product::find($this->product_id);
+        $product->update([
             'status' => 'DELETED',
             'updated_by' => auth()->user()->id,
         ]);
+        $product->delete();
 
         $this->dispatch('alert-success', route: route('seller-listing'));
     }
@@ -197,9 +199,9 @@ new class extends Component {
 }; ?>
 
 <div class="py-8">
-    <div class="sm:container bg-white py-8 px-4 sm:rounded-lg mx-auto space-y-8 shadow sm:px-6 lg:px-8">
-        <a class="inline-block font-medium text-sky-600 mb-4" href="{{ route('seller-listing') }}" wire:navigate>
-            <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer">
+    <div class="px-4 py-8 mx-auto space-y-8 bg-white shadow sm:container sm:rounded-lg sm:px-6 lg:px-8">
+        <a class="inline-block mb-4 font-medium text-sky-600" href="{{ route('seller-listing') }}" wire:navigate>
+            <span class="flex items-center space-x-2 cursor-pointer hover:opacity-70">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -208,19 +210,19 @@ new class extends Component {
         </a>
         <div class="pb-8">
             <form action="post" wire:submit="saveItem" enctype="multipart/form-data">
-                <div class="max-w-4xl space-y-4 m-auto">
-                    <div class="bg-yellow-100 border border-yellow-300 text-yellow-800 p-4 rounded-lg shadow-md">
-                        <div class="font-semibold text-lg">
+                <div class="max-w-4xl m-auto space-y-4">
+                    <div class="p-4 text-yellow-800 bg-yellow-100 border border-yellow-300 rounded-lg shadow-md">
+                        <div class="text-lg font-semibold">
                             Note:
                         </div>
                         <p class="mt-2">
-                            If this post has already been approved, it cannot be edited.
+                            If this post has already been deleted, it cannot be edited.
                         </p>
                     </div>
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Category</p>
-                            <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="sub_category" {{ $status != 'PENDING' ? 'disabled' : '' }}>
+                            <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="sub_category" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                                 <option value="" disabled selected>Select a sub category...</option>
                                 @foreach ($categories as $category)
                                     <option class="font-medium text-sky-600" value="_" disabled>{{ $category->name }}</option>
@@ -233,7 +235,7 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Title Name</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name" {{ $status != 'PENDING' ? 'disabled' : '' }}>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                             </div>
                         </div>
                     </div>
@@ -241,39 +243,39 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required step="0.01" wire:model="price" {{ $status != 'PENDING' ? 'disabled' : '' }}>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required step="0.01" wire:model="price" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Qty</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="0" {{ $status != 'PENDING' ? 'disabled' : '' }}>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="0" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Description</p>
-                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description" {{ $status != 'PENDING' ? 'disabled' : '' }}></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description" {{ $status == 'DELETED' ? 'disabled' : '' }}></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Additional Information</p>
-                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information" {{ $status != 'PENDING' ? 'disabled' : '' }}></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information" {{ $status == 'DELETED' ? 'disabled' : '' }}></textarea>
                         </div>
                     </div>
-                    <div class="border border-slate-300 rounded-lg p-4">
+                    <div class="p-4 border rounded-lg border-slate-300">
                         <div class="flex items-center gap-4 overflow-x-auto" id="lightgallery">
                             @if (!empty($photos_file))
                                 @foreach ($photos_file as $index => $file)
                                 <div class="relative space-y-2" wire:key="present-img-{{ $index }}">
                                     <div class="item-img" data-src="{{ asset($file['file_paths']) }}">
-                                        <img class="h-56 max-w-96 object-contain cursor-pointer"
+                                        <img class="object-contain h-56 cursor-pointer max-w-96"
                                         src="{{ asset($file['file_paths']) }}"
                                         alt="Image {{ $index }}">
                                     </div>
-                                    <button class="text-red-600 hover:text-red-700" type="button" wire:click="deleteImg({{ $index }})" {{ $status != 'PENDING' ? 'disabled' : '' }}>
+                                    <button class="text-red-600 hover:text-red-700" type="button" wire:click="deleteImg({{ $index }})" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                                         Delete
                                     </button>
                                 </div>
@@ -283,7 +285,7 @@ new class extends Component {
                                 @foreach (array_reverse($photos) as $index => $photo)
                                     <div class="relative space-y-2" wire:key="uploaded-img-{{ $index }}">                                   
                                         <div class="item-img" data-src="{{ $photo->temporaryUrl() }}">
-                                            <img class="max-w-96 h-56 object-contain cursor-pointer" src="{{ $photo->temporaryUrl() }}">
+                                            <img class="object-contain h-56 cursor-pointer max-w-96" src="{{ $photo->temporaryUrl() }}">
                                         </div>
                                         <button class="text-red-600 hover:text-red-700" type="button" wire:click="deleteTempImg({{ $index }})">
                                             Delete
@@ -297,7 +299,7 @@ new class extends Component {
                     <div class="space-y-2">
                         <div class="space-y-2">
                             <label class="block font-medium text-slate-700">Upload Photos</label>
-                            <input type="file" multiple wire:model="photos" @change="$dispatch('new-img')" x-ref="fileInput" class="hidden" {{ $status != 'PENDING' ? 'disabled' : '' }} accept="image/*">
+                            <input type="file" multiple wire:model="photos" @change="$dispatch('new-img')" x-ref="fileInput" class="hidden" {{ $status == 'DELETED' ? 'disabled' : '' }} accept="image/*">
                             <!-- Custom Button -->
                             <button type="button"
                                     class="block text-md px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55] text-slate-600 hover:bg-[#246567] hover:text-white cursor-pointer"
@@ -316,22 +318,22 @@ new class extends Component {
                         @error('photos.*') <div class="mt-4">{{ $message }}</div>@enderror
                     </div>
                     <div class="w-full text-center" wire:loading>
-                        <div class="flex justify-center items-center gap-2">
+                        <div class="flex items-center justify-center gap-2">
                             <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
                             </svg>
-                            <span class="text-md font-medium text-slate-600">Saving post...</span>
+                            <span class="font-medium text-md text-slate-600">Saving post...</span>
                         </div>
                     </div>
                     <div class="!mt-8 text-right space-x-2">
                         @if ($status != 'DELETED')                            
-                            <button class="text-white bg-red-500 shadow py-2 px-4 rounded-lg hover:opacity-70" 
+                            <button class="px-4 py-2 text-white bg-red-500 rounded-lg shadow hover:opacity-70" 
                             type="button" 
                             wire:click="deleteItem"
                             wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE">Delete</button>
+                            <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit" {{ $status == 'DELETED' ? 'disabled' : '' }}>Save</button>
                         @endif
-                        <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit" {{ $status != 'PENDING' ? 'disabled' : '' }}>Save</button>
                     </div>
                     <livewire:component.alert-messages />
                 </div>

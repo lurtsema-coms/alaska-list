@@ -50,10 +50,10 @@ new class extends Component {
 }; ?>
 
 <div class="py-8">
-    <div class="sm:container bg-white py-8 px-4 sm:rounded-lg mx-auto space-y-8 shadow sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center flex-wrap">
+    <div class="px-4 py-8 mx-auto space-y-8 bg-white shadow sm:container sm:rounded-lg sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-between">
             <livewire:backend.admin.special-boost.add-boost/>
-            <div class="relative w-52 p-1 pointer-events-auto overflow-hidden md:max-w-96">
+            <div class="relative p-1 overflow-hidden pointer-events-auto w-52 md:max-w-96">
                 <input class="text-sm w-full px-4 border border-slate-300 rounded-lg focus:border-none focus:outline-none focus:ring-2 focus:ring-[#1F4B55]" type="search" placeholder="Search..." wire:model.live.debounce.200ms="search">
             </div>
         </div>
@@ -62,69 +62,72 @@ new class extends Component {
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Id
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Item Code
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Product Name
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Advertising Plan
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             From Date
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            Start Date
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            To Date
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Created By
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Created At
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Updated By
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Actions
                         </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
+                    @php
+                        use Carbon\Carbon;
+                    @endphp
                     @foreach ($sponsors as $sponsor)
                     <tr class="hover:bg-gray-100" wire:key="sponsor-item-{{ $sponsor->id }}">
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->id }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->product->uuid }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->product->name }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->advertisingPlan->name }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
-                            {{ $sponsor->from_date }}
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                            {{ Carbon::parse($sponsor->from_date)->format('F j, Y g:i A') }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
-                            {{ $sponsor->to_date }}
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                            {{ Carbon::parse($sponsor->to_date)->format('F j, Y g:i A') }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->createdBy->first_name.' '.$sponsor->createdBy->last_name }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->created_at->format('Y-m-d') }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->updatedBy ? $sponsor->updatedBy->first_name.' '.$sponsor->updatedBy->last_name : '' }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             <div class="flex items-center gap-2">
                                 <livewire:backend.admin.special-boost.edit-boost x-on:alert-success="$refresh" wire:key="edit-boosting-{{ $sponsor->id }}" :$sponsor />
                                 <livewire:component.soft-delete-button wire:key="{{ 'soft-delete-boosting-' . $sponsor->id }}" :model="$sponsor" />

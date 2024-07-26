@@ -14,7 +14,7 @@ new class extends Component {
 
     public function loadSpecialBoost()
     {
-        $today = now()->toDateString();
+        $today = now()->toDateTimeString();
 
         return SpecialBoost::with('product')
             ->where('from_date', '<=', $today)
@@ -28,16 +28,16 @@ new class extends Component {
 
 <div>
     @if (count($sponsors) == 0)
-        <p class="text-center text-sm text-gray-600">No other products are boosted at the moment. Take advantage of this opportunity to get your product noticed first.</p>
+        <p class="text-sm text-center text-gray-600">No other products are boosted at the moment. Take advantage of this opportunity to get your product noticed first.</p>
     @endif
-    <div class="sponsored-listing swiper w-full">
+    <div class="w-full sponsored-listing swiper">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             @foreach ($sponsors as $sponsor)
                 <div class="h-[300px] w-[600px] swiper-slide " wire:key="sponsor-listing-{{ $sponsor->id }}">
                     <div class="flex items-center justify-center overflow-hidden">
                         <a href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate class="relative overflow-hidden">
-                            <img class="h-[300px] object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" src="{{ asset($sponsor->file_path) }}" alt="Image 1">
+                            <img class="h-[300px] w-[600px] object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" src="{{ asset($sponsor->file_path) }}" alt="Image 1" loading="lazy">
                         </a>
                     </div>
                 </div>

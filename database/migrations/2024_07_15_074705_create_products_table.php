@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('approved_by')->length(10)->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

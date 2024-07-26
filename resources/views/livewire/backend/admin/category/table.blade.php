@@ -23,6 +23,7 @@ new class extends Component {
     public function loadCategories()
     {
         return Category::with('subCategories', 'createdBy', 'updatedBy')
+            ->withCount('products')
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
@@ -42,10 +43,10 @@ new class extends Component {
 }; ?>
 
 <div class="py-8">
-    <div class="sm:container bg-white py-8 px-4 sm:rounded-lg mx-auto space-y-8 shadow sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center flex-wrap">
+    <div class="px-4 py-8 mx-auto space-y-8 bg-white shadow sm:container sm:rounded-lg sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-between">
             <livewire:backend.admin.category.add-category />
-            <div class="relative w-52 p-1 pointer-events-auto overflow-hidden md:max-w-96">
+            <div class="relative p-1 overflow-hidden pointer-events-auto w-52 md:max-w-96">
                 <input class="text-sm w-full px-4 border border-slate-300 rounded-lg focus:border-none focus:outline-none focus:ring-2 focus:ring-[#1F4B55]" type="search" placeholder="Search..." wire:model.live.debounce.200ms="search">
             </div>
         </div>
@@ -54,22 +55,25 @@ new class extends Component {
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Category
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Sub Categories
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Products
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Created By
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Created At
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Updated By
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-sm text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Actions
                         </th>
                     </tr>
@@ -77,10 +81,10 @@ new class extends Component {
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($categories as $category)
                         <tr class="hover:bg-gray-100" wire:key="{{ $category->id }}">
-                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 {{ $category->name }}
                             </td>
-                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 <div class="flex items-center gap-2">
                                     @php
                                         $subCategoriesToShow = $category->subCategories->take(4);
@@ -88,7 +92,7 @@ new class extends Component {
                                     @endphp
     
                                     @foreach ($subCategoriesToShow as $sub_category)
-                                        <span class="inline-block bg-gray-200 rounded-full  text-sm font-semibold text-gray-500 px-4 py-2">
+                                        <span class="inline-block px-4 py-2 text-sm font-semibold text-gray-500 bg-gray-200 rounded-full">
                                             {{ $sub_category->name }}
                                         </span>
                                     @endforeach
@@ -100,19 +104,24 @@ new class extends Component {
                                     @endif
                                 </div>
                             </td>
-                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                                {{ $category->products_count }}
+                            </td>
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 {{ $category->createdBy->first_name.' '.$category->createdBy->last_name }}
                             </td>
-                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 {{ $category->created_at }}
                             </td>
-                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 {{ $category->updatedBy ? $category->updatedBy->first_name.' '.$category->updatedBy->last_name : '' }}
                             </td>
-                            <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 <div class="flex items-center gap-2">
                                     <livewire:backend.admin.category.edit-category wire:key="{{ 'edit-' . $category->id }}" :category="$category" />
-                                    <livewire:component.delete-button wire:key="{{ 'delete-' . $category->id }}" :model="$category" />
+                                    @if ($category->products_count == 0)
+                                        <livewire:component.delete-button wire:key="{{ 'delete-' . $category->id }}" :model="$category" />
+                                    @endif
                                 </div>
                             </td>
                         </tr>

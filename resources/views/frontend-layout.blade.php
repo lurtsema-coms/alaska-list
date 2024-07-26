@@ -45,8 +45,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="min-h-screen font-sans bg-gray-50 text-slate-800 antialiased">
-    <div class="flex flex-col h-full w-full">
+<body class="min-h-screen font-sans antialiased bg-gray-50 text-slate-800">
+    <div class="flex flex-col w-full h-full">
         <!-- Slider main container -->
 
         {{-- Navbar --}}
@@ -62,10 +62,15 @@
     <script data-navigate-once>
         document.addEventListener('livewire:navigated', () => {
             AOS.init();
+
+            
+            const swiperContainer = document.querySelector(".sponsored-listing");
+            const slides = swiperContainer.querySelectorAll('.swiper-slide');
+            console.log(slides.length);
             
             const swiper = new Swiper(".sponsored-listing", {
                 grabCursor: true,
-                centeredSlides: false,
+                centeredSlides: isSingleImage(),
                 allowTouchMove: false,
                 autoplay: {
                     delay: 5000, 
@@ -106,8 +111,13 @@
                     });
                 } 
             }
+
+            function isSingleImage() {
+                const swiperContainer = document.querySelector(".sponsored-listing");
+                const slides = swiperContainer.querySelectorAll('.swiper-slide');
+                return slides.length === 1;
+            }
         });
-        
     </script>
 </body>
 </html>

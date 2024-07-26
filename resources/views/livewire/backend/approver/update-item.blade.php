@@ -22,7 +22,9 @@ new class extends Component {
 
     public function mount($id)
     {
-        $product = Product::with('subCategory')->find($id);
+        $product = Product::withTrashed()
+            ->with('subCategory')
+            ->find($id);
 
         $this->product_id = $product->id;
         $this->sub_category = $product->subCategory->id;
@@ -48,6 +50,7 @@ new class extends Component {
         }
     }
 
+    
     public function with(): array
     {
         return [
@@ -55,27 +58,39 @@ new class extends Component {
         ];
     }
 
-    public function approveListing()
+    public function activeListing()
     {
-        Product::find($this->product_id)->update([
-            'status' => 'APPROVED',
+        $product = Product::withTrashed()
+            ->find($this->product_id);
+            
+        $product->update([
+            'status' => 'ACTIVE',
             'approved_by' => auth()->user()->id,
-            'approved_at' => date('Y-m-d H:i:s')
+            'approved_at' => date('Y-m-d H:i:s'),
         ]);
 
+        $product->restore();
+
         $this->update_listing_modal = false;
+        $this->status = 'ACTIVE';
         $this->dispatch('alert-success');
     }
 
-    public function rejectListing()
+    public function deleteListing()
     {
-        Product::find($this->product_id)->update([
-            'status' => 'REJECTED',
+        $product = Product::withTrashed()
+            ->find($this->product_id);
+        
+        $product->update([
+            'status' => 'DELETED',
             'approved_by' => auth()->user()->id,
             'approved_at' => date('Y-m-d H:i:s')
         ]);
 
+        $product->delete();
+
         $this->update_listing_modal = false;
+        $this->status = 'DELETED';
         $this->dispatch('alert-success');
     }
 
@@ -94,23 +109,23 @@ new class extends Component {
             document.body.classList.remove('overflow-hidden');
         }
     })">
-    <button class="bg-blue-400 text-sm text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-500"
+    <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500"
     @click="update_listing_modal=true">
         Update
     </button>
     
-    <div class="position fixed h-full w-full top-0 left-0 bg-black bg-opacity-30 z-10 overflow-auto"
+    <div class="fixed top-0 left-0 z-10 w-full h-full overflow-auto bg-black position bg-opacity-30"
         x-show="update_listing_modal"
         x-transition
         x-cloak>
-        <div class="h-full flex p-5">
-            <div class="bg-white w-full max-w-6xl m-auto rounded-2xl shadow-lg overflow-hidden"
+        <div class="flex h-full p-5">
+            <div class="w-full max-w-6xl m-auto overflow-hidden bg-white shadow-lg rounded-2xl"
             @click.outside="update_listing_modal=false;">
                 <div class="p-10 max-h-[42rem] overflow-auto">
-                    <div class="max-w-4xl space-y-4 m-auto">
-                        <p class="font-bold text-lg text-slate-700 tracking-wide mb-6 pointer-events-none">Approve Listing</p>
+                    <div class="max-w-4xl m-auto space-y-4">
+                        <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Approve Listing</p>
                         <p>
-                            <span class="font-bold {{ $status == 'APPROVED' ? 'text-green-500' : ($status == 'PENDING' ? 'text-yellow-500' : 'text-red-500') }}">
+                            <span class="font-bold {{ $status == 'ACTIVE' ? 'text-green-500' : 'text-red-500' }}">
                                 {{ $status }}
                             </span>
                         </p>
@@ -160,13 +175,13 @@ new class extends Component {
                                 <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information" disabled></textarea>
                             </div>
                         </div>
-                        <div class="border border-slate-300 rounded-lg p-4">
+                        <div class="p-4 border rounded-lg border-slate-300">
                             <div class="flex items-center gap-4 overflow-x-auto" id="lightgallery">
                                 @if (!empty($photos_file))
                                     @foreach ($photos_file as $index => $file)
                                     <div class="relative space-y-2" wire:key="present-img-{{ $index }}">
                                         <div class="item-img" data-src="{{ asset($file['file_paths']) }}">
-                                            <img class="h-56 max-w-96 object-contain cursor-pointer"
+                                            <img class="object-contain h-56 cursor-pointer max-w-96"
                                             src="{{ asset($file['file_paths']) }}"
                                             alt="Image {{ $index }}">
                                         </div>
@@ -176,12 +191,13 @@ new class extends Component {
                             </div>
                         </div>
                         <div class="!mt-8 text-right space-x-2">
-                            <button class="text-slate-600 shadow py-2 px-4 rounded-lg hover:opacity-70" type="button" @click="update_listing_modal=false">
+                            <button class="px-4 py-2 rounded-lg shadow text-slate-600 hover:opacity-70" type="button" @click="update_listing_modal=false">
                                 Cancel
                             </button>
-                            @if ($status == 'PENDING')                            
-                                <button class="text-white bg-red-500 shadow py-2 px-4 rounded-lg hover:opacity-70" type="button" wire:click="rejectListing">Reject</button>
-                                <button class="text-white bg-green-500 shadow py-2 px-4 rounded-lg hover:opacity-70" wire:click="approveListing" type="button">Approved</button>
+                            @if ($status == 'ACTIVE')                            
+                                <button class="px-4 py-2 text-white bg-red-500 rounded-lg shadow hover:opacity-70" type="button" wire:click="deleteListing">DELETE</button>
+                            @else
+                                <button class="px-4 py-2 text-white bg-green-500 rounded-lg shadow hover:opacity-70" wire:click="activeListing" type="button">ACTIVE</button>
                             @endif
                         </div>
                     </div>
