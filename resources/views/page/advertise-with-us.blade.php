@@ -1,21 +1,21 @@
 @extends('frontend-layout')
 
 @section('body-content')
-<div class="relative my-14 px-5">
+<div class="relative px-5 my-14">
     <div class="absolute inset-0 bg-no-repeat bg-cover opacity-25 bg-scattered"></div>
 
     <div id="advertise-with-us" class="container mx-auto" data-aos="zoom-in-up">
-        <h2 class="text-center text-4xl font-bold text-gray-800 mb-4">Advertise with us</h2>
-        <p class="text-center text-gray-600 mb-4">Boost your listing to the top and gain maximum visibility!</p>
+        <h2 class="mb-4 text-4xl font-bold text-center text-gray-800">Advertise with us</h2>
+        <p class="mb-4 text-center text-gray-600">Boost your listing to the top and gain maximum visibility!</p>
     
-        <div class="mb-6">
+        <div class="mt-12 mb-6">
             <h3 class="text-xl font-semibold text-gray-700">Advertising Plans</h3>
             @php
                 $plans = App\Models\AdvertisingPlan::all(); // Fetch all products
             @endphp
-            <div class="space-y-4 mt-2">
+            <div class="mt-2 space-y-4">
                 @foreach ($plans as $plan)
-                    <div class="bg-gray-50 p-4 rounded-md shadow-md">
+                    <div class="p-4 rounded-md shadow-md bg-gray-50">
                         <h4 class="text-lg font-semibold text-gray-800">{{ $plan->name }}</h4>
                         <p class="text-gray-600">{{ $plan->description }}.</p>
                     </div>
@@ -25,7 +25,7 @@
 
         <div class="mb-6">
             <h3 class="text-xl font-semibold text-gray-700">Why Choose Our Advertising Options?</h3>
-            <ul class="list-disc pl-5 text-gray-600 mt-2 space-y-2">
+            <ul class="pl-5 mt-2 space-y-2 text-gray-600 list-disc">
                 <li>Prominent Placement</li>
                 <li>Enhanced Exposure</li>
                 <li>Targeted Audience</li>
@@ -35,7 +35,7 @@
     
         <div class="mb-6">
             <h3 class="text-xl font-semibold text-gray-700">How It Works</h3>
-            <ol class="list-decimal pl-5 text-gray-600 mt-2 space-y-2">
+            <ol class="pl-5 mt-2 space-y-2 text-gray-600 list-decimal">
                 <li>
                     Go to the Contact Page
                     <p class="ml-4">Navigate to our contact page to start the process of promoting your product.</p>
