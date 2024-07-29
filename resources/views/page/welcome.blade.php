@@ -159,7 +159,7 @@
                         1
                     </div>
                     <p class="text-xl font-semibold text-slate-700">Register</p>
-                    <p class="mt-3 text-lg text-slate-500">
+                    <p class="mt-3 text-slate-500 sm:text-lg">
                         Become part of our community by creating an account. It’s quick and easy, allowing you to start listing your treasures immediately.
                     </p>
                 </div>
@@ -170,7 +170,7 @@
                         2
                     </div>
                     <p class="text-xl font-semibold text-slate-700">Login</p>
-                    <p class="mt-3 text-lg text-slate-500">
+                    <p class="mt-3 text-slate-500 sm:text-lg">
                         Securely access your account to manage your listings. Login keeps your details safe and ensures easy management of your items.
                     </p>
                 </div>
@@ -181,7 +181,7 @@
                         3
                     </div>
                     <p class="text-xl font-semibold text-slate-700">Upload Your Treasures</p>
-                    <p class="mt-3 text-lg text-slate-500">
+                    <p class="mt-3 text-slate-500 sm:text-lg">
                         Ready to make a sale? Upload your items with clear descriptions and set a fair price to attract potential buyers quickly.
                     </p>
                 </div>
