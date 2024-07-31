@@ -1,14 +1,10 @@
 <?php
 
-use Livewire\Attributes\Url;
 use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
 
 new class extends Component {
 
-    #[Url]
-    public $search = '';
-    
     public function logout(Logout $logout): void
     {
         $logout();
@@ -115,7 +111,7 @@ new class extends Component {
                         <span class="transition-opacity group-hover:opacity-70">Dashboard</span>
                         <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
                     </a>
-                    <a class="relative px-1 group" wire:cilck="logout">
+                    <a class="relative px-1 cursor-pointer group" wire:click="logout">
                         <span class="transition-opacity group-hover:opacity-70">Logout</span>
                         <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
                     </a>
