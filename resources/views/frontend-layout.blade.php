@@ -63,59 +63,61 @@
         document.addEventListener('livewire:navigated', () => {
             AOS.init();
 
-            
             const swiperContainer = document.querySelector(".sponsored-listing");
-            const slides = swiperContainer.querySelectorAll('.swiper-slide');
-            console.log(slides.length);
-            
-            const swiper = new Swiper(".sponsored-listing", {
-                grabCursor: true,
-                centeredSlides: isSingleImage(),
-                allowTouchMove: false,
-                autoplay: {
-                    delay: 5000, 
-                    disableOnInteraction: false,
-                },
-                loop: false,
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-                breakpointsBase: 'container',
-                breakpoints: {
-                    576: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
+            if (swiperContainer) {
+                const slides = swiperContainer.querySelectorAll('.swiper-slide');
+                
+                const swiper = new Swiper(".sponsored-listing", {
+                    grabCursor: true,
+                    centeredSlides: isSingleImage(),
+                    allowTouchMove: false,
+                    autoplay: {
+                        delay: 5000, 
+                        disableOnInteraction: false,
                     },
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 0,
+                    loop: false,
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
                     },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 0,
+                    breakpointsBase: 'container',
+                    breakpoints: {
+                        576: {
+                            slidesPerView: 1,
+                            spaceBetween: 0,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 0,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 0,
+                        },
                     },
-                    
-                },
-            });
+                });
 
-            if (window.location.hash === '#get-in-touch') {
-                var element = document.getElementById('get-in-touch');
-                if (element) {
-                    var navbarHeight = 74;
-                    var offsetPosition = element.offsetTop - navbarHeight - 20;
+                if (window.location.hash === '#get-in-touch') {
+                    var element = document.getElementById('get-in-touch');
+                    if (element) {
+                        var navbarHeight = 74;
+                        var offsetPosition = element.offsetTop - navbarHeight - 20;
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                } 
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    } 
+                }
             }
 
             function isSingleImage() {
                 const swiperContainer = document.querySelector(".sponsored-listing");
-                const slides = swiperContainer.querySelectorAll('.swiper-slide');
-                return slides.length === 1;
+                if (swiperContainer) {
+                    const slides = swiperContainer.querySelectorAll('.swiper-slide');
+                    return slides.length === 1;
+                }
+                return false;
             }
         });
     </script>
