@@ -22,7 +22,11 @@ new class extends Component {
     #[On('alert-success')]
     public function loadSpecialBoost(){
         $query = SpecialBoost::withTrashed()
-            ->with('product', 'advertisingPlan')
+            ->with(['product' => function($query) {
+                $query->withTrashed();
+            }, 'advertisingPlan' => function($query) {
+                $query->withTrashed();
+            }])
             ->where(function ($query) {
                 $query->where('id', 'like', '%' . $this->search . '%')
                     ->orWhere('from_date', 'like', '%' . $this->search . '%')
