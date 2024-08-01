@@ -63,46 +63,47 @@ new class extends Component {
 
     <!-- Livewire Event Listeners -->
     <script>
+        console.log('Event Listener for alert message running');            
         document.addEventListener('livewire:init', () => {
-            Livewire.on('alert-success', (events) => {
-                console.log('alert success session running');
-                document.getElementById('alert-success').classList.remove('hidden');
-                document.getElementById('alert-success').classList.add('flex');
-                if(events.route){
-                    window.location.href = events.route;
-                }
-                setTimeout(() => {
-                    document.getElementById('alert-success').classList.remove('flex');
-                    document.getElementById('alert-success').classList.add('hidden');
-                }, 10000);
-            });
-
-            Livewire.on('alert-info', () => {
-                document.getElementById('info-message').classList.remove('hidden');
-                document.getElementById('info-message').classList.add('flex');
-                setTimeout(() => {
-                    document.getElementById('info-message').classList.remove('flex');
-                    document.getElementById('info-message').classList.add('hidden');
-                }, 10000);
-            });
-
-            Livewire.on('alert-error', () => {
-                document.getElementById('error-message').classList.remove('hidden');
-                document.getElementById('error-message').classList.add('flex');
-                setTimeout(() => {
-                    document.getElementById('error-message').classList.remove('flex');
-                    document.getElementById('error-message').classList.add('hidden');
-                }, 10000);
-            });
-
-            // Close button event listeners
-            document.querySelectorAll('.svg-x').forEach(button => {
-                button.addEventListener('click', () => {
-                    button.closest('.items-center').classList.remove('flex');
-                    button.closest('.items-center').classList.add('hidden');
+                Livewire.on('alert-success', (events) => {
+                    console.log('alert success session running');
+                    document.getElementById('alert-success').classList.remove('hidden');
+                    document.getElementById('alert-success').classList.add('flex');
+                    if(events.route){
+                        window.location.href = events.route;
+                    }
+                    setTimeout(() => {
+                        document.getElementById('alert-success').classList.remove('flex');
+                        document.getElementById('alert-success').classList.add('hidden');
+                    }, 10000);
                 });
-            });
-        });
+    
+                Livewire.on('alert-info', () => {
+                    document.getElementById('info-message').classList.remove('hidden');
+                    document.getElementById('info-message').classList.add('flex');
+                    setTimeout(() => {
+                        document.getElementById('info-message').classList.remove('flex');
+                        document.getElementById('info-message').classList.add('hidden');
+                    }, 10000);
+                });
+    
+                Livewire.on('alert-error', () => {
+                    document.getElementById('error-message').classList.remove('hidden');
+                    document.getElementById('error-message').classList.add('flex');
+                    setTimeout(() => {
+                        document.getElementById('error-message').classList.remove('flex');
+                        document.getElementById('error-message').classList.add('hidden');
+                    }, 10000);
+                });
+    
+                // Close button event listeners
+                document.querySelectorAll('.svg-x').forEach(button => {
+                    button.addEventListener('click', () => {
+                        button.closest('.items-center').classList.remove('flex');
+                        button.closest('.items-center').classList.add('hidden');
+                    });
+                });
+        })
     </script>
 </div>
 
