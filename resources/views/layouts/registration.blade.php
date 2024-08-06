@@ -32,7 +32,7 @@
         }
         </style>
     </head>
-    <body class="flex min-h-screen m-auto font-sans antialiased text-gray-900">
+    <body class="flex min-h-screen py-10 font-sans antialiased text-gray-900">
         <div class="w-full max-w-7xl flex flex-row justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden min-h-[45rem] bg-no-repeat sm:bg-cover sm:bg-splashed rounded-2xl sm:border px-5">
             <div class="w-full max-w-2xl p-10 m-auto mx-1 leading-none border rounded-2xl bg-gray-50">
                 <div class="w-full">

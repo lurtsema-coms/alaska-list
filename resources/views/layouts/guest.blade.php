@@ -16,7 +16,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="flex min-h-screen m-auto font-sans antialiased text-gray-900 sm:px-10">
+    <body class="flex min-h-screen py-10 font-sans antialiased text-gray-900 sm:px-10">
         <div class="w-full max-w-7xl flex flex-col-reverse justify-center m-auto bg-white shadow-none lg:shadow-md overflow-hidden h-full lg:min-h-[45rem] lg:flex-row rounded-3xl lg:border">
             <div class="flex w-full p-5 bg-white sm:p-10 xl:p-20 rounded-3xl lg:w-1/2">
                 <div class="w-full max-w-2xl p-20 px-10 m-auto border bg-gray-50 rounded-2xl">
