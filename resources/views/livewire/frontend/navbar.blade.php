@@ -28,7 +28,7 @@ new class extends Component {
                 </div>
                 <div class="flex items-center justify-end w-full gap-4 xl:px-0">
                 @guest
-                    <a class="relative" href="{{ route('register') }}" wire:navigate>
+                    <a class="relative" href="{{ route('login') }}" wire:navigate>
                         <div class="font-bold text-white border-2 border-green-300 bg-[#246567] px-4 py-2 rounded-full shadow-md hover:bg-[#1B494D] hover:border-white transition duration-300">
                             POST CLASSIFIEDS
                         </div>

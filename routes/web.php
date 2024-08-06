@@ -14,10 +14,6 @@ use Livewire\Volt\Volt;
 |
 */
 
-Route::middleware('auth')->group(function (){
-
-});
-
 Route::view('/', 'page.welcome')->name('welcome');
 Route::view('categories', 'page.categories')->name('categories');
 Route::view('about-us', 'page.about-us')->name('about-us');

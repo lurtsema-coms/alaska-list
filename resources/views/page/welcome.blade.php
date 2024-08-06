@@ -186,7 +186,7 @@
                     </p>
                 </div>
             </div>
-            <a class="flex justify-center mt-8" href="{{ route('login') }}">
+            <a class="flex justify-center mt-8" href="{{ route('register') }}">
                 <div class="bg-[#2171a7] border border-[#2171a7] px-6 py-3 rounded-lg shadow-lg text-white font-semibold hover:bg-[#1a5b8a] transition-colors duration-300 cursor-pointer">
                     Get Started
                 </div>

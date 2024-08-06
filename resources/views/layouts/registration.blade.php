@@ -32,11 +32,9 @@
         }
         </style>
     </head>
-    <body class="font-sans text-gray-900 antialiased flex m-auto min-h-screen">
-        <div class="w-full max-w-7xl flex flex-row justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden h-[45rem] bg-no-repeat bg-cover bg-splashed">
-            <div class="w-full hidden sm:block sm:w-2/5">
-            </div>
-            <div class="w-full sm:w-3/5 p-10 m-auto mx-1 sm:mx-16 rounded-lg leading-none bg-gray-50 border">
+    <body class="flex min-h-screen m-auto font-sans antialiased text-gray-900">
+        <div class="w-full max-w-7xl flex flex-row justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden min-h-[45rem] bg-no-repeat sm:bg-cover sm:bg-splashed rounded-2xl sm:border px-5">
+            <div class="w-full max-w-2xl p-10 m-auto mx-1 leading-none border rounded-2xl bg-gray-50">
                 <div class="w-full">
                     <livewire:pages.auth.register>
                 </div>
