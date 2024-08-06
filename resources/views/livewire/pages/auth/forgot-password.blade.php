@@ -54,7 +54,7 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <div class="flex flex-wrap items-center justify-end gap-2 mt-4">
-            <a href="{{ route('login') }}">
+            <a href="{{ route('login') }}" wire:navigate>
                 <div class="px-4 py-2 text-xs bg-white border">
                     BACK
                 </div>
