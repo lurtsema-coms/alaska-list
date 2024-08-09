@@ -3,7 +3,10 @@
 @section('body-content')
 {{-- hero section --}}
 <div class="mx-auto overflow-hidden" data-aos="zoom-in-up">
-    <div class="absolute w-full h-full bg-center bg-cover brightness-50 bg-woman" style="background-position: 0% 10%;">
+    <div class="absolute w-full h-full bg-center bg-cover brightness-50">
+        <video class="absolute top-0 left-0 w-full h-full object-cover brightness-50" autoplay muted loop style="object-position: 50% 5%;">
+            <source src="{{ asset('frontend/vid_banner.mp4') }}" type="video/mp4">
+        </video>
     </div>
     <div class="relative h-auto sm:min-h-[42rem] w-full sm:container mx-auto  md:rounded-2xl">
         <div class="min-h-[38rem] flex md:p-10">
