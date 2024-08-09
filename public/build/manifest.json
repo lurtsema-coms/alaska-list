@@ -1,12 +1,16 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-C-klE3GC.css",
+    "file": "assets/app-DET4UeBl.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/images/brainstorming.jpg": {
-    "file": "assets/brainstorming-BPbsYebD.jpg",
+    "file": "assets/brainstorming-BbMg5TYj.jpg",
     "src": "resources/images/brainstorming.jpg"
+  },
+  "resources/images/buildings.jpg": {
+    "file": "assets/buildings-C1RUj3rU.jpg",
+    "src": "resources/images/buildings.jpg"
   },
   "resources/images/scattered-forcefields.svg": {
     "file": "assets/scattered-forcefields-DBgI1RH8.svg",
