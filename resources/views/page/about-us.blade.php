@@ -9,7 +9,7 @@
         </div>
         <div class="flex flex-col items-center justify-center gap-8 lg:flex-row">
             <div class="max-w-2xl overflow-hidden rounded-lg">
-                <img src="{{ asset('frontend/work-team-digital-art.jpg') }}" alt="Our Team at Work">
+                <img src="{{ asset('frontend/about-us.jpg') }}" alt="Our Team at Work">
             </div>
             <div class="space-y-8 text-slate-600">
                 <p class="max-w-2xl text-lg">

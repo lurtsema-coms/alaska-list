@@ -95,6 +95,27 @@ new class extends Component {
                 <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
             </div>
 
+            <div class="flex flex-wrap gap-6">
+                <div>
+                    <h3 class="mb-2">Location</h3>
+                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg">
+                        <option value="">Price low to high</option>
+                        <option value="">Price high to low</option>
+                    </select>
+                </div>
+                <div>
+                    <h3 class="mb-2">Sort By:</h3>
+                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg">
+                        <option value="">Price low to high</option>
+                        <option value="">Price high to low</option>
+                    </select>
+                </div>
+                <div>
+                    <h3 class="mb-2">Price Range:</h3>
+                    <input name="" id="" class="h-12 border border-gray-300 rounded-lg"/>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach ($categories as $category)
                     <div class="p-4 bg-gray-100 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
@@ -130,7 +151,7 @@ new class extends Component {
             <div class="relative w-full p-1 overflow-hidden max-w-60 md:max-w-96 ">
                 <div class="relative w-full">
                     <input
-                        class="h-12 text-md w-full px-4 pr-10 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]"
+                        class="w-full h-12 px-4 pr-10 border rounded-lg text-md border-slate-300"
                         type="seaerch"
                         placeholder="Search..."
                         wire:model.live.debounce.200ms="search"

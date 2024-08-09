@@ -3,7 +3,7 @@
 @section('body-content')
 {{-- hero section --}}
 <div class="mx-auto overflow-hidden" data-aos="zoom-in-up">
-    <div class="absolute w-full h-full bg-center bg-cover brightness-50 bg-building">
+    <div class="absolute w-full h-full bg-center bg-cover brightness-50 bg-woman" style="background-position: 0% 10%;">
     </div>
     <div class="relative h-auto sm:min-h-[42rem] w-full sm:container mx-auto  md:rounded-2xl">
         <div class="min-h-[38rem] flex md:p-10">
@@ -188,8 +188,99 @@
     </div>
 </div>
 
+<div class="relative py-28" data-aos="fade-up">
+    <div class="container px-6 mx-auto md:px-12">
+        <div class="mb-12 text-center">
+            <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">
+                Frequently Asked Questions
+            </h1>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-slate-500">
+                Here are some of the most common frequently asked questions
+            </p>
+        </div>
+        <div x-data="{ 
+                activeAccordion: '', 
+                setActiveAccordion(id) { 
+                    this.activeAccordion = (this.activeAccordion == id) ? '' : id 
+                } 
+            }" class="relative w-full max-w-4xl p-8 mx-auto text-lg bg-white shadow-md rounded-2xl">
+
+            <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                    <span>How do I create a listing?</span>
+                    <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
+                        <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                        <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                    </div>
+                </button>
+                <div x-show="activeAccordion==id" x-collapse x-cloak>
+                    <div class="p-5 pt-0 opacity-70">
+                        Your safety is our priority. We recommend meeting in public places for transactions, bringing a friend along, and avoiding sharing personal information online. Always trust your instincts, and if something feels off, it’s okay to walk away.
+                    </div>
+                </div>
+            </div>
+            <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                    <span>How do I ensure my safety when buying or selling?</span>
+                    <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
+                        <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                        <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                    </div>
+                </button>
+                <div x-show="activeAccordion==id" x-collapse x-cloak>
+                    <div class="p-5 pt-0 opacity-70">
+                        Your safety is our priority. We recommend meeting in public places for transactions, bringing a friend along, and avoiding sharing personal information online. Always trust your instincts, and if something feels off, it’s okay to walk away
+                    </div>
+                </div>
+            </div>
+            <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                    <span>What types of items are prohibited on the platform?</span>
+                    <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
+                        <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                        <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                    </div>
+                </button>
+                <div x-show="activeAccordion==id" x-collapse x-cloak>
+                    <div class="p-5 pt-0 opacity-70">
+                        Items that are illegal, harmful, or violate our community guidelines are strictly prohibited. This includes weapons, counterfeit goods, stolen property, and adult content. Please review our full list of prohibited items before posting.
+                    </div>
+                </div>
+            </div>
+            <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                    <span>How can I boost my ad to get more visibility?</span>
+                    <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
+                        <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                        <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                    </div>
+                </button>
+                <div x-show="activeAccordion==id" x-collapse x-cloak>
+                    <div class="p-5 pt-0 opacity-70">
+                        You can boost your ad by selecting one of our premium listing options. Boosted ads appear at the top of search results and can increase your chances of making a sale. Check the “Advertise with Us” section for more details.
+                    </div>
+                </div>
+            </div>
+            <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                    <span>What should I do if I encounter a suspicious ad or user?</span>
+                    <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
+                        <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                        <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                    </div>
+                </button>
+                <div x-show="activeAccordion==id" x-collapse x-cloak>
+                    <div class="p-5 pt-0 opacity-70">
+                        If you come across an ad or user that seems suspicious, please report it immediately using the "Report" button on the listing page. Our team will review the report and take appropriate action to maintain the safety and integrity of our platform.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- Get In Touch --}}
-<div id="get-in-touch" class="container mx-auto my-28" data-aos="zoom-in">
+<div id="get-in-touch" class="container mx-auto mb-28" data-aos="zoom-in">
     <div class="flex flex-col items-center gap-4 mb-14">
         <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">Get In Touch</h1>
         <p class="text-lg text-center text-slate-500">Contact us using the information below. We'll respond promptly to your inquiries and feedback</p>

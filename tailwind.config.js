@@ -17,6 +17,7 @@ export default {
                 darkerGrotesque: ['"Darker Grotesque"', "sans-serif"],
             },
             backgroundImage: {
+                woman: "url('../images/woman.jpg')",
                 building: "url('../images/buildings.jpg')",
                 scattered: "url('../images/scattered-forcefields.svg')",
                 splashed: "url('../images/wave3.svg')",

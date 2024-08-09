@@ -12,7 +12,7 @@ class SpecialBoost extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'advertising_plan_name',
+        'advertising_plan_id',
         'product_id',
         'from_date',
         'to_date',
@@ -29,7 +29,7 @@ class SpecialBoost extends Model
 
     public function advertisingPlan()
     {
-        return $this->belongsTo(AdvertisingPlan::class, 'product_id');
+        return $this->belongsTo(AdvertisingPlan::class, 'advertising_plan_id');
     }
 
     public function createdBy()

@@ -54,6 +54,7 @@ new class extends Component {
 
         $sp = SpecialBoost::create([
             'product_id' => $product->id,
+            'advertising_plan_id' => $this->advertising_plan,
             'from_date' => $this->from_date,
             'to_date' => $this->to_date_computed,
             'created_by' => auth()->user()->id
