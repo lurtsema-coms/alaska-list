@@ -2,24 +2,25 @@
 
 @section('body-content')
 {{-- hero section --}}
-<div class="mx-auto overflow-hidden" data-aos="zoom-in-up">
-    <div class="absolute w-full h-full bg-center bg-cover brightness-50">
-        <video class="absolute top-0 left-0 w-full h-full object-cover brightness-50" autoplay muted loop style="object-position: 50% 5%;">
+<div class="mx-auto overflow-hidden min-h-[50rem]" data-aos="zoom-in-up">
+    <div class="absolute w-full h-full bg-center bg-cover">
+        <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted loop style="object-position: 50% 5%;">
             <source src="{{ asset('frontend/vid_banner.mp4') }}" type="video/mp4">
         </video>
     </div>
-    <div class="relative h-auto sm:min-h-[42rem] w-full sm:container mx-auto  md:rounded-2xl">
-        <div class="min-h-[38rem] flex md:p-10">
-            <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 text-white md:px-10 xl:w-1/2">
-                <div>
-                    <p class="text-3xl font-bold text-white font-darkerGrotesque sm:text-6xl">ANYTHING YOU NEED, WE'VE GOT YOU COVERED</p>
+    <div class="relative h-auto sm:min-h-[50rem] w-full sm:container mx-auto md:rounded-2xl">
+        <div class="min-h-[50rem] flex md:p-10">
+            <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 mt-[28rem] text-white">
+                <div class="flex justify-center mt-4" >
+                    <a class="bg-search-gradient text-3xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer" href="{{ route('listing-page') }}" wire:navigate>
+                        BROWSE ITEMS
+                    </a>
                 </div>
-                <p class="text-xl font-bold text-white">Classified advertissement website</p>
-                <a class="flex justify-start mt-4" href="{{ route('listing-page') }}" wire:navigate>
-                    <div class="bg-[#5BA5BC] text-xl px-6 py-3 rounded-lg shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">
-                        Search Now
-                    </div>
-                </a>
+                <div class="flex justify-center mt-4" >
+                    <a class="bg-search-gradient text-2xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer" href="{{ route('dashboard') }}" wire:navigate>
+                        SELL NOW
+                    </a>
+                </div>
             </div>
         </div>
     </div>

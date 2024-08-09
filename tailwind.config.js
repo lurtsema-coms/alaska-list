@@ -22,6 +22,8 @@ export default {
                 scattered: "url('../images/scattered-forcefields.svg')",
                 splashed: "url('../images/wave3.svg')",
                 brainstorm: "url('../images/brainstorming.jpg')",
+                'search-gradient': 'linear-gradient(to right, #143E7A, #4988A5)',
+                
             },
             screens: {
                 xsm: "400px",
