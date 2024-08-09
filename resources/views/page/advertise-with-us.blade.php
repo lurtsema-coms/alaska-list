@@ -6,7 +6,7 @@
 
     <div id="advertise-with-us" class="container mx-auto" data-aos="zoom-in-up">
         <h2 class="mb-4 text-4xl font-bold text-center text-gray-800">Advertise with us</h2>
-        <p class="mb-4 text-center text-gray-600">Boost your listing to the top and gain maximum visibility!</p>
+        <p class="mb-4 text-lg text-center text-gray-600">Boost your listing to the top and gain maximum visibility!</p>
     
         <div class="mt-12 mb-6">
             <h3 class="text-xl font-semibold text-gray-700">Advertising Plans</h3>

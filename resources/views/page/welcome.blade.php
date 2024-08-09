@@ -2,34 +2,21 @@
 
 @section('body-content')
 {{-- hero section --}}
-<div class="bg-[#A2DCEC] overflow-hidden mx-auto" data-aos="zoom-in-up">
+<div class="mx-auto overflow-hidden" data-aos="zoom-in-up">
+    <div class="absolute w-full h-full bg-center bg-cover brightness-50 bg-building">
+    </div>
     <div class="relative h-auto sm:min-h-[42rem] w-full sm:container mx-auto  md:rounded-2xl">
         <div class="min-h-[38rem] flex md:p-10">
             <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 text-white md:px-10 xl:w-1/2">
                 <div>
-                    <p class="text-3xl font-bold font-darkerGrotesque sm:text-6xl">ANYTHING YOU NEED, WE'VE GOT YOU COVERED</p>
-                    <p class="text-3xl font-bold font-darkerGrotesque sm:text-6xl"></p>
+                    <p class="text-3xl font-bold text-white font-darkerGrotesque sm:text-6xl">ANYTHING YOU NEED, WE'VE GOT YOU COVERED</p>
                 </div>
-                <p class="text-lg font-bold text-slate-500">Classified advertissement website</p>
+                <p class="text-xl font-bold text-white">Classified advertissement website</p>
                 <a class="flex justify-start mt-4" href="{{ route('listing-page') }}" wire:navigate>
-                    <div class="bg-[#42C8E7] text-xl px-6 py-3 rounded-lg shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">
+                    <div class="bg-[#5BA5BC] text-xl px-6 py-3 rounded-lg shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">
                         Search Now
                     </div>
                 </a>
-            </div>
-            <div class="absolute inset-0 bottom-0 flex items-center justify-end">
-                <img src="{{ asset('frontend/business-woman.png') }}" alt="Image" class="relative z-10 hidden w-1/3 rounded-lg xl:block xl:right-24">
-            </div>
-            <!-- Random image icons -->
-            <div class="absolute inset-0 flex items-center justify-center">
-                <!-- Example random image icons with opacity -->
-                <img src="{{ asset('icon-img/contact-list.png') }}" alt="Icon 1" class="absolute top-[10%] left-[10%] opacity-30 w-10">
-                <img src="{{ asset('icon-img/list.png') }}" alt="Icon 2" class="absolute top-[30%] left-[70%] opacity-30 w-10">
-                <img src="{{ asset('icon-img/shopping-bag.png') }}" alt="Icon 3" class="absolute top-[60%] left-[30%] opacity-30 w-10">
-                <img src="{{ asset('icon-img/shopping-cart.png') }}" alt="Icon 4" class="absolute top-[40%] left-[50%] opacity-30 w-10">
-                <img src="{{ asset('icon-img/store.png') }}" alt="Icon 5" class="absolute top-[80%] left-[20%] opacity-30 w-10">
-                <img src="{{ asset('icon-img/store.png') }}" alt="Icon 6" class="absolute top-[70%] left-[60%] opacity-30 w-10">
-                <!-- Add more icons as needed -->
             </div>
         </div>
     </div>
@@ -140,64 +127,66 @@
     </div>
 </div>
 
-<div class="relative py-28 bg-gradient-to-b from-gray-100 to-white">
-    <div class="px-6 mx-auto sm:container md:px-12">
-        <div class="flex flex-col items-center gap-4 mb-12" data-aos="fade-up">
+<div class="relative border py-28 bg-gradient-to-b from-gray-50 to-white" data-aos="fade-up">
+    <div class="container px-6 mx-auto md:px-12">
+        <div class="mb-12 text-center">
             <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">
                 Share Your Treasures with Us
             </h1>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-slate-500">
+                Join our community and start listing your valuable items today. It’s fast, easy, and secure.
+            </p>
         </div>
 
-        <div class="flex flex-col items-center gap-8 px-8 py-8 mx-auto bg-white rounded-lg shadow-lg max-w-7xl" data-aos="fade-up">
-            <div class="flex flex-col items-start gap-16 lg:flex-row xl:gap-16">
-                <!-- Step 1: Register -->
-                <div class="flex-1 transition-transform transform hover:scale-105">
-                    <div class="flex items-center mb-4 space-x-4">
-                        <div class="bg-[#2171a7] text-white rounded-full h-12 w-12 min-w-[3rem] flex items-center justify-center text-2xl font-bold">
-                            1
-                        </div>
-                        <p class="text-2xl font-bold text-slate-800">Register</p>
+        <div class="flex flex-col items-center max-w-6xl gap-8 px-8 py-10 mx-auto bg-white shadow-xl lg:flex-row lg:space-x-8 lg:gap-0 rounded-xl">
+            <!-- Step 1: Register -->
+            <div class="flex-1 transition-transform transform hover:scale-105">
+                <div class="flex items-center mb-6 space-x-4">
+                    <div class="flex items-center justify-center text-xl font-bold text-white rounded-full h-14 w-14">
+                        <img src="{{ asset('frontend/signup.png') }}" alt="">
                     </div>
-                    <p class="text-lg text-slate-600">
-                        Become part of our community by creating an account. It’s quick and easy, allowing you to start listing your treasures immediately.
-                    </p>
+                    <p class="text-xl font-semibold text-slate-800">Register</p>
                 </div>
-                
-                <!-- Step 2: Login -->
-                <div class="flex-1 transition-transform transform hover:scale-105">
-                    <div class="flex items-center mb-4 space-x-4">
-                        <div class="bg-[#2171a7] text-white rounded-full h-12 w-12 min-w-[3rem] flex items-center justify-center text-2xl font-bold">
-                            2
-                        </div>
-                        <p class="text-2xl font-bold text-slate-800">Login</p>
-                    </div>
-                    <p class="text-lg text-slate-600">
-                        Securely access your account to manage your listings. Login keeps your details safe and ensures easy management of your items.
-                    </p>
-                </div>
-                
-                <!-- Step 3: Upload Your Treasures -->
-                <div class="flex-1 transition-transform transform hover:scale-105">
-                    <div class="flex items-center mb-4 space-x-4">
-                        <div class="bg-[#2171a7] text-white rounded-full h-12 w-12 min-w-[3rem] flex items-center justify-center text-2xl font-bold">
-                            3
-                        </div>
-                        <p class="text-2xl font-bold text-slate-800">Upload Your Treasures</p>
-                    </div>
-                    <p class="text-lg text-slate-600">
-                        Ready to make a sale? Upload your items with clear descriptions and set a fair price to attract potential buyers quickly.
-                    </p>
-                </div>
+                <p class="text-base text-slate-600">
+                    Become part of our community by creating an account. It’s quick and easy, allowing you to start listing your treasures immediately.
+                </p>
             </div>
-            <a class="flex justify-center mt-8" href="{{ route('register') }}">
-                <div class="bg-[#2171a7] px-6 py-3 rounded-full shadow-lg text-white font-semibold hover:bg-[#1a5b8a] transition-colors duration-300 cursor-pointer">
+            
+            <!-- Step 2: Login -->
+            <div class="flex-1 transition-transform transform hover:scale-105">
+                <div class="flex items-center mb-6 space-x-4">
+                    <div class="flex items-center justify-center text-xl font-bold text-white rounded-full h-14 w-14">
+                        <img src="{{ asset('frontend/login.png') }}" alt="">
+                    </div>
+                    <p class="text-xl font-semibold text-slate-800">Login</p>
+                </div>
+                <p class="text-base text-slate-600">
+                    Securely access your account to manage your listings. Login keeps your details safe and ensures easy management of your items.
+                </p>
+            </div>
+            
+            <!-- Step 3: Upload Your Treasures -->
+            <div class="flex-1 transition-transform transform hover:scale-105">
+                <div class="flex items-center mb-6 space-x-4">
+                    <div class="flex items-center justify-center text-xl font-bold text-white rounded-full h-14 w-14">
+                        <img src="{{ asset('frontend/photo.png') }}" alt="">
+                    </div>
+                    <p class="text-xl font-semibold text-slate-800">Upload Your Treasures</p>
+                </div>
+                <p class="text-base text-slate-600">
+                    Ready to make a sale? Upload your items with clear descriptions and set a fair price to attract potential buyers quickly.
+                </p>
+            </div>
+        </div>
+        <div class="flex justify-center mt-12">
+            <a href="{{ route('register') }}" wire:navigate>
+                <div class="bg-[#2171a7] px-8 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:bg-[#1a5b8a] transition-transform transform hover:scale-105 cursor-pointer">
                     Get Started
                 </div>
             </a>
         </div>
     </div>
 </div>
-
 
 {{-- Get In Touch --}}
 <div id="get-in-touch" class="container mx-auto my-28" data-aos="zoom-in">

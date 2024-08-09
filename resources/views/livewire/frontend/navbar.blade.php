@@ -15,7 +15,7 @@ new class extends Component {
 
 <div class="sticky top-0 z-20" x-data="{ sidebarOpen: false }">
     <div class="shadow-lg border-b-1 bg-gray-50">
-        <div class="px-2 py-2 mx-auto sm:container sm:px-0">
+        <div class="px-5 py-2 mx-auto sm:container sm:px-0">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-5">
                     <a class="" href="/" wire:navigate>
@@ -30,43 +30,43 @@ new class extends Component {
                     <a class="relative px-1 group {{ request()->routeIs('welcome') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="{{ route('welcome') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('welcome') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('welcome') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                     </a>
 
                     <a class="relative px-1 group {{ request()->routeIs('listing-page') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="{{ route('listing-page') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('listing-page') ? 'Listing Page' : 'Listing Page' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('listing-page') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('listing-page') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                     </a>
 
                     <a class="relative px-1 group {{ request()->routeIs('about-us') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="{{ route('about-us') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('about-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('about-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                     </a>
 
                     {{-- <a class="relative px-1 group {{ request()->routeIs('get-in-touch') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="/#get-in-touch" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('get-in-touch') ? 'Get In Touch' : 'Get In Touch' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('get-in-touch') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('get-in-touch') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                     </a> --}}
 
                     <a class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="{{ route('advertise-with-us') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('advertise-with-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('advertise-with-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                     </a>
 
                     @guest
                         <a class="relative" href="{{ route('login') }}" wire:navigate>
-                            <div class="font-bold text-white border-2 border-green-300 bg-[#246567] px-4 py-2 rounded-full shadow-md hover:bg-[#1B494D] hover:border-white transition duration-300">
+                            <div class="font-bold text-white bg-[#70B7E5] px-4 py-2 rounded-full shadow-md hover:bg-[#1B494D] hover:border-white transition duration-300">
                                 POST CLASSIFIEDS
                             </div>
                         </a>
                         @else
                         <a class="relative px-1 group" href="{{ route('dashboard') }}" wire:navigate>
                             <span class="transition-opacity group-hover:text-slate-950">Dashboard</span>
-                            <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 w-0 group-hover:w-full"></span>
+                            <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 w-0 group-hover:w-full"></span>
                         </a>
                     @endguest
                     {{-- <div class="relative w-full p-1 overflow-hidden max-w-60 md:max-w-96 ">

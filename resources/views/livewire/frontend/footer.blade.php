@@ -16,11 +16,9 @@ new class extends Component {
                 </a>
                 <ul class="flex-wrap items-center justify-center text-center transition-all duration-500 text-md sm:flex gap-14 lg:gap-10 xl:gap-14">
                     <li><a href="/" wire:navigate class="text-white hover:text-gray-400">Home</a></li>
-                    <li><a href="/categories" wire:navigate class="text-white hover:text-gray-400">Categories</a></li>
-                    <li><a href="#" class="text-white hover:text-gray-400">Listing Page</a></li>
-                    <li><a href="/about-us" wire:navigate class="text-white hover:text-gray-400">About Us</a></li>
-                    <li><a href="/#get-in-touch" class="text-white hover:text-gray-400">Get In Touch</a></li>
-                    <li><a href="/advertise-with-us" wire:navigate class="text-white hover:text-gray-400">Advertise with us</a></li>
+                    <li><a href="{{ route('listing-page') }}" class="text-white hover:text-gray-400">Listing Page</a></li>
+                    <li><a href="{{ route('about-us') }}" wire:navigate class="text-white hover:text-gray-400">About Us</a></li>
+                    <li><a href="{{ route('advertise-with-us') }}" wire:navigate class="text-white hover:text-gray-400">Advertise with us</a></li>
                 </ul>
                 <div class="flex space-x-4 sm:justify-center ">
                     <a href="#"  class="flex items-center justify-center bg-gray-800 rounded-full w-9 h-9 hover:bg-indigo-600">

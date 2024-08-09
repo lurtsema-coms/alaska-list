@@ -154,7 +154,7 @@ new class extends Component {
                             @php
                                 $images = explode(',', $product->file_path);
                                 $firstImage = trim($images[0]);
-                            @endphp
+                            @endphp 
 
                             <img class="object-cover w-full h-56" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
                             <div class="p-6">
@@ -168,7 +168,7 @@ new class extends Component {
                             </div>
                             <div class="p-6 border-t border-gray-200">
                                 <p class="mb-4 font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
-                                <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+                                <button class="px-4 py-2 font-bold text-white rounded bg-sky-600 hover:bg-blue-700">
                                     View Details
                                 </button>
                             </div>
