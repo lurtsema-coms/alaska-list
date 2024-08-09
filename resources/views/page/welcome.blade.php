@@ -2,7 +2,7 @@
 
 @section('body-content')
 {{-- hero section --}}
-<div class="bg-[#246567] xl:[clip-path:ellipse(100%_100%_at_top_center)]" data-aos="zoom-in-up">
+<div class="bg-[#A2DCEC] overflow-hidden mx-auto" data-aos="zoom-in-up">
     <div class="relative h-auto sm:min-h-[42rem] w-full sm:container mx-auto  md:rounded-2xl">
         <div class="min-h-[38rem] flex md:p-10">
             <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 text-white md:px-10 xl:w-1/2">
@@ -10,9 +10,9 @@
                     <p class="text-3xl font-bold font-darkerGrotesque sm:text-6xl">ANYTHING YOU NEED, WE'VE GOT YOU COVERED</p>
                     <p class="text-3xl font-bold font-darkerGrotesque sm:text-6xl"></p>
                 </div>
-                <p class="text-lg text-slate-200">Classified advertissement website</p>
+                <p class="text-lg font-bold text-slate-500">Classified advertissement website</p>
                 <a class="flex justify-start mt-4" href="{{ route('listing-page') }}" wire:navigate>
-                    <div class="bg-[#1F4B55] text-xl px-6 py-3 rounded-lg shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">
+                    <div class="bg-[#42C8E7] text-xl px-6 py-3 rounded-lg shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">
                         Search Now
                     </div>
                 </a>
@@ -87,7 +87,7 @@
                 </div>
             </a>
             <div class="w-32 mb-4 transition-all bg-gray-100 shadow-md cursor-pointer min-h-44 rounded-l-xl hover:border hover:bg-gray-200" data-aos="fade-right">
-                <a href="/categories" wire:navigate>
+                <a href="{{ route('listing-page') }}" wire:navigate>
                     <div class="flex flex-col items-center justify-center h-full gap-4">
                         <div class="p-3 border rounded-full bg-gray-50">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -132,7 +132,7 @@
 </div>
 
 <div class="relative mt-28 h-96 ">
-    <div class="absolute w-full h-full bg-center bg-cover bg-brainstorm brightness-50">
+    <div class="absolute w-full h-full bg-top bg-cover bg-brainstorm brightness-50" style="background-position: 30% 60%;">
     </div>
     <div class="absolute top-0 flex flex-col items-center justify-center w-full h-full font-darkerGrotesque">
         <p class="text-5xl text-white">Find what you need</p>
@@ -140,7 +140,7 @@
     </div>
 </div>
 
-<div class="relative py-28">
+<div class="relative py-28 bg-gradient-to-b from-gray-100 to-white">
     <div class="px-6 mx-auto sm:container md:px-12">
         <div class="flex flex-col items-center gap-4 mb-12" data-aos="fade-up">
             <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">
@@ -148,46 +148,49 @@
             </h1>
         </div>
 
-        <div class="flex flex-col items-center gap-12 px-8 py-12 mx-auto overflow-hidden bg-white border shadow-xl max-w-7xl rounded-2xl md:px-16" data-aos="fade-up">
-            <div class="text-center bg-[#202c47] bg-opacity-80 text-white inline-block px-4 py-2 rounded-xl text-lg font-semibold">
-                How It Works
-            </div>
-            <div class="flex flex-col gap-8 lg:flex-row lg:gap-12">
+        <div class="flex flex-col items-center gap-8 px-8 py-8 mx-auto bg-white rounded-lg shadow-lg max-w-7xl" data-aos="fade-up">
+            <div class="flex flex-col items-start gap-16 lg:flex-row xl:gap-16">
                 <!-- Step 1: Register -->
-                <div class="flex-1 relative bg-[#f9fbfc] p-8 rounded-xl shadow-lg transition-transform transform hover:scale-105">
-                    <div class="absolute -top-8 -left-8 text-8xl text-[#2171a7] opacity-15">
-                        1
+                <div class="flex-1 transition-transform transform hover:scale-105">
+                    <div class="flex items-center mb-4 space-x-4">
+                        <div class="bg-[#2171a7] text-white rounded-full h-12 w-12 min-w-[3rem] flex items-center justify-center text-2xl font-bold">
+                            1
+                        </div>
+                        <p class="text-2xl font-bold text-slate-800">Register</p>
                     </div>
-                    <p class="text-xl font-semibold text-slate-700">Register</p>
-                    <p class="mt-3 text-slate-500 sm:text-lg">
+                    <p class="text-lg text-slate-600">
                         Become part of our community by creating an account. It’s quick and easy, allowing you to start listing your treasures immediately.
                     </p>
                 </div>
                 
                 <!-- Step 2: Login -->
-                <div class="flex-1 relative bg-[#f9fbfc] p-8 rounded-xl shadow-lg transition-transform transform hover:scale-105">
-                    <div class="absolute -top-8 -left-8 text-8xl text-[#2171a7] opacity-15">
-                        2
+                <div class="flex-1 transition-transform transform hover:scale-105">
+                    <div class="flex items-center mb-4 space-x-4">
+                        <div class="bg-[#2171a7] text-white rounded-full h-12 w-12 min-w-[3rem] flex items-center justify-center text-2xl font-bold">
+                            2
+                        </div>
+                        <p class="text-2xl font-bold text-slate-800">Login</p>
                     </div>
-                    <p class="text-xl font-semibold text-slate-700">Login</p>
-                    <p class="mt-3 text-slate-500 sm:text-lg">
+                    <p class="text-lg text-slate-600">
                         Securely access your account to manage your listings. Login keeps your details safe and ensures easy management of your items.
                     </p>
                 </div>
                 
                 <!-- Step 3: Upload Your Treasures -->
-                <div class="flex-1 relative bg-[#f9fbfc] p-8 rounded-xl shadow-lg transition-transform transform hover:scale-105">
-                    <div class="absolute -top-8 -left-8 text-8xl text-[#2171a7] opacity-15">
-                        3
+                <div class="flex-1 transition-transform transform hover:scale-105">
+                    <div class="flex items-center mb-4 space-x-4">
+                        <div class="bg-[#2171a7] text-white rounded-full h-12 w-12 min-w-[3rem] flex items-center justify-center text-2xl font-bold">
+                            3
+                        </div>
+                        <p class="text-2xl font-bold text-slate-800">Upload Your Treasures</p>
                     </div>
-                    <p class="text-xl font-semibold text-slate-700">Upload Your Treasures</p>
-                    <p class="mt-3 text-slate-500 sm:text-lg">
+                    <p class="text-lg text-slate-600">
                         Ready to make a sale? Upload your items with clear descriptions and set a fair price to attract potential buyers quickly.
                     </p>
                 </div>
             </div>
             <a class="flex justify-center mt-8" href="{{ route('register') }}">
-                <div class="bg-[#2171a7] border border-[#2171a7] px-6 py-3 rounded-lg shadow-lg text-white font-semibold hover:bg-[#1a5b8a] transition-colors duration-300 cursor-pointer">
+                <div class="bg-[#2171a7] px-6 py-3 rounded-full shadow-lg text-white font-semibold hover:bg-[#1a5b8a] transition-colors duration-300 cursor-pointer">
                     Get Started
                 </div>
             </a>
@@ -195,8 +198,9 @@
     </div>
 </div>
 
+
 {{-- Get In Touch --}}
-<div id="get-in-touch" class="container mx-auto mb-28" data-aos="zoom-in">
+<div id="get-in-touch" class="container mx-auto my-28" data-aos="zoom-in">
     <div class="flex flex-col items-center gap-4 mb-14">
         <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">Get In Touch</h1>
         <p class="text-lg text-center text-slate-500">Contact us using the information below. We'll respond promptly to your inquiries and feedback</p>

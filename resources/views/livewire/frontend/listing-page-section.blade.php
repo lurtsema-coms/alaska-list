@@ -85,7 +85,7 @@ new class extends Component {
 
 <div class="space-y-8">
     <div>
-    <h2 class="text-4xl text-gray-800 ">Listing Page</h2>
+    <h2 class="text-4xl font-bold text-gray-800">Listing Page</h2>
     </div>
     <div class="space-y-10">
         <livewire:frontend.sponsored-listing>

@@ -14,26 +14,61 @@ new class extends Component {
 }; ?>
 
 <div class="sticky top-0 z-20" x-data="{ sidebarOpen: false }">
-    <div class="bg-[#246567]">
+    <div class="shadow-lg border-b-1 bg-gray-50">
         <div class="px-2 py-2 mx-auto sm:container sm:px-0">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white cursor-pointer size-8 text-dark hover:opacity-70"
-                        @click="sidebarOpen = true;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    <a class="hidden md:block" href="/" wire:navigate>
-                        <img class="max-w-24" src="{{ asset('frontend/alaska.png') }}" alt="">
+                    <a class="" href="/" wire:navigate>
+                        <img class="max-w-24" src="{{ asset('img/logo/logo.png') }}" alt="{{ asset('img/logo/logo.png') }}">
                     </a>
                 </div>
-                <div class="flex items-center justify-end w-full gap-4 xl:px-0">
-                @guest
-                    <a class="relative" href="{{ route('login') }}" wire:navigate>
-                        <div class="font-bold text-white border-2 border-green-300 bg-[#246567] px-4 py-2 rounded-full shadow-md hover:bg-[#1B494D] hover:border-white transition duration-300">
-                            POST CLASSIFIEDS
-                        </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="block text-black cursor-pointer size-8 text-dark hover:opacity-70 lg:hidden"
+                    @click="sidebarOpen = true;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                <div class="items-center justify-end hidden w-full gap-4 lg:flex xl:px-0">
+                    <a class="relative px-1 group {{ request()->routeIs('welcome') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    href="{{ route('welcome') }}" wire:navigate>
+                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('welcome') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
                     </a>
-                @endguest
+
+                    <a class="relative px-1 group {{ request()->routeIs('listing-page') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    href="{{ route('listing-page') }}" wire:navigate>
+                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('listing-page') ? 'Listing Page' : 'Listing Page' }}</span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('listing-page') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                    </a>
+
+                    <a class="relative px-1 group {{ request()->routeIs('about-us') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    href="{{ route('about-us') }}" wire:navigate>
+                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('about-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                    </a>
+
+                    {{-- <a class="relative px-1 group {{ request()->routeIs('get-in-touch') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    href="/#get-in-touch" wire:navigate>
+                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('get-in-touch') ? 'Get In Touch' : 'Get In Touch' }}</span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('get-in-touch') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                    </a> --}}
+
+                    <a class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    href="{{ route('advertise-with-us') }}" wire:navigate>
+                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
+                        <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 {{ request()->routeIs('advertise-with-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                    </a>
+
+                    @guest
+                        <a class="relative" href="{{ route('login') }}" wire:navigate>
+                            <div class="font-bold text-white border-2 border-green-300 bg-[#246567] px-4 py-2 rounded-full shadow-md hover:bg-[#1B494D] hover:border-white transition duration-300">
+                                POST CLASSIFIEDS
+                            </div>
+                        </a>
+                        @else
+                        <a class="relative px-1 group" href="{{ route('dashboard') }}" wire:navigate>
+                            <span class="transition-opacity group-hover:text-slate-950">Dashboard</span>
+                            <span class="absolute left-0 h-1 transition-all bg-[#42C8E7] -bottom-3 w-0 group-hover:w-full"></span>
+                        </a>
+                    @endguest
                     {{-- <div class="relative w-full p-1 overflow-hidden max-w-60 md:max-w-96 ">
                         <input class="w-full py-2 pl-4 pr-12 rounded-full focus:ring-2" type="search" wire:model="search" placeholder="Search..."
                             x-on:change="$dispatch('search-on', { val: $event.target.value})">
@@ -72,7 +107,7 @@ new class extends Component {
         <div class="space-y-4 ">
             <div class="flex items-center justify-between md:justify-end">
                 <a class="block md:hidden" href="/" wire:navigate>
-                    <img class="max-w-24" src="{{ asset('frontend/alaska.png') }}" alt="">
+                    <img class="max-w-24 invert filter" src="{{ asset('img/logo/logo.png') }}" alt="{{ asset('img/logo/logo.png') }}">
                 </a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cursor-pointer size-8 text-slate-300 hover:text-white"
                 @click="sidebarOpen = false;">
@@ -84,10 +119,10 @@ new class extends Component {
                     <span class="transition-opacity group-hover:opacity-70">Home</span>
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
                 </a>
-                <a class="relative px-1 group" href="{{ route('categories') }}" wire:navigate>
+                {{-- <a class="relative px-1 group" href="{{ route('categories') }}" wire:navigate>
                     <span class="transition-opacity group-hover:opacity-70">Categories</span>
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
-                </a>
+                </a> --}}
                 <a class="relative px-1 group" href="{{ route('listing-page') }}" wire:navigate>
                     <span class="transition-opacity group-hover:opacity-70">Listing Page</span>
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
@@ -96,10 +131,10 @@ new class extends Component {
                     <span class="transition-opacity group-hover:opacity-70">About Us</span>
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
                 </a>
-                <a class="relative px-1 group" href="/#get-in-touch" wire:navigate>
+                {{-- <a class="relative px-1 group" href="/#get-in-touch" wire:navigate>
                     <span class="transition-opacity group-hover:opacity-70">Get In Touch</span>
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
-                </a>
+                </a> --}}
                 <a class="relative px-1 group" href="{{ route('advertise-with-us') }}" wire:navigate>
                     <span class="transition-opacity group-hover:opacity-70">Advertise With Us</span>
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>

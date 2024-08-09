@@ -54,11 +54,23 @@
                 </li>
             </ol>
         </div>
+    </div>
 
-    
-        <div class="mt-6">
-            <h3 class="text-xl font-semibold text-gray-700">Get Started Today!</h3>
-            <p class="text-gray-600">For any questions or custom advertising needs, feel free to <a href="/#get-in-touch" class="text-blue-600 underline">contact us</a>. Our team is here to help you succeed.</p>
+    {{-- Get In Touch --}}
+    <div id="get-in-touch" class="container mx-auto my-28" data-aos="zoom-in">
+        <div class="flex flex-col items-center gap-4 mb-14">
+            <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">Get In Touch</h1>
+            <p class="text-lg text-center text-slate-500">Contact us using the information below. We'll respond promptly to your inquiries and feedback</p>
+        </div>
+        <div class="px-5 md:px-0">
+            <div class="flex w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg lg:rounded-full lg:shadow">
+                <div class="hidden w-full mb-4 lg:block lg:w-1/2 md:mb-0">
+                    <img class="h-[38rem] w-full object-cover bg-center" src="{{ asset('frontend/contact.jpg') }}" alt="Contact Image" loading="lazy">
+                </div>
+                <div class="flex items-center justify-center w-full p-5 lg:w-full xl:w-1/2 lg:bg-white">
+                    <livewire:frontend.contact-us>
+                </div>
+            </div>
         </div>
     </div>
 </div>
