@@ -11,6 +11,8 @@ new class extends Component
 {
     public string $first_name = '';
     public string $last_name = '';
+    public string $home_address = '';
+    public string $contact_number = '';
     public string $email = '';
 
     /**
@@ -20,6 +22,8 @@ new class extends Component
     {
         $this->first_name = Auth::user()->first_name;
         $this->last_name = Auth::user()->last_name;
+        $this->home_address = Auth::user()->home_address;
+        $this->contact_number = Auth::user()->contact_number;
         $this->email = Auth::user()->email;
     }
 
@@ -33,6 +37,8 @@ new class extends Component
         $validated = $this->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'home_address' => ['required', 'string', 'max:255'],
+            'contact_number' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
@@ -91,7 +97,19 @@ new class extends Component
                 <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
             </div>
         </div>
+        <div>
+            <x-input-label for="home_address" :value="__('Address')" />
+            <x-text-input wire:model="home_address" id="home_address" name="home_address" type="text" class="mt-1 block w-full" required autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('home_address')" />
+        </div>
+        <div>
+            <x-input-label for="contact_number" :value="__('Contact Number')" />
+            <x-text-input wire:model="contact_number" id="contact_number" name="contact_number" type="text" class="mt-1 block w-full" required autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('contact_number')" />
+        </div>
+        <div>
 
+        </div>
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
