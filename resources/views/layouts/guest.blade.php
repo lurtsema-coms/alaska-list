@@ -20,21 +20,22 @@
     <body class="flex min-h-screen py-10 font-sans antialiased text-gray-900 sm:px-10">
         <div class="w-full max-w-7xl flex flex-col-reverse justify-center m-auto bg-white shadow-none lg:shadow-md overflow-hidden h-full lg:min-h-[45rem] lg:flex-row rounded-3xl lg:border">
             <div class="flex w-full p-5 bg-white sm:p-10 xl:p-20 rounded-3xl lg:w-1/2">
-                <div class="w-full max-w-2xl p-20 px-10 m-auto border bg-gray-50 rounded-2xl">
+                <div class="w-full max-w-2xl p-20 px-10 m-auto  rounded-2xl">
                     {{ $slot }}
                 </div>
             </div>
-            <div class="w-1/2 flex-row hidden lg:block bg-[#122a30] p-10 xl:p-20 pt-32">
-                <div class="flex justify-center w-full mb-2">
-                    <img class="w-2/3" src="{{ asset('frontend/alaska.png') }}" alt="">
+            <div class="w-full flex-1 hidden sm:block relative bg-contain bg-no-repeat bg-center">
+                <img class="absolute object-cover min-h-full min-w-full top-0 z-10" src="{{asset('frontend/mountain.jpg')}}" alt="">
+                <div class=" w-full h-full absolute inset-0 z-20 bg-[#17427C] opacity-75">
                 </div>
-                <div class="w-full p-6">
-                    <h1 class="mb-2 text-xl font-bold text-white ">Your Alaskan Shopping Adventure Starts Here </h1>
-                    <div class="flex justify-center text-justify">
-                        <span class="text-gray-200 text">Discover the best of Alaska from wherever you are with our curated selection of unique products and essentials. Your Alaskan shopping adventure begins here, bringing the spirit of the Last Frontier to your doorstep.</span>
-                    </div>
+                <div class="flex justify-center w-full z-30 absolute top-40">
+                    <img class="w-2/3" src="{{ asset('img/logo/logo_white.png') }}" alt="">
+                </div>
+                <div class="w-full flex absolute z-30 justify-center text-justify bottom-64">
+                    <h1 class="text-2xl font-bold text-white italic ">Your Alaskan Shopping Adventure Starts Here</h1>
                 </div>
             </div>
+
         </div>
     </body>
 </html>

@@ -33,30 +33,31 @@ new #[Layout('layouts.guest')] class extends Component
 
         <div class="mb-8">
             <div class="flex flex-col items-center justify-center mb-4">
-                <h1 class="text-3xl font-extrabold text-[#246567] sm:text-start font-poppins">LOGIN</h1>
+                <h1 class="text-3xl font-extrabold text-[#17427C] sm:text-start font-poppins">LOGIN</h1>
+
             </div>
-            <span class="font-bold text-[#246567]">Doesn't have an account yet? <a href="/register"  class="font-bold underline text-cyan-600 hover:text-cyan-500" wire:navigate>Sign Up</a>
+            <span class="font-bold text-[#17427C]">Doesn't have an account yet? <a href="/register"  class="font-bold underline text-cyan-600 hover:text-cyan-500" wire:navigate>Sign Up</a>
         </div>
 
         <!-- Email Address -->
         <div>
-            <x-input-label class="text-[#246567] font-bold " for="email" :value="__('Email:')" />
-            <input wire:model="form.email" id="email" class="block w-full px-1 py-1 border-t-0 border-l-0 border-r-0 border-b-1 focus:border-cyan-800 focus:ring-gray-50 focus:border-b-2 border-cyan-800 bg-gray-50" type="email" name="email" required autofocus autocomplete="username" />
+            <x-input-label class="text-[#17427C] font-bold " for="email" :value="__('Email:')" />
+            <input wire:model="form.email" id="email" class="block w-full px-1 py-1 border-t-0 border-l-0 border-r-0 border-b-1 focus:border-cyan-800 focus:ring-gray-50 focus:border-b-2 border-cyan-800 " type="email" name="email" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label class="text-[#246567] font-bold" for="password" :value="__('Password:')" />
-            <input wire:model="form.password" id="password" class="block w-full px-1 py-1 border-t-0 border-l-0 border-r-0 border-b-1 focus:border-cyan-800 focus:ring-gray-50 focus:border-b-2 border-cyan-800 bg-gray-50" type="password" name="password" required autocomplete="current-password" />
+            <x-input-label class="text-[#17427C] font-bold" for="password" :value="__('Password:')" />
+            <input wire:model="form.password" id="password" class="block w-full px-1 py-1 border-t-0 border-l-0 border-r-0 border-b-1 focus:border-cyan-800 focus:ring-gray-50 focus:border-b-2 border-cyan-800 " type="password" name="password" required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
         </div>
 
         <!-- Remember Me -->
         <div class="flex flex-col mt-4 sm:flex-row gap-x-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-[#246567] shadow-sm focus:ring-cyan-800" name="remember">
-                <span class="ms-2 text-sm text-[#246567]">{{ __('Remember me') }}</span>
+                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-[#17427C] shadow-sm focus:ring-cyan-800" name="remember">
+                <span class="ms-2 text-sm text-[#17427C]">{{ __('Remember me') }}</span>
             </label>
             @if (Route::has('password.request'))
             <a class="text-sm underline rounded-md text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-800" href="{{ route('password.request') }}" wire:navigate>
@@ -66,7 +67,7 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <div class="flex items-center justify-center mt-8 ">
-            <x-primary-button class="w-full flex items-center h-12 justify-center !bg-[#1F4B55] ">
+            <x-primary-button class="w-full flex items-center h-12 justify-center !bg-search-gradient ">
                 {{ __('Continue') }}
             </x-primary-button>
         </div>
@@ -75,7 +76,5 @@ new #[Layout('layouts.guest')] class extends Component
                 {{ __('Go To Home Page') }}
             </a>
         </div>
-
-
     </form>
 </div>
