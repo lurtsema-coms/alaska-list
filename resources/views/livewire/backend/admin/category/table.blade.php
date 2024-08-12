@@ -22,7 +22,7 @@ new class extends Component {
     #[On('alert-success')] 
     public function loadCategories()
     {
-        return Category::with('subCategories', 'createdBy', 'updatedBy')
+        return Category::with(['subCategories.products', 'createdBy', 'updatedBy'])
             ->withCount('products')
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
@@ -39,6 +39,7 @@ new class extends Component {
             })
             ->paginate(10);
     }
+
 
 }; ?>
 

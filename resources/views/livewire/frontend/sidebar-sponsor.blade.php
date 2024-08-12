@@ -30,7 +30,7 @@ new class extends Component {
     <div class="fixed bottom-0 right-0 z-30"
         x-data="{ ads:true }"
         x-show="ads">
-        <div class="z-30 h-auto max-h-screen p-5 space-y-4 bg-white border shadow-xl w-80 xsm:w-96">
+        <div class="z-30 h-auto max-h-screen p-5 space-y-4 overflow-auto bg-white border shadow-xl w-80 xsm:w-96">
             <div class="flex items-center justify-between">
                 <p class="font-bold">ADVERTISEMENT</p>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cursor-pointer size-8 text-slate-400 hover:text-slate-500"
@@ -38,7 +38,8 @@ new class extends Component {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>
             </div>
-            <livewire:frontend.sponsored-listing wire:ignore/>
+            <livewire:frontend.ads-listing/>
+            <livewire:frontend.sponsored-listing/>
 
             <!-- Content for Advertisers -->
             @if (count($sponsors) == 0)

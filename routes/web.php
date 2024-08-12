@@ -36,13 +36,14 @@ Route::middleware(['auth', 'verified'])->group(function() {
     // Routes for users with 'approver' role
     Route::middleware('role:approver')->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
-        Route::view('approver-listing', 'page-backend.approver.b-approve-listing')->name('approver-listing');
     });
 
     // Routes for users with 'admin' role
     Route::middleware('role:admin')->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
+        Route::view('admin-listing', 'page-backend.approver.b-approve-listing')->name('admin-listing');
         Route::view('admin-special-boost', 'page-backend.admin.b-special-boost')->name('admin-special-boost');
+        Route::view('admin-advertisement', 'page-backend.admin.b-advertisement')->name('admin-advertisement');
         Route::view('admin-user-control', 'page-backend.admin.b-user-control')->name('admin-user-control');
         Route::view('admin-advertising-plan', 'page-backend.admin.b-advertising-plan')->name('admin-advertising-plan');
     });

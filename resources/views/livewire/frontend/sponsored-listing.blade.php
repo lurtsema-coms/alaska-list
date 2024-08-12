@@ -35,22 +35,22 @@ new class extends Component {
         <div class="swiper-wrapper">
             @foreach ($sponsors as $sponsor)
                 <div class="swiper-slide " wire:key="sponsor-listing-{{ $sponsor->id }}">
-                    <div class="swiper-slide py-6">
-                        <a class="overflow-hidden w-full" href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate>
-                            <div class="overflow-hidden max-h-96 max-w-80 border border-gray-200 rounded-xl shadow-lg m-auto hover:border-blue-400">
+                    <div class="py-6 swiper-slide">
+                        <a class="w-full overflow-hidden" href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate>
+                            <div class="w-full m-auto overflow-hidden border border-gray-200 shadow-lg max-h-96 max-w-[22rem] rounded-xl hover:border-blue-400">
                                 <div class="relative">
                                     @if ($sponsor->file_path)
-                                        <img class="w-full object-cover h-48" src="{{ asset($sponsor->file_path) }}" alt="{{ $sponsor->product->name }}" loading="lazy">
+                                        <img class="object-cover w-full h-48" src="{{ asset($sponsor->file_path) }}" alt="{{ $sponsor->product->name }}" loading="lazy">
                                         @else
                                             @if ($sponsor->product->file_path)
                                                 @php
                                                     $paths = explode(',', $sponsor->product->file_path);
                                                     $firstPath = trim($paths[0]); // Ensure there are no leading or trailing spaces
                                                 @endphp
-                                                <img class="w-full object-cover h-48" src="{{ asset($firstPath) }}" alt="{{ $sponsor->product->name }}" loading="lazy">
+                                                <img class="object-cover w-full h-48" src="{{ asset($firstPath) }}" alt="{{ $sponsor->product->name }}" loading="lazy">
                                             @endif
                                     @endif
-                                    <div class="bg-white rounded-full py-1 px-3 shadow-lg absolute bottom-4 left-4">
+                                    <div class="absolute px-3 py-1 bg-white rounded-full shadow-lg bottom-4 left-4">
                                         <p class="font-medium text-gray-600">
                                             ${{ number_format($sponsor->product->price, fmod($sponsor->product->price, 1) !== 0.00 ? 2 : 0) }}
                                         </p>
@@ -58,8 +58,8 @@ new class extends Component {
                                 </div>
                                 <div class="p-4 bg-white">
                                     <p class="text-lg font-semibold text-gray-800">{{ \Illuminate\Support\Str::words($sponsor->product->name, 15, '...') }}</p>
-                                    <p class="text-sm text-gray-600 mt-2">Available: {{ $sponsor->product->qty }}</p>
-                                    <p class="text-sm text-gray-600 mt-2">{{ \Carbon\Carbon::parse($sponsor->product->created_at)->format('F j, Y') }}</p>
+                                    <p class="mt-2 text-sm text-gray-600">Available: {{ $sponsor->product->qty }}</p>
+                                    <p class="mt-2 text-sm text-gray-600">{{ \Carbon\Carbon::parse($sponsor->product->created_at)->format('F j, Y') }}</p>
                                 </div>
                             </div>
                         </a>

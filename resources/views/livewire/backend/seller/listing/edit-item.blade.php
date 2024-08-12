@@ -221,7 +221,7 @@ new class extends Component {
                     </div>
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
-                            <p class="font-medium text-slate-700">Category</p>
+                            <p class="font-medium text-slate-700">Category <span class="text-red-400">*</span></p>
                             <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="sub_category" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                                 <option value="" disabled selected>Select a sub category...</option>
                                 @foreach ($categories as $category)
@@ -234,7 +234,7 @@ new class extends Component {
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Title Name</p>
+                                <p class="font-medium text-slate-700">Title Name <span class="text-red-400">*</span></p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                             </div>
                         </div>
@@ -242,27 +242,27 @@ new class extends Component {
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Price</p>
+                                <p class="font-medium text-slate-700">Price <span class="text-red-400">*</span></p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required step="0.01" wire:model="price" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Qty</p>
+                                <p class="font-medium text-slate-700">Qty <span class="text-red-400">*</span></p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="0" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
-                            <p class="font-medium text-slate-700">Description</p>
+                            <p class="font-medium text-slate-700">Description <span class="text-red-400">*</span></p>
                             <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description" {{ $status == 'DELETED' ? 'disabled' : '' }}></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Additional Information</p>
-                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information" {{ $status == 'DELETED' ? 'disabled' : '' }}></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" wire:model="additional_information" {{ $status == 'DELETED' ? 'disabled' : '' }}></textarea>
                         </div>
                     </div>
                     <div class="p-4 border rounded-lg border-slate-300">

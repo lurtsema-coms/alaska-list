@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Alaska List</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/alaska.png') }}">
+    <title>{{ config('app.name') }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/logo/logo.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -84,7 +84,7 @@
                 const slides = swiperContainer.querySelectorAll('.swiper-slide');
                 
                 const swiper = new Swiper(".sponsored-listing", {
-                    grabCursor: true,
+                    grabCursor: false,
                     centeredSlides: isSingleImage(),
                     allowTouchMove: false,
                     autoplay: {
