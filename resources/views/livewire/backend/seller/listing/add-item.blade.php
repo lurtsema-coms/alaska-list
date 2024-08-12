@@ -137,31 +137,31 @@ new class extends Component {
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Price</p>
+                                <p class="font-medium text-slate-700">Price <span class="text-red-400">*</span></p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required step="0.01" wire:model="price">
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Qty</p>
+                                <p class="font-medium text-slate-700">Qty <span class="text-red-400">*</span></p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="1">
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
-                            <p class="font-medium text-slate-700">Description</p>
+                            <p class="font-medium text-slate-700">Description <span class="text-red-400">*</span></p>
                             <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description"></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Additional Information</p>
-                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="additional_information"></textarea>
+                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" wire:model="additional_information"></textarea>
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <label class="font-medium text-slate-700">Upload Photos</label>
+                        <label class="font-medium text-slate-700">Upload Photos <span class="text-red-400">*</span></label>
                         <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" multiple wire:model="photos" wire:click="resetData(['photos'])" id="upload{{ $inc }}" accept="image/*" required>
                         
                         <ul class="mt-2">

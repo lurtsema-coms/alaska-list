@@ -12,7 +12,7 @@ new class extends Component {
             <!--Grid-->
             <div class="flex flex-col flex-wrap items-center justify-between gap-8 py-12 lg:flex-row">
                 <a href="/" wire:navigate class="flex justify-center text-white">
-                    <img class="max-w-24 filter invert brightness-100 contrast-100" src="{{ asset('img/logo/logo.png') }}" alt="Logo">
+                    <img class="max-w-24" src="{{ asset('img/logo/logo-white.png') }}" alt="Logo">
                 </a>
                 <ul class="flex-wrap items-center justify-center text-center transition-all duration-500 text-md sm:flex gap-14 lg:gap-10 xl:gap-14">
                     <li><a href="/" wire:navigate class="text-white hover:text-gray-400">Home</a></li>

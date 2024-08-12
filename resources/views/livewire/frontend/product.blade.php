@@ -61,7 +61,7 @@ new class extends Component {
             </span>
         </a>
         <div class="max-w-4xl">
-            <p class="mb-4 text-xl font-bold max-w-lg">{{ $title_name }}</p>
+            <p class="max-w-lg mb-4 text-xl font-bold">{{ $title_name }}</p>
             <div class="space-y-8">
                 <div class="px-5 py-10 shadow-md rounded-xl">
                     <p class="mb-4 text-right">
@@ -102,10 +102,12 @@ new class extends Component {
                     <p class="font-bold">Description</p>
                     <p>{!! nl2br(e($description)) !!}</p>
                 </div>
-                <div class="space-y-2">
-                    <p class="font-bold">Additional Information</p>
-                    <p>{!! nl2br(e($additional_information)) !!}</p>
-                </div>
+                @if ($additional_information)                    
+                    <div class="space-y-2">
+                        <p class="font-bold">Additional Information</p>
+                        <p>{!! nl2br(e($additional_information)) !!}</p>
+                    </div>
+                @endif
                 <div class="space-y-2">
                     <p><span class="font-bold">Date Publish: </span>{{ \Carbon\Carbon::parse($posted_at)->format('F j, Y') }}</p>
                 </div>

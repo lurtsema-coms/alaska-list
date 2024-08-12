@@ -19,7 +19,7 @@ new class extends Component {
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-5">
                     <a class="" href="/" wire:navigate>
-                        <img class="max-w-24" src="{{ asset('img/logo/logo.png') }}" alt="{{ asset('img/logo/logo.png') }}">
+                        <img class="max-w-24" src="{{ asset('img/logo/logo.png') }}" alt="logo-white">
                     </a>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="block text-black cursor-pointer size-8 text-dark hover:opacity-70 lg:hidden"
@@ -65,7 +65,7 @@ new class extends Component {
                         </a>
                         @else
                         <a class="relative px-1 group" href="{{ route('dashboard') }}" wire:navigate>
-                            <span class="transition-opacity text-gray-600 group-hover:text-slate-950">Dashboard</span>
+                            <span class="text-gray-600 transition-opacity group-hover:text-slate-950">Dashboard</span>
                             <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 w-0 group-hover:w-full"></span>
                         </a>
                     @endguest
@@ -107,7 +107,7 @@ new class extends Component {
         <div class="space-y-4 ">
             <div class="flex items-center justify-between md:justify-end">
                 <a class="block md:hidden" href="/" wire:navigate>
-                    <img class="max-w-24 invert filter" src="{{ asset('img/logo/logo.png') }}" alt="{{ asset('img/logo/logo.png') }}">
+                    <img class="max-w-24" src="{{ asset('img/logo/logo-white.png') }}" alt="logo-white">
                 </a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cursor-pointer size-8 text-slate-300 hover:text-white"
                 @click="sidebarOpen = false;">

@@ -27,10 +27,10 @@ new class extends Component {
 }; ?>
 
 <div>
-    <div class="fixed bottom-0 right-0 z-10"
+    <div class="fixed bottom-0 right-0 z-30"
         x-data="{ ads:true }"
         x-show="ads">
-        <div class="h-auto p-5 space-y-4 bg-white border shadow-xl w-80 xsm:w-96">
+        <div class="z-30 h-auto max-h-screen p-5 space-y-4 bg-white border shadow-xl w-80 xsm:w-96">
             <div class="flex items-center justify-between">
                 <p class="font-bold">ADVERTISEMENT</p>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cursor-pointer size-8 text-slate-400 hover:text-slate-500"
@@ -38,13 +38,13 @@ new class extends Component {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>
             </div>
-            <livewire:frontend.sponsored-listing/>
+            <livewire:frontend.sponsored-listing wire:ignore/>
 
             <!-- Content for Advertisers -->
             @if (count($sponsors) == 0)
                 <div class="p-4 mt-6 rounded-md bg-slate-100">
                     <h3 class="mb-4 text-xl font-bold text-center text-teal-700">Advertise Your Product with Us!</h3>
-                    <p class="mb-4 leading-relaxed text-gray-700 text-center">
+                    <p class="mb-4 leading-relaxed text-center text-gray-700">
                         Are you looking to showcase your product to a larger audience? Our platform offers excellent advertising opportunities for businesses and individuals who want to boost their visibility and reach potential customers effectively.
                     </p>
                     <div class="mt-6 mb-2 text-center">
