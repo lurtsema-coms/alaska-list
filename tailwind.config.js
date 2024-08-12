@@ -20,7 +20,7 @@ export default {
                 woman: "url('../images/woman.jpg')",
                 building: "url('../images/buildings.jpg')",
                 scattered: "url('../images/scattered-forcefields.svg')",
-                splashed: "url('../images/wave3.svg')",
+                blob: "url('../images/wave4.svg')",
                 brainstorm: "url('../images/brainstorming.jpg')",
                 'search-gradient': 'linear-gradient(to right, #143E7A, #4988A5)',
                 
