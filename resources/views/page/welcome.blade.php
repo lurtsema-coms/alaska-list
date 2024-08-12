@@ -29,7 +29,7 @@
 <div>
     <div class="container mx-auto mt-28">
         <h2 class="mb-4 text-3xl font-bold text-center sm:text-4xl text-slate-700">Explore Our Categories</h2>
-        <p class="mb-12 text-lg text-center text-gray-600">Find the best deals and discover a wide range of products across various categories. Start exploring now!</p>
+        <p class="mb-12 text-lg text-center text-slate-500">Find the best deals and discover a wide range of products across various categories. Start exploring now!</p>
         <div class="flex flex-wrap justify-center gap-4 px-5 md:px-0">
             @php
                 $queryParamFurniture = 'sc_names[' . '0' . ']=' . urlencode('furniture');
