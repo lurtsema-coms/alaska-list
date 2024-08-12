@@ -61,7 +61,7 @@ new class extends Component {
             </span>
         </a>
         <div class="max-w-4xl">
-            <p class="mb-4 text-xl font-bold">{{ $title_name }}</p>
+            <p class="mb-4 text-xl font-bold max-w-lg">{{ $title_name }}</p>
             <div class="space-y-8">
                 <div class="px-5 py-10 shadow-md rounded-xl">
                     <p class="mb-4 text-right">
@@ -101,7 +101,6 @@ new class extends Component {
                 <div class="space-y-2">
                     <p class="font-bold">Description</p>
                     <p>{!! nl2br(e($description)) !!}</p>
-                    <p><span class="font-bold">ID: </span>{{ $uuid }}</p>
                 </div>
                 <div class="space-y-2">
                     <p class="font-bold">Additional Information</p>
@@ -112,44 +111,7 @@ new class extends Component {
                 </div>
             </div>
         </div>
-        <div class="absolute top-0 right-0 z-20"
-            x-data="{ ads:true }"
-            x-show="ads">
-            <div class="h-auto p-5 space-y-4 bg-white shadow-xl w-80 xsm:w-96">
-                <div class="flex items-center justify-between">
-                    <p class="font-bold">ADVERTISEMENT</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cursor-pointer size-8 text-slate-400 hover:text-slate-500"
-                    @click="ads = false;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
-                </div>
-                <livewire:frontend.sponsored-listing/>
 
-                <!-- Content for Advertisers -->
-                <div class="p-4 mt-6 rounded-md bg-slate-100">
-                    <h3 class="mb-4 text-xl font-bold text-center text-teal-700">Advertise with Us!</h3>
-                    <p class="mb-2 leading-relaxed text-gray-700">
-                        Looking to reach a larger audience and get your message noticed? 
-                        Our platform offers premium ad placement opportunities for businesses and individuals looking to boost their visibility.
-                    </p>
-                    <h4 class="mt-4 mb-2 text-lg font-semibold">Why Advertise Here?</h4>
-                    <ul class="text-gray-600 list-disc list-inside">
-                        <li>Flexible ad formats to suit your needs and budget.</li>
-                        <li>Dedicated support to help you maximize your ad performance.</li>
-                    </ul>
-                    
-                    <h4 class="mt-4 mb-2 text-lg font-semibold">Boost Your Listings!</h4>
-                    <p class="mb-4 leading-relaxed text-gray-700">
-                        By boosting your listings, you can ensure that they appear at the top of relevant pages, gaining more visibility and attracting more potential customers.
-                    </p>
-                    <div class="mt-6 mb-2 text-center">
-                        <a href="{{ route('advertise-with-us') }}" class="px-4 py-2 text-white bg-teal-700 rounded hover:bg-teal-800" wire:navigate>
-                            Learn More About Advertising
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

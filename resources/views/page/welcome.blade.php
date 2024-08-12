@@ -4,7 +4,7 @@
 {{-- hero section --}}
 <div class="mx-auto overflow-hidden min-h-[50rem]" data-aos="zoom-in-up">
     <div class="absolute w-full h-full bg-center bg-cover">
-        <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted loop style="object-position: 50% 5%;">
+        <video class="absolute top-0 left-0 object-cover w-full h-full" autoplay muted loop style="object-position: 50% 5%;">
             <source src="{{ asset('frontend/vid_banner.mp4') }}" type="video/mp4">
         </video>
     </div>
@@ -108,13 +108,10 @@
         
         <div id="products" class="p-5 bg-white rounded-lg shadow-lg sm:p-10" data-aos="zoom-in">
             <div class="md:mx-12 lg:mx-20 xl:mx-auto">
-                <div class="mb-12 space-y-5 text-center md:mb-14">
-                    <div class="inline-block px-4 py-2 text-sm font-semibold text-white rounded-full bg-[#2171a7] shadow-md hover:bg-[#1e65a4] transition-colors">
+                <div class="mt-6 mb-8 space-y-5 text-center">
+                    <div class="inline-block px-4 py-2 text-lg font-semibold text-white rounded-full bg-[#2171a7] shadow-md hover:bg-[#1e65a4] transition-colors">
                         Fresh recommended ads
                     </div>
-                    <h1 class="text-3xl font-semibold text-gray-800">
-                        Explore products that have been highlighted for your attention.
-                    </h1>
                 </div>
                 <livewire:frontend.sponsored-listing>
             </div>
@@ -219,7 +216,7 @@
                 </button>
                 <div x-show="activeAccordion==id" x-collapse x-cloak>
                     <div class="p-5 pt-0 opacity-70">
-                        Your safety is our priority. We recommend meeting in public places for transactions, bringing a friend along, and avoiding sharing personal information online. Always trust your instincts, and if something feels off, it’s okay to walk away.
+                        To create a listing, simply log in to your account, navigate to the 'Listing' page, fill out the required details including title, description, price, and category, then upload clear photos of your item, and finally, click 'Submit' to post your listing.
                     </div>
                 </div>
             </div>
@@ -233,7 +230,7 @@
                 </button>
                 <div x-show="activeAccordion==id" x-collapse x-cloak>
                     <div class="p-5 pt-0 opacity-70">
-                        Your safety is our priority. We recommend meeting in public places for transactions, bringing a friend along, and avoiding sharing personal information online. Always trust your instincts, and if something feels off, it’s okay to walk away
+                        Your safety is our priority. We recommend meeting in public places for transactions, bringing a friend along, and avoiding sharing personal information online. Always trust your instincts, and if something feels off, it’s okay to walk away.
                     </div>
                 </div>
             </div>

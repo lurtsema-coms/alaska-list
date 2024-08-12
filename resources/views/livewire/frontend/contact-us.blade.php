@@ -73,7 +73,7 @@ new class extends Component
                 <label class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">Your message</label>
             </div>
             <div class="flex">
-                <button class="text-white bg-[#1F4B55] text-sm px-6 py-3 rounded-lg shadow-md hover:bg-[#245D69] transition-colors duration-300 cursor-pointer">Submit</button>
+                <button class="text-white bg-[#2171a7] text-sm px-6 py-3 rounded-lg shadow-md hover:opacity-70 transition-colors duration-300 cursor-pointer">Submit</button>
             </div>
             @if($submissionSuccess)
                 <div class="text-green-500 mt-3 text-end" wire:loading.remove>

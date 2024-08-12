@@ -46,6 +46,7 @@
     @livewireStyles
 </head>
 <body class="min-h-screen font-sans antialiased bg-gray-50 text-slate-800">
+    <livewire:frontend.sidebar-sponsor>
     <div class="flex flex-col w-full min-h-screen">
         <!-- Slider main container -->
 
@@ -65,6 +66,19 @@
         document.addEventListener('livewire:navigated', () => {
             AOS.init();
 
+            if (window.location.hash === '#get-in-touch') {
+                var element = document.getElementById('get-in-touch');
+                if (element) {
+                    var navbarHeight = 74;
+                    var offsetPosition = element.offsetTop - navbarHeight - 20;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                } 
+            }
+            
             const swiperContainer = document.querySelector(".sponsored-listing");
             if (swiperContainer) {
                 const slides = swiperContainer.querySelectorAll('.swiper-slide');
@@ -88,29 +102,24 @@
                             slidesPerView: 1,
                             spaceBetween: 0,
                         },
+                        650: {
+                            slidesPerView: 2,
+                            spaceBetween: 0,
+                        },
                         768: {
                             slidesPerView: 2,
                             spaceBetween: 0,
                         },
                         1024: {
                             slidesPerView: 3,
-                            spaceBetween: 0,
+                            spaceBetween: 15,
+                        },
+                        1300: {
+                            slidesPerView: 4,
+                            spaceBetween: 15,
                         },
                     },
                 });
-
-                if (window.location.hash === '#get-in-touch') {
-                    var element = document.getElementById('get-in-touch');
-                    if (element) {
-                        var navbarHeight = 74;
-                        var offsetPosition = element.offsetTop - navbarHeight - 20;
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    } 
-                }
             }
 
             function isSingleImage() {
@@ -121,6 +130,8 @@
                 }
                 return false;
             }
+
+
         });
     </script>
 </body>

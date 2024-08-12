@@ -37,10 +37,6 @@
             <h3 class="text-xl font-semibold text-gray-700">How It Works</h3>
             <ol class="pl-5 mt-2 space-y-2 text-gray-600 list-decimal">
                 <li>
-                    Go to the Contact Page
-                    <p class="ml-4">Navigate to our contact page to start the process of promoting your product.</p>
-                </li>
-                <li>
                     Send a Message in the Contact Form
                     <p class="ml-4">Fill out the contact form with your product details and promotion requirements.</p>
                 </li>

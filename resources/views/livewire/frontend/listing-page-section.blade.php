@@ -154,7 +154,7 @@ new class extends Component {
                         class="w-full h-12 px-4 pr-10 border rounded-lg text-md border-slate-300"
                         type="seaerch"
                         placeholder="Search..."
-                        wire:model.live.debounce.200ms="search"
+                        wire:model.live.debounce.500ms="search"
                         required>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -189,7 +189,7 @@ new class extends Component {
                             </div>
                             <div class="p-6 border-t border-gray-200">
                                 <p class="mb-4 font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
-                                <button class="px-4 py-2 font-bold text-white rounded bg-sky-600 hover:bg-blue-700">
+                                <button class="px-4 py-2 font-bold text-white rounded-xl bg-sky-600 hover:bg-blue-700">
                                     View Details
                                 </button>
                             </div>

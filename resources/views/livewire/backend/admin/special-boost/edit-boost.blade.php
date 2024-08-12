@@ -60,7 +60,7 @@ new class extends Component {
     {
         $photo = $this->photo;
 
-        $sp = SpecialBoost::find($this->sponsor_id);
+        $sp = SpecialBoost::with('product')->find($this->sponsor_id);
         
         $sp->update([
             'from_date' => $this->from_date,
@@ -69,23 +69,52 @@ new class extends Component {
         ]);
 
         if(!empty($photo)) {
-            // Upload Photo
-            $file_name = $sp->file_name;
-            // Store the file in the public disk
-            $path = $photo->storeAs(
-                path: "public/photos/product-boost",
-                name: $file_name
-            );
 
-            // Optimize image
-            $file_path = storage_path("app/" . $path);
-            $image = Image::make($file_path);
-            $image->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $image->save($file_path, 80);
+            if(!$sp->file_name){
+                $uuid = substr(Str::uuid()->toString(), 0, 8);
+                $file_name = $sp->product->uuid . "-$uuid" . "." . $photo->getClientOriginalExtension();
+                // Store the file in the public disk
+                $path = $photo->storeAs(
+                    path: "public/photos/product-boost",
+                    name: $file_name
+                );
 
-            $f_path = "storage/photos/product-boost/$file_name";
+                // Optimize image
+                $file_path = storage_path("app/" . $path);
+                $image = Image::make($file_path);
+                $image->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $image->save($file_path, 80);
+
+                $f_path = "storage/photos/product-boost/$file_name";
+
+                $sp->update([
+                    'file_name' => $file_name,
+                    'file_path' => $f_path,
+                ]);
+
+                $this->file_path = $f_path;
+            }else{
+                // Replace Photo
+                $file_name = $sp->file_name;
+                // Store the file in the public disk
+                $path = $photo->storeAs(
+                    path: "public/photos/product-boost",
+                    name: $file_name
+                );
+    
+                // Optimize image
+                $file_path = storage_path("app/" . $path);
+                $image = Image::make($file_path);
+                $image->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $image->save($file_path, 80);
+    
+                $f_path = "storage/photos/product-boost/$file_name";
+            }
+
         }
 
         $this->resetData(['photo']);
@@ -172,14 +201,16 @@ new class extends Component {
                                         <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="to_date" readonly required>
                                 </div>
                             </div>
-                            <div class="flex flex-col space-y-2">
-                                <label class="font-medium text-slate-700">Current Image</label>
+                            @if (!empty($file_path))                                
+                                <div class="flex flex-col space-y-2">
+                                    <label class="font-medium text-slate-700">Current Image</label>
                                     <img class="object-contain w-full h-56"
-                                        src="{{ asset($file_path) }}?v={{ md5_file(public_path($file_path)) }}"
-                                        alt="Image">
-                            </div>
+                                            src="{{ asset($file_path) }}?v={{ md5_file(public_path($file_path)) }}"
+                                            alt="Image">
+                                </div>
+                            @endif
                             <div class="flex flex-col space-y-2">
-                                <label class="font-medium text-slate-700">Replace New Photo</label>
+                                <label class="font-medium text-slate-700">{{ $file_path ? "Replace New Photo" : "Add Photo"}}</label>
                                 <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" wire:model="photo" id="upload-{{ $inc }}">
                             </div>
                             {{-- Loading Animation --}}

@@ -65,7 +65,7 @@ new class extends Component {
                         </a>
                         @else
                         <a class="relative px-1 group" href="{{ route('dashboard') }}" wire:navigate>
-                            <span class="transition-opacity group-hover:text-slate-950">Dashboard</span>
+                            <span class="transition-opacity text-gray-600 group-hover:text-slate-950">Dashboard</span>
                             <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 w-0 group-hover:w-full"></span>
                         </a>
                     @endguest

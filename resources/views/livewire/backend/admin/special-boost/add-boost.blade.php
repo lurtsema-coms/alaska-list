@@ -45,11 +45,6 @@ new class extends Component {
     {
         $photo = $this->photo;
 
-        if(empty($photo)){
-            $this->resetData(['advertising_plan', 'item_code', 'from_date', 'to_date', 'to_date_computed', 'photo']);
-            return $this->dispatch('alert-error');
-        }
-
         $product = Product::find($this->item_code);
 
         $sp = SpecialBoost::create([
@@ -59,30 +54,32 @@ new class extends Component {
             'to_date' => $this->to_date_computed,
             'created_by' => auth()->user()->id
         ]);
-        
+
         // Upload Photo
-        $uuid = substr(Str::uuid()->toString(), 0, 8);
-        $file_name = $product->uuid . "-$uuid" . "." . $photo->getClientOriginalExtension();
-        // Store the file in the public disk
-        $path = $photo->storeAs(
-            path: "public/photos/product-boost",
-            name: $file_name
-        );
+        if(!empty($photo)){
+            $uuid = substr(Str::uuid()->toString(), 0, 8);
+            $file_name = $product->uuid . "-$uuid" . "." . $photo->getClientOriginalExtension();
+            // Store the file in the public disk
+            $path = $photo->storeAs(
+                path: "public/photos/product-boost",
+                name: $file_name
+            );
 
-        // Optimize image
-        $file_path = storage_path("app/" . $path);
-        $image = Image::make($file_path);
-        $image->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        $image->save($file_path, 80);
+            // Optimize image
+            $file_path = storage_path("app/" . $path);
+            $image = Image::make($file_path);
+            $image->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image->save($file_path, 80);
 
-        $f_path = "storage/photos/product-boost/$file_name";
+            $f_path = "storage/photos/product-boost/$file_name";
 
-        $sp->update([
-            'file_name' => $file_name,
-            'file_path' => $f_path,
-        ]);
+            $sp->update([
+                'file_name' => $file_name,
+                'file_path' => $f_path,
+            ]);
+        }
 
         $this->resetData(['advertising_plan', 'item_code', 'from_date', 'to_date', 'photo']);
         $this->add_boost_modal = false;
@@ -146,7 +143,7 @@ new class extends Component {
                         <div class="space-y-4">
                             <div class="flex flex-col gap-4 sm:flex-row">
                                 <div class="flex-1 space-y-2" wire:ignore>
-                                    <p class="font-medium text-slate-700">Item Code</p>
+                                    <p class="font-medium text-slate-700">Item Code <span class="text-red-400">*</span></p>
                                     <select class="selectize-select" id="item-code" wire:model="item_code" required>
                                         <option value="" disabled></option>
                                         @foreach ($products as $product)
@@ -155,7 +152,7 @@ new class extends Component {
                                     </select>
                                 </div>
                                 <div class="flex-1 space-y-2" wire:ignore>
-                                    <p class="font-medium text-slate-700">Advertising Plan</p>
+                                    <p class="font-medium text-slate-700">Advertising Plan <span class="text-red-400">*</span></p>
                                     <select class="selectize-select" id="advertising-plan" required>
                                         <option value="" disabled selected></option>
                                         @foreach ($plans as $plan)
@@ -166,7 +163,7 @@ new class extends Component {
                             </div>
                             <div class="flex flex-col gap-4 sm:flex-row">
                                 <div class="flex-1 space-y-2">
-                                    <p class="font-medium text-slate-700">From Date</p>
+                                    <p class="font-medium text-slate-700">From Date <span class="text-red-400">*</span></p>
                                     <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="datetime-local" required wire:change="computePlanDate" wire:model="from_date" required>
                                 </div>
                                 <div class="flex-1 space-y-2">
@@ -176,7 +173,7 @@ new class extends Component {
                             </div>
                             <div class="space-y-2">
                                 <label class="font-medium text-slate-700">Upload Photos</label>
-                                <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" wire:model="photo" id="upload-{{ $inc }}" required>
+                                <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" wire:model="photo" id="upload-{{ $inc }}">
                             </div>
                             <div>
                                 <p class="mb-2 text-sm text-gray-600">
