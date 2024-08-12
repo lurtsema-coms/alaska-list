@@ -23,7 +23,7 @@
                     {{ $slot }}
                 </div>
             </div>
-            <div class="w-full flex-1 hidden sm:block relative bg-contain bg-no-repeat bg-center">
+            <div class="w-full flex-1 hidden lg:block relative bg-contain bg-no-repeat bg-center">
                 <img class="absolute object-cover min-h-full min-w-full top-0 z-10" src="{{asset('frontend/mountain.jpg')}}" alt="">
                 <div class=" w-full h-full absolute inset-0 z-20 bg-[#17427C] opacity-75">
                 </div>
