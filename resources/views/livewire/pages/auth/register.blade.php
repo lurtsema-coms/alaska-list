@@ -52,9 +52,9 @@ new #[Layout('layouts.registration')] class extends Component
 
 <div>
     <div class="mb-5 text-center ">
-        <h1 class=" text-3xl font-bold text-[#1F4B55] font-poppins">Registration Form</h1>
+        <h1 class=" text-3xl font-bold text-[#17427C] font-poppins">Registration Form</h1>
     </div>
-    <form wire:submit="register" class="text-[#1F4B55] space-y-5">
+    <form wire:submit="register" class="text-[#17427C] space-y-5">
         <!-- Name -->
         <div class="flex flex-col gap-5 sm:flex-row">
             <div class="flex-1">
