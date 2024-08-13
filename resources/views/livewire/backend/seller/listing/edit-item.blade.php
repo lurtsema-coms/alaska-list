@@ -263,7 +263,7 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Qty</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="qty" wire:model="qty" {{ $status == 'DELETED' ? 'disabled' : '' }} placeholder="Leave blank if not applicable">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="qty" wire:model="qty" {{ $status == 'DELETED' ? 'disabled' : '' }} placeholder="Leave blank if not applicable">
                             </div>
                         </div>
                     </div>
