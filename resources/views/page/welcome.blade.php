@@ -281,7 +281,7 @@
 </div>
 
 {{-- Get In Touch --}}
-<div id="get-in-touch" class="container mx-auto mb-28" data-aos="zoom-in">
+<div id="get-in-touch" class="container px-5 mx-auto mb-28" data-aos="zoom-in">
     <div class="flex flex-col items-center gap-4 mb-14">
         <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">Get In Touch</h1>
         <p class="text-lg text-center text-slate-500">Contact us using the information below. We'll respond promptly to your inquiries and feedback</p>
