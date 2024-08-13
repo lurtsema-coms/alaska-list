@@ -30,6 +30,7 @@ new class extends Component {
             ])
             ->where(function ($query) {
                 $query->where('id', 'like', '%' . $this->search . '%')
+                    ->orWhere('uuid', 'like', '%' . $this->search . '%')
                     ->orWhere('from_date', 'like', '%' . $this->search . '%')
                     ->orWhere('to_date', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
