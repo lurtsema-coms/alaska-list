@@ -119,12 +119,12 @@
     </div>
 </div>
 
-<div class="relative mt-28 h-96 ">
+<div class="relative mt-28 h-96">
     <div class="absolute w-full h-full bg-top bg-cover bg-brainstorm brightness-50" style="background-position: 30% 60%;">
     </div>
     <div class="absolute top-0 flex flex-col items-center justify-center w-full h-full font-darkerGrotesque">
-        <p class="text-5xl text-white">Find what you need</p>
-        <p class="text-5xl text-white">in <span class="text-yellow-200">Alaska</span></p>
+        <p class="px-5 text-5xl text-center text-white">Find what you need</p>
+        <p class="px-5 text-5xl text-center text-white">in <span class="text-yellow-200">Alaska</span></p>
     </div>
 </div>
 
