@@ -47,7 +47,7 @@
                     <p class="text-gray-700">Discover a wide selection of sofas, tables, and chairs for sale, both new and used.</p>
                 </div>
                 <div class="flex justify-end flex-1 mt-3">
-                    <img class="w-16" src="{{ asset('icon-img/lamp.png') }}" alt="">
+                    <img class="object-contain w-16" src="{{ asset('icon-img/lamp.png') }}" alt="">
                 </div>
             </a>
             <a class="flex flex-col flex-1 p-4 mb-4 transition-all border shadow-md cursor-pointer bg-gray-50 min-w-56 min-h-44 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $electronic }}" wire:navigate data-aos="fade-right">
@@ -56,7 +56,7 @@
                     <p class="text-gray-700">Explore deals on smartphones, laptops, and gadgets from leading brands.</p>
                 </div>
                 <div class="flex justify-end flex-1 mt-3">
-                    <img class="w-16" src="{{ asset('icon-img/gadgets.png') }}" alt="">
+                    <img class="object-contain w-16" src="{{ asset('icon-img/gadgets.png') }}" alt="">
                 </div>
             </a>
             <a class="flex flex-col flex-1 p-4 mb-4 transition-all border shadow-md cursor-pointer bg-gray-50 min-w-56 min-h-44 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $vehicle }}" wire:navigate data-aos="fade-right">
@@ -65,7 +65,7 @@
                     <p class="text-gray-700">Find cars, trucks, motorcycles, and RVs for sale near you, both use.</p>
                 </div>
                 <div class="flex justify-end flex-1 mt-3">
-                    <img class="w-16" src="{{ asset('icon-img/car.png') }}" alt="">
+                    <img class="object-contain w-16" src="{{ asset('icon-img/car.png') }}" alt="">
                 </div>
             </a>
             <a class="flex flex-col flex-1 p-4 mb-4 transition-all border shadow-md cursor-pointer bg-gray-50 min-w-56 min-h-44 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $real_estate }}" wire:navigate data-aos="fade-right">
@@ -74,7 +74,7 @@
                     <p class="text-gray-700">Browse listings for apartments, houses, and commercial properties.</p>
                 </div>
                 <div class="flex justify-end flex-1 mt-3">
-                    <img class="w-16" src="{{ asset('icon-img/house.png') }}" alt="">
+                    <img class="object-contain w-16" src="{{ asset('icon-img/house.png') }}" alt="">
                 </div>
             </a>
             <div class="w-32 mb-4 transition-all bg-gray-100 shadow-md cursor-pointer min-h-44 rounded-l-xl hover:border hover:bg-gray-200" data-aos="fade-right">
