@@ -173,7 +173,7 @@ new class extends Component {
                 @foreach ($categories as $category)
                     <div class="p-4 bg-gray-100 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
                         <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
-                        <div class="flex flex-wrap gap-3">
+                        <div class="flex flex-wrap gap-8">
                             @foreach($category->subCategories as $sub_category)
                                 <label class="inline-flex items-center space-x-2 cursor-pointer" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
                                     <input type="checkbox"
