@@ -111,7 +111,7 @@ new class extends Component {
                             {{ $sponsor->product->uuid }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
-                            {{ $sponsor->product->name }}
+                            {{ Str::limit($sponsor->product->name, 50) }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->advertisingPlan->name }}

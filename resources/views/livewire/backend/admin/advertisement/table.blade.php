@@ -103,7 +103,7 @@ new class extends Component {
                             {{ $advertisement->uuid }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
-                            {{ $advertisement->advertisingPlan->name }}
+                            {{ Str::limit($advertisement->advertisingPlan->name, 50) }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ Carbon::parse($advertisement->from_date)->format('F j, Y g:i A') }}

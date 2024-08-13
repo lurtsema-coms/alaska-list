@@ -75,7 +75,7 @@ new class extends Component {
                             </span>
                         @endif
                     </p>
-                    <div class="w-full swiper-product-item swiper">
+                    <div class="w-full bg-white swiper-product-item swiper">
                         <!-- Additional required wrapper -->
                         <div class="flex items-center swiper-wrapper" id="lightgallery">
                             @foreach ($photos as $index => $file)
@@ -94,22 +94,22 @@ new class extends Component {
                     </div>
                 </div>
                 <div class="space-y-2">
-                    <p><span class="font-bold">Posted by: </span>{{ $posted_by }}</p>
-                    <p><span class="font-bold">Contact: </span>{{ $contact }}</p>
-                    <p><span class="font-bold">Price: </span><span class="text-green-600">${{ $price }}</span></p>
+                    <p><span class="font-bold">Posted by: </span> <span class="text-gray-600">{{ $posted_by }}</span></p>
+                    <p><span class="font-bold">Contact: </span> <span class="text-gray-600">{{ $contact }}</span></p>
+                    <p><span class="font-bold">Price: </span> <span class="text-green-600">${{ $price }}</span></p>
                 </div>
                 <div class="space-y-2">
                     <p class="font-bold">Description</p>
-                    <p>{!! nl2br(e($description)) !!}</p>
+                    <p class="text-gray-600">{!! nl2br(e($description)) !!}</p>
                 </div>
                 @if ($additional_information)                    
                     <div class="space-y-2">
                         <p class="font-bold">Additional Information</p>
-                        <p>{!! nl2br(e($additional_information)) !!}</p>
+                        <p class="text-gray-600">{!! nl2br(e($additional_information)) !!}</p>
                     </div>
                 @endif
                 <div class="space-y-2">
-                    <p><span class="font-bold">Date Publish: </span>{{ \Carbon\Carbon::parse($posted_at)->format('F j, Y') }}</p>
+                    <p><span class="font-bold">Date Publish: </span> <span class="text-gray-600">{{ \Carbon\Carbon::parse($posted_at)->format('F j, Y') }}</span></p>
                 </div>
             </div>
         </div>

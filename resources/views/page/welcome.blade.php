@@ -27,7 +27,7 @@
 </div>
 {{-- Categories Section --}}
 <div>
-    <div class="container mx-auto mt-28">
+    <div class="container px-5 mx-auto mt-28">
         <h2 class="mb-4 text-3xl font-bold text-center sm:text-4xl text-slate-700">Explore Our Categories</h2>
         <p class="mb-12 text-lg text-center text-slate-500">Find the best deals and discover a wide range of products across various categories. Start exploring now!</p>
         <div class="flex flex-wrap justify-center gap-4 px-5 md:px-0">
@@ -92,7 +92,7 @@
         </div>
     </div>
     {{-- Featured Section --}}
-    <div class="container mx-auto mt-28">
+    <div class="container px-5 mx-auto mt-28">
         <div class="flex flex-col items-center gap-4 mb-4" data-aos="zoom-in">
             <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">Featured Products</h1>
             <svg width="100%" height="24" viewBox="0 0 445 24" fill="none" xmlns="http://www.w3.org/2000/svg">

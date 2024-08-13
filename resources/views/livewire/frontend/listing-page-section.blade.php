@@ -14,6 +14,8 @@ new class extends Component {
     public $sc_names = [];
     #[Url] 
     public $search;
+    public $price_range;
+    public $sort_by = "";
     public $pagination = 10;
 
     public function updated()
@@ -48,14 +50,55 @@ new class extends Component {
                         ->orWhere('description', 'like', '%' . $this->search . '%')
                         ->orWhere('price', 'like', '%' . $this->search . '%');
                 });
-            })
-            ->orderByRaw('
+            });
+            // ->orderByRaw('
+            //     CASE
+            //         WHEN created_at >= NOW() - INTERVAL 7 DAY THEN 1
+            //         ELSE RAND()
+            //     END,
+            //     created_at DESC
+            // ');
+
+            // Apply the price range filter
+            if (!empty($this->price_range)) {
+                $priceRange = explode('-', $this->price_range);
+
+                if (count($priceRange) === 1) {
+                    // If a single value is entered
+                    $minPrice = (float)$priceRange[0];
+                    
+                    if ($this->sort_by == 'low') {
+                        // When sorting from low to high, filter for prices less than or equal to the entered value
+                        $query->where('price', '<=', $minPrice);
+                    } else {
+                        // When sorting from high to low, filter for prices greater than or equal to the entered value
+                        $query->where('price', '>=', $minPrice);
+                    }
+                } elseif (count($priceRange) === 2) {
+                    // If two values are entered, use them as min and max price
+                    $minPrice = (float)$priceRange[0];
+                    $maxPrice = (float)$priceRange[1];
+                    $query->whereBetween('price', [$minPrice, $maxPrice]);
+                } else {
+                    // Default case, don't apply any filter
+                }
+            }
+
+        // Apply sorting by price if set
+        if ($this->sort_by == 'low') {
+            $query->orderBy('price', 'asc');
+        } elseif ($this->sort_by == 'high') {
+            $query->orderBy('price', 'desc');
+        } else {
+            // Apply default sorting logic
+            $query->orderByRaw('
                 CASE
                     WHEN created_at >= NOW() - INTERVAL 7 DAY THEN 1
                     ELSE RAND()
                 END,
                 created_at DESC
             ');
+        }
 
         // Apply sub-category filter if there are selected sub-categories
         if (!empty($this->sc_names)) {
@@ -74,7 +117,7 @@ new class extends Component {
 
     public function dispatchTimeAgo(){
         $this->dispatch('load-time-ago');
-        $this->resetData(['sc_names']);
+        $this->resetData(['sc_names', 'price_range', 'sort_by']);
     }
 
     public function resetData($data)
@@ -99,20 +142,22 @@ new class extends Component {
                 <div>
                     <h3 class="mb-2">Location</h3>
                     <select name="" id="" class="h-12 border border-gray-300 rounded-lg">
-                        <option value="">Price low to high</option>
-                        <option value="">Price high to low</option>
+                        <option value="" disabled>Select Location</option>
                     </select>
                 </div>
                 <div>
                     <h3 class="mb-2">Sort By:</h3>
-                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg">
-                        <option value="">Price low to high</option>
-                        <option value="">Price high to low</option>
+                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model.change="sort_by">
+                        <option value="" disabled>Select Sorting</option>
+                        <option value="low">Price low to high</option>
+                        <option value="high">Price high to low</option>
                     </select>
                 </div>
                 <div>
                     <h3 class="mb-2">Price Range:</h3>
-                    <input name="" id="" class="h-12 border border-gray-300 rounded-lg"/>
+                    <input name="" id="" class="h-12 border border-gray-300 rounded-lg" placeholder="e.g. 100-500"
+                        wire:model.live.debounce.500ms="price_range"
+                    />
                 </div>
             </div>
 

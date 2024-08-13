@@ -100,7 +100,7 @@ new class extends Component {
                                 {{ $product->subCategory->name }}
                             </td>
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
-                                {{ $product->name }}
+                                {{ Str::limit($product->name , 50) }}
                             </td>
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 {{ count(explode(",", $product->file_name)) }}

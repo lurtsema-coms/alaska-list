@@ -42,7 +42,7 @@ new class extends Component {
             $this->dispatch('error');
         }
         
-        $uuid = substr(Str::uuid()->toString(), 0, 8);
+        $uuid = 'ad-'.substr(Str::uuid()->toString(), 0, 8);
 
         $sp = Advertisement::create([
             'uuid' => $uuid,
@@ -54,7 +54,7 @@ new class extends Component {
 
         // Upload Photo
         if(!empty($photo)){
-            $file_name = "ad-$uuid" . "." . $photo->getClientOriginalExtension();
+            $file_name = "$uuid" . "." . $photo->getClientOriginalExtension();
             // Store the file in the public disk
             $path = $photo->storeAs(
                 path: "public/photos/advertisement",

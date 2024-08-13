@@ -15,9 +15,8 @@ new class extends Component {
     
     use WithFileUploads;
 
-    public $sponsor;
-    public $sponsor_id;
-    public $item_code = '';
+    public $advertisement_id;
+    public $uuid = '';
     public $advertising_plan = '';
     public $from_date = '';
     public $to_date = '';
@@ -26,13 +25,13 @@ new class extends Component {
     public $file_path;
     public $photo = '';
     public $inc = 1;
-    public $edit_boost = false;
+    public $edit_advertisement = false;
 
     public function mount($advertisement)
     {
-        $this->sponsor_id = $advertisement->id;
-        $this->item_code = $advertisement->uuid;
-        $this->advertising_plan = $advertisement->product_id;
+        $this->advertisement_id = $advertisement->id;
+        $this->uuid = $advertisement->uuid;
+        $this->advertising_plan = $advertisement->advertising_plan_id;
         $this->from_date = $advertisement->from_date;
         $this->to_date = $advertisement->to_date;
         $this->file_path = $advertisement->file_path;
@@ -53,65 +52,36 @@ new class extends Component {
     {
         $photo = $this->photo;
 
-        $sp = Advertisement::with('advertisingPlan')->find($this->sponsor_id);
+        $advertisement = Advertisement::with('advertisingPlan')->find($this->advertisement_id);
         
-        $sp->update([
+        $advertisement->update([
             'from_date' => $this->from_date,
             'to_date' => $this->to_date,
             'updated_by' => auth()->user()->id
         ]);
 
         if(!empty($photo)) {
+            // Replace Photo
+            $file_name = $advertisement->file_name;
+            // Store the file in the public disk
+            $path = $photo->storeAs(
+                path: "public/photos/advertisement",
+                name: $file_name
+            );
 
-            if(!$sp->file_name){
-                $uuid = substr(Str::uuid()->toString(), 0, 8);
-                $file_name = $sp->product->uuid . "-$uuid" . "." . $photo->getClientOriginalExtension();
-                // Store the file in the public disk
-                $path = $photo->storeAs(
-                    path: "public/photos/product-boost",
-                    name: $file_name
-                );
+            // Optimize image
+            $file_path = storage_path("app/" . $path);
+            $image = Image::make($file_path);
+            $image->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image->save($file_path, 80);
 
-                // Optimize image
-                $file_path = storage_path("app/" . $path);
-                $image = Image::make($file_path);
-                $image->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $image->save($file_path, 80);
-
-                $f_path = "storage/photos/product-boost/$file_name";
-
-                $sp->update([
-                    'file_name' => $file_name,
-                    'file_path' => $f_path,
-                ]);
-
-                $this->file_path = $f_path;
-            }else{
-                // Replace Photo
-                $file_name = $sp->file_name;
-                // Store the file in the public disk
-                $path = $photo->storeAs(
-                    path: "public/photos/product-boost",
-                    name: $file_name
-                );
-    
-                // Optimize image
-                $file_path = storage_path("app/" . $path);
-                $image = Image::make($file_path);
-                $image->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $image->save($file_path, 80);
-    
-                $f_path = "storage/photos/product-boost/$file_name";
-            }
-
+            $f_path = "storage/photos/advertisement/$file_name";
         }
 
         $this->resetData(['photo']);
-        $this->edit_boost = false;
+        $this->edit_advertisement = false;
         $this->inc++;
         $this->dispatch('alert-success');
     }
@@ -119,12 +89,11 @@ new class extends Component {
     public function computePlanDate()
     {
         $ap = AdvertisingPlan::find($this->advertising_plan);
-
         // Check if $ap is not null and has a duration_day property
         if ($ap && $ap->duration_days) {
             
             $from_date = Carbon::parse($this->from_date);
-            
+
             $to_date = $from_date->copy()->addDays($ap->duration_days);
             
             $this->from_date = $from_date->format('Y-m-d\TH:i');
@@ -142,7 +111,7 @@ new class extends Component {
 }; ?>
 
 <div style="font-size: 16px;"
-    x-data="{ edit_boost: $wire.entangle('edit_boost') }" x-init="$watch('edit_boost', value => {
+    x-data="{ edit_advertisement: $wire.entangle('edit_advertisement') }" x-init="$watch('edit_advertisement', value => {
         if (value) {
             document.body.classList.add('overflow-hidden');
         } else {
@@ -150,27 +119,27 @@ new class extends Component {
         }
     })">
     <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500"
-    @click="edit_boost=true;">
+    @click="edit_advertisement=true;">
         EDIT
     </button>
     
     <div class="fixed top-0 left-0 z-10 w-full h-full overflow-auto bg-black position bg-opacity-30"
-        x-show="edit_boost"
+        x-show="edit_advertisement"
         x-transition
         x-cloak>
         <div class="flex h-full p-5">
             <div class="w-full max-w-xl m-auto overflow-hidden bg-white shadow-lg rounded-2xl"
-            @click.outside="edit_boost=false; $wire.call('resetData', ['photo'])">
+            @click.outside="edit_advertisement=false; $wire.call('resetData', ['photo'])">
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="editSpecialBoost">
                         <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Edit Boost</p>
                         <div class="space-y-4">
                             <div class="flex flex-col gap-4 sm:flex-row">
-                                <div class="flex-1 space-y-2" wire:ignore>
+                                <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">Item Code</p>
-                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="item_code" readonly>
+                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="uuid" readonly>
                                 </div>
-                                <div class="flex-1 space-y-2" wire:ignore>
+                                <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">Advertising Plan</p>
                                     <select class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" wire:model="advertising_plan" wire:change="computePlanDate" required>
                                         <option value="" disabled selected>Select at least one</option>
@@ -215,9 +184,10 @@ new class extends Component {
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
                             <button class="px-4 py-2 rounded-lg shadow text-slate-600 hover:opacity-70" type="button"
-                                @click="edit_boost=false; $wire.call('resetData', ['photo'])">
+                                @click="edit_advertisement=false; $wire.call('resetData', ['photo'])">
                                 Cancel
                             </button>
+                            <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Save</button>
                         </div>
                     </form>
                 </div>
