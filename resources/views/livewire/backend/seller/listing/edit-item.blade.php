@@ -262,7 +262,7 @@ new class extends Component {
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Qty <span class="text-red-400">*</span></p>
+                                <p class="font-medium text-slate-700">Qty</p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="0" {{ $status == 'DELETED' ? 'disabled' : '' }}>
                             </div>
                         </div>
