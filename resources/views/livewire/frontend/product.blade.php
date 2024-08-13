@@ -75,7 +75,7 @@ new class extends Component {
                             </span>
                         @endif
                     </p>
-                    <div class="w-full bg-white swiper-product-item swiper">
+                    <div class="w-full swiper-product-item swiper">
                         <!-- Additional required wrapper -->
                         <div class="flex items-center swiper-wrapper" id="lightgallery">
                             @foreach ($photos as $index => $file)

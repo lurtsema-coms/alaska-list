@@ -59,7 +59,7 @@ new class extends Component {
 
                     @guest
                         <a class="relative" href="{{ route('login') }}" wire:navigate>
-                            <div class="font-bold text-white bg-[#70B7E5] px-4 py-2 rounded-full shadow-md hover:bg-[#1B494D] hover:border-white transition duration-300">
+                            <div class="px-4 py-2 font-bold text-white transition duration-300 rounded-full shadow-md bg-search-gradient hover:opacity-70">
                                 POST CLASSIFIEDS
                             </div>
                         </a>
