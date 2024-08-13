@@ -60,7 +60,7 @@ new class extends Component {
                     @guest
                         <a class="relative" href="{{ route('login') }}" wire:navigate>
                             <div class="px-4 py-2 font-bold text-white transition duration-300 rounded-full shadow-md bg-search-gradient hover:opacity-70">
-                                POST CLASSIFIEDS
+                                Post Classifieds
                             </div>
                         </a>
                         @else
@@ -140,17 +140,21 @@ new class extends Component {
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
                 </a>
                 <div class="flex flex-col gap-5 mt-10">
-                @guest
-                    @else
-                    <a class="relative px-1 group" href="{{ route('dashboard') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:opacity-70">Dashboard</span>
-                        <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
-                    </a>
-                    <a class="relative px-1 cursor-pointer group" wire:click="logout">
-                        <span class="transition-opacity group-hover:opacity-70">Logout</span>
-                        <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
-                    </a>
-                @endguest
+                    @guest
+                        <a class="relative px-1 group" href="{{ route('login') }}" wire:navigate>
+                            <span class="transition-opacity group-hover:opacity-70">Post Classifieds</span>
+                            <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
+                        </a>
+                        @else
+                        <a class="relative px-1 group" href="{{ route('dashboard') }}" wire:navigate>
+                            <span class="transition-opacity group-hover:opacity-70">Dashboard</span>
+                            <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
+                        </a>
+                        <a class="relative px-1 cursor-pointer group" wire:click="logout">
+                            <span class="transition-opacity group-hover:opacity-70">Logout</span>
+                            <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
+                        </a>
+                    @endguest
                 </div>
             </div>
         </div>
