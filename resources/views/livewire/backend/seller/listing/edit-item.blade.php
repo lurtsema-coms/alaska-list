@@ -238,7 +238,7 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Title Name <span class="text-red-400">*</span></p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name" {{ $status == 'DELETED' ? 'disabled' : '' }}>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name" {{ $status == 'DELETED' ? 'disabled' : '' }} placeholder="Enter the title name here">
                             </div>
                         </div>
                     </div>
@@ -257,26 +257,26 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price <span class="text-red-400">*</span></p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required step="0.01" wire:model="price" {{ $status == 'DELETED' ? 'disabled' : '' }}>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="price" {{ $status == 'DELETED' ? 'disabled' : '' }}placeholder="Enter price">
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Qty</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="0" {{ $status == 'DELETED' ? 'disabled' : '' }}>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="qty" wire:model="qty" {{ $status == 'DELETED' ? 'disabled' : '' }} placeholder="Leave blank if not applicable">
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Description <span class="text-red-400">*</span></p>
-                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description" {{ $status == 'DELETED' ? 'disabled' : '' }}></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description" {{ $status == 'DELETED' ? 'disabled' : '' }} placeholder="Provide a detailed description"></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Additional Information</p>
-                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" wire:model="additional_information" {{ $status == 'DELETED' ? 'disabled' : '' }}></textarea>
+                            <textarea class="text-md w-full py-4 px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" wire:model="additional_information" {{ $status == 'DELETED' ? 'disabled' : '' }} placeholder="Add any additional information here"></textarea>
                         </div>
                     </div>
                     <div class="p-4 border rounded-lg border-slate-300">
