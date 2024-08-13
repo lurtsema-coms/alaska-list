@@ -240,7 +240,7 @@ new class extends Component {
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
                                 </div>
                                 @if ($product->qty)
-                                    <p class="text-sm text-gray-500">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
+                                    <p class="text-sm text-gray-600">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
                                 @endif
                             </div>
                             <div class="p-6 border-t border-gray-200">

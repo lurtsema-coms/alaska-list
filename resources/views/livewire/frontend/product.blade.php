@@ -11,6 +11,7 @@ new class extends Component {
     public $title_name = '';
     public $price = '';
     public $qty = '';
+    public $location = '';
     public $description = '';
     public $additional_information = '';
     public $photos = [];
@@ -31,6 +32,7 @@ new class extends Component {
         $this->title_name = $product->name;
         $this->price = $product->price;
         $this->qty = $product->qty;
+        $this->location = $product->location;
         $this->description = $product->description;
         $this->additional_information = $product->additional_information;
         $this->posted_at = $product->created_at;
@@ -97,7 +99,10 @@ new class extends Component {
                     <p><span class="font-bold">Posted by: </span> <span class="text-gray-600">{{ $posted_by }}</span></p>
                     <p><span class="font-bold">Contact: </span> <span class="text-gray-600">{{ $contact }}</span></p>
                     @if($price)
-                        <p><span class="font-bold">Price: </span> <span class="text-green-600">${{ $price }}</span></p>
+                        <p><span class="font-bold">Price: </span> <span class="text-green-600">{{ $price }}</span></p>
+                    @endif
+                    @if ($qty)
+                        <p><span class="font-bold">Available: </span> <span class="text-gray-600">{{ $qty }}</span></p>
                     @endif
                 </div>
                 <div class="space-y-2">
@@ -111,6 +116,7 @@ new class extends Component {
                     </div>
                 @endif
                 <div class="space-y-2">
+                    <p><span class="font-bold">Location: </span> <span class="text-gray-600">{{ $location ? config('global.us_states')[$location] : '' }}</span></p>
                     <p><span class="font-bold">Date Publish: </span> <span class="text-gray-600">{{ \Carbon\Carbon::parse($posted_at)->format('F j, Y') }}</span></p>
                 </div>
             </div>
