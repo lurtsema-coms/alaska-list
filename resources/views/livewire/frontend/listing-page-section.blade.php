@@ -234,7 +234,7 @@ new class extends Component {
                                 <p class="mb-4 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
                                 <p class="mb-4 text-gray-600">{{ Str::limit($product->description, 200) }}</p>
                                 @if ($product->price)
-                                    <p class="mb-4 font-semibold text-gray-800">{{ $product->price }}</p>
+                                    <p class="mb-4 font-semibold text-blue-600">{{ $product->price }}</p>
                                 @endif
                                 <div class="flex items-center mt-4 mb-4 space-x-2">
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
