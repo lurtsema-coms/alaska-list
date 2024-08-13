@@ -142,7 +142,10 @@ new class extends Component {
                 <div>
                     <h3 class="mb-2">Location</h3>
                     <select name="" id="" class="h-12 border border-gray-300 rounded-lg">
-                        <option value="" disabled>Select Location</option>
+                        <option value="" selected>All Location</option>
+                        @foreach (config('global.us_states') as $key => $location)
+                        <option value="{{ $key }}">{{ $location }} ({{ $key }})</option>
+                        @endforeach
                     </select>
                 </div>
                 <div>
