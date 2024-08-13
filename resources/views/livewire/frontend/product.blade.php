@@ -96,7 +96,9 @@ new class extends Component {
                 <div class="space-y-2">
                     <p><span class="font-bold">Posted by: </span> <span class="text-gray-600">{{ $posted_by }}</span></p>
                     <p><span class="font-bold">Contact: </span> <span class="text-gray-600">{{ $contact }}</span></p>
-                    <p><span class="font-bold">Price: </span> <span class="text-green-600">${{ $price }}</span></p>
+                    @if($price)
+                        <p><span class="font-bold">Price: </span> <span class="text-green-600">${{ $price }}</span></p>
+                    @endif
                 </div>
                 <div class="space-y-2">
                     <p class="font-bold">Description</p>

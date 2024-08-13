@@ -53,7 +53,7 @@ new class extends Component {
     }
 
     public function loadAdvertisingPlans(){
-        return AdvertisingPlan::get();
+        return AdvertisingPlan::withTrashed()->get();
     }
 
     public function editSpecialBoost()
@@ -126,7 +126,7 @@ new class extends Component {
     public function computePlanDate()
     {
         $ap = AdvertisingPlan::find($this->advertising_plan);
-
+        
         // Check if $ap is not null and has a duration_day property
         if ($ap && $ap->duration_days) {
             

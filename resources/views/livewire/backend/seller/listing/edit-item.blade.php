@@ -16,6 +16,7 @@ new class extends Component {
     public $title_name = '';
     public $price = '';
     public $qty = '';
+    public $location = '';
     public $description = '';
     public $additional_information = '';
     #[Validate(['photos.*' => 'image|max:5120'])]
@@ -42,6 +43,7 @@ new class extends Component {
         $this->title_name = $product->name;
         $this->price = $product->price;
         $this->qty = $product->qty;
+        $this->location = $product->location;
         $this->description = $product->description;
         $this->additional_information = $product->additional_information;
         $this->status = $product->status;
@@ -137,6 +139,7 @@ new class extends Component {
                 'name' => $this->title_name,
                 'price' => $this->price,
                 'qty' => $this->qty,
+                'location' => $this->location,
                 'description' => $this->description,
                 'additional_information' => $this->additional_information,
                 'file_name' => implode(",", $merged_names) ?: null,
@@ -240,6 +243,17 @@ new class extends Component {
                         </div>
                     </div>
                     <div class="flex flex-col gap-4 sm:flex-row">
+                        <div class="flex-1 space-y-2">
+                            <div class="space-y-2">
+                                <p class="font-medium text-slate-700">Location <span class="text-red-400">*</span></p>
+                                <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="location">
+                                    <option value="" disabled selected>Select one</option>
+                                    @foreach (config('global.us_states') as $key => $location)
+                                        <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price <span class="text-red-400">*</span></p>

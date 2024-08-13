@@ -15,6 +15,7 @@ new class extends Component {
 
     public $sub_category = '';
     public $title_name = '';
+    public $location = '';
     public $price = '';
     public $qty = '';
     public $description = '';
@@ -23,8 +24,8 @@ new class extends Component {
     public $photos = [];
     public $inc = 1;
 
-    public function addItem(){
-
+    public function addItem()
+    {
         $this->validate();
         
         $user_id = auth()->user()->id;
@@ -44,6 +45,7 @@ new class extends Component {
             'name' => $this->title_name,
             'price' => $this->price,
             'qty' => $this->qty,
+            'location' => $this->location,
             'description' => $this->description,
             'additional_information' => $this->additional_information,
             'created_by' => $user_id
@@ -116,7 +118,7 @@ new class extends Component {
                 <div class="max-w-4xl m-auto space-y-4">
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
-                            <p class="font-medium text-slate-700">Category</p>
+                            <p class="font-medium text-slate-700">Category <span class="text-red-400">*</span></p>
                             <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="sub_category">
                                 <option value="" disabled selected>Select a sub category...</option>
                                 @foreach ($categories as $category)
@@ -129,35 +131,46 @@ new class extends Component {
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Title Name</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name">
+                                <p class="font-medium text-slate-700">Title Name <span class="text-red-400">*</span></p>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name" placeholder="Enter the title name here">
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col gap-4 sm:flex-row">
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Price <span class="text-red-400">*</span></p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required step="0.01" wire:model="price">
+                                <p class="font-medium text-slate-700">Location <span class="text-red-400">*</span></p>
+                                <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="location">
+                                    <option value="" disabled selected>Select one</option>
+                                    @foreach (config('global.us_states') as $key => $location)
+                                        <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex-1 space-y-2">
+                            <div class="space-y-2">
+                                <p class="font-medium text-slate-700">Price</p>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="price" placeholder="Enter price or leave blank if not applicable">
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Qty <span class="text-red-400">*</span></p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" required wire:model="qty" wire:model="qty" min="1">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="qty" placeholder="Enter the quantity (e.g., 1, 2, 3)">
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Description <span class="text-red-400">*</span></p>
-                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description"></textarea>
+                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description" placeholder="Provide a detailed description"></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Additional Information</p>
-                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" wire:model="additional_information"></textarea>
+                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" wire:model="additional_information" placeholder="Add any additional information here"></textarea>
                         </div>
                     </div>
                     <div class="space-y-2">

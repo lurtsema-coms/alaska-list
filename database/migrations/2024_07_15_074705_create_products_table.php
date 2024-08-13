@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('status');
             $table->text('name');
             $table->string('sub_category_id');
-            $table->decimal('price', 10, 2);
-            $table->integer('qty');
+            $table->text('price')->nullable();
+            $table->text('qty');
+            $table->text('location');
             $table->text('description');
             $table->text('additional_information')->nullable();
             $table->text('file_name')->nullable();

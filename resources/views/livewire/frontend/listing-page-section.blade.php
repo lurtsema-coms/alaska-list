@@ -14,6 +14,7 @@ new class extends Component {
     public $sc_names = [];
     #[Url] 
     public $search;
+    public $location;
     public $price_range;
     public $sort_by = "";
     public $pagination = 10;
@@ -117,7 +118,7 @@ new class extends Component {
 
     public function dispatchTimeAgo(){
         $this->dispatch('load-time-ago');
-        $this->resetData(['sc_names', 'price_range', 'sort_by']);
+        $this->resetData(['sc_names', 'price_range', 'sort_by', 'location']);
     }
 
     public function resetData($data)
@@ -141,10 +142,10 @@ new class extends Component {
             <div class="flex flex-wrap gap-6">
                 <div>
                     <h3 class="mb-2">Location</h3>
-                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg">
+                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model="location">
                         <option value="" selected>All Location</option>
                         @foreach (config('global.us_states') as $key => $location)
-                        <option value="{{ $key }}">{{ $location }} ({{ $key }})</option>
+                            <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
                         @endforeach
                     </select>
                 </div>
@@ -213,7 +214,7 @@ new class extends Component {
             </div>
         </div>
         
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             @if($products->isEmpty())
                 <p>No products to show.</p>
             @else
@@ -229,14 +230,19 @@ new class extends Component {
                             <div class="p-6">
                                 <p class="mb-4 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
                                 <p class="mb-4 text-gray-600">{{ Str::limit($product->description, 200) }}</p>
-                                <p class="mb-4 font-semibold text-gray-800">${{ $product->price }}</p>
+                                @if ($product->price)
+                                    <p class="mb-4 font-semibold text-gray-800">${{ $product->price }}</p>
+                                @endif
                                 <div class="flex items-center mt-4 mb-4 space-x-2">
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
                                 </div>
                                 <p class="text-sm text-gray-500">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
                             </div>
                             <div class="p-6 border-t border-gray-200">
-                                <p class="mb-4 font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
+                                <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                    <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
+                                    <p class="text-gray-600">{{ $product->location ? config('global.us_states')[$product->location] : '' }}</p>
+                                </div>
                                 <button class="px-4 py-2 font-bold text-white rounded-xl bg-sky-600 hover:bg-blue-700">
                                     View Details
                                 </button>
