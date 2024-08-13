@@ -60,30 +60,34 @@ new class extends Component {
             //     created_at DESC
             // ');
 
-            // Apply the price range filter
-            if (!empty($this->price_range)) {
-                $priceRange = explode('-', $this->price_range);
+        if(!empty($this->location)) {
+            $query->where('location', $this->location);
+        }
 
-                if (count($priceRange) === 1) {
-                    // If a single value is entered
-                    $minPrice = (float)$priceRange[0];
-                    
-                    if ($this->sort_by == 'low') {
-                        // When sorting from low to high, filter for prices less than or equal to the entered value
-                        $query->where('price', '<=', $minPrice);
-                    } else {
-                        // When sorting from high to low, filter for prices greater than or equal to the entered value
-                        $query->where('price', '>=', $minPrice);
-                    }
-                } elseif (count($priceRange) === 2) {
-                    // If two values are entered, use them as min and max price
-                    $minPrice = (float)$priceRange[0];
-                    $maxPrice = (float)$priceRange[1];
-                    $query->whereBetween('price', [$minPrice, $maxPrice]);
+        // Apply the price range filter
+        if (!empty($this->price_range)) {
+            $priceRange = explode('-', $this->price_range);
+
+            if (count($priceRange) === 1) {
+                // If a single value is entered
+                $minPrice = (float)$priceRange[0];
+                
+                if ($this->sort_by == 'low') {
+                    // When sorting from low to high, filter for prices less than or equal to the entered value
+                    $query->where('price', '<=', $minPrice);
                 } else {
-                    // Default case, don't apply any filter
+                    // When sorting from high to low, filter for prices greater than or equal to the entered value
+                    $query->where('price', '>=', $minPrice);
                 }
+            } elseif (count($priceRange) === 2) {
+                // If two values are entered, use them as min and max price
+                $minPrice = (float)$priceRange[0];
+                $maxPrice = (float)$priceRange[1];
+                $query->whereBetween('price', [$minPrice, $maxPrice]);
+            } else {
+                // Default case, don't apply any filter
             }
+        }
 
         // Apply sorting by price if set
         if ($this->sort_by == 'low') {
@@ -142,7 +146,7 @@ new class extends Component {
             <div class="flex flex-wrap gap-6">
                 <div>
                     <h3 class="mb-2">Location</h3>
-                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model="location">
+                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model.change="location">
                         <option value="" selected>All Location</option>
                         @foreach (config('global.us_states') as $key => $location)
                             <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
@@ -169,17 +173,16 @@ new class extends Component {
                 @foreach ($categories as $category)
                     <div class="p-4 bg-gray-100 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
                         <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
-                        <div class="flex flex-wrap gap-2">
-                        @foreach($category->subCategories as $sub_category)
-                            <label class="inline-flex items-center space-x-2 cursor-pointer" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                                <input type="checkbox"
-                                    class="w-5 h-5 text-blue-600 "
-                                    wire:model.change="sc_names"
-                                    value="{{ $sub_category->name }}">
-                                <span class="text-gray-600">{{ $sub_category->name }}</span>
-                            </label>
-                        @endforeach
-
+                        <div class="flex flex-wrap gap-3">
+                            @foreach($category->subCategories as $sub_category)
+                                <label class="inline-flex items-center space-x-2 cursor-pointer" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                                    <input type="checkbox"
+                                        class="w-5 h-5 text-blue-600 "
+                                        wire:model.change="sc_names"
+                                        value="{{ $sub_category->name }}">
+                                    <span class="text-gray-600">{{ $sub_category->name }}</span>
+                                </label>
+                            @endforeach
                         </div>
                     </div>
                 @endforeach
