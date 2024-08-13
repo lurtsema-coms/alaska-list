@@ -12,12 +12,12 @@
         <div class="min-h-[50rem] flex md:p-10">
             <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 mt-[28rem] text-white">
                 <div class="flex justify-center mt-4" >
-                    <a class="bg-search-gradient text-3xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer" href="{{ route('listing-page') }}" wire:navigate>
+                    <a class="bg-search-gradient text-3xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('listing-page') }}" wire:navigate>
                         BROWSE ITEMS
                     </a>
                 </div>
                 <div class="flex justify-center mt-4" >
-                    <a class="bg-search-gradient text-2xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer" href="{{ route('dashboard') }}" wire:navigate>
+                    <a class="bg-search-gradient text-2xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('dashboard') }}" wire:navigate>
                         SELL NOW
                     </a>
                 </div>
