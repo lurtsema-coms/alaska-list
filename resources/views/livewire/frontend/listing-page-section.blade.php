@@ -34,13 +34,18 @@ new class extends Component {
 
     public function loadCategories()
     {
-        return Category::with('subCategories')
+        return Category::withCount('subCategories')
+            ->orderBy('sub_categories_count', 'asc')
             ->get();
     }
 
     public function loadProducts()
     {
-        $query = Product::with('subCategory')
+        $today = now()->toDateTimeString();
+
+        $query = Product::with([
+                    'subCategory'
+                ])
             ->where(function ($query) {
                 // Apply the status filter
                 $query->where('status', 'ACTIVE');
@@ -52,13 +57,6 @@ new class extends Component {
                         ->orWhere('price', 'like', '%' . $this->search . '%');
                 });
             });
-            // ->orderByRaw('
-            //     CASE
-            //         WHEN created_at >= NOW() - INTERVAL 7 DAY THEN 1
-            //         ELSE RAND()
-            //     END,
-            //     created_at DESC
-            // ');
 
         if(!empty($this->location)) {
             $query->where('location', $this->location);
@@ -98,11 +96,24 @@ new class extends Component {
             // Apply default sorting logic
             $query->orderByRaw('
                 CASE
-                    WHEN created_at >= NOW() - INTERVAL 7 DAY THEN 1
-                    ELSE RAND()
-                END,
-                created_at DESC
-            ');
+                    WHEN EXISTS (
+                        SELECT 1 FROM special_boosts
+                        WHERE special_boosts.product_id = products.id
+                        AND special_boosts.from_date <= ?
+                        AND special_boosts.to_date >= ?
+                    ) THEN 1
+                    ELSE 0
+                END DESC,
+                CASE
+                    WHEN EXISTS (
+                        SELECT 1 FROM special_boosts
+                        WHERE special_boosts.product_id = products.id
+                        AND special_boosts.from_date <= ?
+                        AND special_boosts.to_date >= ?
+                    ) THEN RAND()
+                    ELSE created_at
+                END DESC
+            ', [$today, $today, $today, $today]);
         }
 
         // Apply sub-category filter if there are selected sub-categories
@@ -136,7 +147,6 @@ new class extends Component {
     <h2 class="text-4xl font-bold text-gray-800">Listing Page</h2>
     </div>
     <div class="space-y-10">
-        <livewire:frontend.sponsored-listing>
         <div class="p-4 mx-auto space-y-4 overflow-y-auto bg-white border max-h-80 rounded-2xl">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
@@ -222,38 +232,78 @@ new class extends Component {
                 <p>No products to show.</p>
             @else
                 @foreach($products as $product)
-                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
-                        <div class="overflow-hidden transition duration-300 bg-white border border-gray-200 shadow-md rounded-2xl hover:border-blue-400">
-                            @php
-                                $images = explode(',', $product->file_path);
-                                $firstImage = trim($images[0]);
-                            @endphp 
+                    @if ($product->ActiveSpecialBoostCount)
+                        <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border-4 shadow-lg border-yellow-50 rounded-2xl hover:border-yellow-200 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
+                            <div class="flex flex-col h-full">
+                                @php
+                                    $images = explode(',', $product->file_path);
+                                    $firstImage = trim($images[0]);
+                                @endphp 
 
-                            <img class="object-cover w-full h-56" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
-                            <div class="p-6">
-                                <p class="mb-4 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
-                                <p class="mb-4 text-gray-600">{{ Str::limit($product->description, 200) }}</p>
-                                @if ($product->price)
-                                    <p class="mb-4 font-semibold text-blue-600">{{ $product->price }}</p>
-                                @endif
-                                <div class="flex items-center mt-4 mb-4 space-x-2">
-                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
+                                <div class="relative">
+                                    <img class="object-cover w-full h-56 rounded-t-xl" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
+                                    <div class="absolute px-3 py-1 text-xs font-bold text-white bg-yellow-500 rounded-full top-4 left-4">Boosted</div>
                                 </div>
-                                @if ($product->qty)
-                                    <p class="text-sm text-gray-600">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
-                                @endif
-                            </div>
-                            <div class="p-6 border-t border-gray-200">
-                                <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
-                                    <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
-                                    <p class="text-gray-600">{{ $product->location ? config('global.us_states')[$product->location] : '' }}</p>
+                                
+                                <div class="flex-1 p-6 bg-gradient-to-b from-yellow-50 to-white">
+                                    <p class="mb-2 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
+                                    <p class="mb-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
+                                    @if ($product->price)
+                                        <p class="mb-4 text-lg font-semibold text-yellow-600">${{ $product->price }}</p>
+                                    @endif
+                                    <div class="flex items-center my-4 space-x-2">
+                                        <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
+                                    </div>
+                                    @if ($product->qty)
+                                        <p class="text-sm text-gray-600">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
+                                    @endif
                                 </div>
-                                <button class="px-4 py-2 font-bold text-white rounded-xl bg-sky-600 hover:bg-blue-700">
-                                    View Details
-                                </button>
+                                
+                                <div class="p-6 border-t border-yellow-200 bg-yellow-50 rounded-b-xl">
+                                    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                        <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
+                                        <p class="text-gray-600">{{ $product->location ? config('global.us_states')[$product->location] : '' }}</p>
+                                    </div>
+                                    <button class="px-4 py-2 font-bold text-white bg-yellow-500 rounded-xl hover:bg-yellow-600">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                        @else
+                            <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border border-gray-200 shadow-md rounded-2xl hover:border-blue-400 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
+                                <div class="flex flex-col h-full">
+                                    @php
+                                        $images = explode(',', $product->file_path);
+                                        $firstImage = trim($images[0]);
+                                    @endphp 
+
+                                    <img class="object-cover w-full h-56" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
+                                    <div class="flex-1 p-6">
+                                        <p class="mb-4 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
+                                        <p class="mb-4 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
+                                        @if ($product->price)
+                                            <p class="mb-4 font-semibold text-blue-600">${{ $product->price }}</p>
+                                        @endif
+                                        <div class="flex items-center my-4 space-x-2">
+                                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
+                                        </div>
+                                        @if ($product->qty)
+                                            <p class="text-sm text-gray-600">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
+                                        @endif
+                                    </div>
+                                    <div class="p-6 border-t border-gray-200">
+                                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                            <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
+                                            <p class="text-gray-600">{{ $product->location ? config('global.us_states')[$product->location] : '' }}</p>
+                                        </div>
+                                        <button class="px-4 py-2 font-bold text-white rounded-xl bg-sky-600 hover:bg-blue-700">
+                                            View Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </a>
+                    @endif
                 @endforeach
             @endif
         </div>

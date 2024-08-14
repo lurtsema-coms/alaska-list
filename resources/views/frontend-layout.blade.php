@@ -46,7 +46,6 @@
     @livewireStyles
 </head>
 <body class="min-h-screen font-sans antialiased bg-gray-50 text-slate-800">
-    <livewire:frontend.sidebar-sponsor>
     <div class="flex flex-col w-full min-h-screen">
         <!-- Slider main container -->
 

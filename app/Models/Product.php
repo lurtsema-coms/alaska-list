@@ -29,6 +29,7 @@ class Product extends Model
         'approved_at',
     ];
 
+
     public function subCategory(){
         return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
@@ -36,6 +37,21 @@ class Product extends Model
     public function category()
     {
         return $this->subCategory->belongsTo(Category::class, 'category_id');
+    }
+
+    public function specialBoost()
+    {
+        return $this->hasMany(SpecialBoost::class);
+    }
+
+    public function getActiveSpecialBoostCountAttribute()
+    {
+        $today = now()->toDateTimeString();
+
+        return $this->specialBoost()
+            ->where('from_date', '<=', $today)
+            ->where('to_date', '>=', $today)
+            ->count();
     }
 
     public function createdBy()

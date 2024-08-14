@@ -20,7 +20,7 @@ new class extends Component {
     public $qty = '';
     public $description = '';
     public $additional_information = '';
-    #[Validate(['photos.*' => 'image|max:5120'])]
+    #[Validate(['photos' => 'required|array|max:4', 'photos.*' => 'image|max:5120'])]
     public $photos = [];
     public $inc = 1;
 
@@ -40,7 +40,7 @@ new class extends Component {
 
         $product = Product::create([
             'status' => 'ACTIVE',
-            'uuid' => substr(Str::uuid()->toString(), 0, 10),
+            'uuid' => 'Item-Code-'.substr(Str::uuid()->toString(), 0, 10),
             'sub_category_id' => (int)$this->sub_category,
             'name' => $this->title_name,
             'price' => $this->price,
@@ -151,13 +151,13 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price <span class="text-red-400">*</span></p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="price" placeholder="Enter price">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" step="0.01" required wire:model="price" placeholder="Enter price">
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Qty</p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="qty" placeholder="Leave blank if not applicable">
+                                <p class="font-medium text-slate-700">Quantity</p>
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="qty" placeholder="Leave blank if not applicable">
                             </div>
                         </div>
                     </div>
@@ -176,7 +176,7 @@ new class extends Component {
                     <div class="space-y-2">
                         <label class="font-medium text-slate-700">Upload Photos <span class="text-red-400">*</span></label>
                         <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" multiple wire:model="photos" wire:click="resetData(['photos'])" id="upload{{ $inc }}" accept="image/*" required>
-                        
+                        <p class="text-gray-600">Note: Maximum of 4 photos</p>
                         <ul class="mt-2">
                             @foreach(array_reverse($photos) as $index => $photo)
                                 <li wire:key="{{ $index }}" class="text-slate-700">
@@ -184,7 +184,8 @@ new class extends Component {
                                 </li>
                             @endforeach
                         </ul>
-                        @error('photos.*') <div class="mt-4 text-red-500">{{ $message }}</div>@enderror
+                        @error('photos') <span class="text-red-500">{{ $message }}</span> @enderror
+                        @error('photos.*') <span class="text-red-500">{{ $message }}</span> @enderror
                     </div>
                     {{-- Loading Animation --}}
                     <div class="w-full text-center" wire:loading>

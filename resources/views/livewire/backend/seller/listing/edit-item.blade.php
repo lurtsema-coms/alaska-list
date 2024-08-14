@@ -72,9 +72,14 @@ new class extends Component {
     public function saveItem()
     {
         $this->validate();
-        
+
         if(count($this->photos) == 0 && count($this->photos_file) == 0){
             $this->addError('no_photo', 'At least one photo');  
+            return;
+        }
+
+        if(count($this->photos_file) + count($this->photos) > 4){
+            $this->addError('count_photo', 'No more than 4 photos');  
             return;
         }
 
@@ -257,12 +262,12 @@ new class extends Component {
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price <span class="text-red-400">*</span></p>
-                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="price" {{ $status == 'DELETED' ? 'disabled' : '' }}placeholder="Enter price">
+                                <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" step="0.01" required wire:model="price" {{ $status == 'DELETED' ? 'disabled' : '' }}placeholder="Enter price">
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
-                                <p class="font-medium text-slate-700">Qty</p>
+                                <p class="font-medium text-slate-700">Quantity</p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="qty" wire:model="qty" {{ $status == 'DELETED' ? 'disabled' : '' }} placeholder="Leave blank if not applicable">
                             </div>
                         </div>
@@ -308,7 +313,8 @@ new class extends Component {
                                 @endforeach
                             @endif
                         </div>
-                        <div class="text-sm text-red-500">@error('no_photo') {{ $message }} @enderror</div>
+                        @error('photos.*') <span class="text-red-500">{{ $message }}</span> @enderror
+                        @error('count_photo') <span class="text-red-500">{{ $message }}</span> @enderror
                     </div>
                     <div class="space-y-2">
                         <div class="space-y-2">

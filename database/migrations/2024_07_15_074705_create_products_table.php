@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('status');
             $table->text('name');
             $table->string('sub_category_id');
-            $table->text('price');
+            $table->float('price', 8, 2);
             $table->text('qty')->nullable();
             $table->text('location');
             $table->text('description');
