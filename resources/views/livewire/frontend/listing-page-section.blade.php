@@ -154,32 +154,6 @@ new class extends Component {
                     <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
                 </div>
 
-                <div class="flex flex-wrap gap-6">
-                    <div>
-                        <h3 class="mb-2">Location</h3>
-                        <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model.change="location">
-                            <option value="" selected>All Location</option>
-                            @foreach (config('global.us_states') as $key => $location)
-                                <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div>
-                        <h3 class="mb-2">Sort By:</h3>
-                        <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model.change="sort_by">
-                            <option value="" disabled>Select Sorting</option>
-                            <option value="low">Price low to high</option>
-                            <option value="high">Price high to low</option>
-                        </select>
-                    </div>
-                    <div>
-                        <h3 class="mb-2">Price Range:</h3>
-                        <input name="" id="" class="h-12 border border-gray-300 rounded-lg" placeholder="e.g. 100-500"
-                            wire:model.live.debounce.500ms="price_range"
-                        />
-                    </div>
-                </div>
-
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
                     @foreach ($categories as $category)
                         <div class="p-4 bg-gray-100 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
@@ -201,29 +175,58 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="flex flex-wrap items-center justify-end gap-4">
-            <div>
-                <select class="h-12 border border-gray-300 rounded-lg" name="" id="" wire:model.change="pagination">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
+        <div class="flex flex-col justify-between xl:flex-row">
+            <div class="flex flex-wrap gap-4">
+                <div>
+                    <h3 class="mb-2">Location</h3>
+                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model.change="location">
+                        <option value="" selected>All Location</option>
+                        @foreach (config('global.us_states') as $key => $location)
+                            <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <h3 class="mb-2">Sort By:</h3>
+                    <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model.change="sort_by">
+                        <option value="" disabled>Select Sorting</option>
+                        <option value="low">Price low to high</option>
+                        <option value="high">Price high to low</option>
+                    </select>
+                </div>
+                <div>
+                    <h3 class="mb-2">Price Range:</h3>
+                    <input name="" id="" class="h-12 border border-gray-300 rounded-lg" placeholder="e.g. 100-500"
+                        wire:model.live.debounce.500ms="price_range"
+                    />
+                </div>
             </div>
-            <div class="relative w-full p-1 overflow-hidden max-w-60 md:max-w-96 ">
-                <div class="relative w-full">
-                    <input
-                        class="w-full h-12 px-4 pr-10 border rounded-lg text-md border-slate-300"
-                        type="seaerch"
-                        placeholder="Search..."
-                        wire:model.live.debounce.500ms="search"
-                        required>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                        </svg>                    
+            <div class="flex justify-start flex-1 gap-4 xl:justify-end">
+                <div>
+                    <h3 class="mb-2 opacity-0">Paginate</h3>
+                    <select class="h-12 border border-gray-300 rounded-lg" name="" id="" wire:model.change="pagination">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>               
+                <div class="relative w-full overflow-hidden max-w-60 md:max-w-96 ">
+                    <h3 class="mb-2 opacity-0">Search</h3>
+                    <div class="relative w-full">
+                        <input
+                            class="w-full h-12 px-4 pr-10 border rounded-lg text-md border-slate-300"
+                            type="seaerch"
+                            placeholder="Search..."
+                            wire:model.live.debounce.500ms="search"
+                            required>
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>                    
+                        </div>
                     </div>
                 </div>
             </div>
