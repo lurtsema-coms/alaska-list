@@ -17,7 +17,7 @@ new class extends Component {
     public $location;
     public $price_range;
     public $sort_by = "";
-    public $pagination = 3;
+    public $pagination = 5;
 
     public function updated()
     {
@@ -237,7 +237,7 @@ new class extends Component {
                     @else
                         @foreach($products as $product)
                             @if ($product->ActiveSpecialBoostCount)
-                                <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border-4 shadow-lg border-yellow-50 rounded-2xl hover:border-yellow-200 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
+                                <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg border-yellow-50 rounded-2xl hover:border-yellow-200 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
                                     <div class="flex flex-col h-full">
                                         @php
                                             $images = explode(',', $product->file_path);
@@ -253,7 +253,7 @@ new class extends Component {
                                             <p class="mb-2 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
                                             <p class="mb-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
                                             @if ($product->price)
-                                                <p class="mb-4 text-lg font-semibold text-yellow-600">${{ $product->price }}</p>
+                                                <p class="mb-4 text-lg font-semibold text-yellow-600">${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}</p>
                                             @endif
                                             <div class="flex items-center my-4 space-x-2">
                                                 <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
@@ -275,19 +275,22 @@ new class extends Component {
                                     </div>
                                 </a>
                                 @else
-                                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border border-gray-200 shadow-md rounded-2xl hover:border-blue-400 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
+                                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg rounded-2xl hover:border-blue-200 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
                                         <div class="flex flex-col h-full">
                                             @php
                                                 $images = explode(',', $product->file_path);
                                                 $firstImage = trim($images[0]);
                                             @endphp 
-        
-                                            <img class="object-cover w-full h-56" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
-                                            <div class="flex-1 p-6">
-                                                <p class="mb-4 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
-                                                <p class="mb-4 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
+            
+                                            <div class="relative">
+                                                <img class="object-cover w-full h-56 rounded-t-xl" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
+                                            </div>
+                                            
+                                            <div class="flex-1 p-6 to-white">
+                                                <p class="mb-2 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
+                                                <p class="mb-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
                                                 @if ($product->price)
-                                                    <p class="mb-4 font-semibold text-blue-600">${{ $product->price }}</p>
+                                                    <p class="mb-4 text-lg font-semibold text-blue-600">${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}</p>
                                                 @endif
                                                 <div class="flex items-center my-4 space-x-2">
                                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
@@ -296,12 +299,13 @@ new class extends Component {
                                                     <p class="text-sm text-gray-600">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
                                                 @endif
                                             </div>
-                                            <div class="p-6 border-t border-gray-200">
+                                            
+                                            <div class="p-6 border-t rounded-b-xl">
                                                 <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
                                                     <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
                                                     <p class="text-gray-600">{{ $product->location ? config('global.us_states')[$product->location] : '' }}</p>
                                                 </div>
-                                                <button class="px-4 py-2 font-bold text-white rounded-xl bg-sky-600 hover:bg-blue-700">
+                                                <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded-xl hover:bg-blue-600">
                                                     View Details
                                                 </button>
                                             </div>
