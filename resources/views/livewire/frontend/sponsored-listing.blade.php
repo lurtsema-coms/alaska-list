@@ -58,7 +58,7 @@ new class extends Component {
                                 </div>
                                 <div class="p-4 bg-white">
                                     <p class="text-lg font-semibold text-gray-800">{{ \Illuminate\Support\Str::words($sponsor->product->name, 15, '...') }}</p>
-                                    <p class="mt-2 text-sm text-gray-600">Available: {{ $sponsor->product->qty }}</p>
+                                    <p class="mt-2 text-sm text-gray-600">Location: {{ $sponsor->product->location }}</p>
                                     <p class="mt-2 text-sm text-gray-600">{{ \Carbon\Carbon::parse($sponsor->product->created_at)->format('F j, Y') }}</p>
                                 </div>
                             </div>
