@@ -189,7 +189,7 @@ new class extends Component {
                 <div>
                     <h3 class="mb-2">Sort By:</h3>
                     <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model.change="sort_by">
-                        <option value="" disabled>Select Sorting</option>
+                        <option value="">Default</option>
                         <option value="low">Price low to high</option>
                         <option value="high">Price high to low</option>
                     </select>
@@ -217,8 +217,8 @@ new class extends Component {
                     <h3 class="mb-2 opacity-0">Search</h3>
                     <div class="relative w-full">
                         <input
-                            class="w-full h-12 px-4 pr-10 border rounded-lg text-md border-slate-300"
-                            type="seaerch"
+                            class="w-full h-12 px-4 pr-10 border rounded-lg text-md border-slate-300 focus:outline-none focus:ring-0 focus:border-blue-600"
+                            type="text"
                             placeholder="Search..."
                             wire:model.live.debounce.500ms="search"
                             required>
