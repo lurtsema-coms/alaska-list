@@ -51,6 +51,20 @@ new class extends Component {
     public function editSpecialBoost()
     {
         $photo = $this->photo;
+        
+        $photo_img = Image::make($photo);
+        $photo_height = $photo_img->getHeight();
+        $photo_width = $photo_img->getWidth();
+
+        if(empty($photo)){
+            $this->dispatch('error');
+            return;
+        }
+
+        if($photo_width != 1280 && $photo_height != 550){
+            $this->addError('image_constraint', 'The image width must be 1280 pixels and the height must be 550 pixels.');
+            return;
+        }
 
         $advertisement = Advertisement::with('advertisingPlan')->withTrashed()->find($this->advertisement_id);
         
@@ -72,7 +86,7 @@ new class extends Component {
             // Optimize image
             $file_path = storage_path("app/" . $path);
             $image = Image::make($file_path);
-            $image->resize(1280, 350, function ($constraint) {
+            $image->resize(1280, 550, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -171,9 +185,16 @@ new class extends Component {
                                 </div>
                             @endif
                             <div class="flex flex-col space-y-2">
-                                <label class="font-medium text-slate-700">{{ $file_path ? "Replace New Photo" : "Add Photo"}}</label>
+                                <label class="font-medium text-slate-700">Replace New Photo</label>
                                 <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" wire:model="photo" id="upload-{{ $inc }}">
                             </div>
+                            @error('image_constraint')                                
+                                <div>
+                                    <p class="mb-2 text-sm text-red-600">
+                                        Note: {{ $message }}
+                                    </p>
+                                </div>
+                            @enderror
                             {{-- Loading Animation --}}
                             <div class="w-full text-center" wire:loading>
                                 <div class="flex items-center justify-center gap-2">

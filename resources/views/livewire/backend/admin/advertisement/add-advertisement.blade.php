@@ -37,9 +37,19 @@ new class extends Component {
     public function addAds()
     {
         $photo = $this->photo;
+        
+        $photo_img = Image::make($photo);
+        $photo_height = $photo_img->getHeight();
+        $photo_width = $photo_img->getWidth();
 
         if(empty($photo)){
             $this->dispatch('error');
+            return;
+        }
+
+        if($photo_width != 1280 && $photo_height != 550){
+            $this->addError('image_constraint', 'The image width must be 1280 pixels and the height must be 550 pixels.');
+            return;
         }
         
         $uuid = 'ad-'.substr(Str::uuid()->toString(), 0, 8);
@@ -64,9 +74,12 @@ new class extends Component {
             // Optimize image
             $file_path = storage_path("app/" . $path);
             $image = Image::make($file_path);
-            $image->resize(800, null, function ($constraint) {
+            $image->resize(1280, 550, function ($constraint) {
                 $constraint->aspectRatio();
+                $constraint->upsize();
             });
+
+            $image->fit(1280, 550);
             $image->save($file_path, 80);
 
             $f_path = "storage/photos/advertisement/$file_name";
@@ -135,7 +148,7 @@ new class extends Component {
             @click.outside="addAdvertisement=false; $wire.call('resetData', ['advertising_plan', 'from_date', 'to_date', 'to_date_computed', 'photo']); $('#advertising-plan').selectize()[0].selectize.clear();">
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="addAds">
-                        <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Add Boost</p>
+                        <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Add</p>
                         <div class="space-y-4">
                             <div class="flex flex-col gap-4 sm:flex-row">
                                 <div class="flex-1 space-y-2" wire:ignore>
@@ -159,14 +172,21 @@ new class extends Component {
                                 </div>
                             </div>
                             <div class="space-y-2">
-                                <label class="font-medium text-slate-700">Upload Photos <span class="text-red-400">*</span></label>
+                                <label class="font-medium text-slate-700">Upload Photo <span class="text-red-400">*</span></label>
                                 <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" required wire:model="photo" id="upload-{{ $inc }}">
                             </div>
                             <div>
                                 <p class="mb-2 text-sm text-gray-600">
-                                    Requirement: For best quality in advertising, the image should be exactly 300px in height and 600px in width.
+                                    Requirement: For best quality in advertising, the image should be exactly 550px in height and 1280px in width.
                                 </p>
                             </div>
+                            @error('image_constraint')                                
+                                <div>
+                                    <p class="mb-2 text-sm text-red-600">
+                                        Note: {{ $message }}
+                                    </p>
+                                </div>
+                            @enderror
                             {{-- Loading Animation --}}
                             <div class="w-full text-center" wire:loading>
                                 <div class="flex items-center justify-center gap-2">
