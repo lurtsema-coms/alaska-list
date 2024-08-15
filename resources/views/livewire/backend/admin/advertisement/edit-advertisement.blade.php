@@ -52,7 +52,7 @@ new class extends Component {
     {
         $photo = $this->photo;
 
-        $advertisement = Advertisement::with('advertisingPlan')->find($this->advertisement_id);
+        $advertisement = Advertisement::with('advertisingPlan')->withTrashed()->find($this->advertisement_id);
         
         $advertisement->update([
             'from_date' => $this->from_date,
@@ -72,9 +72,12 @@ new class extends Component {
             // Optimize image
             $file_path = storage_path("app/" . $path);
             $image = Image::make($file_path);
-            $image->resize(800, null, function ($constraint) {
+            $image->resize(1280, 350, function ($constraint) {
                 $constraint->aspectRatio();
+                $constraint->upsize();
             });
+
+            $image->fit(1280, 550);
             $image->save($file_path, 80);
 
             $f_path = "storage/photos/advertisement/$file_name";

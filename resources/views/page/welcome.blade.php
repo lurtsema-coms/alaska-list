@@ -32,11 +32,11 @@
             <h2 class="mb-4 text-3xl font-bold text-center sm:text-4xl text-slate-700">Discover Top Deals in Alaska</h2>
             <p class="max-w-3xl mb-12 text-lg text-center text-slate-500">Explore unbeatable offers and a wide range of products and services across Alaska. Alaska List is your go-to marketplace for finding top deals in your local area. Start your search today!</p>
         </div>
-        <div class="flex flex-col gap-8 m-auto max-w-[85rem] xl:flex-row">
-            <div class="w-full mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl" data-aos="fade-right">
+        <div class="flex flex-col gap-8 m-auto max-w-7xl">
+            <div class="w-full mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-7xl" data-aos="fade-right">
                 <livewire:frontend.ads-listing/>
-            </div>          
-            <div class="flex flex-col justify-center flex-1 gap-4 px-5 md:px-0">
+            </div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @php
                     $queryParamFurniture = 'sc_names[' . '0' . ']=' . urlencode('furniture');
                     $furniture = route('listing-page') . '?' . $queryParamFurniture;
@@ -47,23 +47,23 @@
                     $queryParamRealEstate = 'sc_names[' . '0' . ']=' . urlencode('real state');
                     $real_estate = route('listing-page') . '?' . $queryParamRealEstate;
                 @endphp
-                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $furniture }}" wire:navigate data-aos="fade-right">
+                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $furniture }}" wire:navigate data-aos="fade-right">
                     <p class="text-xl font-bold text-gray-700">Furnitures</p>
                     <p class="text-gray-700">Discover a wide selection of sofas, tables, and chairs for sale, both new and used.</p>
                 </a>
-                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $electronic }}" wire:navigate data-aos="fade-right">
+                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $electronic }}" wire:navigate data-aos="fade-right">
                     <div>
                         <p class="text-xl font-bold text-gray-700">Electronics</p>
                         <p class="text-gray-700">Explore deals on smartphones, laptops, and gadgets from leading brands.</p>
                     </div>
                 </a>
-                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $vehicle }}" wire:navigate data-aos="fade-right">
+                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $vehicle }}" wire:navigate data-aos="fade-right">
                     <div>
                         <p class="text-xl font-bold text-gray-700">Vehicles</p>
                         <p class="text-gray-700">Find cars, trucks, motorcycles, and RVs for sale near you, both use.</p>
                     </div>
                 </a>
-                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $real_estate }}" wire:navigate data-aos="fade-right">
+                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $real_estate }}" wire:navigate data-aos="fade-right">
                     <div>
                         <p class="text-xl font-bold text-gray-700">Real Estate</p>
                         <p class="text-gray-700">Browse listings for apartments, houses, and commercial properties.</p>

@@ -26,13 +26,13 @@ new class extends Component {
 
 <div>
     @if (count($campaigns) != 0)
-        <div class="w-full swiper-add-listing-item swiper">
+        <div class="w-full h-full swiper-add-listing-item swiper">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 @foreach ($campaigns as $campaign)
                     <div class="swiper-slide " wire:key="ad-listing-{{ $campaign->id }}">
                         <div class="swiper-slide">
-                            <img class="object-cover w-full rounded-2xl" src="{{ asset($campaign->file_path) }}" alt="{{ $campaign->uuid }}" loading="lazy">
+                            <img class="object-cover w-full h-full rounded-2xl" src="{{ asset($campaign->file_path) }}" alt="{{ $campaign->uuid }}" loading="lazy">
                         </div>
                     </div>
                 @endforeach
