@@ -14,7 +14,7 @@ new class extends Component {
 }; ?>
 
 <div class="sticky top-0 z-20" x-data="{ sidebarOpen: false }">
-    <div class="shadow-lg border-b-1 bg-gray-50">
+    <div class="shadow-md border-b-1 bg-gray-50">
         <div class="px-5 py-2 mx-auto sm:container">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-5">

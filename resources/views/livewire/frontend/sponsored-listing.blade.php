@@ -35,9 +35,9 @@ new class extends Component {
         <div class="swiper-wrapper">
             @foreach ($sponsors as $sponsor)
                 <div class="swiper-slide " wire:key="sponsor-listing-{{ $sponsor->id }}">
-                    <div class="py-6 swiper-slide">
+                    <div class="swiper-slide">
                         <a class="w-full overflow-hidden" href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate>
-                            <div class="w-full m-auto overflow-hidden border border-gray-200 shadow-lg max-h-96 max-w-[22rem] rounded-xl hover:border-blue-400">
+                            <div class="w-full m-auto overflow-hidden border border-gray-200 max-h-96 max-w-[80rem] rounded-xl hover:border-blue-400">
                                 <div class="relative">
                                     @if ($sponsor->file_path)
                                         <img class="object-cover w-full h-48" src="{{ asset($sponsor->file_path) }}" alt="{{ $sponsor->product->name }}" loading="lazy">
@@ -70,7 +70,7 @@ new class extends Component {
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
         <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        {{-- <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div> --}}
     </div>
 </div>
