@@ -148,7 +148,7 @@ new class extends Component {
     </div>
     <div class="space-y-10">
         <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl">
-            <div class="p-4 space-y-4 overflow-y-auto max-h-80 ">
+            <div class="space-y-4 overflow-y-auto max-h-80 sm:p-4">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
                     <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
@@ -160,7 +160,7 @@ new class extends Component {
                             <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
                             <div class="grid grid-cols-2 gap-2">
                                 @foreach($category->subCategories as $sub_category)
-                                    <label class="inline-flex items-start space-x-2 cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                                    <label class="flex items-center space-x-2 cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
                                         <input type="checkbox"
                                             class="w-5 h-5 text-blue-600 "
                                             wire:model.change="sc_names"
