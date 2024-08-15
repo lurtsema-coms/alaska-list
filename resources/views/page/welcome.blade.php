@@ -2,22 +2,23 @@
 
 @section('body-content')
 {{-- hero section --}}
-<div class="mx-auto overflow-hidden min-h-[50rem]" data-aos="zoom-in-up">
-    <div class="absolute w-full h-full bg-center bg-cover">
-        <video class="absolute top-0 left-0 object-cover w-full h-full" autoplay muted loop style="object-position: 50% 5%;">
+<div class="mx-auto overflow-hidden md:min-h-[50rem]" data-aos="zoom-in-up">
+    <div class="w-full h-full bg-center bg-cover md:absolute">
+        <img src="{{ asset('frontend/hero.png') }}" alt="" class="md:hidden">
+        <video class="absolute top-0 left-0 hidden object-cover w-full h-full md:block" autoplay muted loop style="object-position: 50% 5%;">
             <source src="{{ asset('frontend/vid_banner.mp4') }}" type="video/mp4">
         </video>
     </div>
-    <div class="relative h-auto sm:min-h-[50rem] w-full sm:container mx-auto md:rounded-2xl">
-        <div class="min-h-[50rem] flex md:p-10">
-            <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 mt-[28rem] text-white">
+    <div class="relative h-auto md:min-h-[50rem] w-full sm:container mx-auto md:rounded-2xl">
+        <div class="flex md:p-10 md:min-h-[50rem]">
+            <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 mt-8 md:mt-[28rem] text-white">
                 <div class="flex justify-center mt-4" >
-                    <a class="bg-search-gradient text-3xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('listing-page') }}" wire:navigate>
+                    <a class="bg-search-gradient text-xl md:text-3xl px-6 py-3 rounded-full md:border-2 md:border-white font-extrabold shadow-sm md:shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('listing-page') }}" wire:navigate>
                         BROWSE ITEMS
                     </a>
                 </div>
-                <div class="flex justify-center mt-4" >
-                    <a class="bg-search-gradient text-2xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('dashboard') }}" wire:navigate>
+                <div class="flex justify-center md:mt-4" >
+                    <a class="bg-search-gradient text-xl md:text-2xl px-6 py-3 rounded-full md:border-2 md:border-white font-extrabold shadow-sm md:shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('dashboard') }}" wire:navigate>
                         SELL NOW
                     </a>
                 </div>
