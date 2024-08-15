@@ -18,6 +18,7 @@ new class extends Component {
     public $posted_by;
     public $posted_at;
     public $contact;
+    public $is_boosted;
 
     public function mount()
     {
@@ -36,6 +37,7 @@ new class extends Component {
         $this->description = $product->description;
         $this->additional_information = $product->additional_information;
         $this->posted_at = $product->created_at;
+        $this->is_boosted = $product->ActiveSpecialBoostCount;
 
         if(!empty($product->file_name)){
             $file_names = explode(',', $product->file_name);
@@ -65,14 +67,19 @@ new class extends Component {
         <div class="max-w-4xl">
             <p class="max-w-lg mb-4 text-xl font-bold">{{ $title_name }}</p>
             <div class="space-y-8">
-                <div class="px-5 py-10 shadow-md rounded-xl">
-                    <p class="mb-4 text-right">
+                <div class="px-5 py-10 shadow-md rounded-xl {{ $is_boosted != 0 ? "border-4 border-yellow-200 bg-gradient-to-b from-yellow-50 to-white" : "" }}">
+                    <p class="mb-4 space-x-2 text-right">
+                        @if ($is_boosted != 0)
+                            <span class="inline-block px-4 py-1 text-sm font-semibold text-white bg-yellow-500 rounded-full shadow-sm">
+                                Boosted
+                            </span>
+                        @endif
                         @if ($qty === 0)                            
                             <span class="inline-block px-4 py-1 text-sm font-semibold text-red-700 bg-red-100 rounded-full shadow-sm">
                                 Not Available
                             </span>
                         @else
-                            <span class="inline-block px-4 py-1 text-sm font-semibold text-green-700 bg-green-100 rounded-full shadow-sm">
+                            <span class="inline-block px-4 py-1 text-sm font-semibold text-white bg-green-500 rounded-full shadow-sm">
                                 Available
                             </span>
                         @endif

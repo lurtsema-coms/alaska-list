@@ -28,9 +28,11 @@
 {{-- Categories Section --}}
 <div>
     <div class="container px-5 mx-auto mt-28">
-        <h2 class="mb-4 text-3xl font-bold text-center sm:text-4xl text-slate-700">Explore Our Categories</h2>
-        <p class="mb-12 text-lg text-center text-slate-500">Find the best deals and discover a wide range of products across various categories. Start exploring now!</p>
-        <div class="flex flex-col gap-8 xl:flex-row">
+        <div class="flex flex-col items-center">
+            <h2 class="mb-4 text-3xl font-bold text-center sm:text-4xl text-slate-700">Discover Top Deals in Alaska</h2>
+            <p class="max-w-3xl mb-12 text-lg text-center text-slate-500">Explore unbeatable offers and a wide range of products and services across Alaska. Alaska List is your go-to marketplace for finding top deals in your local area. Start your search today!</p>
+        </div>
+        <div class="flex flex-col gap-8 m-auto max-w-[85rem] xl:flex-row">
             <div class="w-full mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl" data-aos="fade-right">
                 <livewire:frontend.ads-listing/>
             </div>          
@@ -45,54 +47,28 @@
                     $queryParamRealEstate = 'sc_names[' . '0' . ']=' . urlencode('real state');
                     $real_estate = route('listing-page') . '?' . $queryParamRealEstate;
                 @endphp
-                <a class="flex flex-col flex-1 p-4 mb-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $furniture }}" wire:navigate data-aos="fade-right">
-                    <div>
-                        <p class="text-xl font-bold text-gray-700">Furnitures</p>
-                        <p class="text-gray-700">Discover a wide selection of sofas, tables, and chairs for sale, both new and used.</p>
-                    </div>
-                    {{-- <div class="flex justify-end flex-1 mt-3">
-                        <img class="object-contain w-16" src="{{ asset('icon-img/lamp.png') }}" alt="">
-                    </div> --}}
+                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $furniture }}" wire:navigate data-aos="fade-right">
+                    <p class="text-xl font-bold text-gray-700">Furnitures</p>
+                    <p class="text-gray-700">Discover a wide selection of sofas, tables, and chairs for sale, both new and used.</p>
                 </a>
-                <a class="flex flex-col flex-1 p-4 mb-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $electronic }}" wire:navigate data-aos="fade-right">
+                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $electronic }}" wire:navigate data-aos="fade-right">
                     <div>
                         <p class="text-xl font-bold text-gray-700">Electronics</p>
                         <p class="text-gray-700">Explore deals on smartphones, laptops, and gadgets from leading brands.</p>
                     </div>
-                    {{-- <div class="flex justify-end flex-1 mt-3">
-                        <img class="object-contain w-16" src="{{ asset('icon-img/gadgets.png') }}" alt="">
-                    </div> --}}
                 </a>
-                <a class="flex flex-col flex-1 p-4 mb-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $vehicle }}" wire:navigate data-aos="fade-right">
+                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $vehicle }}" wire:navigate data-aos="fade-right">
                     <div>
                         <p class="text-xl font-bold text-gray-700">Vehicles</p>
                         <p class="text-gray-700">Find cars, trucks, motorcycles, and RVs for sale near you, both use.</p>
                     </div>
-                    {{-- <div class="flex justify-end flex-1 mt-3">
-                        <img class="object-contain w-16" src="{{ asset('icon-img/car.png') }}" alt="">
-                    </div> --}}
                 </a>
-                <a class="flex flex-col flex-1 p-4 mb-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $real_estate }}" wire:navigate data-aos="fade-right">
+                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer bg-gray-50 min-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $real_estate }}" wire:navigate data-aos="fade-right">
                     <div>
                         <p class="text-xl font-bold text-gray-700">Real Estate</p>
                         <p class="text-gray-700">Browse listings for apartments, houses, and commercial properties.</p>
                     </div>
-                    {{-- <div class="flex justify-end flex-1 mt-3">
-                        <img class="object-contain w-16" src="{{ asset('icon-img/house.png') }}" alt="">
-                    </div> --}}
                 </a>
-                {{-- <div class="w-32 mb-4 transition-all bg-gray-100 shadow-md cursor-pointer rounded-l-xl hover:border hover:bg-gray-200" data-aos="fade-right">
-                    <a href="{{ route('listing-page') }}" wire:navigate>
-                        <div class="flex flex-col items-center justify-center h-full gap-4">
-                            <div class="p-3 border rounded-full bg-gray-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                                </svg>
-                            </div>
-                            <p class="font-medium text-slate-600">See all</p>
-                        </div>
-                    </a>
-                </div> --}}
             </div>
         </div>
         <div class="flex justify-center mt-12">

@@ -27,8 +27,8 @@ new class extends Component {
 }; ?>
 
 <div>
-    @if (count($sponsors) == 0)
-        <p class="text-sm text-center text-gray-600">No other products are boosted at the moment. Take advantage of this opportunity to get your product noticed first.</p>
+    @if (count($sponsors) != 0)
+        <p class="mb-2 font-bold text-gray-600">You might also like</p>
     @endif
     <div class="w-full sponsored-listing swiper">
         <!-- Additional required wrapper -->
