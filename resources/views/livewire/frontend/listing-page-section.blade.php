@@ -275,7 +275,7 @@ new class extends Component {
                                     </div>
                                 </a>
                                 @else
-                                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg rounded-2xl hover:border-blue-200 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
+                                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg rounded-2xl hover:border-blue-400 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
                                         <div class="flex flex-col h-full">
                                             @php
                                                 $images = explode(',', $product->file_path);
