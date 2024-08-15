@@ -111,7 +111,7 @@ new class extends Component {
                     @if ($qty)
                         <p><span class="font-bold">Available: </span> <span class="text-gray-600">{{ $qty }}</span></p>
                     @endif
-                    <p><span class="font-bold">Contact: </span> <span class="text-gray-600">{{ $uuid }}</span></p>
+                    <p><span class="font-bold">ID: </span> <span class="text-gray-600">{{ $uuid }}</span></p>
                 </div>
                 <div class="space-y-2">
                     <p class="font-bold">Description</p>
