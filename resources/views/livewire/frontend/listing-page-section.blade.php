@@ -147,7 +147,7 @@ new class extends Component {
         <h2 class="text-4xl font-bold text-white">Listing Page</h2>
     </div>
     <div class="space-y-10">
-        <div class="p-4 mx-auto bg-white border max-w-8xl rounded-2xl">
+        <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl">
             <div class="p-4 space-y-4 overflow-y-auto max-h-80 ">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
@@ -240,7 +240,7 @@ new class extends Component {
                     @else
                         @foreach($products as $product)
                             @if ($product->ActiveSpecialBoostCount)
-                                <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg border-yellow-50 rounded-2xl hover:border-yellow-200 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
+                                <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg border-yellow-50 rounded-2xl hover:border-yellow-600 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
                                     <div class="flex flex-col h-full">
                                         @php
                                             $images = explode(',', $product->file_path);

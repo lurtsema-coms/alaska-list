@@ -26,23 +26,23 @@ new class extends Component {
                     @click="sidebarOpen = true;">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
-                <div class="items-center justify-end hidden w-full gap-4 lg:flex xl:px-0">
+                <div class="items-center justify-end hidden w-full gap-2 lg:flex xl:px-0">
                     <a class="relative px-1 group {{ request()->routeIs('welcome') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="{{ route('welcome') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('welcome') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        {{-- <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('welcome') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span> --}}
                     </a>
 
                     <a class="relative px-1 group {{ request()->routeIs('listing-page') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="{{ route('listing-page') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('listing-page') ? 'Listing Page' : 'Listing Page' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('listing-page') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        {{-- <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('listing-page') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span> --}}
                     </a>
 
                     <a class="relative px-1 group {{ request()->routeIs('about-us') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="{{ route('about-us') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('about-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        {{-- <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('about-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span> --}}
                     </a>
 
                     {{-- <a class="relative px-1 group {{ request()->routeIs('get-in-touch') ? 'text-slate-950' : 'text-gray-600' }}" 
@@ -54,7 +54,7 @@ new class extends Component {
                     <a class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? 'text-slate-950' : 'text-gray-600' }}" 
                     href="{{ route('advertise-with-us') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
-                        <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('advertise-with-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
+                        {{-- <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 {{ request()->routeIs('advertise-with-us') ? 'w-full' : 'w-0 group-hover:w-full' }}"></span> --}}
                     </a>
 
                     @guest
@@ -66,7 +66,7 @@ new class extends Component {
                         @else
                         <a class="relative px-1 group" href="{{ route('dashboard') }}" wire:navigate>
                             <span class="text-gray-600 transition-opacity group-hover:text-slate-950">Dashboard</span>
-                            <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 w-0 group-hover:w-full"></span>
+                            {{-- <span class="absolute left-0 h-1 transition-all bg-[#70B7E5] -bottom-3 w-0 group-hover:w-full"></span> --}}
                         </a>
                     @endguest
                     {{-- <div class="relative w-full p-1 overflow-hidden max-w-60 md:max-w-96 ">

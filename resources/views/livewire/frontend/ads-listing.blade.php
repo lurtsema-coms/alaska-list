@@ -32,12 +32,14 @@ new class extends Component {
                 @foreach ($campaigns as $campaign)
                     <div class="swiper-slide " wire:key="ad-listing-{{ $campaign->id }}">
                         <div class="swiper-slide">
-                            <img class="object-cover w-full h-48 rounded-2xl" src="{{ asset($campaign->file_path) }}" alt="{{ $campaign->uuid }}" loading="lazy">
+                            <img class="object-cover w-full rounded-2xl" src="{{ asset($campaign->file_path) }}" alt="{{ $campaign->uuid }}" loading="lazy">
                         </div>
                     </div>
                 @endforeach
             </div>  
         </div>
+        @else
+            <img class="object-cover w-full rounded-2xl" src="{{ asset('frontend/ads.jpg') }}" alt="">
     @endif
 </div>
 
