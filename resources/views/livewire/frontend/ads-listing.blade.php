@@ -39,7 +39,7 @@ new class extends Component {
             </div>  
         </div>
         @else
-            <img class="object-cover w-full rounded-2xl" src="{{ asset('frontend/ads.jpg') }}" alt="">
+            <img class="object-cover w-full max-w-2xl m-auto rounded-2xl" src="{{ asset('frontend/ads.jpg') }}" alt="">
     @endif
 </div>
 
