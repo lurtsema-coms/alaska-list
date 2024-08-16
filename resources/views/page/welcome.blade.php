@@ -8,16 +8,16 @@
             <source src="{{ asset('frontend/vid_banner.mp4') }}" type="video/mp4">
         </video>
     </div>
-    <div class="relative h-auto  w-full sm:container mx-auto md:rounded-2xl">
+    <div class="relative w-full h-auto mx-auto sm:container md:rounded-2xl">
         <div class="min-h-[50rem] flex md:p-10">
             <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 mt-[5rem] md:mt-[30rem] lg:mt-[28rem] text-white">
                 <div class="flex justify-center mt-4" >
-                    <a class="bg-search-gradient text-2xl sm:text-3xl px-6 py-3 rounded-full border-2 border-white  font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70 " href="{{ route('listing-page') }}" wire:navigate>
+                    <a class="bg-search-gradient text-2xl sm:text-3xl px-6 py-3 rounded-full sm:border-2 sm:border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70 " href="{{ route('listing-page') }}" wire:navigate>
                         BROWSE ITEMS
                     </a>
                 </div>  
-                <div class="flex justify-center mt-4" >
-                    <a class="bg-search-gradient text-xl sm:text-2xl px-6 py-3 rounded-full border-2 border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('dashboard') }}" wire:navigate>
+                <div class="flex justify-center mt-2 sm:mt-4" >
+                    <a class="bg-search-gradient text-xl sm:text-2xl px-6 py-3 rounded-full sm:border-2 sm:border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('dashboard') }}" wire:navigate>
                         SELL NOW
                     </a>
                 </div>

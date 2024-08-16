@@ -65,7 +65,12 @@ new class extends Component {
             </span>
         </a>
         <div class="max-w-4xl">
-            <p class="max-w-lg mb-4 text-xl font-bold">{{ $title_name }}</p>
+            <div class="flex items-center justify-between gap-4 mb-4">
+                <div class="flex-1">
+                    <p class="max-w-lg text-xl font-bold">{{ $title_name }}</p>
+                </div>
+                <livewire:frontend.report-listing/>
+            </div>
             <div class="space-y-8">
                 <div class="px-5 py-10 shadow-md rounded-xl {{ $is_boosted != 0 ? "border-4 border-yellow-200 bg-gradient-to-b from-yellow-50 to-white" : "" }}">
                     <p class="mb-4 space-x-2 text-right">
