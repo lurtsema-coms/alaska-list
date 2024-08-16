@@ -65,7 +65,7 @@ new class extends Component {
             </span>
         </a>
         <div class="max-w-4xl">
-            <div class="flex items-center justify-between gap-4 mb-4">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
                 <div class="flex-1">
                     <p class="max-w-lg text-xl font-bold">{{ $title_name }}</p>
                 </div>
