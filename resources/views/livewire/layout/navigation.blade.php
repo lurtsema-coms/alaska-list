@@ -81,7 +81,7 @@ new class extends Component
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                        <button wire:click="logout" class="w-full text-start">
+                        <button wire:click="logout" class="w-full text-start" x-on:click="localStorage.setItem('prohibitedModal', 'true');">
                             <x-dropdown-link>
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -141,7 +141,7 @@ new class extends Component
                 <div class="text-base font-medium text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->first_name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
                 <div class="text-sm font-medium text-gray-500">{{ auth()->user()->email }}</div>
             </div>
-
+            
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile')" wire:navigate>
                     {{ __('Profile') }}
@@ -149,7 +149,7 @@ new class extends Component
 
                 <!-- Authentication -->
                 <button wire:click="logout" class="w-full text-start">
-                    <x-responsive-nav-link>
+                    <x-responsive-nav-link x-on:click="localStorage.setItem('prohibitedModal', 'true');">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </button>

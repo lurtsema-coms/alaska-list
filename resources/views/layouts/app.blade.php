@@ -94,6 +94,9 @@
 
             <!-- Page Content -->
             <main>
+                @role('seller')
+                    <livewire:component.prohibited-listing-modal />
+                @endrole
                 {{ $slot }}
             </main>
         </div>
