@@ -43,7 +43,7 @@ new class extends Component {
                 <div class="absolute inset-0 z-20 w-full h-full opacity-70 bg-gradient-to-t from-black"></div>
                 <img src="https://cdn.devdojo.com/images/may2023/pines-bg-1.png" class="z-10 object-cover w-full h-full" />
             </div>
-            <div class="relative flex flex-wrap items-center w-full h-full">
+            <div class="relative flex flex-wrap items-center w-full h-full px-8">
                     
                 <div class="relative w-full max-w-sm mx-auto lg:mb-0">
                     <div class="relative text-center">
