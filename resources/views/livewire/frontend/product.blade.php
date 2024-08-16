@@ -5,6 +5,7 @@ use Livewire\Volt\Component;
 
 new class extends Component {
     
+    public $product;
     public $product_id;
     public $uuid;
     public $sub_category = '';
@@ -25,6 +26,7 @@ new class extends Component {
         $product_id = request()->route('id');
         $product = Product::with('subCategory', 'createdBy')->find($product_id);
         
+        $this->product = $product;
         $this->uuid = $product->uuid;
         $this->product_id = $product->id;
         $this->posted_by = $product->createdBy->first_name." ".$product->createdBy->last_name;
@@ -69,7 +71,7 @@ new class extends Component {
                 <div class="flex-1">
                     <p class="max-w-lg text-xl font-bold">{{ $title_name }}</p>
                 </div>
-                <livewire:frontend.report-listing/>
+                <livewire:frontend.report-listing :product="$product"/>
             </div>
             <div class="space-y-8">
                 <div class="px-5 py-10 shadow-md rounded-xl border {{ $is_boosted != 0 ? "!border-4 border-yellow-200 bg-gradient-to-b from-yellow-50 to-white" : "" }}">
