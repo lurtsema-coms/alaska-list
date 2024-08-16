@@ -72,7 +72,7 @@ new class extends Component {
                 <livewire:frontend.report-listing/>
             </div>
             <div class="space-y-8">
-                <div class="px-5 py-10 shadow-md rounded-xl {{ $is_boosted != 0 ? "border-4 border-yellow-200 bg-gradient-to-b from-yellow-50 to-white" : "" }}">
+                <div class="px-5 py-10 shadow-md rounded-xl border {{ $is_boosted != 0 ? "!border-4 border-yellow-200 bg-gradient-to-b from-yellow-50 to-white" : "" }}">
                     <p class="mb-4 space-x-2 text-right">
                         @if ($is_boosted != 0)
                             <span class="inline-block px-4 py-1 text-sm font-semibold text-white bg-yellow-500 rounded-full shadow-sm">
