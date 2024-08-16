@@ -30,7 +30,8 @@ class Product extends Model
     ];
 
 
-    public function subCategory(){
+    public function subCategory()
+    {
         return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
 
@@ -39,10 +40,15 @@ class Product extends Model
         return $this->subCategory->belongsTo(Category::class, 'category_id');
     }
 
+    public function productIssue(){
+        return $this->hasMany(ProductIssue::class, 'product_id');
+    }
+
     public function specialBoost()
     {
         return $this->hasMany(SpecialBoost::class);
     }
+    
 
     public function getActiveSpecialBoostCountAttribute()
     {

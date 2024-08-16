@@ -54,7 +54,7 @@ new class extends Component {
     @keydown.escape="fullscreenModal=false"
     >
     <x-modal-success :message="'The problem has been reported successfully. We will look into it and get back to you shortly.'"/>
-    <button @click="fullscreenModal=true;" class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors bg-white border rounded-md hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Report Problem</button>
+    <button @click="fullscreenModal=true;" class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors bg-white border rounded-md hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Report</button>
     <template x-teleport="body">
         <div 
             x-show="fullscreenModal"
@@ -75,7 +75,7 @@ new class extends Component {
                     <img class="max-w-24" src="{{ asset('img/logo/logo-white.png') }}" alt="">
                 </a>
                 <div class="absolute inset-0 z-20 w-full h-full opacity-70 bg-gradient-to-t from-black"></div>
-                <img src="https://cdn.devdojo.com/images/may2023/pines-bg-1.png" class="z-10 object-cover w-full h-full" />
+                <img src="https://cdn.devdojo.com/images/may2023/pines-bg-1.png" class="z-10 object-cover w-full min-h-full" />
             </div>
             <div class="relative flex flex-wrap items-center w-full h-full px-8">
                     

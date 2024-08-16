@@ -124,7 +124,7 @@ new class extends Component {
                                 {{ Str::limit($product->description, 100) }}
                             </td>
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-normal">
-                                {{ $product->qty }}
+                                {{ $product->qty ? $product->qty : 0 }}
                             </td>
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 {{ $product->created_at->format('Y-m-d') }}

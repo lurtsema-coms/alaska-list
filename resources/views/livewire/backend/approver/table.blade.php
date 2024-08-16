@@ -24,11 +24,17 @@ new class extends Component {
     public function loadProducts()
     {
         $query = Product::withTrashed()
-            ->with('subCategory.category')
+            ->with('subCategory.category', 'productIssue', 'createdBy')
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('uuid', 'like', '%' . $this->search . '%')
                     ->orWhere('description', 'like', '%' . $this->search . '%')
                     ->orWhere('status', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('createdBy', function ($createdByQuery) {
+                        $createdByQuery->whereRaw("CONCAT(first_name, ' ', last_name) like ?", ['%' . $this->search . '%'])
+                            ->orWhere('contact_number', 'like', '%' . $this->search . '%')
+                            ->orWhere('email', 'like', '%' . $this->search . '%');
+                    })
                     ->orWhereHas('subCategory', function ($query) {
                         $query->where('name', 'like', '%' . $this->search . '%');
                     })
@@ -60,6 +66,9 @@ new class extends Component {
                             Status
                         </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Item Code
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Category
                         </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
@@ -73,6 +82,18 @@ new class extends Component {
                         </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Description
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Report
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Created By
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Contact#
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Email
                         </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Created At
@@ -94,6 +115,9 @@ new class extends Component {
                                 </span>
                             </td>
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                                {{ $product->uuid }}
+                            </td>
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 {{ $product->category->name }}
                             </td>
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
@@ -109,6 +133,18 @@ new class extends Component {
                                 {{ Str::limit($product->description, 100) }}
                             </td>
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                                {{ count($product->productIssue) }}
+                            </td>
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                                {{ $product->createdBy->first_name.' '.$product->createdBy->last_name }}
+                            </td>
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                                {{ $product->createdBy->contact_number }}
+                            </td>
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                                {{ $product->createdBy->email }}
+                            </td>
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 {{ $product->created_at->format('Y-m-d') }}
                             </td>
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
@@ -117,6 +153,7 @@ new class extends Component {
                             <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                                 <div class="flex items-center gap-2">
                                     <livewire:backend.approver.update-item wire:key="approver-update-listing-{{ $product->id }}" :id="$product->id"/>
+                                    <livewire:backend.approver.review-item wire:key="approver-review-listing-{{ $product->id }}" :productIssue="$product->productIssue"/>
                                 </div>
                             </td>
                         </tr>

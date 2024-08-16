@@ -108,6 +108,7 @@ new class extends Component {
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
+                    <p class="mt-4 text-center">{{ count($photos) > 1 ? count($photos).' '.'Images' : '1 Image' }} Available</p>
                 </div>
                 <div class="space-y-2">
                     <p><span class="font-bold">Posted by: </span> <span class="text-gray-600">{{ $posted_by }}</span></p>

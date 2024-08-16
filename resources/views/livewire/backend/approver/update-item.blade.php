@@ -111,7 +111,7 @@ new class extends Component {
     })">
     <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500"
     @click="update_listing_modal=true">
-        Update
+        UPDATE
     </button>
     
     <div class="fixed top-0 left-0 z-10 w-full h-full overflow-auto bg-black position bg-opacity-30"
