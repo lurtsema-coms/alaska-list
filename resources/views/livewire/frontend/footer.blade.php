@@ -22,7 +22,7 @@ new class extends Component {
     <footer class="w-full bg-gray-900">
         <div class="container px-4 mx-auto sm:px-6 lg:px-8">
             <!--Grid-->
-            <div class="flex flex-col flex-wrap items-center justify-between gap-8 py-12 lg:flex-row">
+            <div class="flex flex-col flex-wrap justify-between gap-8 py-12 lg:flex-row">
                 <a href="/" wire:navigate class="flex justify-center text-white">
                     <img class="max-w-24" src="{{ asset('img/logo/logo-white.png') }}" alt="Logo">
                 </a>
