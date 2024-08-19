@@ -1,9 +1,21 @@
 <?php
 
+use App\Models\Category;
 use Livewire\Volt\Component;
 
 new class extends Component {
-    //
+    public function with(): array
+    {
+        return [
+            'categories' => $this->loadCategories(),
+        ];
+    }
+
+    public function loadCategories()
+    {
+        return Category::with('subCategories')
+            ->get();
+    }
 }; ?>
 
 <div>
@@ -14,12 +26,14 @@ new class extends Component {
                 <a href="/" wire:navigate class="flex justify-center text-white">
                     <img class="max-w-24" src="{{ asset('img/logo/logo-white.png') }}" alt="Logo">
                 </a>
-                <ul class="flex-wrap items-center justify-center text-center transition-all duration-500 text-md sm:flex gap-14 lg:gap-10 xl:gap-14">
-                    <li><a href="/" wire:navigate class="text-white hover:text-gray-400">Home</a></li>
-                    <li><a href="{{ route('listing-page') }}" wire:navigate class="text-white hover:text-gray-400">Listing Page</a></li>
-                    <li><a href="{{ route('about-us') }}" wire:navigate class="text-white hover:text-gray-400">About Us</a></li>
-                    <li><a href="{{ route('advertise-with-us') }}" wire:navigate class="text-white hover:text-gray-400">Advertise with us</a></li>
-                </ul>
+                <div>
+                    <p class="mb-2 text-xl text-white">Categories</p>
+                    <div class="grid grid-cols-4 gap-8">
+                        @foreach ($categories as $category)
+                            <span class="text-neutral-300">{{ $category->name }}</span>
+                        @endforeach
+                    </div>
+                </div>
                 <div class="flex space-x-4 sm:justify-center ">
                     <a href="#"  class="flex items-center justify-center bg-gray-800 rounded-full w-9 h-9 hover:bg-indigo-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

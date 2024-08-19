@@ -25,11 +25,11 @@ new class extends Component {
 
     <div class="flex flex-wrap gap-8">
         @foreach($categories->chunk(ceil($categories->count() / 3)) as $chunk)
-            <div class="flex-1 min-w-72 max-w-xl flex flex-col gap-8 xsm:min-w-80">
+            <div class="flex flex-col flex-1 max-w-xl gap-8 min-w-72 xsm:min-w-80">
                 @foreach($chunk as $category)
-                    <div class="border border-gray-200 shadow-sm bg-gray-50 rounded-lg p-5">
+                    <div class="p-5 border border-gray-200 rounded-lg shadow-sm bg-gray-50">
                         <p class="mb-4 text-lg font-medium text-gray-700">{{ $category->name }}</p>
-                        <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 list-disc list-inside">
+                        <ol class="grid grid-cols-1 gap-2 list-disc list-inside sm:grid-cols-2">
                             @foreach($category->subCategories as $index => $subCategory)
                                 <li class="text-gray-600 break-words">
                                     @php

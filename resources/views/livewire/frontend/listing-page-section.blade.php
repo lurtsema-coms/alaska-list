@@ -143,10 +143,13 @@ new class extends Component {
 }; ?>
 
 <div class="relative space-y-8">
-    <div class="">
-        <h2 class="text-4xl font-bold text-white">Listing Page</h2>
+    <div class="bg-search-gradient py-14">
+        <div class="container px-5 mx-auto">            
+            <h2 class="text-4xl font-bold text-white">Listing Page</h2>
+            <p class="invisible text-lg text-neutral-300">Connecting communities through trusted local marketplaces.</p>
+        </div>
     </div>
-    <div class="space-y-10">
+    <div class="container relative px-5 mx-auto space-y-10 -top-28 sm:-top-20 sm:px-5">
         <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl">
             <div class="space-y-4 overflow-y-auto max-h-80 sm:p-4">
                 <div class="flex items-center justify-between mb-4">
