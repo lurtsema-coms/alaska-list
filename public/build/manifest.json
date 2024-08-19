@@ -1,16 +1,8 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DRKe_uEK.css",
+    "file": "assets/app-BRiipJLO.css",
     "src": "resources/css/app.css",
     "isEntry": true
-  },
-  "resources/images/brainstorming.jpg": {
-    "file": "assets/brainstorming-BbMg5TYj.jpg",
-    "src": "resources/images/brainstorming.jpg"
-  },
-  "resources/images/scattered-forcefields.svg": {
-    "file": "assets/scattered-forcefields-DBgI1RH8.svg",
-    "src": "resources/images/scattered-forcefields.svg"
   },
   "resources/images/wave4.svg": {
     "file": "assets/wave4-BQc595BR.svg",
