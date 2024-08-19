@@ -175,7 +175,7 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="flex flex-col justify-between xl:flex-row">
+        <div class="flex flex-col justify-between xl:flex-row n" id="filter">
             <div class="flex flex-wrap gap-4">
                 <div>
                     <h3 class="mb-2">Location</h3>
@@ -318,7 +318,7 @@ new class extends Component {
                         @endforeach
                     @endif
                 </div>
-                {{ $products->links() }}
+                {{ $products->links(data: ['scrollTo' => '#filter']) }}
             </div>
             <div>
                 <livewire:frontend.sidebar-sponsor>

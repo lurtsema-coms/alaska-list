@@ -33,9 +33,9 @@
             <p class="max-w-3xl mb-12 text-lg text-center text-slate-500">Explore unbeatable offers and a wide range of products and services across Alaska. Alaska List is your go-to marketplace for finding top deals in your local area. Start your search today!</p>
         </div>
         <div class="flex flex-col gap-8 m-auto max-w-7xl">
-            <div class="w-full mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-7xl" data-aos="fade-right">
+            {{-- <div class="w-full mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-7xl" data-aos="fade-right">
                 <livewire:frontend.ads-listing/>
-            </div>
+            </div> --}}
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @php
                     $queryParamFurniture = 'sc_names[' . '0' . ']=' . urlencode('furniture');
@@ -196,7 +196,7 @@
             }" class="relative w-full max-w-4xl p-5 mx-auto text-lg bg-white shadow-md sm:p-8 rounded-2xl">
 
             <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
-                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full gap-4 px-5 py-4 font-semibold text-left select-none">
                     <span>How do I create a listing?</span>
                     <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 shrink-0 duration-300 ease-out">
                         <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
@@ -210,7 +210,7 @@
                 </div>
             </div>
             <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
-                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full gap-4 px-5 py-4 font-semibold text-left select-none">
                     <span>How do I ensure my safety when buying or selling?</span>
                     <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 shrink-0 duration-300 ease-out">
                         <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
@@ -224,7 +224,7 @@
                 </div>
             </div>
             <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
-                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full gap-4 px-5 py-4 font-semibold text-left select-none">
                     <span>What types of items are prohibited on the platform?</span>
                     <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 shrink-0 duration-300 ease-out">
                         <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
@@ -238,7 +238,7 @@
                 </div>
             </div>
             <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
-                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full gap-4 px-5 py-4 font-semibold text-left select-none">
                     <span>How can I boost my ad to get more visibility?</span>
                     <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 shrink-0 duration-300 ease-out">
                         <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
@@ -252,7 +252,7 @@
                 </div>
             </div>
             <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
-                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full gap-4 px-5 py-4 font-semibold text-left select-none">
                     <span>What should I do if I encounter a suspicious ad or user?</span>
                     <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 shrink-0 duration-300 ease-out">
                         <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
