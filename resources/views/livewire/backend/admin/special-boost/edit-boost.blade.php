@@ -194,7 +194,7 @@ new class extends Component {
                             <div class="flex flex-col gap-4 sm:flex-row">
                                 <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">From Date</p>
-                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="datetime-local" wire:change="computePlanDate" wire:model="from_date" required>
+                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55] datetime-input" type="datetime-local" wire:change="computePlanDate" wire:model="from_date" required wire:ignore>
                                 </div>
                                 <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">To Date</p>

@@ -315,6 +315,7 @@ new class extends Component {
                         </div>
                         @error('photos.*') <span class="text-red-500">{{ $message }}</span> @enderror
                         @error('count_photo') <span class="text-red-500">{{ $message }}</span> @enderror
+                        @error('no_photo') <span class="text-red-500">{{ $message }}</span> @enderror
                     </div>
                     <div class="space-y-2">
                         <div class="space-y-2">

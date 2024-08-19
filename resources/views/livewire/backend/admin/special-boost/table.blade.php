@@ -145,3 +145,34 @@ new class extends Component {
         </div>
     </div>
 </div>
+
+@script
+<script>
+    $(document).ready(function() {
+        
+        setMinDateTime();
+
+        function setMinDateTime() {
+            $('.datetime-input').each(function() {
+                let currentValue = $(this).val(); // Get the current value of the input
+                console.log(currentValue);
+                if (currentValue) {
+                    // If there's already a value, set the minimum to that value
+                    $(this).attr('min', currentValue);
+                } else {
+                    // If there's no value, set the minimum to the current date and time
+                    const now = new Date();
+                    const year = now.getFullYear();
+                    const month = String(now.getMonth() + 1).padStart(2, '0');
+                    const day = String(now.getDate()).padStart(2, '0');
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const minutes = String(now.getMinutes()).padStart(2, '0');
+                    
+                    const minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+                    $(this).attr('min', minDateTime);
+                }
+            });
+        }
+    });
+</script>
+@endscript

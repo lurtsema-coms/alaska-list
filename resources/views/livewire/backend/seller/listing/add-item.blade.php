@@ -13,11 +13,16 @@ new class extends Component {
 
     use WithFileUploads;
 
+    #[Validate('required')]
     public $sub_category = '';
+    #[Validate('required')]
     public $title_name = '';
+    #[Validate('required')]
     public $location = '';
+    #[Validate('required')]
     public $price = '';
     public $qty = '';
+    #[Validate('required')]
     public $description = '';
     public $additional_information = '';
     #[Validate(['photos' => 'required|array|max:4', 'photos.*' => 'image|max:5120'])]
@@ -128,11 +133,13 @@ new class extends Component {
                                     @endforeach
                                 @endforeach
                             </select>
+                            @error('sub_category')<span class="mt-1 text-red-500">{{ $message }}</span>@enderror
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Title Name <span class="text-red-400">*</span></p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="title_name" placeholder="Enter the title name here">
+                                @error('title_name')<span class="mt-1 text-red-500">{{ $message }}</span>@enderror
                             </div>
                         </div>
                     </div>
@@ -146,12 +153,14 @@ new class extends Component {
                                         <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
                                     @endforeach
                                 </select>
+                                @error('location')<span class="mt-1 text-red-500">{{ $message }}</span>@enderror
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
                             <div class="space-y-2">
                                 <p class="font-medium text-slate-700">Price <span class="text-red-400">*</span></p>
                                 <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="number" step="0.01" required wire:model="price" placeholder="Enter price">
+                                @error('price')<span class="mt-1 text-red-500">{{ $message }}</span>@enderror
                             </div>
                         </div>
                         <div class="flex-1 space-y-2">
@@ -164,7 +173,8 @@ new class extends Component {
                     <div>
                         <div class="flex-1 space-y-2">
                             <p class="font-medium text-slate-700">Description <span class="text-red-400">*</span></p>
-                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" required wire:model="description" placeholder="Provide a detailed description"></textarea>
+                            <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="5" wire:model="description" placeholder="Provide a detailed description"></textarea>
+                            @error('description')<span class="mt-1 text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
                     <div>
