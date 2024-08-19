@@ -113,11 +113,12 @@
 </div>
 
 <div class="relative mt-28 h-96">
-    <div class="absolute w-full h-full bg-top bg-cover bg-brainstorm brightness-50" style="background-position: 30% 60%;">
+    <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
     </div>
-    <div class="absolute top-0 flex flex-col items-center justify-center w-full h-full font-darkerGrotesque">
-        <p class="px-5 text-5xl text-center text-white">Find what you need</p>
-        <p class="px-5 text-5xl text-center text-white">in <span class="text-yellow-200">Alaska</span></p>
+    <div class=" w-full h-full absolute inset-0 z-10 bg-search-gradient opacity-80">
+    </div>
+    <div class="absolute top-16 flex flex-col items-center  w-full h-full font-darkerGrotesque z-20">
+        <p class="px-5 text-5xl text-center tracking-wider text-white">FIND WHAT YOU NEED IN <span class="font-extrabold">ALASKA</span></p>
     </div>
 </div>
 
@@ -273,21 +274,5 @@
     </div>
 </div>
 
-{{-- Get In Touch --}}
-<div id="get-in-touch" class="container px-5 mx-auto mb-28" data-aos="zoom-in">
-    <div class="flex flex-col items-center gap-4 mb-14">
-        <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">Get In Touch</h1>
-        <p class="text-lg text-center text-slate-500">Contact us using the information below. We'll respond promptly to your inquiries and feedback</p>
-    </div>
-    <div class="px-5 md:px-0">
-        <div class="flex w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg lg:rounded-full lg:shadow">
-            <div class="hidden w-full mb-4 lg:block lg:w-1/2 md:mb-0">
-                <img class="h-[38rem] w-full object-cover bg-center" src="{{ asset('frontend/contact.jpg') }}" alt="Contact Image" loading="lazy">
-            </div>
-            <div class="flex items-center justify-center w-full p-5 lg:w-full xl:w-1/2 lg:bg-white">
-                <livewire:frontend.contact-us>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
