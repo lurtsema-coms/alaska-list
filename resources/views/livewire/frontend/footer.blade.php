@@ -7,7 +7,7 @@ new class extends Component {
     public function with(): array
     {
         return [
-            'categories' => $this->loadCategories(),
+            'categories_footer' => $this->loadCategories(),
         ];
     }
 
@@ -15,25 +15,6 @@ new class extends Component {
     {
         return Category::with('subCategories')
             ->get();
-    }
-
-    public function link($category_id)
-    {
-        $category = Category::with('subCategories')->find($category_id);
-        
-        $sub_categories = $category->subCategories->pluck('name');
-        $query = "listing-page?category_id=$category->id";
-        $count = count($sub_categories) - 1;
-        
-        // foreach($sub_categories as $index => $sb) {
-        //     $str = '';
-        //     if ($count != $index) {
-        //         $str = '&';
-        //     }
-            
-        //     $query.="sc_names[$index]=$sb$str";
-        // }
-        return $this->redirect("$query", navigate: true); 
     }
 }; ?>
 
@@ -48,8 +29,14 @@ new class extends Component {
                 <div>
                     <p class="mb-2 text-xl text-white">Categories</p>
                     <div class="grid grid-cols-4 gap-x-8 gap-y-2">
-                        @foreach ($categories as $category)
-                            <a class="no-underline cursor-pointer text-neutral-300" wire:click="link({{ $category->id }})" wire:key="{{ "sub_categories-".$category->id }}">{{ $category->name }}</a>
+                        @foreach ($categories_footer as $category_footer)
+                            <a 
+                                class="no-underline cursor-pointer text-neutral-300" 
+                                href="/listing-page?category_id={{ $category_footer->id }}" 
+                                wire:key="{{ str()->random(50) }}"
+                                wire:navigate>
+                                {{ $category_footer->name }}
+                            </a>
                         @endforeach
                     </div>
                 </div>

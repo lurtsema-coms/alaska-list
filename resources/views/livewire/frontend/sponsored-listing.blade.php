@@ -31,7 +31,7 @@ new class extends Component {
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             @foreach ($sponsors as $sponsor)
-                <div class="swiper-slide" wire:key="sponsor-listing-{{ $sponsor->id }}">
+                <div class="swiper-slide" wire:key="{{ str()->random(50) }}">
                     {{-- <div class="swiper-slide"> --}}
                         <a class="w-full overflow-hidden" href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate>
                             <div class="w-full m-auto overflow-hidden border border-gray-200 max-h-96 max-w-[80rem] rounded-xl hover:border-blue-400">

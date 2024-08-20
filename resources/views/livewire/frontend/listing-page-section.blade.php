@@ -167,7 +167,7 @@ new class extends Component {
 
     public function dispatchTimeAgo(){
         $this->dispatch('load-time-ago');
-        $this->resetData(['sc_names', 'price_range', 'sort_by', 'location']);
+        $this->resetData(['sc_names', 'price_range', 'sort_by', 'location', 'category_id']);
     }
 
     public function resetData($data)

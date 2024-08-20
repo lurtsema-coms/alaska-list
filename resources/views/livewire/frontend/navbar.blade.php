@@ -49,7 +49,7 @@ new class extends Component {
                         </div>
                     </a>
                     @else
-                    <a class="relative px-1 group lg:block" href="{{ route('dashboard') }}" wire:navigate>
+                    <a class="relative hidden px-1 group lg:block" href="{{ route('dashboard') }}" wire:navigate>
                         <span class="text-gray-600 transition-opacity group-hover:text-slate-950">Dashboard</span>
                     </a>
                 @endguest

@@ -30,7 +30,7 @@ new class extends Component {
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 @foreach ($campaigns as $campaign)
-                    <div class="swiper-slide " wire:key="ad-listing-{{ $campaign->id }}">
+                    <div class="swiper-slide " wire:key="{{ str()->random(50) }}">
                         <div class="swiper-slide">
                             <img class="object-cover w-full h-full rounded-2xl" src="{{ asset($campaign->file_path) }}" alt="{{ $campaign->uuid }}" loading="lazy">
                         </div>

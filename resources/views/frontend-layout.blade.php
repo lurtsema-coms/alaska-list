@@ -124,8 +124,6 @@
                 }
                 return false;
             }
-
-            console.log(isSingleImage());
         });
     </script>
 </body>

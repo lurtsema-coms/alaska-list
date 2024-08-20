@@ -31,9 +31,7 @@ new class extends Component {
         <div class="text-right">
             <p class="font-bold">ADVERTISEMENT</p>
         </div>
-        @persist('ads-listing')
         <livewire:frontend.ads-listing/>
-        @endpersist
         @if (count($sponsors) != 0)
             <p class="mb-2 font-bold text-gray-600">You might also like</p>
         @endif
