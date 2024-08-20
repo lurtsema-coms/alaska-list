@@ -22,19 +22,18 @@ new class extends Component {
         $category = Category::with('subCategories')->find($category_id);
         
         $sub_categories = $category->subCategories->pluck('name');
-        $query = 'listing-page?';
+        $query = "listing-page?category_id=$category->id";
         $count = count($sub_categories) - 1;
         
-        foreach($sub_categories as $index => $sb) {
-            $str = '';
-            if ($count != $index) {
-                $str = '&';
-            }
+        // foreach($sub_categories as $index => $sb) {
+        //     $str = '';
+        //     if ($count != $index) {
+        //         $str = '&';
+        //     }
             
-            $query.="sc_names[$index]=$sb$str";
-        }
-
-        return $this->redirect($query, navigate: true); 
+        //     $query.="sc_names[$index]=$sb$str";
+        // }
+        return $this->redirect("$query", navigate: true); 
     }
 }; ?>
 
@@ -48,7 +47,7 @@ new class extends Component {
                 </a>
                 <div>
                     <p class="mb-2 text-xl text-white">Categories</p>
-                    <div class="grid grid-cols-4 gap-8">
+                    <div class="grid grid-cols-4 gap-x-8 gap-y-2">
                         @foreach ($categories as $category)
                             <a class="no-underline cursor-pointer text-neutral-300" wire:click="link({{ $category->id }})" wire:key="{{ "sub_categories-".$category->id }}">{{ $category->name }}</a>
                         @endforeach

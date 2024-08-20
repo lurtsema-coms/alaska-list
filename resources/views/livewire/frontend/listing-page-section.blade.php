@@ -10,18 +10,33 @@ use Livewire\Volt\Component;
 new class extends Component {
 
     use WithPagination;
+    
     #[Url] 
     public $sc_names = [];
     #[Url] 
     public $search;
+    #[Url] 
+    public $category_id;
     public $location;
     public $price_range;
     public $sort_by = "";
     public $pagination = 5;
 
-    public function mount() 
+    public function mount()
     {
+        $category_id = $this->category_id;
+        $filter_sc_names = [];
         
+        if($category_id) {
+            $sub_category = Category::with('subCategories')->find($category_id);
+            
+            foreach($sub_category->subCategories as $item){                
+                $filter_sc_names[] = "$item->category_id-$item->name";
+            }
+
+            $this->sc_names = $filter_sc_names;
+            // dd($filter_sc_names);
+        }
     }
 
     public function updated()
@@ -123,8 +138,22 @@ new class extends Component {
 
         // Apply sub-category filter if there are selected sub-categories
         if (!empty($this->sc_names)) {
-            $query->whereHas('subCategory', function ($subQuery) {
-                $subQuery->whereIn('name', $this->sc_names);
+            $category_ids = [];
+            $names = [];
+            
+            foreach($this->sc_names as $item) {
+                $parts = explode('-', $item, 2);
+                $category_ids[] = $parts[0];
+                $names[] = $parts[1];
+            }
+
+            $query->where(function ($query) use ($category_ids, $names) {
+                $query->whereHas('subCategory', function ($subQuery) use ($category_ids, $names) {
+                    $subQuery->whereIn('name', $names)
+                        ->whereIn('category_id', $category_ids);
+                });
+
+                // Filter by category ID
             });
         } else {
             // Handle cases where sub-category filter is not applied
@@ -172,7 +201,7 @@ new class extends Component {
                                         <input type="checkbox"
                                             class="w-5 h-5 text-blue-600 "
                                             wire:model.change="sc_names"
-                                            value="{{ $sub_category->name }}">
+                                            value="{{ $category->id.'-'.$sub_category->name }}">
                                         <span class="text-gray-600">{{ $sub_category->name }}</span>
                                     </label>
                                 @endforeach
