@@ -16,6 +16,26 @@ new class extends Component {
         return Category::with('subCategories')
             ->get();
     }
+
+    public function link($category_id)
+    {
+        $category = Category::with('subCategories')->find($category_id);
+        
+        $sub_categories = $category->subCategories->pluck('name');
+        $query = 'listing-page?';
+        $count = count($sub_categories) - 1;
+        
+        foreach($sub_categories as $index => $sb) {
+            $str = '';
+            if ($count != $index) {
+                $str = '&';
+            }
+            
+            $query.="sc_names[$index]=$sb$str";
+        }
+
+        return $this->redirect($query, navigate: true); 
+    }
 }; ?>
 
 <div>
@@ -24,13 +44,13 @@ new class extends Component {
             <!--Grid-->
             <div class="flex flex-col flex-wrap justify-between gap-8 py-12 lg:flex-row">
                 <a href="/" wire:navigate class="flex justify-center text-white">
-                    <img class="max-w-24" src="{{ asset('img/logo/logo-white.png') }}" alt="Logo">
+                    <img class="object-contain max-w-24" src="{{ asset('img/logo/logo-white.png') }}" alt="Logo">
                 </a>
                 <div>
                     <p class="mb-2 text-xl text-white">Categories</p>
                     <div class="grid grid-cols-4 gap-8">
                         @foreach ($categories as $category)
-                            <span class="text-neutral-300">{{ $category->name }}</span>
+                            <a class="no-underline cursor-pointer text-neutral-300" wire:click="link({{ $category->id }})" wire:key="{{ "sub_categories-".$category->id }}">{{ $category->name }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -68,5 +88,5 @@ new class extends Component {
                 </div>
             </div>
         </div>
-    </footer>
+    </footer>   
 </div>

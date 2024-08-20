@@ -14,11 +14,11 @@ new class extends Component {
 
     public function loadSpecialBoost()
     {
-        $today = now()->toDateTimeString();
+        $today = now()->toDateString();
 
-        return SpecialBoost::with('product')
-            ->where('from_date', '<=', $today)
-            ->where('to_date', '>=', $today)
+        return SpecialBoost::with('product.subCategory')
+            ->whereDate('from_date', '<=', $today)
+            ->whereDate('to_date', '>=', $today)
             ->whereHas('product', function ($query) {
                 $query->where('status', '!=', 'DELETED');
             })
@@ -27,15 +27,12 @@ new class extends Component {
 }; ?>
 
 <div>
-    @if (count($sponsors) != 0)
-        <p class="mb-2 font-bold text-gray-600">You might also like</p>
-    @endif
     <div class="w-full sponsored-listing swiper">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             @foreach ($sponsors as $sponsor)
-                <div class="swiper-slide " wire:key="sponsor-listing-{{ $sponsor->id }}">
-                    <div class="swiper-slide">
+                <div class="swiper-slide" wire:key="sponsor-listing-{{ $sponsor->id }}">
+                    {{-- <div class="swiper-slide"> --}}
                         <a class="w-full overflow-hidden" href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate>
                             <div class="w-full m-auto overflow-hidden border border-gray-200 max-h-96 max-w-[80rem] rounded-xl hover:border-blue-400">
                                 <div class="relative">
@@ -55,6 +52,11 @@ new class extends Component {
                                             ${{ number_format($sponsor->product->price, fmod($sponsor->product->price, 1) !== 0.00 ? 2 : 0) }}
                                         </p>
                                     </div>
+                                    <div class="absolute px-3 py-1 bg-[#18396F] rounded-full shadow-lg top-4 left-4">
+                                        <p class="font-medium text-white">
+                                            {{ $sponsor->product->subCategory->name }}
+                                        </p>
+                                    </div>
                                 </div>
                                 <div class="p-4 bg-white">
                                     <p class="text-lg font-semibold text-gray-800">{{ \Illuminate\Support\Str::words($sponsor->product->name, 15, '...') }}</p>
@@ -63,7 +65,7 @@ new class extends Component {
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    {{-- </div> --}}
                 </div>
             @endforeach
         </div>  

@@ -34,7 +34,7 @@ new class extends Component {
     {
         $this->sponsor_id = $sponsor->id;
         $this->item_code = $sponsor->product->uuid;
-        $this->advertising_plan = $sponsor->product_id;
+        $this->advertising_plan = $sponsor->advertising_plan_id;
         $this->from_date = $sponsor->from_date;
         $this->to_date = $sponsor->to_date;
         $this->file_path = $sponsor->file_path;

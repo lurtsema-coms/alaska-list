@@ -45,9 +45,9 @@ new class extends Component {
     {
         $photo = $this->photo;
 
-        if(empty($this->photo)){
-            return $this->dispatch('alert-error');
-        }
+        // if(empty($this->photo)){
+        //     return $this->dispatch('alert-error');
+        // }
 
         $product = Product::find($this->item_code);
 

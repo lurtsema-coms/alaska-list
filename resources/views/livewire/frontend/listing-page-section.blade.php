@@ -19,6 +19,11 @@ new class extends Component {
     public $sort_by = "";
     public $pagination = 5;
 
+    public function mount() 
+    {
+        
+    }
+
     public function updated()
     {
         $this->dispatch('load-time-ago');

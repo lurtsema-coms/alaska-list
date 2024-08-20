@@ -93,24 +93,24 @@
                     breakpointsBase: 'container',
                     breakpoints: {
                         576: {
-                            slidesPerView: 1,
-                            spaceBetween: 0,
+                            slidesPerView: 2,
+                            spaceBetween: 20,
                         },
                         650: {
                             slidesPerView: 2,
-                            spaceBetween: 0,
+                            spaceBetween: 20,
                         },
                         768: {
-                            slidesPerView: 2,
-                            spaceBetween: 0,
+                            slidesPerView: 3,
+                            spaceBetween: 20,
                         },
                         1024: {
-                            slidesPerView: 3,
-                            spaceBetween: 15,
+                            slidesPerView: 4,
+                            spaceBetween: 20,
                         },
                         1300: {
                             slidesPerView: 4,
-                            spaceBetween: 15,
+                            spaceBetween: 30,
                         },
                     },
                 });
@@ -125,7 +125,7 @@
                 return false;
             }
 
-
+            console.log(isSingleImage());
         });
     </script>
 </body>

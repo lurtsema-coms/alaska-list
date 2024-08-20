@@ -32,10 +32,18 @@
             <h2 class="mb-4 text-3xl font-bold text-center sm:text-4xl text-slate-700">Discover Top Deals in Alaska</h2>
             <p class="max-w-3xl mb-12 text-lg text-center text-slate-500">Explore unbeatable offers and a wide range of products and services across Alaska. Alaska List is your go-to marketplace for finding top deals in your local area. Start your search today!</p>
         </div>
-        <div class="flex flex-col gap-8 m-auto max-w-7xl">
-            {{-- <div class="w-full mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-7xl" data-aos="fade-right">
-                <livewire:frontend.ads-listing/>
-            </div> --}}
+    </div>
+
+    <div class="w-full mt-14 bg-search-gradient">
+        <div class="container relative px-5 mx-auto -top-8">                
+            <div class="mx-auto max-w-7xl" data-aos="fade-right">
+                <livewire:frontend.sponsored-listing/>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container px-5 mx-auto mt-14">
+        <div class="flex flex-col gap-8 m-auto max-w-8xl">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @php
                     $queryParamFurniture = 'sc_names[' . '0' . ']=' . urlencode('furniture');
@@ -115,10 +123,10 @@
 <div class="relative mt-28 h-96">
     <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
     </div>
-    <div class=" w-full h-full absolute inset-0 z-10 bg-search-gradient opacity-80">
+    <div class="absolute inset-0 z-10 w-full h-full bg-search-gradient opacity-80">
     </div>
-    <div class="absolute top-16 flex flex-col items-center  w-full h-full font-darkerGrotesque z-20">
-        <p class="px-5 text-5xl text-center tracking-wider text-white">FIND WHAT YOU NEED IN <span class="font-extrabold">ALASKA</span></p>
+    <div class="absolute z-20 flex flex-col items-center w-full h-full top-16 font-darkerGrotesque">
+        <p class="px-5 text-5xl tracking-wider text-center text-white">FIND WHAT YOU NEED IN <span class="font-extrabold">ALASKA</span></p>
     </div>
 </div>
 
