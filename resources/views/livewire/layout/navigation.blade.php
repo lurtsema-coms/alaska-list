@@ -36,6 +36,9 @@ new class extends Component
                     <x-nav-link :href="route('seller-listing')" :active="request()->routeIs('seller-listing') || request()->routeIs('seller-listing-add') " wire:navigate>
                         {{ __('Listing') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('seller-boost')" :active="request()->routeIs('seller-boost')" wire:navigate>
+                        {{ __('Boost') }}
+                    </x-nav-link>
                 @endrole
                 @role('admin')
                     <x-nav-link :href="route('admin-categories')" :active="request()->routeIs('admin-categories')" wire:navigate>
@@ -111,6 +114,9 @@ new class extends Component
             @role('seller')
                 <x-responsive-nav-link :href="route('seller-listing')" :active="request()->routeIs('seller-listing')" wire:navigate>
                     {{ __('Listing') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('seller-boost')" :active="request()->routeIs('seller-boost')" wire:navigate>
+                    {{ __('Boost') }}
                 </x-responsive-nav-link>
             @endrole
             @role('admin')

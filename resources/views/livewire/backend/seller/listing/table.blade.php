@@ -30,6 +30,7 @@ new class extends Component {
             ->where('created_by', $user_id)
             ->where(function ($query) {
                 $query
+                    ->orWhere('uuid', 'like', '%' . $this->search . '%')
                     ->orWhere('name', 'like', '%' . $this->search . '%')
                     ->orWhere('description', 'like', '%' . $this->search . '%')
                     ->orWhere('status', 'like', '%' . $this->search . '%')
@@ -65,6 +66,9 @@ new class extends Component {
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Item Code
+                        </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Status
                         </th>
@@ -102,7 +106,10 @@ new class extends Component {
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($products as $product)
-                        <tr class="hover:bg-gray-100" wire:key="{{ $product->id }}">
+                        <tr class="hover:bg-gray-100" wire:key="{{ "product-item-code-".$product->id }}">
+                            <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                                {{ $product->uuid}}
+                            </td>
                             <td class="px-6 py-3 text-sm whitespace-nowrap">
                                 <span class="font-bold {{ $product->status == 'ACTIVE' ? 'text-green-500' : 'text-red-500' }}">
                                     {{ $product->status }}

@@ -179,11 +179,11 @@ new class extends Component {
                                 <label class="font-medium text-slate-700">Upload Photos</label>
                                 <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" wire:model="photo" id="upload-{{ $inc }}">
                             </div>
-                            <div>
+                            {{-- <div>
                                 <p class="mb-2 text-sm text-gray-600">
                                     Requirement: For best quality in advertising, the image should be exactly 300px in height and 600px in width.
                                 </p>
-                            </div>
+                            </div> --}}
                             {{-- Loading Animation --}}
                             <div class="w-full text-center" wire:loading>
                                 <div class="flex items-center justify-center gap-2">

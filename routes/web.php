@@ -28,6 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
     // Routes for users with 'seller' role
     Route::middleware('role:seller')->group(function() {
         Route::view('admin-categories', 'page-backend.admin.b-categories')->name('admin-categories');
+        Route::view('seller-boost', 'page-backend.seller.b-product-boost')->name('seller-boost');
         Route::view('seller-listing', 'page-backend.seller.b-listing')->name('seller-listing');
         Route::view('seller-listing/add-item', 'page-backend.seller.b-listing-add-item')->name('seller-listing-add');
         Route::view('seller-listing/edit-item/{id}', 'page-backend.seller.b-listing-edit-item')->name('seller-listing-edit');
