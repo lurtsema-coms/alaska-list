@@ -35,7 +35,7 @@ new class extends Component {
                     <div class="swiper-slide" wire:key="{{ str()->random(50) }}">
                         {{-- <div class="swiper-slide"> --}}
                             <a class="w-full overflow-hidden" href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate>
-                                <div class="w-full m-auto overflow-hidden max-h-96 max-w-[80rem] rounded-xl {{ Request::segment(1) == 'listing-page' ? "border border-gray-200" : '' }} hover:border hover:border-blue-400">
+                                <div class="w-full m-auto overflow-hidden max-h-96 max-w-[80rem] rounded-xl {{ Request::segment(1) != '' ? "border border-gray-200" : '' }} hover:border hover:border-blue-400">
                                     <div class="relative">
                                         @if ($sponsor->file_path)
                                             <img class="object-cover w-full h-48" src="{{ asset($sponsor->file_path) }}" alt="{{ $sponsor->product->name }}" loading="lazy">
