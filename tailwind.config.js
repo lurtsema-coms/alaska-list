@@ -15,6 +15,7 @@ export default {
                 sans: ["Figtree", "sans-serif"],
                 poppins: ["Poppins", "sans-serif"],
                 darkerGrotesque: ['"Darker Grotesque"', "sans-serif"],
+                bebasNeue: ['"Bebas Neue"', "sans-serif"], 
             },
             backgroundImage: {
                 woman: "url('../images/woman.jpg')",
@@ -28,8 +29,20 @@ export default {
             screens: {
                 xsm: "400px",
             },
+            textShadow: {
+                'custom': '0em 0.1em 0.1em rgba(0, 0, 0, 0.4)',
+            },
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        function ({ addUtilities }) {
+            addUtilities({
+                '.text-shadow-custom': {
+                    textShadow: '0em 0.1em 0.1em rgba(0, 0, 0, 0.4)',
+                },
+            })
+        },
+    ],
 };
