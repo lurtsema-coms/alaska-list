@@ -14,11 +14,11 @@ new class extends Component {
 
     public function loadAds()
     {
-        $today = now()->toDateTimeString();
+        $today = now()->toDateString();
 
         return Advertisement::withoutTrashed()
-            ->where('from_date', '<=', $today)
-            ->where('to_date', '>=', $today)
+            ->whereDate('from_date', '<=', $today)
+            ->whereDate('to_date', '>=', $today)
             ->get();
     }
 
