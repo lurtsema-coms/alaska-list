@@ -91,42 +91,17 @@
             </a>
         </div>
     </div>
-    
-    {{-- Featured Section --}}
-    {{-- <div class="container px-5 mx-auto mt-28"> --}}
-        {{-- <div class="flex flex-col items-center gap-4 mb-4" data-aos="zoom-in">
-            <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">Featured Products</h1>
-            <svg width="100%" height="24" viewBox="0 0 445 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="paint0_linear" x1="442.073" y1="0.563245" x2="414.515" y2="114.417" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#a1ffce"></stop>
-                        <stop offset="100%" stop-color="#faffd1"></stop>
-                    </linearGradient>
-                </defs>
-                <path d="M2.05469 14.4867C101.635 11.2688 220.427 7.27869 321.636 4.51622C339.098 4.03959 405.88 2.2299 435.16 2.4148C469.321 2.63052 367.236 4.76098 333.13 5.23315C287.706 5.862 241.846 5.56207 196.608 7.11433C141.398 9.00879 86.1341 13.2794 32.6894 18.4062C25.661 19.0804 18.1112 19.7952 11.4034 20.8511C10.8564 20.9372 12.5329 21.0395 13.133 21.0441C30.5637 21.177 48.0652 20.9913 65.4387 20.6787C190.017 18.4372 313.48 13.4101 438.301 12.1482" stroke="url(#paint0_linear)" stroke-width="4" stroke-linecap="round"></path>
-            </svg>
-        </div>
-        
-        <div id="products" class="p-5 bg-white rounded-lg shadow-lg sm:p-10" data-aos="zoom-in">
-            <div class="md:mx-12 lg:mx-20 xl:mx-auto">
-                <div class="mt-6 mb-8 space-y-5 text-center">
-                    <div class="inline-block px-4 py-2 text-lg font-semibold text-white rounded-full bg-[#2171a7] shadow-md hover:bg-[#1e65a4] transition-colors">
-                        Fresh recommended ads
-                    </div>
-                </div>
-                <livewire:frontend.sponsored-listing>
-            </div>
-        </div> --}}
-    {{-- </div> --}}
 </div>
 
 <div class="relative mt-28 h-96">
     <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
     </div>
-    <div class="absolute inset-0 z-10 w-full h-full bg-search-gradient opacity-80">
+    <div class="absolute inset-0 z-10 w-full h-full bg-search-gradient opacity-70">
     </div>
-    <div class="absolute z-20 flex flex-col items-center w-full h-full top-16 font-darkerGrotesque">
-        <p class="px-5 text-5xl tracking-wider text-center text-white">FIND WHAT YOU NEED IN <span class="font-extrabold">ALASKA</span></p>
+    <div class="absolute z-20 flex flex-col items-center w-full h-full top-8 font-bebasNeue">
+        <p class="px-5 text-[4rem] font-bold text-center text-white text-shadow-custom">
+            FIND WHAT YOU NEED IN <span class="">ALASKA</span>
+        </p>    
     </div>
 </div>
 
