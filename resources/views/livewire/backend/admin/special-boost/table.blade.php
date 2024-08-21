@@ -155,7 +155,6 @@ new class extends Component {
         function setMinDateTime() {
             $('.datetime-input').each(function() {
                 let currentValue = $(this).val(); // Get the current value of the input
-                console.log(currentValue);
                 if (currentValue) {
                     // If there's already a value, set the minimum to that value
                     $(this).attr('min', currentValue);
@@ -169,7 +168,7 @@ new class extends Component {
                     const minutes = String(now.getMinutes()).padStart(2, '0');
                     
                     const minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
-                    $(this).attr('min', minDateTime);
+                    // $(this).attr('min', minDateTime);
                 }
             });
         }
