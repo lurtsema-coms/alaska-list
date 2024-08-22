@@ -24,7 +24,7 @@ new class extends Component {
     }
 
     public function loadActivePost(){
-        return Product::where('created_by', $this->user_id)->where('status', 'APPROVED')->count();
+        return Product::where('created_by', $this->user_id)->where('status', 'ACTIVE')->count();
     }
 
     public function loadDeletedPost(){
