@@ -67,13 +67,13 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <div class="flex items-center justify-center mt-8 ">
-            <x-primary-button class="w-full flex items-center h-12 justify-center !bg-search-gradient"
+            <x-primary-button class="w-full flex items-center h-12 justify-center !bg-search-gradient hover:opacity-70"
                 x-on:click="localStorage.setItem('prohibitedModal', 'true')">
                 {{ __('Continue') }}
             </x-primary-button>
         </div>
         <div class="flex items-center justify-center mt-3 ">
-            <a href="/" class="w-full flex items-center h-12 justify-center !text-[#1F4B55] border border-[#1F4B55] font-semibold text-xs uppercase tracking-widest ">
+            <a href="/" class="w-full flex items-center h-12 justify-center !text-[#1F4B55] border border-[#1F4B55] font-semibold text-xs uppercase tracking-widest hover:opacity-70">
                 {{ __('Go To Home Page') }}
             </a>
         </div>

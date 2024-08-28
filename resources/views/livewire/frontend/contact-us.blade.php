@@ -54,37 +54,45 @@ new class extends Component
 };
 ?>
 
-<div class="min-h-44 max-w-2xl ">
-    <form wire:submit.prevent="submitForm">
+<div class="max-w-2xl min-h-44 ">
+    <form wire:submit="submitForm">
         <div class="flex flex-col gap-10 p-5 sm:p-10">
-            <p class="text-slate-700 text-lg font-bold">Send us your message now!</p>
+            <p class="text-lg font-bold text-slate-700">Send us your message now!</p>
             <div class="flex flex-wrap gap-5">
-                <div class="flex-1 min-w-64 relative z-0">
+                <div class="relative z-0 flex-1 min-w-64">
                     <input type="text" name="name" wire:model="name"  class="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " required/>
                     <label class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 ">Your name</label>
+                    @error('name') <p class="mt-2 text-red-500">{{ $message }}</p> @enderror
                 </div>
-                <div class="flex-1 min-w-64 relative z-0">
+                <div class="relative z-0 flex-1 min-w-64">
                     <input type="text" name="email" wire:model="email" class="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " required/>
                     <label class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">Your Email</label>
+                    @error('email') <p class="mt-2 text-red-500">{{ $message }}</p> @enderror
                 </div>
             </div>
             <div class="relative z-0">
                 <textarea name="message" rows="5" wire:model="message"  class="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " required></textarea>
                 <label class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">Your message</label>
+                @error('message') <p class="mt-2 text-red-500">{{ $message }}</p> @enderror
             </div>
             <div class="flex">
                 <button class="text-white bg-[#2171a7] text-sm px-6 py-3 rounded-lg shadow-md hover:opacity-70 transition-colors duration-300 cursor-pointer">Submit</button>
             </div>
-            @if($submissionSuccess)
-                <div class="text-green-500 mt-3 text-end" wire:loading.remove>
-                    {{ $successMessage }}
+            <div>
+                <div wire:loading>
+                    Loading...
                 </div>
-            @endif
-            @if($submissionFailed)
-                <div class="text-red-500 mt-3 text-end" wire:loading.remove>
-                    {{ $errorMessage }}
-                </div>
-            @endif
+                @if($submissionSuccess)
+                    <div class="mt-3 text-green-500" wire:loading.remove>
+                        {{ $successMessage }}
+                    </div>
+                @endif
+                @if($submissionFailed)
+                    <div class="mt-3 text-red-500" wire:loading.remove>
+                        {{ $errorMessage }}
+                    </div>
+                @endif
+            </div>
         </div>
     </form>
 </div>

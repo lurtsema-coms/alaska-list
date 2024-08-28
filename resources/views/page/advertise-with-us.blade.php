@@ -63,9 +63,9 @@
                         <p class="text-lg text-center text-slate-500">Contact us using the information below. We'll respond promptly to your inquiries and feedback</p>
                     </div>
                     <div class="px-5 md:px-0">
-                        <div class="flex w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg xl:rounded-full xl:shadow">
+                        <div class="flex w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-lg max-h-[50rem] xl:rounded-full xl:shadow">
                             <div class="hidden w-full mb-4 xl:block xl:w-1/2 md:mb-0">
-                                <img class="h-[38rem] w-full object-cover bg-center" src="{{ asset('frontend/contact.jpg') }}" alt="Contact Image" loading="lazy">
+                                <img class="object-cover w-full h-auto bg-center" src="{{ asset('frontend/contact.jpg') }}" alt="Contact Image" loading="lazy">
                             </div>
                             <div class="flex items-center justify-center w-full p-5 lg:w-full xl:w-1/2 lg:bg-white">
                                 <livewire:frontend.contact-us>

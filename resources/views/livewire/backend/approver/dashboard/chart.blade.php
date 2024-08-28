@@ -18,7 +18,7 @@ new class extends Component {
     }
 
     public function loadActivePost(){
-        return Product::where('status', 'APPROVED')->count();
+        return Product::where('status', 'ACTIVE')->count();
     }
 
     public function loadDeletedPost(){

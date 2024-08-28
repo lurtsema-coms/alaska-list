@@ -67,7 +67,7 @@
                     var offsetPosition = element.offsetTop - navbarHeight - 20;
 
                     window.scrollTo({
-                        top: offsetPosition,
+                        top: element.offsetTop+170,
                         behavior: 'smooth'
                     });
                 } 

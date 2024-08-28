@@ -21,7 +21,7 @@
                     <p class="max-w-2xl text-lg">
                         Our team is dedicated to creating a safe and user-friendly environment where everyone can find what they need, whether it's a rare find or a great deal. We are here to support your transactions every step of the way.
                     </p>
-                    <a class="flex" href="/#get-in-touch">
+                    <a class="flex" href="/advertise-with-us#get-in-touch" wire:navigate>
                         <div class="border border-[#2171a7] px-6 py-3 rounded-lg shadow-md hover:bg-[#2171a7] hover:text-white transition-colors duration-300 cursor-pointer">
                             Get In Touch
                         </div>

@@ -23,23 +23,23 @@ new class extends Component {
                     </a>
                 </div>
                 <div class="absolute items-center hidden gap-2 -translate-x-1/2 left-1/2 lg:flex">
-                    <a class="relative px-1 group {{ request()->routeIs('welcome') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    <a class="relative px-1 group {{ request()->routeIs('welcome') ? 'text-sky-700' : 'text-gray-600' }}" 
                     href="{{ route('welcome') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
+                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
                     </a>
 
-                    <a class="relative px-1 group {{ request()->routeIs('listing-page') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    <a class="relative px-1 group {{ request()->routeIs('listing-page') ? 'text-sky-700' : 'text-gray-600' }}" 
                     href="{{ route('listing-page') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('listing-page') ? 'Listing Page' : 'Listing Page' }}</span>
+                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('listing-page') ? 'Listing Page' : 'Listing Page' }}</span>
                     </a>
 
-                    <a class="relative px-1 group {{ request()->routeIs('about-us') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    <a class="relative px-1 group {{ request()->routeIs('about-us') ? 'text-sky-700' : 'text-gray-600' }}" 
                     href="{{ route('about-us') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
+                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
                     </a>
-                    <a class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? 'text-slate-950' : 'text-gray-600' }}" 
+                    <a class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? 'text-sky-700' : 'text-gray-600' }}" 
                     href="{{ route('advertise-with-us') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-slate-950">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
+                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
                     </a>
                 </div>
                 @guest
@@ -50,7 +50,7 @@ new class extends Component {
                     </a>
                     @else
                     <a class="relative hidden px-1 group lg:block" href="{{ route('dashboard') }}" wire:navigate>
-                        <span class="text-gray-600 transition-opacity group-hover:text-slate-950">Dashboard</span>
+                        <span class="text-gray-600 transition-opacity group-hover:text-sky-700">Dashboard</span>
                     </a>
                 @endguest
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="block text-black cursor-pointer size-8 text-dark hover:opacity-70 lg:hidden"
