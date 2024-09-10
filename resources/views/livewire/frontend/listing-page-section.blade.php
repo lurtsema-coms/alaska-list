@@ -218,8 +218,8 @@ new class extends Component {
                     <h3 class="mb-2">Location</h3>
                     <select name="" id="" class="h-12 border border-gray-300 rounded-lg" wire:model.change="location">
                         <option value="" selected>All Location</option>
-                        @foreach (config('global.us_states') as $key => $location)
-                            <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
+                        @foreach (config('global.us_states') as  $location)
+                            <option value="{{ $location }}" wire:key="{{ $location }}">{{ $location }}</option>
                         @endforeach
                     </select>
                 </div>
