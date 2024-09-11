@@ -2,29 +2,46 @@
 
 @section('body-content')
 {{-- hero section --}}
-<div class="mx-auto overflow-hidden h-[37rem] md:min-h-[50rem] lg:min-h-[50rem]" data-aos="zoom-in-up">
-    <div class="absolute w-full h-full bg-center bg-cover">
-        <video class="absolute top-0 left-0 object-cover w-auto h-[20rem] sm:h-full sm:w-full" autoplay muted loop style="object-position: 50% 5%;">
-            <source src="{{ asset('frontend/vid_banner.mp4') }}" type="video/mp4">
-        </video>
+<div class="relative h-72">
+    <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
     </div>
-    <div class="relative w-full h-auto mx-auto sm:container md:rounded-2xl">
-        <div class="min-h-[50rem] flex md:p-10">
-            <div class="z-10 flex flex-col justify-center w-full gap-8 px-5 mt-[5rem] md:mt-[30rem] lg:mt-[28rem] text-white">
-                <div class="flex justify-center mt-4" >
-                    <a class="bg-search-gradient text-2xl sm:text-3xl px-6 py-3 rounded-full sm:border-2 sm:border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70 " href="{{ route('listing-page') }}" wire:navigate>
-                        BROWSE ITEMS
-                    </a>
-                </div>  
-                <div class="flex justify-center mt-2 sm:mt-4" >
-                    <a class="bg-search-gradient text-xl sm:text-2xl px-6 py-3 rounded-full sm:border-2 sm:border-white font-extrabold shadow-lg hover:bg-[#245D69] transition-colors duration-300 cursor-pointer hover:opacity-70" href="{{ route('dashboard') }}" wire:navigate>
-                        SELL NOW
-                    </a>
+    <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
+    </div>
+    <div class="absolute inset-0 z-30 flex items-center justify-center">
+        <div class="container mx-auto font-sans text-4xl font-semibold text-white text-shadow-custom">
+            <p>ONE STOP SHOP</p>
+            <p>FOR ALL ALASKAN GOODS!</p>
+        </div>
+    </div>
+    <div class="absolute inset-x-0 bottom-0 z-30 -translate-x-1/2 translate-y-1/2 left-1/2">
+        <div class="w-full max-w-5xl bg-white shadow-lg h-14">
+            <div class="flex items-center h-full">
+                <div class="flex flex-1">
+                    <select class="max-w-56 text-md w-full px-4 border-none focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="">
+                        <option value="" disabled selected>Category...</option>
+                    </select>
+                    <div class="w-[1px] h-10 bg-gray-200"></div>
+                    <input class="flex-1 border-none focus:outline-none focus:ring-0" placeholder="Search for ..." type="text">
+                    <div class="w-[1px] h-10 bg-gray-200"></div>
+                    <select class="flex-1 text-md w-full px-4 border-none focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="">
+                        <option value="" disabled selected>Location...</option>
+                    </select>
                 </div>
+                <button class="max-w-40 text-lg font-bold w-full text-white h-full bg-[#2171a7] hover:bg-[#1a5b8a]">Search</button>
             </div>
         </div>
     </div>
 </div>
+
+{{-- Categories Section --}}
+<div>
+    <div class="container px-5 mx-auto mt-0 sm:mt-28">
+        <livewire:frontend.categories />
+    </div>
+</div>
+
+
+
 {{-- Categories Section --}}
 <div>
     <div class="container px-5 mx-auto mt-0 sm:mt-28">
@@ -42,7 +59,7 @@
         </div>
     </div>
     
-    <div class="container px-5 mx-auto mt-14">
+    <div class="container px-5 mx-auto my-14">
         <div class="flex flex-col gap-8 m-auto max-w-8xl">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @php
@@ -90,18 +107,6 @@
                 </div>
             </a>
         </div>
-    </div>
-</div>
-
-<div class="relative mt-28 h-96">
-    <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
-    </div>
-    <div class="absolute inset-0 z-10 w-full h-full bg-search-gradient opacity-70">
-    </div>
-    <div class="absolute z-20 flex flex-col items-center w-full h-full top-8 font-bebasNeue">
-        <p class="px-5 text-[4rem] font-bold text-center text-white text-shadow-custom">
-            FIND WHAT YOU NEED IN <span class="">ALASKA</span>
-        </p>    
     </div>
 </div>
 
