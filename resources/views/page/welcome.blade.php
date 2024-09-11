@@ -66,7 +66,7 @@
             <h1 class="text-3xl font-bold text-center sm:text-4xl text-slate-700">
                 Share Your Treasures with Us
             </h1>
-            <p class="max-w-2xl mx-auto mt-4 text-lg text-slate-500">
+            <p class="max-w-3xl mx-auto mt-4 text-lg text-slate-500">
                 Join our community and start listing your valuable items today. It’s fast, easy, and secure.
             </p>
         </div>
