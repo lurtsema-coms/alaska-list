@@ -58,56 +58,6 @@
             </div>
         </div>
     </div>
-    
-    <div class="container px-5 mx-auto my-14">
-        <div class="flex flex-col gap-8 m-auto max-w-8xl">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                @php
-                    $queryParamFurniture = 'sc_names[' . '0' . ']=' . urlencode('furniture');
-                    $furniture = route('listing-page') . '?' . $queryParamFurniture;
-                    $queryParamElectronics = 'sc_names[' . '0' . ']=' . urlencode('electronic');
-                    $electronic = route('listing-page') . '?' . $queryParamElectronics;
-                    $queryParamVehicles = 'sc_names[' . '0' . ']=' . urlencode('vehicle');
-                    $vehicle = route('listing-page') . '?' . $queryParamVehicles;
-                    $queryParamRealEstate = 'sc_names[' . '0' . ']=' . urlencode('real state');
-                    $real_estate = route('listing-page') . '?' . $queryParamRealEstate;
-                @endphp
-                {{-- <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $furniture }}" wire:navigate data-aos="fade-right"> --}}
-                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ route('listing-page') }}" wire:navigate data-aos="fade-right">
-                    <p class="text-xl font-bold text-gray-700">Furnitures</p>
-                    <p class="text-gray-700">Discover a wide selection of sofas, tables, and chairs for sale, both new and used.</p>
-                </a>
-                {{-- <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $electronic }}" wire:navigate data-aos="fade-right"> --}}
-                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ route('listing-page') }}" wire:navigate data-aos="fade-right">
-                    <div>
-                        <p class="text-xl font-bold text-gray-700">Electronics</p>
-                        <p class="text-gray-700">Explore deals on smartphones, laptops, and gadgets from leading brands.</p>
-                    </div>
-                </a>
-                {{-- <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $vehicle }}" wire:navigate data-aos="fade-right"> --}}
-                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ route('listing-page')}}" wire:navigate data-aos="fade-right">
-                    <div>
-                        <p class="text-xl font-bold text-gray-700">Vehicles</p>
-                        <p class="text-gray-700">Find cars, trucks, motorcycles, and RVs for sale near you, both use.</p>
-                    </div>
-                </a>
-                {{-- <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ $real_estate }}" wire:navigate data-aos="fade-right"> --}}
-                <a class="flex flex-col p-4 transition-all border shadow-sm cursor-pointer min-w-fit bg-gray-50 max-w-56 border-slate-300 rounded-xl hover:border-sky-600" href="{{ route('listing-page')}}" wire:navigate data-aos="fade-right">
-                    <div>
-                        <p class="text-xl font-bold text-gray-700">Real Estate</p>
-                        <p class="text-gray-700">Browse listings for apartments, houses, and commercial properties.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="flex justify-center mt-12">
-            <a href="{{ route('listing-page') }}" wire:navigate>
-                <div class="bg-[#2171a7] px-8 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:bg-[#1a5b8a] transition-transform transform hover:scale-105 cursor-pointer">
-                    See All Categories
-                </div>
-            </a>
-        </div>
-    </div>
 </div>
 
 <div class="relative border py-28 bg-gradient-to-b from-gray-50 to-white" data-aos="fade-up">
