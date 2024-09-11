@@ -45,7 +45,7 @@ new class extends Component {
                 @guest
                     <a class="relative hidden px-1 group lg:block" href="{{ route('login') }}" wire:navigate>
                         <div class="px-4 py-2 font-bold text-white transition duration-300 rounded-full shadow-md bg-search-gradient hover:opacity-70">
-                            Post Classifieds
+                            Post an Ad
                         </div>
                     </a>
                     @else

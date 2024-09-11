@@ -273,7 +273,7 @@ new class extends Component {
             <div class="flex-1">
                 <div class="grid grid-cols-1 gap-8 xl:grid-cols-2 2xl:grid-cols-3">
                     @if($products->isEmpty())
-                        <p>No products to show.</p>
+                        <p>😔 No uploads yet!</p>
                     @else
                         @foreach($products as $product)
                             @if ($product->ActiveSpecialBoostCount)
@@ -306,7 +306,7 @@ new class extends Component {
                                         <div class="p-6 border-t border-yellow-200 bg-yellow-50 rounded-b-xl">
                                             <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
                                                 <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
-                                                <p class="text-gray-600">{{ $product->location ? config('global.us_states')[$product->location] : '' }}</p>
+                                                <p class="text-gray-600">{{ $product->location ? $product->location : '' }}</p>
                                             </div>
                                             <button class="px-4 py-2 font-bold text-white bg-yellow-500 rounded-xl hover:bg-yellow-600">
                                                 View Details
@@ -343,7 +343,7 @@ new class extends Component {
                                             <div class="p-6 border-t rounded-b-xl">
                                                 <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
                                                     <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
-                                                    <p class="text-gray-600">{{ $product->location ? config('global.us_states')[$product->location] : '' }}</p>
+                                                    <p class="text-gray-600">{{ $product->location ? $product->location : '' }}</p>
                                                 </div>
                                                 <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded-xl hover:bg-blue-600">
                                                     View Details

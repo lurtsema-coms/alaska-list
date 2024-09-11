@@ -8,7 +8,7 @@
     <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
     </div>
     <div class="absolute inset-0 z-30 flex items-center justify-center">
-        <div class="container mx-auto font-sans text-4xl font-semibold text-white text-shadow-custom">
+        <div class="container px-5 mx-auto font-sans text-4xl font-semibold text-white text-shadow-custom">
             <p>ONE STOP SHOP</p>
             <p>FOR ALL ALASKAN GOODS!</p>
         </div>

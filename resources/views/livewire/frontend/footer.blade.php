@@ -26,20 +26,20 @@ new class extends Component {
                 <a href="/" wire:navigate class="flex justify-center text-white">
                     <img class="object-contain max-w-24" src="{{ asset('img/logo/logo-white.png') }}" alt="Logo">
                 </a>
-                <div>
+                {{-- <div>
                     <p class="mb-2 text-xl text-white">Categories</p>
                     <div class="grid grid-cols-4 gap-x-8 gap-y-2">
                         @foreach ($categories_footer as $category_footer)
                             <a 
                                 class="no-underline cursor-pointer text-neutral-300" 
-                                href="/listing-page?category_id={{ $category_footer->id }}" 
+                                href="/listing-page?category_id={{ $category_footer->id }}"
                                 wire:key="{{ str()->random(50) }}"
                                 wire:navigate>
                                 {{ $category_footer->name }}
                             </a>
                         @endforeach
                     </div>
-                </div>
+                </div> --}}
                 <div class="flex space-x-4 sm:justify-center ">
                     <a href="#"  class="flex items-center justify-center bg-gray-800 rounded-full w-9 h-9 hover:bg-indigo-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
