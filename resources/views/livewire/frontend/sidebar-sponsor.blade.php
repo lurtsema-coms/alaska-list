@@ -35,6 +35,6 @@ new class extends Component {
         @if (count($sponsors) != 0)
             <p class="mb-2 font-bold text-gray-600">You might also like</p>
         @endif
-        <livewire:frontend.sponsored-listing/>
+        {{-- <livewire:frontend.sponsored-listing/> --}}
     </div>
 </div>
