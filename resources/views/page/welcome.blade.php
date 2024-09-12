@@ -8,19 +8,21 @@
     <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
     </div>
     <div class="absolute inset-0 z-30 flex items-center justify-center">
-        <div class="container px-5 mx-auto font-sans text-4xl font-semibold text-white text-shadow-custom">
+        <div class="container px-5 mx-auto font-sans text-2xl font-semibold text-white text-shadow-custom sm:text-4xl">
             <p>ONE STOP SHOP</p>
             <p>FOR ALL ALASKAN GOODS!</p>
         </div>
     </div>
-    <div class="absolute inset-x-0 bottom-0 z-30 -translate-x-1/2 translate-y-1/2 left-1/2">
-        <livewire:frontend.home-search />
+    <div class="absolute inset-x-0 bottom-0 z-30 translate-y-1/2 ">
+        <div class="container px-5 mx-auto">
+            <livewire:frontend.home-search />
+        </div>
     </div>
 </div>
 
 {{-- Categories Section --}}
 <div>
-    <div class="container px-5 mx-auto mt-0 w-full sm:max-w-4xl sm:mt-28">
+    <div class="container w-full px-5 mx-auto sm:max-w-4xl mt-28">
         <livewire:frontend.categories />
     </div>
 </div>
