@@ -15,7 +15,7 @@ export default {
                 sans: ["Figtree", "sans-serif"],
                 poppins: ["Poppins", "sans-serif"],
                 darkerGrotesque: ['"Darker Grotesque"', "sans-serif"],
-                bebasNeue: ['"Bebas Neue"', "sans-serif"], 
+                bebasNeue: ['"Bebas Neue"', "sans-serif"],
             },
             backgroundImage: {
                 woman: "url('../images/woman.jpg')",
@@ -24,7 +24,6 @@ export default {
                 blob: "url('../images/wave4.svg')",
                 brainstorm: "url('../images/brainstorming.jpg')",
                 'search-gradient': 'linear-gradient(to right, #143E7A, #4988A5)',
-                
             },
             screens: {
                 xsm: "400px",
@@ -42,7 +41,17 @@ export default {
                 '.text-shadow-custom': {
                     textShadow: '0em 0.1em 0.1em rgba(0, 0, 0, 0.4)',
                 },
-            })
+                '.column-wrapper': {
+                    columnCount: '1',
+                    columnGap: '1.5rem',
+                    '@screen md': {
+                        columnCount: '3',
+                    },
+                },
+                '.avoid-break': {
+                    breakInside: 'avoid',
+                },
+            });
         },
     ],
 };

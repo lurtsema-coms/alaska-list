@@ -37,12 +37,55 @@ new class extends Component {
         @endforeach
     </div>
 </div> --}}
-<div class="bg-white p-6 rounded-lg shadow-md">
+{{-- <div class="">
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 ">
         @foreach ($categories as $category)
-            <div class="border border-gray-300 rounded-lg p-4 transition-shadow duration-300 hover:shadow-lg" wire:key="{{ 'category-listing-'.$category->id }}">
+            <div class="" wire:key="{{ 'category-listing-'.$category->id }}">
                 <a href="/listing-page?category_id={{ $category->id }}" wire:navigate>
-                    <h3 class="text-xl font-semibold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
+                    <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
+                </a>
+                <ul class="mt-4 space-y-2">
+                    @foreach($category->subCategories as $sub_category)
+                        <li wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                            <a href="{{ "listing-page?sc_names[0]=$category->id-$sub_category->name" }}" class="text-gray-600 hover:text-gray-800" wire:navigate>
+                                {{ $sub_category->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endforeach
+    </div>
+</div> --}}
+
+
+{{-- <div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="column-wrapper">
+        @foreach ($categories as $category)
+            <div class="border border-gray-300 rounded-lg p-4 mt-4 transition-shadow duration-300 hover:shadow-lg" wire:key="{{ 'category-listing-'.$category->id }}">
+                <a href="/listing-page?category_id={{ $category->id }}" wire:navigate>
+                    <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
+                </a>
+                <ul class="mt-4 space-y-2">
+                    @foreach($category->subCategories as $sub_category)
+                        <li wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                            <a href="{{ "listing-page?sc_names[0]=$category->id-$sub_category->name" }}" class="text-gray-600 hover:text-gray-800" wire:navigate>
+                                {{ $sub_category->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endforeach
+    </div>
+</div> --}}
+
+<div class="">
+    <div class="column-wrapper">
+        @foreach ($categories as $category)
+            <div class="rounded-lg p-4 mt-4 transition-shadow duration-300  avoid-break" wire:key="{{ 'category-listing-'.$category->id }}">
+                <a href="/listing-page?category_id={{ $category->id }}" wire:navigate>
+                    <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
                 </a>
                 <ul class="mt-4 space-y-2">
                     @foreach($category->subCategories as $sub_category)
@@ -57,5 +100,3 @@ new class extends Component {
         @endforeach
     </div>
 </div>
-
-
