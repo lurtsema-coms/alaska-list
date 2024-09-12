@@ -14,22 +14,7 @@
         </div>
     </div>
     <div class="absolute inset-x-0 bottom-0 z-30 -translate-x-1/2 translate-y-1/2 left-1/2">
-        <div class="w-full max-w-5xl bg-white shadow-lg h-14">
-            <div class="flex items-center h-full">
-                <div class="flex flex-1">
-                    <select class="max-w-56 text-md w-full px-4 border-none focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="">
-                        <option value="" disabled selected>Category...</option>
-                    </select>
-                    <div class="w-[1px] h-10 bg-gray-200"></div>
-                    <input class="flex-1 border-none focus:outline-none focus:ring-0" placeholder="Search for ..." type="text">
-                    <div class="w-[1px] h-10 bg-gray-200"></div>
-                    <select class="flex-1 text-md w-full px-4 border-none focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="">
-                        <option value="" disabled selected>Location...</option>
-                    </select>
-                </div>
-                <button class="max-w-40 text-lg font-bold w-full text-white h-full bg-[#2171a7] hover:bg-[#1a5b8a]">Search</button>
-            </div>
-        </div>
+        <livewire:frontend.home-search />
     </div>
 </div>
 

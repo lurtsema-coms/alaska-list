@@ -17,6 +17,7 @@ new class extends Component {
     public $search;
     #[Url] 
     public $category_id;
+    #[Url] 
     public $location;
     public $price_range;
     public $sort_by = "";

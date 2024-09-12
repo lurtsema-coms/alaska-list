@@ -48,10 +48,10 @@ new class extends Component
                         {{ __('Listing') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin-special-boost')" :active="request()->routeIs('admin-special-boost')" wire:navigate>
-                        {{ __('Special Boost') }}
+                        {{ __('Boosted Listing') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin-advertisement')" :active="request()->routeIs('admin-advertisement')" wire:navigate>
-                        {{ __('Advertisement') }}
+                        {{ __('Featured Listing') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin-user-control')" :active="request()->routeIs('admin-user-control')" wire:navigate>
                         {{ __('User Control') }}
@@ -127,10 +127,10 @@ new class extends Component
                 {{ __('Listing') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-special-boost')" :active="request()->routeIs('admin-special-boost')" wire:navigate>
-                {{ __('Special Boost') }}
+                {{ __('Boosted Listing') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-advertisement')" :active="request()->routeIs('admin-advertisement')" wire:navigate>
-                {{ __('Advertisement') }}
+                {{ __('Featured Listing') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-user-control')" :active="request()->routeIs('admin-user-control')" wire:navigate>
                 {{ __('User Control') }}
