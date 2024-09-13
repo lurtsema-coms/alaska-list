@@ -6,6 +6,8 @@ use Livewire\Volt\Component;
 new class extends Component {
     
     public $sub_categories = [];
+    public $selectedCategoryId = null;
+
 
     public function with(): array
     {
@@ -23,6 +25,7 @@ new class extends Component {
 
     public function selectedButton($categoryModel)
     {
+        $this->selectedCategoryId = $categoryModel['id'];
         $this->sub_categories = $categoryModel['sub_categories'] ;
     }
 }; ?>
@@ -47,10 +50,16 @@ new class extends Component {
         @endforeach
     </div>
 
-    <div class="flex mt-36 gap-1 flex-wrap md:hidden">
+    <div class="flex flex-wrap justify-center items-center py-2 mt-36 gap-3  md:hidden">
         @foreach ($categories as $category)
             <div class="" wire:key="{{ 'category-listing-mobile-'.$category->id }}">
-                <button wire:click="selectedButton({{$category}})">{{$category->name}}</button>
+                <button 
+                    class="py-2 w-[8rem] shadow-md font-bold rounded-lg 
+                    {{ $selectedCategoryId === $category->id ? 'bg-[#2171a7] text-white' : '' }}"
+                    wire:click="selectedButton({{ $category }})"
+                >
+                    {{ $category->name }}
+                </button>
             </div>
         @endforeach
     </div>
