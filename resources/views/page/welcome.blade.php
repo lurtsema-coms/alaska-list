@@ -22,7 +22,7 @@
 
 {{-- Categories Section --}}
 <div class="flex">
-    <div class=" px-5 mx-auto mt-0 w-full  lg:max-w-4xl sm:mt-28 md:container">
+    <div class=" px-5 mx-auto mt-0 w-full  lg:max-w-4xl md:mt-28 md:container">
         <livewire:frontend.categories />
     </div>
 </div>

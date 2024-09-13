@@ -8,6 +8,14 @@ new class extends Component {
     public $sub_categories = [];
     public $selectedCategoryId = null;
 
+    public function mount()
+    {
+        $categories = $this->loadCategories();
+        if ($categories->isNotEmpty()) {
+            $this->selectedCategoryId = $categories->first()->id;
+            $this->sub_categories = $categories->first()->subCategories->toArray();
+        }
+    }
 
     public function with(): array
     {
@@ -30,7 +38,8 @@ new class extends Component {
     }
 }; ?>
 
-<div class="">
+<div>
+
     <div class="column-wrapper hidden md:block">
         @foreach ($categories as $category)
             <div class="rounded-lg p-4  transition-shadow duration-300  avoid-break" wire:key="{{ 'category-listing-'.$category->id }}">
@@ -63,8 +72,11 @@ new class extends Component {
             </div>
         @endforeach
     </div>
-    <div class="md:hidden">
-        <ul class="mt-4 space-y-2 list-disc pl-5 font-bold">
+    <div class="mt-6 ml-6 md:hidden text-gray-600 italic">
+        <p>Select Category:</p>
+    </div>
+    <div class="flex justify-center items-center my-8 md:hidden">
+        <ul class=" space-y-2 pl-5 font-bold">
             @foreach($sub_categories as $sub_category)
                 <li wire:key="{{ 'sub-categ-listing-mobile-'.$sub_category['id'] }}">
                     <a href="{{ "listing-page?sc_names[0]=" .$sub_category['category_id']. "-" .$sub_category['name'] }}" class="text-gray-600 hover:text-blue-800" wire:navigate>
