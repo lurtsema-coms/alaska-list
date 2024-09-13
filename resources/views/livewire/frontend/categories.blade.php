@@ -12,8 +12,8 @@ new class extends Component {
     {
         $categories = $this->loadCategories();
         if ($categories->isNotEmpty()) {
-            $this->selectedCategoryId = $categories->first()->id;
-            $this->sub_categories = $categories->first()->subCategories->toArray();
+            $this->selectedCategoryId = $categories->last()->id;
+            $this->sub_categories = $categories->last()->subCategories->toArray();
         }
     }
 
@@ -72,11 +72,11 @@ new class extends Component {
             </div>
         @endforeach
     </div>
-    <div class="mt-6 ml-6 md:hidden text-gray-600 italic">
-        <p>Select Category:</p>
+    <div class="mt-6 ml-6 md:hidden text-gray-500 italic">
+        <p>Select Subcategories:</p>
     </div>
-    <div class="flex justify-center items-center my-8 md:hidden">
-        <ul class=" space-y-2 pl-5 font-bold">
+    <div class="flex justify-center items-center my-6 md:hidden">
+        <ul class="grid grid-cols-2 justify-center items-center underline  space-y-2 pl-5 font-bold ">
             @foreach($sub_categories as $sub_category)
                 <li wire:key="{{ 'sub-categ-listing-mobile-'.$sub_category['id'] }}">
                     <a href="{{ "listing-page?sc_names[0]=" .$sub_category['category_id']. "-" .$sub_category['name'] }}" class="text-gray-600 hover:text-blue-800" wire:navigate>
