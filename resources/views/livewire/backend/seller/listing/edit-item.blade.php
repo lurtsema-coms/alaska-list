@@ -166,7 +166,9 @@ new class extends Component {
         }
 
         $this->dispatch('new-img');
-        $this->dispatch('alert-success');
+        
+        session()->flash('alert-success', 'Item Successfully added');
+        $this->redirect(route('seller-listing'), navigate: true);
     }
 
     public function deleteItem(){

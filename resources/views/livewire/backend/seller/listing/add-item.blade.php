@@ -86,7 +86,9 @@ new class extends Component {
 
         $this->reset(['photos', 'sub_category', 'title_name', 'price', 'qty', 'description', 'additional_information']);
         $this->inc++;
-        $this->dispatch('alert-success', route: route('seller-listing'));
+        
+        session()->flash('alert-success', 'Item Successfully added');
+        $this->redirect(route('seller-listing'), navigate: true);
     }
     
     public function with(): array
@@ -150,7 +152,7 @@ new class extends Component {
                                 <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="location">
                                     <option value="" disabled selected>Select one</option>
                                     @foreach (config('global.us_states') as $key => $location)
-                                        <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }} ({{ $key }})</option>
+                                        <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }}</option>
                                     @endforeach
                                 </select>
                                 @error('location')<span class="mt-1 text-red-500">{{ $message }}</span>@enderror

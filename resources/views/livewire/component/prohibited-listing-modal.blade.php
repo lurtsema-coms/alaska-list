@@ -57,16 +57,13 @@ new class extends Component {
                         To ensure the safety and integrity of our platform, please note that the following items are prohibited:
                     </p>
                     <ul class="pl-5 space-y-2 text-gray-700 list-disc">
-                        <li>Weapons, including firearms, explosives, and knives.</li>
                         <li>Counterfeit or imitation goods that infringe on trademarks.</li>
                         <li>Stolen property or items obtained illegally.</li>
                         <li>Adult content, including explicit materials and services.</li>
                         <li>Illegal drugs and paraphernalia.</li>
                         <li>Hazardous materials or substances.</li>
                         <li>Any items that violate our community guidelines or terms of service.</li>
-                        <li>Alcohol, tobacco, and vape products where prohibited by law.</li>
                         <li>Animals or pets that are not allowed by local regulations.</li>
-                        <li>Lottery tickets or gambling-related items.</li>
                     </ul>
                     <p class="mt-6 text-gray-600">
                         For further information or to report violations, please contact our support team.

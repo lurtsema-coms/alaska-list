@@ -65,15 +65,7 @@ new class extends Component {
 @script
 <script>
     Livewire.on('alert-success', (events) => {
-        document.getElementById('alert-success').classList.remove('hidden');
-        document.getElementById('alert-success').classList.add('flex');
-        if(events.route){
-            window.location.href = events.route;
-        }
-        setTimeout(() => {
-            document.getElementById('alert-success').classList.remove('flex');
-            document.getElementById('alert-success').classList.add('hidden');
-        }, 10000);
+        alertSuccess(events);
     })
 
     Livewire.on('alert-info', () => {
@@ -100,5 +92,26 @@ new class extends Component {
             button.closest('.items-center').classList.add('hidden');
         });
     });
+
+    if ("{{ session('alert-success') }}") {
+        let defaultEvents = {
+            route: "{{ session('alert-success.route', '') }}",
+            message: "{{ session('alert-success.message', '') }}"
+        };
+        
+        alertSuccess(defaultEvents);
+    }
+
+    function alertSuccess(events) {
+        document.getElementById('alert-success').classList.remove('hidden');
+        document.getElementById('alert-success').classList.add('flex');
+        if(events.route){
+            window.location.href = events.route;
+        }
+        setTimeout(() => {
+            document.getElementById('alert-success').classList.remove('flex');
+            document.getElementById('alert-success').classList.add('hidden');
+        }, 10000);
+    }
 </script>
 @endscript
