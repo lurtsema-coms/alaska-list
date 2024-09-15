@@ -47,8 +47,8 @@ new class extends Component {
             return;
         }
 
-        if($photo_width != 1280 && $photo_height != 550){
-            $this->addError('image_constraint', 'The image width must be 1280 pixels and the height must be 550 pixels.');
+        if($photo_width > 1920 || $photo_height > 1080){
+            $this->addError('image_constraint', 'The image width must not exceed 1920 pixels, and the height must not exceed 1080 pixels.');
             return;
         }
         
@@ -74,12 +74,12 @@ new class extends Component {
             // Optimize image
             $file_path = storage_path("app/" . $path);
             $image = Image::make($file_path);
-            $image->resize(1280, 550, function ($constraint) {
+            $image->resize($photo_width, $photo_height, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
 
-            $image->fit(1280, 550);
+            $image->fit($photo_width, $photo_height);
             $image->save($file_path, 80);
 
             $f_path = "storage/photos/advertisement/$file_name";
@@ -136,7 +136,7 @@ new class extends Component {
     })">
     <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500"
     @click="addAdvertisement=true">
-        Add Advertisement
+        Add Featured Listing
     </button>
     
     <div class="fixed top-0 left-0 z-10 w-full h-full overflow-auto bg-black position bg-opacity-30"
@@ -161,7 +161,7 @@ new class extends Component {
                                     </select>
                                 </div>
                             </div>
-                            <div class="flex flex-col gap-4 sm:flex-row">
+                            {{-- <div class="flex flex-col gap-4 sm:flex-row">
                                 <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">From Date <span class="text-red-400">*</span></p>
                                     <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="datetime-local" required wire:change="computePlanDate" wire:model="from_date" required>
@@ -170,14 +170,14 @@ new class extends Component {
                                     <p class="font-medium text-slate-700">To Date</p>
                                         <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="to_date" readonly required>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="space-y-2">
                                 <label class="font-medium text-slate-700">Upload Photo <span class="text-red-400">*</span></label>
                                 <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" required wire:model="photo" id="upload-{{ $inc }}">
                             </div>
                             <div>
                                 <p class="mb-2 text-sm text-gray-600">
-                                    Requirement: For best quality in advertising, the image should be exactly 550px in height and 1280px in width.
+                                    For best quality in advertising, the image should have a maximum height of 1080px and a maximum width of 1920px
                                 </p>
                             </div>
                             @error('image_constraint')                                

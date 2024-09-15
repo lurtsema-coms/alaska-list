@@ -40,16 +40,16 @@ new class extends Component {
 
 <div>
 
-    <div class="column-wrapper hidden md:block">
+    <div class="hidden column-wrapper md:block">
         @foreach ($categories as $category)
-            <div class="rounded-lg p-4  transition-shadow duration-300  avoid-break" wire:key="{{ 'category-listing-'.$category->id }}">
+            <div class="p-4 transition-shadow duration-300 rounded-lg avoid-break" wire:key="{{ 'category-listing-'.$category->id }}">
                 <a href="/listing-page?category_id={{ $category->id }}" wire:navigate>
                     <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
                 </a>
-                <ul class="mt-4 space-y-2 list-disc pl-5 font-bold">
+                <ul class="pl-5 mt-4 space-y-2 list-disc">
                     @foreach($category->subCategories as $sub_category)
                         <li wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                            <a href="{{ "listing-page?sc_names[0]=$category->id-$sub_category->name" }}" class="text-gray-600 hover:text-blue-800" wire:navigate>
+                            <a href="{{ "listing-page?sc_names[0]=$category->id-$sub_category->name" }}" class="text-slate-500 hover:text-blue-800" wire:navigate>
                                 {{ $sub_category->name }}
                             </a>
                         </li>
@@ -59,7 +59,7 @@ new class extends Component {
         @endforeach
     </div>
 
-    <div class="flex flex-wrap justify-center items-center py-2 mt-36 gap-3  md:hidden">
+    <div class="flex flex-wrap items-center justify-center gap-3 py-2 mt-36 md:hidden">
         @foreach ($categories as $category)
             <div class="" wire:key="{{ 'category-listing-mobile-'.$category->id }}">
                 <button 
@@ -72,14 +72,14 @@ new class extends Component {
             </div>
         @endforeach
     </div>
-    <div class="mt-6 ml-6 md:hidden text-gray-500 italic">
+    <div class="mt-6 ml-6 italic text-gray-500 md:hidden">
         <p>Select Subcategories:</p>
     </div>
-    <div class="flex justify-center items-center my-6 md:hidden">
-        <ul class="grid grid-cols-2 justify-center items-center underline  space-y-2 pl-5 font-bold ">
+    <div class="flex items-center justify-center my-6 md:hidden">
+        <ul class="grid items-center justify-center grid-cols-2 pl-5 space-y-2 underline ">
             @foreach($sub_categories as $sub_category)
                 <li wire:key="{{ 'sub-categ-listing-mobile-'.$sub_category['id'] }}">
-                    <a href="{{ "listing-page?sc_names[0]=" .$sub_category['category_id']. "-" .$sub_category['name'] }}" class="text-gray-600 hover:text-blue-800" wire:navigate>
+                    <a href="{{ "listing-page?sc_names[0]=" .$sub_category['category_id']. "-" .$sub_category['name'] }}" class="text-slate-500 hover:text-blue-800" wire:navigate>
                         {{ $sub_category['name'] }}   
                     </a>
                 </li>

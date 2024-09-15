@@ -151,8 +151,8 @@ new class extends Component {
                                 <p class="font-medium text-slate-700">Location <span class="text-red-400">*</span></p>
                                 <select class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" required wire:model="location">
                                     <option value="" disabled selected>Select one</option>
-                                    @foreach (config('global.us_states') as $key => $location)
-                                        <option value="{{ $key }}" wire:key="{{ $location }}-{{ $key }}">{{ $location }}</option>
+                                    @foreach (config('global.us_states') as $location)
+                                        <option value="{{ $location }}" wire:key="add-item-{{ $location }}">{{ $location }}</option>
                                     @endforeach
                                 </select>
                                 @error('location')<span class="mt-1 text-red-500">{{ $message }}</span>@enderror

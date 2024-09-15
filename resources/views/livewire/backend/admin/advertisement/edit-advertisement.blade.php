@@ -55,14 +55,14 @@ new class extends Component {
         $photo_img = Image::make($photo);
         $photo_height = $photo_img->getHeight();
         $photo_width = $photo_img->getWidth();
-
+        
         if(empty($photo)){
             $this->dispatch('error');
             return;
         }
-
-        if($photo_width != 1280 && $photo_height != 550){
-            $this->addError('image_constraint', 'The image width must be 1280 pixels and the height must be 550 pixels.');
+        
+        if($photo_width > 1920 || $photo_height > 1080){
+            $this->addError('image_constraint', 'The image width must not exceed 1920 pixels, and the height must not exceed 1080 pixels.');
             return;
         }
 
@@ -86,12 +86,12 @@ new class extends Component {
             // Optimize image
             $file_path = storage_path("app/" . $path);
             $image = Image::make($file_path);
-            $image->resize(1280, 550, function ($constraint) {
+            $image->resize($photo_width, $photo_height, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
 
-            $image->fit(1280, 550);
+            $image->fit($photo_width, $photo_height);
             $image->save($file_path, 80);
 
             $f_path = "storage/photos/advertisement/$file_name";

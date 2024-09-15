@@ -184,7 +184,7 @@ new class extends Component {
             <p class="invisible text-lg text-neutral-300">Connecting communities through trusted local marketplaces.</p>
         </div>
     </div>
-    <div class="container relative px-5 mx-auto space-y-10 -top-28 sm:-top-20 sm:px-5">
+    <div class="container relative px-5 mx-auto -top-28 sm:-top-20 sm:px-5">
         <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl">
             <div class="space-y-4 overflow-y-auto max-h-80 sm:p-4">
                 <div class="flex items-center justify-between mb-4">
@@ -213,7 +213,7 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="flex flex-col justify-between xl:flex-row n" id="filter">
+        <div class="flex flex-col justify-between mt-12 xl:flex-row" id="filter">
             <div class="flex flex-wrap gap-4">
                 <div>
                     <h3 class="mb-2">Location</h3>
@@ -270,7 +270,7 @@ new class extends Component {
             </div>
         </div>
         
-        <div class="flex flex-col gap-8 md:flex-row">
+        <div class="flex flex-col gap-8 mt-16 md:flex-row">
             <div class="flex-1">
                 <div class="grid grid-cols-1 gap-8 xl:grid-cols-2 2xl:grid-cols-3">
                     @if($products->isEmpty())
@@ -358,7 +358,7 @@ new class extends Component {
                 </div>
                 {{ $products->links(data: ['scrollTo' => '#filter']) }}
             </div>
-            <div>
+            <div class="w-full max-w-72">
                 <livewire:frontend.sidebar-sponsor>
             </div>           
         </div>

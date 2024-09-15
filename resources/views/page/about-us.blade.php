@@ -12,7 +12,7 @@
         <div class="flex flex-col gap-8 md:flex-row">
             <div class="flex flex-col gap-8 2xl:flex-row">
                 <div class="max-w-xl overflow-hidden rounded-lg">
-                    <img src="{{ asset('frontend/about-us.jpg') }}" alt="Our Team at Work">
+                    <img src="{{ asset('frontend/mountain.jpg') }}" alt="Our Team at Work">
                 </div>
                 <div class="space-y-8 text-slate-600">
                     <p class="max-w-2xl text-lg">

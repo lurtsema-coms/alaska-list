@@ -132,7 +132,7 @@ new class extends Component {
                     </div>
                 @endif
                 <div class="space-y-2">
-                    <p><span class="font-bold">Location: </span> <span class="text-gray-600">{{ $location ? config('global.us_states')[$location] : '' }}</span></p>
+                    <p><span class="font-bold">Location: </span> <span class="text-gray-600">{{ $location ? $location : '' }}</span></p>
                     <p><span class="font-bold">Date Publish: </span> <span class="text-gray-600">{{ \Carbon\Carbon::parse($posted_at)->format('F j, Y') }}</span></p>
                 </div>
             </div>

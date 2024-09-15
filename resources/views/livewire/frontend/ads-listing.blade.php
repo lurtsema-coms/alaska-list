@@ -4,12 +4,17 @@ use App\Models\Advertisement;
 use Livewire\Volt\Component;
 
 new class extends Component {
-    
+
     public function with(): array
     {
         return [
             'campaigns' => $this->loadAds(),
         ];
+    }
+
+    public function placeholder()
+    {
+        return view('location-skeleton');
     }
 
     public function loadAds()
@@ -24,28 +29,8 @@ new class extends Component {
 
 }; ?>
 
-<div>
-    @if (count($campaigns) != 0)
-        <div class="w-full h-full swiper-add-listing-item swiper">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                @foreach ($campaigns as $campaign)
-                    <div class="swiper-slide " wire:key="{{ str()->random(50) }}">
-                        <div class="swiper-slide">
-                            <img class="object-cover w-full h-full rounded-2xl" src="{{ asset($campaign->file_path) }}" alt="{{ $campaign->uuid }}" loading="lazy">
-                        </div>
-                    </div>
-                @endforeach
-            </div>  
-        </div>
-        @else
-            <img class="object-cover w-full max-w-2xl m-auto rounded-2xl" src="{{ asset('frontend/ads.jpg') }}" alt="">
-    @endif
-</div>
-
-@script
-<script data-navigate-once>
-    const swiper = new Swiper(".swiper-add-listing-item", {
+<div x-init="
+    const swiper = new Swiper('.swiper-add-listing-item', {
         navigation: false,
         grabCursor: false,
         centeredSlides: true,
@@ -55,5 +40,27 @@ new class extends Component {
             disableOnInteraction: false,
         },
     });
-</script>
-@endscript
+">
+    @if (count($campaigns) != 0)
+        <div class="w-full h-full swiper-add-listing-item swiper">
+            <div class="swiper-wrapper">
+                @foreach ($campaigns as $campaign)
+                    <div class="swiper-slide" wire:key="{{ str()->random(50) }}">
+                        <img class="object-cover w-full rounded-2xl" src="{{ asset($campaign->file_path) . '?' . now()->timestamp }}" alt="{{ $campaign->uuid }}">
+                    </div>
+                @endforeach
+            </div>  
+        </div>
+        @else
+            <div class="p-4 overflow-auto border border-gray-200 divide-gray-200 rounded shadow max-h-96">
+                <p class="pb-4 mb-4 font-medium border-b">Location</p>
+                <div class="grid grid-cols-2 gap-2 text-slate-500">
+                    @foreach (config('global.us_states') as $location)
+                        <a href="{{ "listing-page?location=$location" }}" wire:navigate>
+                            <span>{{ $location }}</span>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+    @endif
+</div>

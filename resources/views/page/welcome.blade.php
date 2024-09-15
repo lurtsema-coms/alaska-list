@@ -15,14 +15,14 @@
     </div>
     <div class="absolute inset-x-0 bottom-0 z-30 translate-y-1/2 ">
         <div class="container px-5 mx-auto">
-            <livewire:frontend.home-search />
+            <livewire:frontend.home-search/>
         </div>
     </div>
 </div>
 
 {{-- Categories Section --}}
 <div class="flex">
-    <div class=" px-5 mx-auto mt-0 w-full  lg:max-w-4xl md:mt-28 md:container">
+    <div class="w-full px-5 mx-auto mt-0 lg:max-w-4xl md:mt-28 md:container">
         <livewire:frontend.categories />
     </div>
 </div>
