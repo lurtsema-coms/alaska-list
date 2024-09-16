@@ -2,6 +2,7 @@
 
 use App\Models\SpecialBoost;
 use Livewire\Volt\Component;
+use App\Models\Advertisement;
 
 new class extends Component {
 
@@ -9,6 +10,7 @@ new class extends Component {
     {
         return [
             'sponsors' => $this->loadSpecialBoost(),
+            'campaigns' => $this->loadAds(),
         ];
     }
 
@@ -24,13 +26,25 @@ new class extends Component {
             })
             ->get();
     }
+
+    public function loadAds()
+    {
+        $today = now()->toDateString();
+
+        return Advertisement::withoutTrashed()
+            ->whereDate('from_date', '<=', $today)
+            ->whereDate('to_date', '>=', $today)
+            ->get();
+    }
 }; ?>
 
 <div class="w-full h-full md:w-80">
     <div class="sticky space-y-4 top-28">
+        @if (count($campaigns) != 0)
         <div class="text-right">
             <p class="font-bold">ADVERTISEMENT</p>
         </div>
+        @endif
         <livewire:frontend.ads-listing lazy/>
         {{-- @if (count($sponsors) != 0)
             <p class="mb-2 font-bold text-gray-600">You might also like</p>
