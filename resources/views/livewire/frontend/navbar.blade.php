@@ -30,7 +30,7 @@ new class extends Component {
 
                     <a class="relative px-1 group {{ request()->routeIs('listing-page') ? 'text-sky-700' : 'text-gray-600' }}" 
                     href="{{ route('listing-page') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('listing-page') ? 'Listing Page' : 'Listing Page' }}</span>
+                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('listing-page') ? 'Listing' : 'Listing' }}</span>
                     </a>
 
                     <a class="relative px-1 group {{ request()->routeIs('about-us') ? 'text-sky-700' : 'text-gray-600' }}" 
@@ -41,6 +41,7 @@ new class extends Component {
                     href="{{ route('advertise-with-us') }}" wire:navigate>
                         <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
                     </a>
+                    
                 </div>
                 @guest
                     <a class="relative hidden px-1 group lg:block" href="{{ route('login') }}" wire:navigate>
@@ -90,7 +91,7 @@ new class extends Component {
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
                 </a> --}}
                 <a class="relative px-1 group" href="{{ route('listing-page') }}" wire:navigate>
-                    <span class="transition-opacity group-hover:opacity-70">Listing Page</span>
+                    <span class="transition-opacity group-hover:opacity-70">Listings</span>
                     <span class="absolute left-0 w-0 h-1 transition-all bg-white -bottom-3 group-hover:w-full"></span>
                 </a>
                 <a class="relative px-1 group" href="{{ route('about-us') }}" wire:navigate>
