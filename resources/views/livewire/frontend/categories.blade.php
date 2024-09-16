@@ -75,7 +75,7 @@ new class extends Component {
     <div class="mt-6 ml-6 italic text-gray-500 md:hidden">
         <p>Select Subcategories:</p>
     </div>
-    <div class="flex items-center justify-center my-6 md:hidden">
+    <div class="flex items-center justify-center max-h-[20rem] mt-4 mb-20 overflow-y-auto md:hidden">
         <ul class="grid items-center justify-center grid-cols-2 pl-5 space-y-2 underline ">
             @foreach($sub_categories as $sub_category)
                 <li wire:key="{{ 'sub-categ-listing-mobile-'.$sub_category['id'] }}">
