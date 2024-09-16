@@ -46,10 +46,10 @@ new class extends Component {
                 <a href="/listing-page?category_id={{ $category->id }}" wire:navigate>
                     <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
                 </a>
-                <ul class="pl-5 mt-4 space-y-2 list-disc">
+                <ul class="text-blue-500 pl-5 mt-4 space-y-2 list-disc underline ">
                     @foreach($category->subCategories as $sub_category)
                         <li wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                            <a href="{{ "listing-page?sc_names[0]=$category->id-$sub_category->name" }}" class="text-slate-500 hover:text-blue-800" wire:navigate>
+                            <a href="{{ "listing-page?sc_names[0]=$category->id-$sub_category->name" }}" class="text-blue-500 hover:text-blue-800" wire:navigate>
                                 {{ $sub_category->name }}
                             </a>
                         </li>
@@ -59,7 +59,7 @@ new class extends Component {
         @endforeach
     </div>
 
-    <div class="flex flex-wrap items-center justify-center gap-3 py-2 mt-36 md:hidden">
+    <div class="flex flex-wrap items-center justify-center gap-3 py-2 mt-32 md:hidden">
         @foreach ($categories as $category)
             <div class="" wire:key="{{ 'category-listing-mobile-'.$category->id }}">
                 <button 

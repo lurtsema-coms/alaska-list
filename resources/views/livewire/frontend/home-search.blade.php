@@ -45,7 +45,7 @@ new class extends Component {
 }; ?>
 
 <div class="flex flex-row justify-center align-center">
-    <form wire:submit="submitSearch" class="container flex flex-col justify-center max-w-screen-lg align-center md:mb-5 " autocomplete="off">        
+    <form wire:submit="submitSearch" class="container flex flex-col justify-center max-w-screen-lg align-center md:mb-5 border border-[#2171a7] rounded-2xl" autocomplete="off">        
         <div class="flex flex-col justify-center md:flex-row align-center">
             <input name="search" class="py-3 pl-6  text-lg text-[#2171a7] border-none rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl grow focus:outline-none focus:ring-0" type="text" placeholder="Search for ..." wire:model="search">
             <select name="location" class="py-3 lg:min-w-[300px] text-[#2171a7] text-lg font-semibold  border-none focus:outline-none focus:ring-0 focus:border-[#1F4B55] " name="" id="">
