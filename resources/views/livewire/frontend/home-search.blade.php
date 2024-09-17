@@ -23,14 +23,10 @@ new class extends Component {
 
     public function submitSearch()
     {
-
-        // $this->validate();
-        
         $search = $this->search;
-        $category_id = $this->search_category_id;
         $location = $this->search_location;
 
-        $this->redirect("/listing-page?category_id=$category_id&location=$location&search=$search", navigate: true);
+        $this->redirect("/listing-page?location=$location&search=$search", navigate: true);
     }
 
     public function loadCategories()
