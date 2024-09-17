@@ -36,8 +36,14 @@ new class extends Component
                     <x-nav-link :href="route('seller-listing')" :active="request()->routeIs('seller-listing') || request()->routeIs('seller-listing-add') " wire:navigate>
                         {{ __('Listing') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('seller-boost')" :active="request()->routeIs('seller-boost')" wire:navigate>
+                    {{-- <x-nav-link :href="route('seller-boost')" :active="request()->routeIs('seller-boost')" wire:navigate>
                         {{ __('Boost') }}
+                    </x-nav-link> --}}
+                    <x-nav-link :href="route('seller-special-boost')" :active="request()->routeIs('seller-special-boost')" wire:navigate>
+                        {{ __('Boosted Listing') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('seller-advertisement')" :active="request()->routeIs('seller-advertisement')" wire:navigate>
+                        {{ __('Featured Listing') }}
                     </x-nav-link>
                 @endrole
                 @role('admin')
@@ -64,7 +70,7 @@ new class extends Component
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden lg:flex lg:items-center lg:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
@@ -94,7 +100,7 @@ new class extends Component
             </div>
 
             <!-- Hamburger -->
-            <div class="flex items-center -me-2 sm:hidden">
+            <div class="flex items-center -me-2 lg:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
                     <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -106,7 +112,7 @@ new class extends Component
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
@@ -115,8 +121,11 @@ new class extends Component
                 <x-responsive-nav-link :href="route('seller-listing')" :active="request()->routeIs('seller-listing')" wire:navigate>
                     {{ __('Listing') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('seller-special-boost')" :active="request()->routeIs('seller-special-boost')" wire:navigate>
+                    {{ __('Boosted Listing') }}
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('seller-boost')" :active="request()->routeIs('seller-boost')" wire:navigate>
-                    {{ __('Boost') }}
+                    {{ __('Featured Listing') }}
                 </x-responsive-nav-link>
             @endrole
             @role('admin')

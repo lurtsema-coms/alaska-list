@@ -32,6 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
         Route::view('seller-listing', 'page-backend.seller.b-listing')->name('seller-listing');
         Route::view('seller-listing/add-item', 'page-backend.seller.b-listing-add-item')->name('seller-listing-add');
         Route::view('seller-listing/edit-item/{id}', 'page-backend.seller.b-listing-edit-item')->name('seller-listing-edit');
+        Route::view('seller-special-boost', 'page-backend.admin.b-special-boost')->name('seller-special-boost');
+        Route::view('seller-featured-listing', 'page-backend.admin.b-advertisement')->name('seller-advertisement');
     });
 
     // Routes for users with 'approver' role

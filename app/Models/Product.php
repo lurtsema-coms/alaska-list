@@ -69,4 +69,10 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function scopeBelongsToUser($query, $userId)
+    {
+        return $query->where('created_by', $userId)
+            ->where('status', 'ACTIVE');
+    }
 }

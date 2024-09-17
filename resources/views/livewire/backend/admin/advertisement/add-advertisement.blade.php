@@ -103,6 +103,10 @@ new class extends Component {
         // Check if $ap is not null and has a duration_day property
         if ($ap && $ap->duration_days) {
 
+            if(!$this->from_date) {
+                return;
+            }
+            
             if($this->from_date == ''){
                 $from_date = Carbon::now();
             }else{
@@ -161,7 +165,7 @@ new class extends Component {
                                     </select>
                                 </div>
                             </div>
-                            {{-- <div class="flex flex-col gap-4 sm:flex-row">
+                            <div class="flex flex-col gap-4 sm:flex-row">
                                 <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">From Date <span class="text-red-400">*</span></p>
                                     <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="datetime-local" required wire:change="computePlanDate" wire:model="from_date" required>
@@ -170,7 +174,7 @@ new class extends Component {
                                     <p class="font-medium text-slate-700">To Date</p>
                                         <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="to_date" readonly required>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="space-y-2">
                                 <label class="font-medium text-slate-700">Upload Photo <span class="text-red-400">*</span></label>
                                 <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" required wire:model="photo" id="upload-{{ $inc }}">

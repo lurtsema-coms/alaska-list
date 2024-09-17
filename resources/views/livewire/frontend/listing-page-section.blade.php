@@ -21,6 +21,8 @@ new class extends Component {
     public $location;
     public $price_range;
     public $sort_by = "";
+        #[Url] 
+    public $page = 1;
     public $pagination = 5;
 
     public function mount()
@@ -41,6 +43,11 @@ new class extends Component {
     }
 
     public function updated()
+    {
+        $this->dispatch('load-time-ago');
+    }
+
+    public function updatedPage($page)
     {
         $this->dispatch('load-time-ago');
     }
@@ -76,6 +83,10 @@ new class extends Component {
                         ->where('name', 'like', '%' . $this->search . '%')
                         ->orWhere('description', 'like', '%' . $this->search . '%')
                         ->orWhere('price', 'like', '%' . $this->search . '%');
+
+                        $searchQuery->orWhereHas('subCategory', function ($subQuery) {
+                            $subQuery->where('name', 'like', '%' . $this->search . '%');
+                        });
                 });
             });
 
@@ -156,18 +167,13 @@ new class extends Component {
 
                 // Filter by category ID
             });
-        } else {
-            // Handle cases where sub-category filter is not applied
-            $query->whereHas('subCategory', function ($subQuery) {
-                $subQuery->orWhere('name', 'like', '%' . $this->search . '%');
-            });
         }
-
+        
         return $query->paginate($this->pagination);
     }
 
     public function dispatchTimeAgo(){
-        $this->dispatch('load-time-ago');
+        // $this->dispatch('load-time-ago');
         $this->resetData(['sc_names', 'price_range', 'sort_by', 'location', 'category_id']);
     }
 
@@ -370,7 +376,7 @@ new class extends Component {
 </div>
 
 @script
-<script >
+<script>
     let timeagoInstance;
     document.addEventListener('livewire:navigated', () => {
 
@@ -390,15 +396,8 @@ new class extends Component {
                 initializeTimeago();
             }, 100);
         });
-
+        
         initializeTimeago();
-
-    });
-
-    document.addEventListener('livewire:navigating', () => {
-        if (timeagoInstance) {
-            chart = undefined;
-        }
     });
 </script>
 @endscript

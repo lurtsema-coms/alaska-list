@@ -55,8 +55,10 @@ new class extends Component {
 
 <div class="py-8">
     <div class="px-4 py-8 mx-auto space-y-8 bg-white shadow sm:container sm:rounded-lg sm:px-6 lg:px-8">
-        <div class="flex flex-wrap items-center justify-between">
+        <div class="flex flex-wrap items-center {{ auth()->user()->role == 'admin' ? 'justify-end' : 'justify-between' }}">
+            @role('seller')
             <livewire:backend.admin.special-boost.add-boost/>
+            @endrole
             <div class="relative p-1 overflow-hidden pointer-events-auto w-52 md:max-w-96">
                 <input class="text-sm w-full px-4 border border-slate-300 rounded-lg focus:border-none focus:outline-none focus:ring-2 focus:ring-[#1F4B55]" type="search" placeholder="Search..." wire:model.live.debounce.200ms="search">
             </div>

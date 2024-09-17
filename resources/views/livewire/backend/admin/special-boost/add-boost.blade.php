@@ -34,7 +34,7 @@ new class extends Component {
     }
 
     public function loadProducts(){
-        return Product::where('status', 'ACTIVE')->get();
+        return Product::belongsToUser(auth()->user()->id)->get();
     }
 
     public function loadAdvertisingPlans(){
