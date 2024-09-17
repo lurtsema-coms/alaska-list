@@ -73,7 +73,7 @@ new class extends Component {
         @endforeach
     </div>
     <div class="mt-6 ml-6 italic text-gray-500 md:hidden">
-        <p>Select Subcategories:</p>
+        <p class="text-blue-600">Select Subcategories:</p>
     </div>
     <div class="flex items-center justify-center max-h-[20rem] mt-4 mb-20 overflow-y-auto md:hidden">
         <ul class="grid items-center justify-center grid-cols-2 pl-5 space-y-2 underline ">
