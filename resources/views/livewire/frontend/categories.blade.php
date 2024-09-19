@@ -59,11 +59,11 @@ new class extends Component {
         @endforeach
     </div>
 
-    <div class="flex flex-wrap items-center justify-center gap-3 py-2 mt-32 md:hidden">
+    <div class="flex items-center gap-3 px-2 py-2 mt-32 w-full max-w-full shadow-sm rounded-lg overflow-x-auto whitespace-nowrap md:hidden">
         @foreach ($categories as $category)
             <div class="" wire:key="{{ 'category-listing-mobile-'.$category->id }}">
                 <button 
-                    class="py-2 w-[8rem] shadow-md font-bold rounded-lg 
+                    class="py-2 w-[8rem]  font-bold  rounded-lg
                     {{ $selectedCategoryId === $category->id ? 'bg-[#2171a7] text-white' : '' }}"
                     wire:click="selectedButton({{ $category }})"
                 >
@@ -73,19 +73,20 @@ new class extends Component {
         @endforeach
     </div>
     <div class="mt-6 ml-6 italic text-gray-500 md:hidden">
-        <p class="text-blue-600">Select Subcategories:</p>
+        <p class="">Select Subcategories:</p>
     </div>
-    <div class="flex items-center justify-center max-h-[20rem] mt-4 mb-20 overflow-y-auto md:hidden">
-        <ul class="grid items-center justify-center grid-cols-2 pl-5 space-y-2 underline ">
+    <div class="flex text-blue-500 items-center justify-center max-h-[20rem] mt-4 mb-20 overflow-y-auto md:hidden">
+        <ul class="grid text-blue-500 items-center justify-center grid-cols-2 pl-5 space-y-2 list-disc underline">
             @foreach($sub_categories as $sub_category)
                 <li wire:key="{{ 'sub-categ-listing-mobile-'.$sub_category['id'] }}">
-                    <a href="{{ "listing-page?sc_names[0]=" .$sub_category['category_id']. "-" .$sub_category['name'] }}" class="text-slate-500 hover:text-blue-800" wire:navigate>
+                    <a href="{{ "listing-page?sc_names[0]=" .$sub_category['category_id']. "-" .$sub_category['name'] }}" class="text-blue-500 hover:text-blue-800" wire:navigate>
                         {{ $sub_category['name'] }}   
                     </a>
                 </li>
             @endforeach
         </ul>
     </div>
+    
 </div>
 
 
