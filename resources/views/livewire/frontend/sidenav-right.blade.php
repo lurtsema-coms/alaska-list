@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <div class="flex flex-row items-center px-6 py-8 mt-10 rounded-xl">
+    <div class="flex flex-row items-center px-6 py-8 mt-10 shadow-sm rounded-xl">
         <div class="">
             <div class=" max-w-6xl px-8">
                 <h1 class="text-xl font-bold text-[#2171a7] underline">
