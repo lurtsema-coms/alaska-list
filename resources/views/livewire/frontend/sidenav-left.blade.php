@@ -19,7 +19,6 @@ new class extends Component {
 }; ?>
 
 <div class="flex flex-col items-center px-6 py-8 mt-10 space-y-4">
-    <span>Alaska Current Date:</span>
 
     <!-- Calendar -->
     <div class="border rounded-lg p-4">
