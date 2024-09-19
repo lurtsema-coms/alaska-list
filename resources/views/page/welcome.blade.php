@@ -23,13 +23,13 @@
 {{-- Categories Section --}}
 <div class="flex w-full">
     <div class=" hidden lg:w-1/4 lg:block" data-aos="fade-up">
-        {{-- <livewire:frontend.sidenav-message /> --}}
+        {{-- <livewire:frontend.sidenav-left /> --}}
     </div>
     <div class="w-full px-5 mx-auto mt-0 lg:max-w-4xl lg:w-1/2 md:mt-28 md:container" data-aos="fade-up">
         <livewire:frontend.categories />
     </div>
     <div class=" hidden lg:w-1/4 lg:block " data-aos="fade-up">
-        <livewire:frontend.sidenav-message />
+        <livewire:frontend.sidenav-right />
     </div>
 </div>
 
