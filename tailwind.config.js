@@ -28,6 +28,7 @@ export default {
             },
             screens: {
                 xsm: "400px",
+                'lg-max': { 'max': '1532px' },  // Custom screen for <= 1532px
             },
             textShadow: {
                 custom: "0em 0.1em 0.1em rgba(0, 0, 0, 0.4)",
