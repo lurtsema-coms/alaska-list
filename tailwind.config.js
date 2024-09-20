@@ -23,13 +23,14 @@ export default {
                 scattered: "url('../images/scattered-forcefields.svg')",
                 blob: "url('../images/wave4.svg')",
                 brainstorm: "url('../images/brainstorming.jpg')",
-                'search-gradient': 'linear-gradient(to right, #143E7A, #4988A5)',
+                "search-gradient":
+                    "linear-gradient(to right, #3C6E9A, #4988A5)",
             },
             screens: {
                 xsm: "400px",
             },
             textShadow: {
-                'custom': '0em 0.1em 0.1em rgba(0, 0, 0, 0.4)',
+                custom: "0em 0.1em 0.1em rgba(0, 0, 0, 0.4)",
             },
         },
     },
@@ -38,18 +39,18 @@ export default {
         forms,
         function ({ addUtilities }) {
             addUtilities({
-                '.text-shadow-custom': {
-                    textShadow: '0em 0.1em 0.1em rgba(0, 0, 0, 0.4)',
+                ".text-shadow-custom": {
+                    textShadow: "0em 0.1em 0.1em rgba(0, 0, 0, 0.4)",
                 },
-                '.column-wrapper': {
-                    columnCount: '1',
-                    columnGap: '1.5rem',
-                    '@screen md': {
-                        columnCount: '3',
+                ".column-wrapper": {
+                    columnCount: "1",
+                    columnGap: "1.5rem",
+                    "@screen md": {
+                        columnCount: "3",
                     },
                 },
-                '.avoid-break': {
-                    breakInside: 'avoid',
+                ".avoid-break": {
+                    breakInside: "avoid",
                 },
             });
         },

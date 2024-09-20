@@ -2,10 +2,16 @@
 
 @section('body-content')
 <div class="relative overflow-hidden pb-28" data-aos="zoom-in-up">
-    <div class="bg-search-gradient py-14">
-        <div class="container px-5 mx-auto">            
-            <h2 class="text-4xl font-bold text-white">About Us</h2>
-            <p class="text-lg text-neutral-300">Connecting communities through trusted local marketplaces.</p>
+    <div class="relative bg-search-gradient h-80">
+        <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
+        </div>
+        <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
+        </div>
+        <div class="absolute inset-0 z-30 flex items-center justify-center">
+            <div class="container px-5 mx-auto font-sans font-semibold text-white text-shadow-custom sm:text-4xl">
+                <p class="text-4xl">About Us</p>
+                <p class="text-lg">Your go-to platform for buying, selling, and connecting with Alaskans.</p>
+            </div>
         </div>
     </div>
     <div class="container px-5 mx-auto mt-28">

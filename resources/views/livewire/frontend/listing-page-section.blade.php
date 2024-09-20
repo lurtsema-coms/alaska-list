@@ -184,14 +184,20 @@ new class extends Component {
 }; ?>
 
 <div class="relative space-y-8">
-    <div class="bg-search-gradient py-14">
-        <div class="container px-5 mx-auto">            
-            <h2 class="text-4xl font-bold text-white">Listing Page</h2>
-            <p class="invisible text-lg text-neutral-300">Connecting communities through trusted local marketplaces.</p>
+    <div class="relative bg-search-gradient h-80">
+        <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
+        </div>
+        <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
+        </div>
+        <div class="absolute inset-0 z-30 flex items-center justify-center">
+            <div class="container px-5 mx-auto font-sans font-semibold text-white text-shadow-custom sm:text-4xl">
+                <p class="text-4xl">Listing Page</p>
+                <p class="text-lg">Connecting communities through trusted local marketplaces.</p>
+            </div>
         </div>
     </div>
-    <div class="container relative px-5 mx-auto -top-28 sm:-top-20 sm:px-5">
-        <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl">
+    <div class="container relative z-30 px-5 mx-auto -top-28 sm:-top-20 sm:px-5">
+        {{-- <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl">
             <div class="space-y-4 overflow-y-auto max-h-80 sm:p-4">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
@@ -216,6 +222,73 @@ new class extends Component {
                         </div>
                     @endforeach
                 </div>
+            </div> --}}
+        <div class="p-4 mx-auto bg-gray-50 max-w-8xl rounded-2xl">
+            <div class="space-y-4 sm:p-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
+                    <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
+                </div>
+
+        <div class="flex space-x-4">
+            <!-- Column 1 -->
+            <div class="flex flex-col flex-1 space-y-4">
+                @foreach ($categories->slice(0, ceil($categories->count() / 3)) as $category)
+                    <div class="p-4 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
+                        <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($category->subCategories as $sub_category)
+                                <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                                    <input type="checkbox"
+                                        class="hidden w-5 h-5 text-blue-600"
+                                        wire:model.change="sc_names"
+                                        value="{{ $category->id.'-'.$sub_category->name }}">
+                                    <span class="text-gray-600">{{ $sub_category->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Column 2 -->
+            <div class="flex flex-col flex-1 space-y-4">
+                @foreach ($categories->slice(ceil($categories->count() / 3), ceil($categories->count() / 3)) as $category)
+                    <div class="p-4 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
+                        <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($category->subCategories as $sub_category)
+                                <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                                    <input type="checkbox"
+                                        class="hidden w-5 h-5 text-blue-600"
+                                        wire:model.change="sc_names"
+                                        value="{{ $category->id.'-'.$sub_category->name }}">
+                                    <span class="text-gray-600">{{ $sub_category->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Column 3 -->
+            <div class="flex flex-col flex-1 space-y-4">
+                @foreach ($categories->slice(ceil($categories->count() / 3) * 2) as $category)
+                    <div class="p-4 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
+                        <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($category->subCategories as $sub_category)
+                                <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                                    <input type="checkbox"
+                                        class="hidden w-5 h-5 text-blue-600"
+                                        wire:model.change="sc_names"
+                                        value="{{ $category->id.'-'.$sub_category->name }}">
+                                    <span class="text-gray-600">{{ $sub_category->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
 

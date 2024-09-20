@@ -2,7 +2,7 @@
 
 @section('body-content')
 {{-- hero section --}}
-<div class="relative h-72">
+<div class="relative h-80">
     <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
     </div>
     <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
@@ -22,13 +22,13 @@
 
 {{-- Categories Section --}}
 <div class="flex w-full">
-    <div class=" hidden lg:w-1/4 lg:block" data-aos="fade-up">
+    <div class="hidden lg:w-1/4 lg:block" data-aos="fade-up">
         <livewire:frontend.sidenav-left />
     </div>
     <div class="w-full px-5 mx-auto mt-0 lg:max-w-4xl lg:w-1/2 md:mt-14 md:container" data-aos="fade-up">
         <livewire:frontend.categories />
     </div>
-    <div class=" hidden lg:w-1/4 lg:block " data-aos="fade-up">
+    <div class="hidden lg:w-1/4 lg:block" data-aos="fade-up">
         <livewire:frontend.sidenav-right />
     </div>
 </div>
@@ -156,20 +156,6 @@
                 <div x-show="activeAccordion==id" x-collapse x-cloak>
                     <div class="p-5 pt-0 opacity-70">
                         Your safety is our priority. We recommend meeting in public places for transactions, bringing a friend along, and avoiding sharing personal information online. Always trust your instincts, and if something feels off, it’s okay to walk away.
-                    </div>
-                </div>
-            </div>
-            <div x-data="{ id: $id('accordion') }" :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" x-cloak>
-                <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full gap-4 px-5 py-4 font-semibold text-left select-none">
-                    <span>What types of items are prohibited on the platform?</span>
-                    <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 shrink-0 duration-300 ease-out">
-                        <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
-                        <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
-                    </div>
-                </button>
-                <div x-show="activeAccordion==id" x-collapse x-cloak>
-                    <div class="p-5 pt-0 opacity-70">
-                        Items that are illegal, harmful, or violate our community guidelines are strictly prohibited. This includes weapons, counterfeit goods, stolen property, and adult content. Please review our full list of prohibited items before posting.
                     </div>
                 </div>
             </div>

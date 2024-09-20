@@ -13,8 +13,12 @@ new class extends Component {
     }
 }; ?>
 
-<div class="sticky top-0 z-50" x-data="{ sidebarOpen: false }">
-    <div class="shadow-md border-b-1 bg-gray-50">
+<div 
+    class="fixed top-0 z-50 w-full" x-data="{ sidebarOpen: false, scrolled: window.scrollY > 0 }" 
+    @scroll.window="scrolled = window.scrollY > 0" 
+    x-init="scrolled = window.scrollY > 0"
+>
+    <div :class="{'bg-search-gradient': scrolled, 'bg-transparent': !scrolled, 'bg-opacity-70': !scrolled}" class="transition-all {{ request()->routeIs('listing-page-item') ? '!bg-search-gradient' : "" }}">
         <div class="px-5 py-2 mx-auto sm:container">
             <div class="relative flex items-center justify-between">
                 <div class="flex items-center gap-5">
@@ -23,23 +27,23 @@ new class extends Component {
                     </a>
                 </div>
                 <div class="absolute items-center hidden gap-2 -translate-x-1/2 left-1/2 lg:flex">
-                    <a class="relative px-1 group {{ request()->routeIs('welcome') ? 'text-sky-700' : 'text-gray-600' }}" 
+                    <a class="relative px-1 group {{ request()->routeIs('welcome') ? 'text-teal-200' : 'text-white' }}" 
                     href="{{ route('welcome') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
+                        <span class="transition-opacity group-hover:text-teal-200">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
                     </a>
 
-                    <a class="relative px-1 group {{ request()->routeIs('listing-page') ? 'text-sky-700' : 'text-gray-600' }}" 
+                    <a class="relative px-1 group {{ request()->routeIs('listing-page') ? 'text-teal-200' : 'text-white' }}" 
                     href="{{ route('listing-page') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('listing-page') ? 'Listing' : 'Listing' }}</span>
+                        <span class="transition-opacity group-hover:text-teal-200">{{ request()->routeIs('listing-page') ? 'Listing' : 'Listing' }}</span>
                     </a>
 
-                    <a class="relative px-1 group {{ request()->routeIs('about-us') ? 'text-sky-700' : 'text-gray-600' }}" 
+                    <a class="relative px-1 group {{ request()->routeIs('about-us') ? 'text-teal-200' : 'text-white' }}" 
                     href="{{ route('about-us') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
+                        <span class="transition-opacity group-hover:text-teal-200">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
                     </a>
-                    <a class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? 'text-sky-700' : 'text-gray-600' }}" 
+                    <a class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? 'text-teal-200' : 'text-white' }}" 
                     href="{{ route('advertise-with-us') }}" wire:navigate>
-                        <span class="transition-opacity group-hover:text-sky-700">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
+                        <span class="transition-opacity group-hover:text-teal-200">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
                     </a>
                     
                 </div>
@@ -51,7 +55,7 @@ new class extends Component {
                     </a>
                     @else
                     <a class="relative hidden px-1 group lg:block" href="{{ route('dashboard') }}" wire:navigate>
-                        <span class="text-gray-600 transition-opacity group-hover:text-sky-700">Dashboard</span>
+                        <span class="text-white transition-opacity group-hover:text-teal-300">Dashboard</span>
                     </a>
                 @endguest
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="block text-black cursor-pointer size-8 text-dark hover:opacity-70 lg:hidden"

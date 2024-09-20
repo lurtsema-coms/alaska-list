@@ -2,10 +2,16 @@
 
 @section('body-content')
 <div data-aos="zoom-in-up">
-    <div class="bg-search-gradient py-14">
-        <div class="container px-5 mx-auto">            
-            <h2 class="text-4xl font-bold text-white">Advertise with us</h2>
-            <p class="text-lg text-neutral-300">Boost your listing to the top and gain maximum visibility!</p>
+    <div class="relative bg-search-gradient h-80">
+        <div class="absolute w-full h-full bg-top bg-cover" style="background-image: url('{{ asset('frontend/alaska-bg.jpg') }}'); background-position: 30% 60%;">
+        </div>
+        <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
+        </div>
+        <div class="absolute inset-0 z-30 flex items-center justify-center">
+            <div class="container px-5 mx-auto font-sans font-semibold text-white text-shadow-custom sm:text-4xl">
+                <p class="text-4xl">Advertise with us</p>
+                <p class="text-lg">Boost your listing to the top and gain maximum visibility!</p>
+            </div>
         </div>
     </div>
     <div class="container relative px-5 mx-auto my-14">
