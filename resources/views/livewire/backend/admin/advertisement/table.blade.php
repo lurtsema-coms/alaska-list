@@ -28,12 +28,17 @@ new class extends Component {
                     $query->withTrashed();
                 }
             ])
+            ->selectRaw("
+                advertisements.*,
+                DATE_FORMAT(CONVERT_TZ(from_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_from_date,
+                DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_to_date
+            ")
             ->where(function ($query) {
                 $query->where('id', 'like', '%' . $this->search . '%')
                     ->orWhere('uuid', 'like', '%' . $this->search . '%')
-                    ->orWhere('from_date', 'like', '%' . $this->search . '%')
-                    ->orWhere('to_date', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%')
+                    ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(from_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%'])
+                    ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%']);
             })
             ->orWhereHas('advertisingPlan', function ($advertisingPlan) {
                 $advertisingPlan->where('name', 'like', '%' . $this->search . '%');
@@ -47,6 +52,7 @@ new class extends Component {
             ->orderBy('id', 'desc')
             ->paginate(10);
     }
+
 }; ?>
 
 <div class="py-8">
@@ -85,9 +91,11 @@ new class extends Component {
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Created At
                         </th>
+                        @role('admin')
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Updated By
                         </th>
+                        @endrole
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Actions
                         </th>
@@ -108,11 +116,13 @@ new class extends Component {
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ Str::limit($advertisement->advertisingPlan->name, 50) }}
                         </td>
-                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
-                            {{ Carbon::parse($advertisement->from_date)->format('F j, Y g:i A') }}
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap" x-data="{
+                            date: moment('{{ $advertisement->from_date }}Z')
+                        }">
+                            {{ $advertisement->formatted_from_date }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
-                            {{ Carbon::parse($advertisement->to_date)->format('F j, Y g:i A') }}
+                            {{ $advertisement->formatted_to_date }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $advertisement->createdBy->first_name.' '.$advertisement->createdBy->last_name }}
@@ -120,13 +130,17 @@ new class extends Component {
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $advertisement->created_at->format('Y-m-d') }}
                         </td>
+                        @role('admin')
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $advertisement->updatedBy ? $advertisement->updatedBy->first_name.' '.$advertisement->updatedBy->last_name : '' }}
                         </td>
+                        @endrole
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             <div class="flex items-center gap-2">
+                                @role('admin')
                                 <livewire:backend.admin.advertisement.edit-advertisement x-on:alert-success="$refresh" wire:key="edit-boosting-{{ $advertisement->id }}" :$advertisement />
                                 <livewire:component.soft-delete-button wire:key="{{ 'soft-delete-boosting-' . $advertisement->id }}" :model="$advertisement" />
+                                @endrole
                             </div>
                         </td>
                     </tr>

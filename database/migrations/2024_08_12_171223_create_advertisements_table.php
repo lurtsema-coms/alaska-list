@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->text('uuid');
             $table->foreignId('advertising_plan_id')->constrained('advertising_plans');
-            $table->datetime('from_date');
-            $table->datetime('to_date');
+            $table->timestamp('from_date');
+            $table->timestamp('to_date');
             $table->text('file_name')->nullable();
             $table->text('file_path')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();

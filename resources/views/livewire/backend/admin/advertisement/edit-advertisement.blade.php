@@ -20,7 +20,6 @@ new class extends Component {
     public $advertising_plan = '';
     public $from_date = '';
     public $to_date = '';
-    public $to_date_computed = '';
     public $file_name = '';
     public $file_path;
     public $photo = '';
@@ -52,25 +51,22 @@ new class extends Component {
     {
         $photo = $this->photo;
         
-        $photo_img = Image::make($photo);
-        $photo_height = $photo_img->getHeight();
-        $photo_width = $photo_img->getWidth();
-        
-        if(empty($photo)){
-            $this->dispatch('error');
-            return;
-        }
-        
-        if($photo_width > 1920 || $photo_height > 1080){
-            $this->addError('image_constraint', 'The image width must not exceed 1920 pixels, and the height must not exceed 1080 pixels.');
-            return;
+        if($photo){
+            $photo_img = Image::make($photo);
+            $photo_height = $photo_img->getHeight();
+            $photo_width = $photo_img->getWidth();
+            
+            if($photo_width > 1920 || $photo_height > 1080){
+                $this->addError('image_constraint', 'The image width must not exceed 1920 pixels, and the height must not exceed 1080 pixels.');
+                return;
+            }
         }
 
         $advertisement = Advertisement::with('advertisingPlan')->withTrashed()->find($this->advertisement_id);
-        
         $advertisement->update([
-            'from_date' => $this->from_date,
-            'to_date' => $this->to_date,
+            'from_date' => $this->formatIso($this->from_date),
+            'to_date' => $this->formatIso($this->to_date),
+            'advertising_plan_id' => $this->advertising_plan,
             'updated_by' => auth()->user()->id
         ]);
 
@@ -97,29 +93,19 @@ new class extends Component {
             $f_path = "storage/photos/advertisement/$file_name";
         }
 
+
         $this->resetData(['photo']);
         $this->edit_advertisement = false;
         $this->inc++;
         $this->dispatch('alert-success');
     }
 
-    public function computePlanDate()
-    {
-        $ap = AdvertisingPlan::find($this->advertising_plan);
-        // Check if $ap is not null and has a duration_day property
-        if ($ap && $ap->duration_days) {
-            
-            $from_date = Carbon::parse($this->from_date);
-
-            $to_date = $from_date->copy()->addDays($ap->duration_days);
-            
-            $this->from_date = $from_date->format('Y-m-d\TH:i');
-            $this->to_date = $to_date->toDateTimeString();
-        } else {
-            $this->from_date = null;
-            $this->to_date = null;
-        }
+    public function formatISO($date)
+    {        
+        $format_date = Carbon::parse($date, 'UTC');
+        return $format_date->format('Y-m-d H:i:s');
     }
+
 
     public function resetData($data)
     {
@@ -158,22 +144,48 @@ new class extends Component {
                                 </div>
                                 <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">Advertising Plan</p>
-                                    <select class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" wire:model="advertising_plan" wire:change="computePlanDate" required>
+                                    <select 
+                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
+                                        id="advertising-plan-{{ $uuid }}"
+                                        wire:model="advertising_plan" 
+                                        required>
                                         <option value="" disabled selected>Select at least one</option>
                                         @foreach ($plans as $plan)
-                                            <option value="{{ $plan->id }}">{{ $plan->name }}</option>
+                                            <option value="{{ $plan->duration_days }}" data-advertising-id="{{ $plan->id }}">{{ $plan->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-4 sm:flex-row">
-                                <div class="flex-1 space-y-2">
+                                <div 
+                                    class="flex-1 space-y-2" 
+                                    x-data="{ 
+                                        from_date: moment(new Date(`${{ $from_date }} UTC`)).format('YYYY-MM-DDTHH:mm') 
+                                    }"
+                                >
                                     <p class="font-medium text-slate-700">From Date</p>
-                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="datetime-local" wire:change="computePlanDate" wire:model="from_date" required>
+                                    <input 
+                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
+                                        id="from-date-{{ $uuid }}"
+                                        type="datetime-local" 
+                                        x-model="from_date"
+                                        required
+                                    >
                                 </div>
-                                <div class="flex-1 space-y-2">
+                                <div 
+                                    class="flex-1 space-y-2"
+                                    x-data="{ 
+                                        to_date: moment(new Date(`${{ $to_date }} UTC`)).format('MM/DD/YYYY') 
+                                    }"
+                                >
                                     <p class="font-medium text-slate-700">To Date</p>
-                                        <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="to_date" readonly required>
+                                        <input 
+                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
+                                        id="to-date-{{ $uuid }}"
+                                        type="text"
+                                        x-model="to_date"
+                                        required
+                                    >
                                 </div>
                             </div>
                             @if (!empty($file_path))                                
@@ -189,10 +201,10 @@ new class extends Component {
                                 <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" wire:model="photo" id="upload-{{ $inc }}">
                             </div>
                             @error('image_constraint')                                
-                                <div>
-                                    <p class="mb-2 text-sm text-red-600">
+                                <div class="flex flex-col space-y-2">
+                                    <label class="mb-2 text-sm text-red-600">
                                         Note: {{ $message }}
-                                    </p>
+                                    </label>
                                 </div>
                             @enderror
                             {{-- Loading Animation --}}
@@ -219,3 +231,39 @@ new class extends Component {
         </div>
     </div>
 </div>
+
+@script
+<script data-navigate-once>
+    $(document).ready(function() {
+
+        let component = @this;
+
+        $('#advertising-plan-{{ $uuid }}, #from-date-{{ $uuid }}').on('change', function(){
+            component.advertising_plan = $('#advertising-plan-{{ $uuid }}').find('option:selected').data('advertising-id');
+            computedPlanDate();
+        })
+        
+        function computedPlanDate() {
+            const duration = parseInt($('#advertising-plan-{{ $uuid }}').val(), 10);
+            const fromDate = $('#from-date-{{ $uuid }}').val();
+
+            if (fromDate === '' || isNaN(duration)) return;
+
+            const fromDateISO = new Date(fromDate);
+            
+            // Calculate the new date by adding the duration
+            const toDateISO = new Date(fromDateISO);
+            toDateISO.setDate(toDateISO.getDate() + duration);
+
+            // Format the to_date as YYYY-MM-DD for display
+            const toDateFormatted = toDateISO.toISOString().split('T')[0];
+
+            // Update the component and the display
+            component.from_date = fromDateISO.toISOString();
+            component.to_date = toDateISO.toISOString();
+            
+            $('#to-date-{{ $uuid }}').val(toDateFormatted);
+        }
+    });
+</script>
+@endscript

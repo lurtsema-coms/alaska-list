@@ -37,6 +37,8 @@
             referrerpolicy="no-referrer">
         </script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
