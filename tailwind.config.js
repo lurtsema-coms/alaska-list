@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import scrollbar from 'tailwind-scrollbar'; // Import the scrollbar plugin
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -38,6 +39,7 @@ export default {
 
     plugins: [
         forms,
+        scrollbar,  // Add the scrollbar plugin
         function ({ addUtilities }) {
             addUtilities({
                 ".text-shadow-custom": {
@@ -56,4 +58,8 @@ export default {
             });
         },
     ],
+
+    variants: {
+        scrollbar: ['rounded'], // Enable rounded scrollbar variant
+    },
 };
