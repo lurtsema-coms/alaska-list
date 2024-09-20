@@ -19,9 +19,8 @@ new class extends Component {
 }; ?>
 
 <div class="flex flex-col items-center px-6 py-8 mt-10 space-y-4">
-
     <!-- Calendar -->
-    <div class="border rounded-lg p-4">
+    <div class="border rounded-lg p-4 w-full">
         <div class="flex justify-between items-center mb-4">
             @php
                 $currentDateTime = new \DateTime('now', new \DateTimeZone(config('app.timezone')));
@@ -59,7 +58,22 @@ new class extends Component {
             @endfor
         </div>
     </div>
+
+<div class="border border-gray-200 divide-gray-200 rounded shadow w-full">
+    <p class="p-4 mb-4 border-b text-lg font-bold text-[#2171a7]">Browse Items by Location</p>
+    <div class="grid grid-cols-2 gap-2 pl-4 text-slate-500 overflow-auto max-h-96  scrollbar-thumb-[#2171a7] scrollbar-track-transparent scrollbar-thin  ">
+        @foreach (config('global.us_states') as $location)
+            <a href="{{ "listing-page?location=$location" }}" wire:navigate>
+                <span>{{ $location }}</span>
+            </a>
+        @endforeach
+    </div>
 </div>
+
+    
+</div>
+
+
 
 
 
