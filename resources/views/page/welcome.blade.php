@@ -8,10 +8,10 @@
     <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
     </div>
     <div class="absolute inset-0 z-30 flex items-center justify-center">
-        <div class="container px-5 mx-auto font-sans text-2xl font-semibold text-white text-shadow-custom sm:text-4xl">
+        {{-- <div class="container px-5 mx-auto font-sans text-2xl font-semibold text-white text-shadow-custom sm:text-4xl">
             <p>ONE STOP SHOP</p>
             <p>FOR ALL ALASKAN GOODS!</p>
-        </div>
+        </div> --}}
     </div>
     <div class="absolute inset-x-0 bottom-0 z-30 translate-y-1/2 ">
         <div class="container px-5 mx-auto">
@@ -25,7 +25,7 @@
     <div class=" hidden lg:w-1/4 lg:block" data-aos="fade-up">
         <livewire:frontend.sidenav-left />
     </div>
-    <div class="w-full px-5 mx-auto mt-0 lg:max-w-4xl lg:w-1/2 md:mt-28 md:container" data-aos="fade-up">
+    <div class="w-full px-5 mx-auto mt-0 lg:max-w-4xl lg:w-1/2 md:mt-14 md:container" data-aos="fade-up">
         <livewire:frontend.categories />
     </div>
     <div class=" hidden lg:w-1/4 lg:block " data-aos="fade-up">
