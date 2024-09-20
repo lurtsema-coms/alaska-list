@@ -21,7 +21,7 @@ new class extends Component {
     public $location;
     public $price_range;
     public $sort_by = "";
-        #[Url] 
+    #[Url] 
     public $page = 1;
     public $pagination = 5;
 
@@ -172,6 +172,17 @@ new class extends Component {
         return $query->paginate($this->pagination);
     }
 
+    public function oneCategory($sub_category)
+    {
+        // Toggle
+        if (in_array($sub_category, $this->sc_names)) {
+            $this->sc_names = array_diff($this->sc_names, [$sub_category]);
+        } else {
+            $this->sc_names = [$sub_category]; 
+        }
+    }
+
+
     public function dispatchTimeAgo(){
         // $this->dispatch('load-time-ago');
         $this->resetData(['sc_names', 'price_range', 'sort_by', 'location', 'category_id']);
@@ -212,7 +223,7 @@ new class extends Component {
                                 @foreach($category->subCategories as $sub_category)
                                     <label class="flex items-center space-x-2 cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
                                         <input type="checkbox"
-                                            class="w-5 h-5 text-blue-600 "
+                                            class="w-5 h-5 "
                                             wire:model.change="sc_names"
                                             value="{{ $category->id.'-'.$sub_category->name }}">
                                         <span class="text-gray-600">{{ $sub_category->name }}</span>
@@ -230,65 +241,80 @@ new class extends Component {
                     <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
                 </div>
 
-        <div class="flex space-x-4">
-            <!-- Column 1 -->
-            <div class="flex flex-col flex-1 space-y-4">
-                @foreach ($categories->slice(0, ceil($categories->count() / 3)) as $category)
-                    <div class="p-4 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
-                        <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach($category->subCategories as $sub_category)
-                                <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                                    <input type="checkbox"
-                                        class="hidden w-5 h-5 text-blue-600"
-                                        wire:model.change="sc_names"
-                                        value="{{ $category->id.'-'.$sub_category->name }}">
-                                    <span class="text-gray-600">{{ $sub_category->name }}</span>
-                                </label>
-                            @endforeach
-                        </div>
+                <div class="flex space-x-4">
+                    <!-- Column 1 -->
+                    <div class="flex flex-col flex-1 space-y-4">
+                        @foreach ($categories->slice(0, ceil($categories->count() / 3)) as $category)
+                            <div class="p-4" wire:key="{{ 'category-listing-1-'.$category->id }}">
+                                <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    @foreach($category->subCategories as $sub_category)
+                                        <a class="category-anchor" wire:click="oneCategory('{{ $category->id.'-'.$sub_category->name }}')">
+                                            <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-3'.$sub_category->id }}">
+                                                <input 
+                                                    class="hidden w-5 h-5"
+                                                    type="checkbox"
+                                                    value="{{ $category->id.'-'.$sub_category->name }}"
+                                                    wire:model.change="sc_names"
+                                                >
+                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
+                                            </label>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
 
-            <!-- Column 2 -->
-            <div class="flex flex-col flex-1 space-y-4">
-                @foreach ($categories->slice(ceil($categories->count() / 3), ceil($categories->count() / 3)) as $category)
-                    <div class="p-4 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
-                        <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach($category->subCategories as $sub_category)
-                                <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                                    <input type="checkbox"
-                                        class="hidden w-5 h-5 text-blue-600"
-                                        wire:model.change="sc_names"
-                                        value="{{ $category->id.'-'.$sub_category->name }}">
-                                    <span class="text-gray-600">{{ $sub_category->name }}</span>
-                                </label>
-                            @endforeach
-                        </div>
+                    <!-- Column 2 -->
+                    <div class="flex flex-col flex-1 space-y-4">
+                        @foreach ($categories->slice(ceil($categories->count() / 3), ceil($categories->count() / 3)) as $category)
+                            <div class="p-4" wire:key="{{ 'category-listing-2-'.$category->id }}">
+                                <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    @foreach($category->subCategories as $sub_category)
+                                        <a class="category-anchor" wire:click="oneCategory('{{ $category->id.'-'.$sub_category->name }}')">
+                                            <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-3'.$sub_category->id }}">
+                                                <input 
+                                                    class="hidden w-5 h-5"
+                                                    type="checkbox"
+                                                    value="{{ $category->id.'-'.$sub_category->name }}"
+                                                    wire:model.change="sc_names"
+                                                >
+                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
+                                            </label>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
 
-            <!-- Column 3 -->
-            <div class="flex flex-col flex-1 space-y-4">
-                @foreach ($categories->slice(ceil($categories->count() / 3) * 2) as $category)
-                    <div class="p-4 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
-                        <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach($category->subCategories as $sub_category)
-                                <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                                    <input type="checkbox"
-                                        class="hidden w-5 h-5 text-blue-600"
-                                        wire:model.change="sc_names"
-                                        value="{{ $category->id.'-'.$sub_category->name }}">
-                                    <span class="text-gray-600">{{ $sub_category->name }}</span>
-                                </label>
-                            @endforeach
-                        </div>
+                    <!-- Column 3 -->
+                    <div class="flex flex-col flex-1 space-y-4">
+                        @foreach ($categories->slice(ceil($categories->count() / 3) * 2) as $category)
+                            <div class="p-4" wire:key="{{ 'category-listing-3-'.$category->id }}">
+                                <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    @foreach($category->subCategories as $sub_category)
+                                        <a class="category-anchor" wire:click="oneCategory('{{ $category->id.'-'.$sub_category->name }}')">
+                                            <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-3'.$sub_category->id }}">
+                                                <input 
+                                                    class="hidden w-5 h-5"
+                                                    type="checkbox"
+                                                    value="{{ $category->id.'-'.$sub_category->name }}"
+                                                    wire:model.change="sc_names"
+                                                >
+                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
+                                            </label>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+
             </div>
         </div>
 
@@ -349,7 +375,7 @@ new class extends Component {
             </div>
         </div>
         
-        <div class="flex flex-col gap-8 mt-16 md:flex-row">
+        <div class="flex flex-col gap-8 mt-16 md:flex-row" id="list-section">
             <div class="flex-1">
                 <div class="grid grid-cols-1 gap-8 xl:grid-cols-2 2xl:grid-cols-3">
                     @if($products->isEmpty())
@@ -472,5 +498,29 @@ new class extends Component {
         
         initializeTimeago();
     });
+
+    $(document).ready(function() {
+        $('.category-anchor').on('click', function(event) {
+
+            // Get the target element by ID
+            const targetElement = document.getElementById('list-section');
+            if (targetElement) {
+                var topOffset = 100; // Adjust the offset as needed
+                
+                // Calculate the element's position relative to the top of the page
+                var elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                
+                // Scroll to the calculated position with the offset
+                window.scrollTo({
+                    top: elementPosition - topOffset,
+                    behavior: 'smooth'
+                });
+            } else {
+                console.error('Element with id "list-section" not found');
+            }
+        });
+    });
+
+
 </script>
 @endscript
