@@ -46,7 +46,9 @@ new class extends Component {
             <div class="swiper-wrapper">
                 @foreach ($campaigns as $campaign)
                     <div class="swiper-slide" wire:key="{{ str()->random(50) }}">
-                        <img class="object-cover w-full rounded-2xl" src="{{ asset($campaign->file_path) . '?' . now()->timestamp }}" alt="{{ $campaign->uuid }}">
+                        <a href="{{ route('listing-page-item', $campaign->product_id) }}" wire:navigate>
+                            <img class="object-cover w-full rounded-2xl" src="{{ asset($campaign->file_path) . '?' . now()->timestamp }}" alt="{{ $campaign->uuid }}">
+                        </a>
                     </div>
                 @endforeach
             </div>  

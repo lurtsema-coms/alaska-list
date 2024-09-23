@@ -22,7 +22,7 @@
 
 {{-- Categories Section --}}
 <div class="flex w-full">
-    <div class="hidden lg:w-1/4 lg:block px-8 lg-max:px-0" data-aos="fade-up">
+    <div class="hidden px-8 lg:w-1/4 lg:block lg-max:px-0" data-aos="fade-up">
         <livewire:frontend.sidenav-left />
     </div>
     <div class="w-full px-5 mx-auto mt-0 lg:max-w-4xl lg:w-1/2 md:mt-14 md:container" data-aos="fade-up">
@@ -169,7 +169,7 @@
                 </button>
                 <div x-show="activeAccordion==id" x-collapse x-cloak>
                     <div class="p-5 pt-0 opacity-70">
-                        You can boost your ad by selecting one of our premium listing options. Boosted ads appear at the top of search results and can increase your chances of making a sale. Check the “Advertise with Us” section for more details.
+                        You can boost your ad by selecting one of our premium listing options. Boosted ads appear at the top of search results and can increase your chances of making a sale. Check the <a href="{{ route('advertise-with-us') }}" class="underline" wire:navigate>“Advertise with Us”</a> section for more details.
                     </div>
                 </div>
             </div>
