@@ -43,7 +43,7 @@ new class extends Component {
         @foreach ($categories as $category)
             <div class="p-4 transition-shadow duration-300 rounded-lg avoid-break" wire:key="{{ 'category-listing-'.$category->id }}">
                 <a href="/listing-page?category_id={{ $category->id }}" wire:navigate>
-                    <h3 class="text-2xl font-bold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
+                    <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
                 </a>
                 <ul class="text-blue-500 pl-5 mt-4 space-y-2 list-disc underline ">
                     @foreach($category->subCategories as $sub_category)

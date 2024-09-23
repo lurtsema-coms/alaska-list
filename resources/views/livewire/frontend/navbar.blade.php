@@ -19,8 +19,8 @@ new class extends Component {
     x-init="scrolled = window.scrollY > 0"
 >
     <div 
-        :class="{'bg-white shadow-sm' : scrolled}"
-        class="transition-all {{ request()->routeIs('listing-page-item') ? 'shadow-sm' : "" }} hover:bg-white"
+        :class="{'bg-white shadow-sm' : scrolled, 'bg-[#f7fafce7]' : hovered || scrolled}"
+        class="transition-all {{ request()->routeIs('listing-page-item') ? 'shadow-sm' : "" }} hover:bg-[#f7fafce7]"
         @mouseenter="hovered = true" 
         @mouseleave="hovered = false"    
     >
