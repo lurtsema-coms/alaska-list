@@ -17,6 +17,7 @@ class Advertisement extends Model
         'to_date',
         'file_name',
         'file_path',
+        'product_id',
         'created_by',
         'updated_by',
     ];
@@ -26,7 +27,12 @@ class Advertisement extends Model
         return $this->belongsTo(AdvertisingPlan::class, 'advertising_plan_id');
     }
 
-        public function createdBy()
+    public function boostedProduct()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
     }

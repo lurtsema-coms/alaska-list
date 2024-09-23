@@ -24,7 +24,7 @@ new class extends Component {
     #[Url] 
     public $page = 1;
     public $pagination = 5;
-
+    
     public function mount()
     {
         $category_id = $this->category_id;
@@ -208,7 +208,8 @@ new class extends Component {
         </div>
     </div>
     <div class="container relative z-30 px-5 mx-auto -top-28 sm:-top-20 sm:px-5">
-        {{-- <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl">
+        {{-- Filter Categories responsive --}}
+        <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl xl:hidden">
             <div class="space-y-4 overflow-y-auto max-h-80 sm:p-4">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
@@ -219,29 +220,34 @@ new class extends Component {
                     @foreach ($categories as $category)
                         <div class="p-4 bg-gray-100 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
                             <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid gap-2 md:grid-cols-2">
                                 @foreach($category->subCategories as $sub_category)
-                                    <label class="flex items-center space-x-2 cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                                        <input type="checkbox"
-                                            class="w-5 h-5 "
-                                            wire:model.change="sc_names"
-                                            value="{{ $category->id.'-'.$sub_category->name }}">
-                                        <span class="text-gray-600">{{ $sub_category->name }}</span>
-                                    </label>
+                                    <a class="category-anchor" wire:click="oneCategory('{{ $category->id.'-'.$sub_category->name }}')">
+                                        <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
+                                            <input type="checkbox"
+                                                class="hidden w-5 h-5"
+                                                wire:model.change="sc_names"
+                                                value="{{ $category->id.'-'.$sub_category->name }}"
+                                            >
+                                            <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "bg-white shadow-sm p-2 border rounded-lg border-[#285680] text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
+                                        </label>
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
                     @endforeach
                 </div>
-            </div> --}}
-        <div class="p-4 mx-auto bg-gray-50 max-w-8xl rounded-2xl">
+            </div>
+        </div>
+        {{-- Filter Categories large screen --}}
+        <div class="hidden p-4 mx-auto bg-gray-50 max-w-8xl rounded-2xl xl:block">
             <div class="space-y-4 sm:p-4">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
                     <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
                 </div>
 
-                <div class="flex space-x-4">
+                <div class="flex">
                     <!-- Column 1 -->
                     <div class="flex flex-col flex-1 space-y-4">
                         @foreach ($categories->slice(0, ceil($categories->count() / 3)) as $category)
@@ -257,7 +263,7 @@ new class extends Component {
                                                     value="{{ $category->id.'-'.$sub_category->name }}"
                                                     wire:model.change="sc_names"
                                                 >
-                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
+                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg border-[#285680] text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
                                             </label>
                                         </a>
                                     @endforeach
@@ -281,7 +287,7 @@ new class extends Component {
                                                     value="{{ $category->id.'-'.$sub_category->name }}"
                                                     wire:model.change="sc_names"
                                                 >
-                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
+                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg border-[#285680] text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
                                             </label>
                                         </a>
                                     @endforeach
@@ -305,7 +311,7 @@ new class extends Component {
                                                     value="{{ $category->id.'-'.$sub_category->name }}"
                                                     wire:model.change="sc_names"
                                                 >
-                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
+                                                <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "shadow-sm p-2 border rounded-lg border-[#285680] text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
                                             </label>
                                         </a>
                                     @endforeach
@@ -375,55 +381,29 @@ new class extends Component {
             </div>
         </div>
         
-        <div class="flex flex-col gap-8 mt-16 md:flex-row" id="list-section">
-            <div class="flex-1">
-                <div class="grid grid-cols-1 gap-8 xl:grid-cols-2 2xl:grid-cols-3">
-                    @if($products->isEmpty())
-                        <p>😔 No uploads yet!</p>
-                    @else
-                        @foreach($products as $product)
-                            @if ($product->ActiveSpecialBoostCount)
-                                <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg border-yellow-50 rounded-2xl hover:border-yellow-600 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
-                                    <div class="flex flex-col h-full">
-                                        @php
-                                            $images = explode(',', $product->file_path);
-                                            $firstImage = trim($images[0]);
-                                        @endphp 
-        
-                                        <div class="relative">
-                                            <img class="object-cover w-full h-56 rounded-t-xl" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
-                                            <div class="absolute px-3 py-1 text-xs font-bold text-white bg-yellow-500 rounded-full top-4 left-4">Boosted</div>
-                                        </div>
-                                        
-                                        <div class="flex-1 p-6 bg-gradient-to-b from-yellow-50 to-white">
-                                            <p class="mb-2 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
-                                            <p class="mb-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
-                                            @if ($product->price)
-                                                <p class="mb-4 text-lg font-semibold text-yellow-600">${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}</p>
-                                            @endif
-                                            <div class="flex items-center my-4 space-x-2">
-                                                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
-                                            </div>
-                                            @if ($product->qty)
-                                                <p class="text-sm text-gray-600">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
-                                            @endif
-                                        </div>
-                                        
-                                        <div class="p-6 border-t border-yellow-200 bg-yellow-50 rounded-b-xl">
-                                            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
-                                                <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
-                                                <p class="text-gray-600">
-                                                    📍 {{ $product->location ? $product->location : '' }}
-                                                </p>
-                                            </div>
-                                            <button class="px-4 py-2 font-bold text-white bg-yellow-500 rounded-xl hover:bg-yellow-600">
-                                                View Details
-                                            </button>
-                                        </div>
-                                    </div>
-                                </a>
-                                @else
-                                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg rounded-2xl hover:border-blue-400 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
+        <div id="list-section">
+            @if ($sc_names)
+                <div class="inline-block px-4 py-2 mt-5 bg-white border border-gray-300 rounded-lg shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span>{{ substr($sc_names[0], strpos($sc_names[0], '-') + 1) }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-600 cursor-pointer size-5 hover:opacity-70"
+                            wire:click="oneCategory('{{ $sc_names[0] }}')"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                </div>
+            @endif
+            
+            <div class="flex flex-col gap-8 mt-11 md:flex-row">
+                <div class="flex-1">
+                    <div class="grid grid-cols-1 gap-8 xl:grid-cols-2 2xl:grid-cols-3">
+                        @if($products->isEmpty())
+                            <p>😔 No uploads yet!</p>
+                        @else
+                            @foreach($products as $product)
+                                @if ($product->ActiveSpecialBoostCount)
+                                    <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg border-yellow-50 rounded-2xl hover:border-yellow-600 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
                                         <div class="flex flex-col h-full">
                                             @php
                                                 $images = explode(',', $product->file_path);
@@ -432,44 +412,85 @@ new class extends Component {
             
                                             <div class="relative">
                                                 <img class="object-cover w-full h-56 rounded-t-xl" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
+                                                <div class="absolute px-3 py-1 text-xs font-bold text-white bg-yellow-500 rounded-full top-4 left-4">Boosted</div>
                                             </div>
                                             
-                                            <div class="flex-1 p-6 to-white">
+                                            <div class="flex-1 p-6 bg-gradient-to-b from-yellow-50 to-white">
                                                 <p class="mb-2 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
                                                 <p class="mb-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
                                                 @if ($product->price)
-                                                    <p class="mb-4 text-lg font-semibold text-blue-600">${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}</p>
+                                                    <p class="mb-4 text-lg font-semibold text-yellow-600">${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}</p>
                                                 @endif
                                                 <div class="flex items-center my-4 space-x-2">
-                                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
+                                                    <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
                                                 </div>
                                                 @if ($product->qty)
                                                     <p class="text-sm text-gray-600">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
                                                 @endif
                                             </div>
                                             
-                                            <div class="p-6 border-t rounded-b-xl">
+                                            <div class="p-6 border-t border-yellow-200 bg-yellow-50 rounded-b-xl">
                                                 <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
                                                     <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
                                                     <p class="text-gray-600">
                                                         📍 {{ $product->location ? $product->location : '' }}
                                                     </p>
                                                 </div>
-                                                <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded-xl hover:bg-blue-600">
+                                                <button class="px-4 py-2 font-bold text-white bg-yellow-500 rounded-xl hover:bg-yellow-600">
                                                     View Details
                                                 </button>
                                             </div>
                                         </div>
                                     </a>
-                            @endif
-                        @endforeach
-                    @endif
+                                    @else
+                                        <a href="{{ route('listing-page-item', $product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg rounded-2xl hover:border-blue-400 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$product->id }}">
+                                            <div class="flex flex-col h-full">
+                                                @php
+                                                    $images = explode(',', $product->file_path);
+                                                    $firstImage = trim($images[0]);
+                                                @endphp 
+                
+                                                <div class="relative">
+                                                    <img class="object-cover w-full h-56 rounded-t-xl" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
+                                                </div>
+                                                
+                                                <div class="flex-1 p-6 to-white">
+                                                    <p class="mb-2 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
+                                                    <p class="mb-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
+                                                    @if ($product->price)
+                                                        <p class="mb-4 text-lg font-semibold text-blue-600">${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}</p>
+                                                    @endif
+                                                    <div class="flex items-center my-4 space-x-2">
+                                                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
+                                                    </div>
+                                                    @if ($product->qty)
+                                                        <p class="text-sm text-gray-600">Available: <span class="text-gray-500">{{ $product->qty }}</span></p>
+                                                    @endif
+                                                </div>
+                                                
+                                                <div class="p-6 border-t rounded-b-xl">
+                                                    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                                        <p class="font-bold text-green-500 timeago text-md" datetime="{{ $product->created_at }} {{ config('app.timezone') }}"></p>
+                                                        <p class="text-gray-600">
+                                                            📍 {{ $product->location ? $product->location : '' }}
+                                                        </p>
+                                                    </div>
+                                                    <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded-xl hover:bg-blue-600">
+                                                        View Details
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </a>
+                                @endif
+                            @endforeach
+                        @endif
+                    </div>
+                    {{ $products->links(data: ['scrollTo' => '#filter']) }}
                 </div>
-                {{ $products->links(data: ['scrollTo' => '#filter']) }}
+                <div class="">
+                    <livewire:frontend.sidebar-sponsor>
+                </div>           
             </div>
-            <div class="w-full max-w-72">
-                <livewire:frontend.sidebar-sponsor>
-            </div>           
         </div>
     </div>
 </div>

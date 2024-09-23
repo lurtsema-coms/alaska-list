@@ -55,6 +55,7 @@
         </div>
         {{-- Footer --}}
         <livewire:frontend.footer>
+        <x-scroll-up/>
     </div>
     @livewireScripts
     <script data-navigate-once>

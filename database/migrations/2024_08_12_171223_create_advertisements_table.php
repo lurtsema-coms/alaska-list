@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('to_date');
             $table->text('file_name')->nullable();
             $table->text('file_path')->nullable();
+            $table->foreignId('product_id')->nullable()->constrained('products');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

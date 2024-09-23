@@ -31,41 +31,43 @@ new class extends Component {
                         <img class="max-w-24" src="{{ asset('img/logo/logo.png') }}" alt="logo-white">
                     </a>
                 </div>
-                <div class="absolute items-center hidden gap-2 -translate-x-1/2 left-1/2 lg:flex">
+                <div class="absolute items-center hidden gap-2 font-bold -translate-x-1/2 left-1/2 lg:flex">
                     <a 
-                        :class="{' {{ request()->routeIs('welcome') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled}"
-                        class="relative px-1 group {{ request()->routeIs('welcome') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-black' : '' }}"
+                        :class="{ 
+                            '{{ request()->routeIs('welcome') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled 
+                        }"
+                        class="relative px-1 group {{ request()->routeIs('welcome') ? '!text-teal-400' : 'text-white' }}"
                         href="{{ route('welcome') }}" 
                         wire:navigate
                     >
-                        <span class="transition-opacity group-hover:text-teal-400">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
+                        <span class="transition-opacity group-hover:!text-teal-400 {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
                     </a>
 
                     <a 
                         :class="{' {{ request()->routeIs('listing-page') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled}"
-                        class="relative px-1 group {{ request()->routeIs('listing-page') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-black' : '' }}"
+                        class="relative px-1 group {{ request()->routeIs('listing-page') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
                         href="{{ route('listing-page') }}" 
                         wire:navigate 
                     >
-                        <span class="transition-opacity group-hover:text-teal-400">{{ request()->routeIs('listing-page') ? 'Listing' : 'Listing' }}</span>
+                        <span class="transition-opacity group-hover:!text-teal-400 {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('listing-page') ? 'Listing' : 'Listing' }}</span>
                     </a>
 
                     <a
                         :class="{' {{ request()->routeIs('about-us') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled}"
-                        class="relative px-1 group {{ request()->routeIs('about-us') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-black' : '' }}"
+                        class="relative px-1 group {{ request()->routeIs('about-us') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
                         href="{{ route('about-us') }}" 
                         wire:navigate
                     >
-                        <span class="transition-opacity group-hover:text-teal-400">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
+                        <span class="transition-opacity group-hover:!text-teal-400 {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
                     </a>
                     
                     <a 
                         :class="{' {{ request()->routeIs('advertise-with-us') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled}"
-                        class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-black' : '' }}"
+                        class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
                         href="{{ route('advertise-with-us') }}" 
                         wire:navigate
                     >
-                        <span class="transition-opacity group-hover:text-teal-400">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
+                        <span class="transition-opacity group-hover:!text-teal-400 {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
                     </a>
                     
                 </div>
@@ -77,7 +79,16 @@ new class extends Component {
                     </a>
                     @else
                     <a class="relative hidden px-1 group lg:block" href="{{ route('dashboard') }}" wire:navigate>
-                        <span class="text-white transition-opacity group-hover:text-teal-300">Dashboard</span>
+                        <span 
+                            :class="{ 
+                                '!text-gray-600': hovered || scrolled || '{{ request()->routeIs('listing-page-item') }}', 
+                                'text-white': !hovered && !'{{ request()->routeIs('listing-page-item') }}', 
+                                'font-bold text-white': !hovered || !scrolled ,
+                            }"
+                            class="transition-opacity group-hover:!text-teal-300"
+                        >
+                            Dashboard
+                        </span>
                     </a>
                 @endguest
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="block text-black cursor-pointer size-8 text-dark hover:opacity-70 lg:hidden"

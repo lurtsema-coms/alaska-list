@@ -37,6 +37,10 @@
             referrerpolicy="no-referrer">
         </script>
 
+        <!-- Timeago.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
+        
+        {{-- Moment JS --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
 
         <!-- Scripts -->

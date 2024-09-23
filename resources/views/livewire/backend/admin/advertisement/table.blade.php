@@ -141,6 +141,11 @@ new class extends Component {
                                 <livewire:backend.admin.advertisement.edit-advertisement x-on:alert-success="$refresh" wire:key="edit-boosting-{{ $advertisement->id }}" :$advertisement />
                                 <livewire:component.soft-delete-button wire:key="{{ 'soft-delete-boosting-' . $advertisement->id }}" :model="$advertisement" />
                                 @endrole
+                                <a href="{{ route('seller-advertisement-view', $advertisement->id) }}" wire:navigate>
+                                    <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500">
+                                        VIEW
+                                    </button>
+                                </a>
                             </div>
                         </td>
                     </tr>
