@@ -43,12 +43,12 @@ new class extends Component {
         @foreach ($categories as $category)
             <div class="p-4 transition-shadow duration-300 rounded-lg avoid-break" wire:key="{{ 'category-listing-'.$category->id }}">
                 <a href="/listing-page?category_id={{ $category->id }}" wire:navigate>
-                    <h3 class="text-xl font-bold text-blue-600 hover:text-blue-800">{{ $category->name }}</h3>
+                    <h3 class="text-xl font-bold text-[#2171a7] hover:text-blue-800">{{ $category->name }}</h3>
                 </a>
                 <ul class="text-blue-500 pl-5 mt-4 space-y-2 list-disc underline ">
                     @foreach($category->subCategories as $sub_category)
                         <li wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                            <a href="{{ "listing-page?sc_names[0]=$category->id-$sub_category->name" }}" class="text-blue-500 text-[17px] hover:text-blue-800" wire:navigate>
+                            <a href="{{ "listing-page?sc_names[0]=$category->id-$sub_category->name" }}" class="text-[#2171a7] text-[17px] hover:text-blue-800" wire:navigate>
                                 {{ $sub_category->name }}
                             </a>
                         </li>
@@ -74,11 +74,11 @@ new class extends Component {
     <div class="mt-6 ml-6 italic text-gray-500 md:hidden">
         <p class="">Select Subcategories:</p>
     </div>
-    <div class="flex text-blue-500 items-center justify-center max-h-[20rem] mt-4 mb-20 overflow-y-auto md:hidden">
-        <ul class="grid text-blue-500 items-center justify-center grid-cols-2 pl-5 space-y-2  underline">
+    <div class="flex text-[#2171a7] items-center justify-center max-h-[20rem] mt-4 mb-20 overflow-y-auto md:hidden">
+        <ul class="grid text-[#2171a7] items-center justify-center grid-cols-2 pl-5 space-y-2  underline">
             @foreach($sub_categories as $sub_category)
                 <li wire:key="{{ 'sub-categ-listing-mobile-'.$sub_category['id'] }}">
-                    <a href="{{ "listing-page?sc_names[0]=" .$sub_category['category_id']. "-" .$sub_category['name'] }}" class="text-blue-500 hover:text-blue-800" wire:navigate>
+                    <a href="{{ "listing-page?sc_names[0]=" .$sub_category['category_id']. "-" .$sub_category['name'] }}" class="text-[#2171a7] hover:text-blue-800" wire:navigate>
                         {{ $sub_category['name'] }}   
                     </a>
                 </li>

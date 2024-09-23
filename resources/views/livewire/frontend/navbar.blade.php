@@ -28,7 +28,7 @@ new class extends Component {
             <div class="relative flex items-center justify-between">
                 <div class="flex items-center gap-5">
                     <a class="" href="/" wire:navigate>
-                        <img class="max-w-24" src="{{ asset('img/logo/logo.png') }}" alt="logo-white">
+                        <img class="max-w-24" src="{{ asset('img/logo/logo_light.png') }}" alt="logo-white">
                     </a>
                 </div>
                 <div class="absolute items-center hidden gap-2 font-bold -translate-x-1/2 left-1/2 lg:flex">
