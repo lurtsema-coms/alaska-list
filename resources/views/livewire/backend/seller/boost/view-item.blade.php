@@ -92,7 +92,7 @@ new class extends Component {
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center mt-4 space-y-4 xl:mt-0">
+            <div class="flex justify-center mt-8 space-y-4 xl:mt-0">
                 <div class="max-w-96">                                    
                     <a href="{{ route('listing-page-item', $sponsor->product->id) }}" class="block mb-8 overflow-hidden transition duration-300 bg-white border shadow-lg border-yellow-50 rounded-2xl hover:border-yellow-600 hover:no-underline" wire:navigate wire:key="{{ 'product-item-listing-'.$sponsor->product->id }}">
                         <div class="flex flex-col h-full">
