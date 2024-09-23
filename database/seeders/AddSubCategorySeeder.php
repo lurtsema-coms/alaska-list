@@ -192,7 +192,7 @@ class AddSubCategorySeeder extends Seeder
                 ],
                 [
                     'category_id' => 4,
-                    'name' => 'Hourse',
+                    'name' => 'Horse',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
