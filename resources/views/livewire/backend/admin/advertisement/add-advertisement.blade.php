@@ -167,15 +167,18 @@ new class extends Component {
                                         id="from-date"
                                         type="datetime-local"  
                                         min="<?=date('Y-m-d\Th:i')?>"
-                                        required>
+                                        required
+                                    >
                                 </div>
                                 <div class="flex-1 space-y-2">
                                     <p class="font-medium text-slate-700">To Date</p>
-                                        <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
+                                    <input 
+                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
                                         id="to-date"
                                         type="text"
                                         readonly 
-                                        required>
+                                        required
+                                    >
                                 </div>
                             </div>
                             <div class="space-y-2">
@@ -253,6 +256,10 @@ new class extends Component {
     $(document).ready(function() {
 
         let component = @this;
+
+        let min = new Date().toISOString().slice(0, 16);
+        $('#from-date').attr('min', min);
+
 
         $('#advertising-plan, #from-date').on('change', function(){
             component.advertising_plan_id = $('#advertising-plan').find('option:selected').data('advertising-id');

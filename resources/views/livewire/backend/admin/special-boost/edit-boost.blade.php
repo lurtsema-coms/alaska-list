@@ -209,10 +209,10 @@ new class extends Component {
                                             alt="Image">
                                 </div>
                             @endif
-                            <div class="flex flex-col space-y-2">
+                            {{-- <div class="flex flex-col space-y-2">
                                 <label class="font-medium text-slate-700">{{ $file_path ? "Replace New Photo" : "Add Photo"}}</label>
                                 <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" wire:model="photo" id="upload-{{ $inc }}">
-                            </div>
+                            </div> --}}
                             {{-- Loading Animation --}}
                             <div class="w-full text-center" wire:loading>
                                 <div class="flex items-center justify-center gap-2">

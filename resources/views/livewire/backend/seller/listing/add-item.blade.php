@@ -45,7 +45,7 @@ new class extends Component {
 
         $product = Product::create([
             'status' => 'ACTIVE',
-            'uuid' => 'Item-Code-'.substr(Str::uuid()->toString(), 0, 10),
+            'uuid' => 'listing-code-'.substr(Str::uuid()->toString(), 0, 10),
             'sub_category_id' => (int)$this->sub_category,
             'name' => $this->title_name,
             'price' => $this->price,

@@ -1,5 +1,6 @@
 <?php
 
+use App\Traits\ListingOption;
 use App\Models\AdvertisingPlan;
 use App\Models\SpecialBoost;
 use App\Models\Product;
@@ -13,13 +14,13 @@ use Livewire\Volt\Component;
 
 new class extends Component {
     
+    use ListingOption;
     use WithFileUploads;
 
     public $item_code = '';
-    public $advertising_plan = '';
+    public $advertising_plan_id = '';
     public $from_date = '';
     public $to_date = '';
-    public $to_date_computed = '';
     public $file_name = '';
     public $photo = '';
     public $inc = 1;
@@ -43,76 +44,21 @@ new class extends Component {
 
     public function addSpecialBoost()
     {
-        $photo = $this->photo;
-
-        // if(empty($this->photo)){
-        //     return $this->dispatch('alert-error');
-        // }
-
         $product = Product::find($this->item_code);
 
         $sp = SpecialBoost::create([
+            'uuid' => 'boost-code-'.substr(Str::uuid()->toString(), 0, 10),
             'product_id' => $product->id,
-            'advertising_plan_id' => $this->advertising_plan,
-            'from_date' => $this->from_date,
-            'to_date' => $this->to_date_computed,
+            'advertising_plan_id' => $this->advertising_plan_id,
+            'from_date' => $this->formatIso($this->from_date),
+            'to_date' => $this->formatIso($this->to_date),
             'created_by' => auth()->user()->id
         ]);
 
-        // Upload Photo
-        if(!empty($photo)){
-            $uuid = substr(Str::uuid()->toString(), 0, 8);
-            $file_name = $product->uuid . "-$uuid" . "." . $photo->getClientOriginalExtension();
-            // Store the file in the public disk
-            $path = $photo->storeAs(
-                path: "public/photos/product-boost",
-                name: $file_name
-            );
-
-            // Optimize image
-            $file_path = storage_path("app/" . $path);
-            $image = Image::make($file_path);
-            $image->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $image->save($file_path, 80);
-
-            $f_path = "storage/photos/product-boost/$file_name";
-
-            $sp->update([
-                'file_name' => $file_name,
-                'file_path' => $f_path,
-            ]);
-        }
-
-        $this->resetData(['advertising_plan', 'item_code', 'from_date', 'to_date', 'photo']);
+        $this->resetData(['item_code', 'from_date', 'to_date', 'photo']);
         $this->add_boost_modal = false;
         $this->inc++;
         $this->dispatch('alert-success');
-    }
-
-    public function computePlanDate()
-    {
-        $ap = AdvertisingPlan::find($this->advertising_plan);
-
-        // Check if $ap is not null and has a duration_day property
-        if ($ap && $ap->duration_days) {
-
-            if($this->from_date == ''){
-                $from_date = Carbon::now();
-            }else{
-                $from_date = Carbon::parse($this->from_date);
-            }
-            
-            $to_date = $from_date->copy()->addDays($ap->duration_days);
-            
-            $this->from_date = $from_date->format('Y-m-d\TH:i');
-            $this->to_date = $to_date->toDateString();
-            $this->to_date_computed = $to_date->format('Y-m-d\TH:i');
-        } else {
-            $this->from_date = null;
-            $this->to_date = null;
-        }
     }
 
     public function resetData($data)
@@ -140,13 +86,13 @@ new class extends Component {
         x-cloak>
         <div class="flex h-full p-5">
             <div class="w-full max-w-xl m-auto overflow-hidden bg-white shadow-lg rounded-2xl"
-            @click.outside="add_boost_modal=false; $wire.call('resetData', ['advertising_plan', 'item_code', 'from_date', 'to_date', 'to_date_computed', 'photo']); $('#item-code').selectize()[0].selectize.clear(); $('#advertising-plan').selectize()[0].selectize.clear();">
+            @click.outside="add_boost_modal=false; $wire.call('resetData', ['item_code', 'from_date', 'to_date', 'photo']); $('#item-code').selectize()[0].selectize.clear();">
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="addSpecialBoost">
                         <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Add Boost</p>
                         <div class="space-y-4">
-                            <div class="flex flex-col gap-4 sm:flex-row">
-                                <div class="flex-1 space-y-2" wire:ignore>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="" wire:ignore>
                                     <p class="font-medium text-slate-700">Item Code <span class="text-red-400">*</span></p>
                                     <select class="selectize-select" id="item-code" wire:model="item_code" required>
                                         <option value="" disabled></option>
@@ -155,35 +101,36 @@ new class extends Component {
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="flex-1 space-y-2" wire:ignore>
+                                <div class="" wire:ignore>
                                     <p class="font-medium text-slate-700">Advertising Plan <span class="text-red-400">*</span></p>
-                                    <select class="selectize-select" id="advertising-plan" required>
-                                        <option value="" disabled selected></option>
-                                        @foreach ($plans as $plan)
-                                            <option value="{{ $plan->id }}">{{ $plan->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <select class="w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" id="advertising-plan" required>
+                                            <option value="" disabled selected>Choose Plan</option>
+                                            @foreach ($plans as $plan)
+                                                <option value="{{ $plan->duration_days }}" data-advertising-id="{{ $plan->id }}">{{ $plan->name }}</option>
+                                            @endforeach
+                                        </select>
                                 </div>
-                            </div>
-                            <div class="flex flex-col gap-4 sm:flex-row">
-                                <div class="flex-1 space-y-2">
+                                <div class="">
                                     <p class="font-medium text-slate-700">From Date <span class="text-red-400">*</span></p>
-                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55] datetime-input" type="datetime-local" required wire:change="computePlanDate" wire:model="from_date" required wire:ignore>
+                                    <input 
+                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55] datetime-input"
+                                        id="from-date"
+                                        type="datetime-local"
+                                        min="<?=date('Y-m-d\Th:i')?>"
+                                        required
+                                    >
                                 </div>
-                                <div class="flex-1 space-y-2">
+                                <div class="">
                                     <p class="font-medium text-slate-700">To Date</p>
-                                        <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" required wire:model="to_date" readonly required>
+                                    <input 
+                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]"
+                                        id="to-date"
+                                        type="text"
+                                        readonly 
+                                        required
+                                    >
                                 </div>
                             </div>
-                            <div class="space-y-2">
-                                <label class="font-medium text-slate-700">Upload Photos</label>
-                                <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" wire:model="photo" id="upload-{{ $inc }}">
-                            </div>
-                            {{-- <div>
-                                <p class="mb-2 text-sm text-gray-600">
-                                    Requirement: For best quality in advertising, the image should be exactly 300px in height and 600px in width.
-                                </p>
-                            </div> --}}
                             {{-- Loading Animation --}}
                             <div class="w-full text-center" wire:loading>
                                 <div class="flex items-center justify-center gap-2">
@@ -197,7 +144,7 @@ new class extends Component {
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
                             <button class="px-4 py-2 rounded-lg shadow text-slate-600 hover:opacity-70" type="button"
-                                @click="add_boost_modal=false; $wire.call('resetData', ['advertising_plan', 'item_code', 'from_date', 'to_date', 'to_date_computed', 'photo']); $('#item-code').selectize()[0].selectize.clear(); $('#advertising-plan').selectize()[0].selectize.clear();">
+                                @click="add_boost_modal=false; $wire.call('resetData', ['item_code', 'from_date', 'to_date', 'photo']); $('#item-code').selectize()[0].selectize.clear();">
                                 Cancel
                             </button>
                             <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Submit</button>
@@ -216,26 +163,45 @@ new class extends Component {
         let component = @this;
 
         $('#item-code').selectize();
-        $('#advertising-plan').selectize();
 
         $('#item-code').on('change', function(){
             component.item_code = $(this).val();
         })
 
-        $('#advertising-plan').on('change', function(){
-            component.advertising_plan = $(this).val();
-            component.call('computePlanDate');
-        })
-
         $wire.on('alert-success', function() {
             $('#item-code').selectize()[0].selectize.clear();
-            $('#advertising-plan').selectize()[0].selectize.clear();
         })
 
         $wire.on('alert-error', function() {
             $('#item-code').selectize()[0].selectize.clear();
-            $('#advertising-plan').selectize()[0].selectize.clear();
         })
+
+        $('#advertising-plan, #from-date').on('change', function(){
+            component.advertising_plan_id = $('#advertising-plan').find('option:selected').data('advertising-id');
+            computedPlanDate();
+        })
+
+        function computedPlanDate() {
+            const duration = parseInt($('#advertising-plan').val(), 10);
+            const fromDate = $('#from-date').val();
+
+            if (fromDate === '' || isNaN(duration)) return;
+
+            const fromDateISO = new Date(fromDate);
+            
+            // Calculate the new date by adding the duration
+            const toDateISO = new Date(fromDateISO);
+            toDateISO.setDate(toDateISO.getDate() + duration);
+
+            // Format the to_date as YYYY-MM-DD for display
+            const toDateFormatted = toDateISO.toISOString().split('T')[0];
+
+            // Update the component and the display
+            component.from_date = fromDateISO.toISOString();
+            component.to_date = toDateISO.toISOString();
+            
+            $('#to-date').val(toDateFormatted);
+        }
     });
 </script>
 @endscript

@@ -81,7 +81,7 @@ new class extends Component {
                 <form wire:submit="editAdvertisement">
                     <div class="grid grid-cols-2 gap-x-8 gap-y-4">
                         <div class="space-y-2">
-                            <p class="font-medium text-slate-700">Item Code</p>
+                            <p class="font-medium text-slate-700">Featured Code</p>
                             <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="uuid" readonly>
                         </div>
                         <div class="space-y-2">

@@ -54,10 +54,20 @@ class Product extends Model
     {
         $today = now()->toDateTimeString();
 
-        return $this->specialBoost()
+        // Count for special boosts
+        $specialBoostCount = $this->specialBoost()
             ->where('from_date', '<=', $today)
             ->where('to_date', '>=', $today)
             ->count();
+
+        // Count for advertisements associated with this product
+        $advertisementCount = Advertisement::where('product_id', $this->id)
+            ->where('from_date', '<=', $today)
+            ->where('to_date', '>=', $today)
+            ->count();
+
+        // Return the special boost count if available, otherwise return the advertisement count
+        return $specialBoostCount > 0 ? $specialBoostCount : $advertisementCount;
     }
 
     public function createdBy()

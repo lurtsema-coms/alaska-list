@@ -27,10 +27,15 @@ new class extends Component {
             }, 'advertisingPlan' => function($query) {
                 $query->withTrashed();
             }])
+            ->selectRaw("
+                special_boosts.*,
+                DATE_FORMAT(CONVERT_TZ(from_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_from_date,
+                DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_to_date
+            ")
             ->where(function ($query) {
                 $query->where('id', 'like', '%' . $this->search . '%')
-                    ->orWhere('from_date', 'like', '%' . $this->search . '%')
-                    ->orWhere('to_date', 'like', '%' . $this->search . '%')
+                    ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(from_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%'])
+                    ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%'])
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->orWhereHas('product', function ($product) {
@@ -72,7 +77,10 @@ new class extends Component {
                             Id
                         </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                            Item Code
+                            Boosted Code
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Listing Item Code
                         </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Product Name
@@ -110,6 +118,9 @@ new class extends Component {
                             {{ $sponsor->id }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                            {{ $sponsor->uuid }}
+                        </td>
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->product->uuid }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
@@ -118,11 +129,21 @@ new class extends Component {
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->advertisingPlan->name }}
                         </td>
-                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
-                            {{ Carbon::parse($sponsor->from_date)->format('F j, Y g:i A') }}
+                        <td 
+                            class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap" 
+                            x-data="{
+                                date: moment('{{ $sponsor->from_date }}Z')
+                            }"
+                        >
+                            {{ $sponsor->formatted_from_date }}
                         </td>
-                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
-                            {{ Carbon::parse($sponsor->to_date)->format('F j, Y g:i A') }}
+                        <td 
+                            class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap" 
+                            x-data="{
+                                date: moment('{{ $sponsor->to_date }}Z')
+                            }"
+                        >
+                            {{ $sponsor->formatted_to_date }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->createdBy->first_name.' '.$sponsor->createdBy->last_name }}
@@ -135,8 +156,17 @@ new class extends Component {
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             <div class="flex items-center gap-2">
-                                <livewire:backend.admin.special-boost.edit-boost x-on:alert-success="$refresh" wire:key="edit-boosting-{{ $sponsor->id }}" :$sponsor />
-                                <livewire:component.soft-delete-button wire:key="{{ 'soft-delete-boosting-' . $sponsor->id }}" :model="$sponsor" />
+                                @role('seller')
+                                    <a href="{{  route('seller-special-boost-view', $sponsor->id) }}" wire:navigate>
+                                        <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500">
+                                            VIEW
+                                        </button>
+                                    </a>
+                                @endrole
+                                @role('admin')
+                                    <livewire:backend.admin.special-boost.edit-boost x-on:alert-success="$refresh" wire:key="edit-boosting-{{ $sponsor->id }}" :$sponsor />
+                                    <livewire:component.soft-delete-button wire:key="{{ 'soft-delete-boosting-' . $sponsor->id }}" :model="$sponsor" />
+                                @endrole
                             </div>
                         </td>
                     </tr>

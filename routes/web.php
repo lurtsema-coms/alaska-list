@@ -33,6 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
         Route::view('seller-listing/add-item', 'page-backend.seller.b-listing-add-item')->name('seller-listing-add');
         Route::view('seller-listing/edit-item/{id}', 'page-backend.seller.b-listing-edit-item')->name('seller-listing-edit');
         Route::view('seller-special-boost', 'page-backend.admin.b-special-boost')->name('seller-special-boost');
+        Route::view('seller-special-boost/view/{id}', 'page-backend.seller.b-special-boost-view')->name('seller-special-boost-view');
         Route::view('seller-featured-listing', 'page-backend.admin.b-advertisement')->name('seller-advertisement');
         Route::view('seller-featured-listing/view/{id}', 'page-backend.seller.b-advertisement-view')->name('seller-advertisement-view');
     });
