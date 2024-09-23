@@ -72,7 +72,7 @@ new class extends Component {
 
         // Generate a new UUID for the advertisement
         $uuid = 'ad-' . substr(Str::uuid()->toString(), 0, 8);
-
+        
         // Create the advertisement
         $sp = Advertisement::create([
             'uuid' => $uuid,
