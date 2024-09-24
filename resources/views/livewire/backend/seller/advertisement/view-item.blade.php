@@ -39,7 +39,8 @@ new class extends Component {
         $photo = $this->photo;
         
         if ($photo) {
-            $photo_img = Image::make($photo);
+            $base_photo = base64_encode(file_get_contents($photo->getRealPath()));
+            $photo_img = Image::make($base_photo);
             
             if ($this->checkResponsiveImage($photo_img)) {
                 $this->addError('image_constraint', 'The image width must not exceed 1920 pixels, and the height must not exceed 1080 pixels.');
