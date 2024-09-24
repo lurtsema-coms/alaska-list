@@ -58,7 +58,7 @@ new class extends Component {
 
         if ($this->promo_item_code) {
             // Try to find the product by UUID
-            $product = Product::where('uuid', $this->promo_item_code)->first();
+            $product = Product::where('created_by', auth()->user()->id)->where('uuid', $this->promo_item_code)->first();
             
             if (is_null($product)) {
                 // If the product is not found, add an error and return null
@@ -73,7 +73,7 @@ new class extends Component {
 
         // Generate a new UUID for the advertisement
         $uuid = 'ad-' . substr(Str::uuid()->toString(), 0, 8);
-        
+        dd($this->advertising_plan_id);
         // Create the advertisement
         $sp = Advertisement::create([
             'uuid' => $uuid,
@@ -144,7 +144,7 @@ new class extends Component {
         x-cloak>
         <div class="flex h-full p-5">
             <div class="w-full max-w-xl m-auto overflow-hidden bg-white shadow-lg rounded-2xl"
-            @click.outside="addAdvertisement=false; $wire.call('resetData', ['advertising_plan_id', 'from_date', 'to_date', 'photo', 'promo_item_code']);">
+            @click.outside="addAdvertisement=false; $wire.call('resetData', ['advertising_plan_id', 'from_date', 'to_date', 'photo', 'promo_item_code']); $('#advertising-plan, #from-date, #to-date').val('');">
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="addAds">
                         <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Add</p>
@@ -240,7 +240,7 @@ new class extends Component {
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
                             <button class="px-4 py-2 rounded-lg shadow text-slate-600 hover:opacity-70" type="button"
-                                @click="addAdvertisement=false; $wire.call('resetData', ['advertising_plan_id', 'from_date', 'to_date', 'photo', 'promo_item_code']);">
+                                @click="addAdvertisement=false; $wire.call('resetData', ['advertising_plan_id', 'from_date', 'to_date', 'photo', 'promo_item_code']); $('#advertising-plan, #from-date, #to-date').val('');">
                                 Cancel
                             </button>
                             <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Checkout</button>
