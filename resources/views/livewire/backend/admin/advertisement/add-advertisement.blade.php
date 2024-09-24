@@ -40,8 +40,9 @@ new class extends Component {
     public function addAds()
     {
         $photo = $this->photo;
-
-        $photo_img = Image::make($photo);
+        
+        $base_photo = base64_encode(file_get_contents($photo->getRealPath()));
+        $photo_img = Image::make($base_photo);
         $photo_height = $photo_img->getHeight();
         $photo_width = $photo_img->getWidth();
 
