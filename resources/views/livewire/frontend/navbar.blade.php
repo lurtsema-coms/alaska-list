@@ -24,50 +24,61 @@ new class extends Component {
         @mouseenter="hovered = true" 
         @mouseleave="hovered = false"    
     >
-        <div class="px-5 py-2 mx-auto sm:container">
+        <div class="px-5 py-6 mx-auto sm:container">
             <div class="relative flex items-center justify-between">
                 <div class="flex items-center gap-5">
                     <a class="" href="/" wire:navigate>
-                        <img class="max-w-24" src="{{ asset('img/logo/logo_light.png') }}" alt="logo-white">
+                        <img 
+                            :class="{'hidden': hovered || scrolled, 'block': !hovered && !scrolled}" 
+                            class="w-auto h-20 transition-all" 
+                            src="{{ asset('img/logo/logo_white.png') }}" 
+                            alt="logo-white"
+                        >
+                        <img 
+                            :class="{'hidden': !hovered && !scrolled, 'block': hovered || scrolled}" 
+                            class="w-auto h-20 hidden transition-all" 
+                            src="{{ asset('img/logo/logo_light.png') }}" 
+                            alt="logo-light"
+                        >
                     </a>
                 </div>
-                <div class="absolute items-center hidden gap-2 font-bold -translate-x-1/2 left-1/2 lg:flex">
+                <div class="absolute items-center hidden gap-6 font-semibold text-xl  -translate-x-1/2 left-1/2 lg:flex">
                     <a 
                         :class="{ 
-                            '{{ request()->routeIs('welcome') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled 
+                            '{{ request()->routeIs('welcome') ? 'text-[#2171a7]' : '!text-gray-600' }}': hovered || scrolled 
                         }"
-                        class="relative px-1 group {{ request()->routeIs('welcome') ? '!text-teal-400' : 'text-white' }}"
+                        class="relative px-1 group {{ request()->routeIs('welcome') ? '!text-[#2171a7]' : 'text-white' }}"
                         href="{{ route('welcome') }}" 
                         wire:navigate
                     >
-                        <span class="transition-opacity group-hover:!text-teal-400 {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
+                        <span class="transition-opacity group-hover:!text-[#2171a7] {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('welcome') ? 'Home' : 'Home' }}</span>
                     </a>
 
                     <a 
-                        :class="{' {{ request()->routeIs('listing-page') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled}"
-                        class="relative px-1 group {{ request()->routeIs('listing-page') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
+                        :class="{' {{ request()->routeIs('listing-page') ? 'text-[#2171a7]' : '!text-gray-600' }}': hovered || scrolled}"
+                        class="relative px-1 group {{ request()->routeIs('listing-page') ? '!text-[#2171a7]' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
                         href="{{ route('listing-page') }}" 
                         wire:navigate 
                     >
-                        <span class="transition-opacity group-hover:!text-teal-400 {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('listing-page') ? 'Listing' : 'Listing' }}</span>
+                        <span class="transition-opacity group-hover:!text-[#2171a7] {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('listing-page') ? 'Listing' : 'Listing' }}</span>
                     </a>
 
                     <a
-                        :class="{' {{ request()->routeIs('about-us') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled}"
-                        class="relative px-1 group {{ request()->routeIs('about-us') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
+                        :class="{' {{ request()->routeIs('about-us') ? 'text-[#2171a7]' : '!text-gray-600' }}': hovered || scrolled}"
+                        class="relative px-1 group {{ request()->routeIs('about-us') ? '!text-[#2171a7]' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
                         href="{{ route('about-us') }}" 
                         wire:navigate
                     >
-                        <span class="transition-opacity group-hover:!text-teal-400 {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
+                        <span class="transition-opacity group-hover:!text-[#2171a7] {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('about-us') ? 'About Us' : 'About Us' }}</span>
                     </a>
                     
                     <a 
-                        :class="{' {{ request()->routeIs('advertise-with-us') ? 'text-teal-400' : '!text-gray-600' }}': hovered || scrolled}"
-                        class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? '!text-teal-400' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
+                        :class="{' {{ request()->routeIs('advertise-with-us') ? 'text-[#2171a7]' : '!text-gray-600' }}': hovered || scrolled}"
+                        class="relative px-1 group {{ request()->routeIs('advertise-with-us') ? '!text-[#2171a7]' : 'text-white' }} {{ request()->routeIs('listing-page-item') ? '!text-gray-500' : '' }}"
                         href="{{ route('advertise-with-us') }}" 
                         wire:navigate
                     >
-                        <span class="transition-opacity group-hover:!text-teal-400 {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
+                        <span class="transition-opacity group-hover:!text-[#2171a7] {{ request()->routeIs('listing-page-item') ? '!text-gray-600' : '' }}">{{ request()->routeIs('advertise-with-us') ? 'Advertise With Us' : 'Advertise With Us' }}</span>
                     </a>
                     
                 </div>
