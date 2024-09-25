@@ -17,7 +17,6 @@ new class extends Component {
     }
 
 }; ?>
-
 <div class="flex flex-col items-center px-6 py-8 mt-10 space-y-4">
     <!-- Calendar -->
     <div class="border rounded-lg p-4 w-full">
@@ -26,7 +25,7 @@ new class extends Component {
                 $currentDateTime = new \DateTime('now', new \DateTimeZone(config('app.timezone')));
                 $currentMonthYear = $currentDateTime->format('F Y');
             @endphp
-            <span class="text-lg font-bold text-[#2171a7]">{{ $currentMonthYear }}</span>
+            <span class="text-lg font-bold text-[#2171a7] underline ">{{ $currentMonthYear }}</span>
         </div>
         <!-- Days of the Week -->
         <div class="grid grid-cols-7 gap-2 text-center font-semibold text-[#2171a7]">
