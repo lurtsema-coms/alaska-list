@@ -171,8 +171,8 @@
         </div>
 
         <div class="py-16 my-10 bg-white">
-            <div class="max-w-2xl px-6 mx-auto lg:max-w-7xl lg:px-8">
-                <p class="max-w-lg mx-auto mt-2 text-4xl font-medium tracking-tight text-center text-pretty text-gray-950 sm:text-3xl">Everything you need in advertising.</p>
+            <div class="max-w-2xl px-0 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
+                <p class="max-w-lg mx-auto mt-2 text-4xl font-medium tracking-tight text-center text-pretty text-gray-950 sm:text-3xl">Boost Your Visibility with Strategic Advertising</p>
                 <div class="grid gap-4 mt-10 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
                 <div class="relative lg:row-span-2">
                     <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
@@ -212,9 +212,14 @@
                 <div class="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
                     <div class="absolute bg-white rounded-lg inset-px"></div>
                     <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
-                    <div class="px-8 pt-8 sm:px-10 sm:pt-10">
-                        <p class="mt-2 font-medium tracking-tight text-lg/7 text-gray-950 max-lg:text-center">Security</p>
-                        <p class="max-w-lg mt-2 text-gray-600 max-lg:text-center">All payments are secure, ensuring that your personal and financial information is protected.</p>
+                    <div class="flex justify-center px-8 pt-8 sm:px-10 sm:pt-10">
+                        <div class="inline-block mt-8">
+                            <a href="{{ route('register') }}" wire:navigate>
+                                <div class="bg-[#2171a7] px-8 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:bg-[#1a5b8a] transition-transform transform hover:scale-105 cursor-pointer">
+                                    BE A SELLER NOW!
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     <div class="flex flex-1 items-center [container-type:inline-size] max-lg:py-6 lg:pb-2">
                         <img class="h-[min(152px,40cqw)] object-cover object-center" src="https://tailwindui.com/plus/img/component-images/bento-03-security.png" alt="">
@@ -228,13 +233,6 @@
                     <div class="px-8 pt-8 pb-3 sm:px-10 sm:pb-0 sm:pt-10">
                         <p class="mt-2 font-medium tracking-tight text-lg/7 text-gray-950 max-lg:text-center">Take Action Now!</p>
                         <p class="max-w-lg mt-2 text-gray-600 max-lg:text-center">Don’t let your product go unnoticed in a competitive marketplace! By choosing our advertising options, you are investing in your brand’s visibility and success. Let us help you reach a broader audience and get your product seen by more people—start boosting your visibility on The Alaska List today!</p>
-                        <div class="inline-block mt-8">
-                            <a href="{{ route('register') }}" wire:navigate>
-                                <div class="bg-[#2171a7] px-8 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:bg-[#1a5b8a] transition-transform transform hover:scale-105 cursor-pointer">
-                                    BE A SELLER NOW!
-                                </div>
-                            </a>
-                        </div>
                     </div>
                     </div>
                     <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-r-[2rem]"></div>
@@ -244,8 +242,6 @@
             </div>
 
         </div>
-
-            
 
         {{-- Get In Touch --}}
         <div id="get-in-touch" class="container mx-auto my-28" data-aos="zoom-in">
