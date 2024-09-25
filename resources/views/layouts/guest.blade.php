@@ -26,14 +26,14 @@
             </div>
             <div class="w-full flex-1 hidden lg:block relative bg-contain bg-no-repeat bg-center">
                 <img class="absolute object-cover min-h-full min-w-full top-0 z-10" src="{{asset('frontend/mountain.jpg')}}" alt="">
-                <div class=" w-full h-full absolute inset-0 z-20 bg-[#17427C] opacity-75">
+                <div class=" w-full h-full absolute inset-0 z-20 bg-[#17437c96] opacity-75">
                 </div>
-                <div class="flex justify-center w-full z-30 absolute top-40">
+                {{-- <div class="flex justify-center w-full z-30 absolute top-40">
                     <img class="w-2/3" src="{{ asset('img/logo/logo_white.png') }}" alt="">
                 </div>
                 <div class="w-full flex absolute z-30 justify-center text-justify bottom-64">
                     <h1 class="text-2xl font-bold text-white italic ">Your Alaskan Shopping Adventure Starts Here</h1>
-                </div>
+                </div> --}}
             </div>
 
         </div>
