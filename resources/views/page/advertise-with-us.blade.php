@@ -170,7 +170,7 @@
             </div> 
         </div>
 
-        <div class="py-16 my-10 bg-white">
+        <div class="py-16 my-10 sm:bg-white">
             <div class="max-w-2xl px-0 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
                 <p class="max-w-lg mx-auto mt-2 text-4xl font-medium tracking-tight text-center text-pretty text-gray-950 sm:text-3xl">Boost Your Visibility with Strategic Advertising</p>
                 <div class="grid gap-4 mt-10 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
