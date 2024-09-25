@@ -177,7 +177,7 @@
                 <div class="relative lg:row-span-2">
                     <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
                     <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
-                        <div class="px-8 pt-8 pb-3 sm:px-10 sm:pb-0 sm:pt-10">
+                        <div class="px-8 pt-8 pb-8 sm:px-10">
                             <p class="mt-2 font-medium tracking-tight text-lg/7 text-gray-950 max-lg:text-center">How It Works</p>
                             <div class="flex flex-col gap-2">                        
                                 <div>
@@ -212,10 +212,10 @@
                 <div class="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
                     <div class="absolute bg-white rounded-lg inset-px"></div>
                     <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
-                    <div class="flex justify-center px-8 pt-8 sm:px-10 sm:pt-10">
+                    <div class="flex justify-center px-4 pt-8 sm:px-10">
                         <div class="inline-block mt-8">
                             <a href="{{ route('register') }}" wire:navigate>
-                                <div class="bg-[#2171a7] px-8 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:bg-[#1a5b8a] transition-transform transform hover:scale-105 cursor-pointer">
+                                <div class="bg-[#2171a7] px-6 py-3 rounded-full text-white font-bold  shadow-lg hover:bg-[#1a5b8a] transition-transform transform hover:scale-105 cursor-pointer">
                                     BE A SELLER NOW!
                                 </div>
                             </a>
@@ -230,7 +230,7 @@
                 <div class="relative lg:row-span-2">
                     <div class="absolute inset-px rounded-lg bg-white lg:rounded-r-[2rem]"></div>
                     <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-r-[calc(2rem+1px)]">
-                    <div class="px-8 pt-8 pb-3 sm:px-10 sm:pb-0 sm:pt-10">
+                    <div class="px-8 pt-8 pb-8 sm:px-10">
                         <p class="mt-2 font-medium tracking-tight text-lg/7 text-gray-950 max-lg:text-center">Take Action Now!</p>
                         <p class="max-w-lg mt-2 text-gray-600 max-lg:text-center">Don’t let your product go unnoticed in a competitive marketplace! By choosing our advertising options, you are investing in your brand’s visibility and success. Let us help you reach a broader audience and get your product seen by more people—start boosting your visibility on The Alaska List today!</p>
                     </div>
