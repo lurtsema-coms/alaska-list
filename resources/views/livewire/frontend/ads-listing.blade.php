@@ -19,11 +19,11 @@ new class extends Component {
 
     public function loadAds()
     {
-        $today = now()->toDateString();
+        $today = now();
 
         return Advertisement::withoutTrashed()
-            ->whereDate('from_date', '<=', $today)
-            ->whereDate('to_date', '>=', $today)
+            ->where('from_date', '<=', $today)
+            ->where('to_date', '>=', $today)
             ->get();
     }
 
@@ -45,8 +45,8 @@ new class extends Component {
         <div class="w-full h-full swiper-add-listing-item swiper">
             <div class="swiper-wrapper">
                 @foreach ($campaigns as $campaign)
-                    <div class="swiper-slide" wire:key="{{ str()->random(50) }}">
-                        <a href="{{ $campaign->product_id ? route('listing-page-item', $campaign->product_id) : '#' }}" wire:navigate>
+                <div class="swiper-slide" wire:key="{{ str()->random(50) }}">
+                        <a href="{{ $campaign->product_id ? route('listing-page-item', $campaign->product_id) : '#' }}" >
                             <img class="object-cover w-full rounded-2xl" src="{{ asset($campaign->file_path) . '?' . now()->timestamp }}" alt="{{ $campaign->uuid }}">
                         </a>
                     </div>

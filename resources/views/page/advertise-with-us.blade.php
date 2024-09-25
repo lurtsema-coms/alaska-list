@@ -14,7 +14,7 @@
             </div>
         </div> --}}
     </div>
-    <div class="container relative z-30 px-5 pt-10 mx-auto bg-gray-50 -top-7 rounded-2xl">
+    <div class="container relative z-30 px-10 pt-10 mx-auto bg-gray-50 -top-7 rounded-2xl">
         <div class="flex flex-col justify-between gap-8 md:flex-row">
             <div>
                 <div id="advertise-with-us">

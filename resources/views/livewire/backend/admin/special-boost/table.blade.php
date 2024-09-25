@@ -30,13 +30,23 @@ new class extends Component {
             ->selectRaw("
                 special_boosts.*,
                 DATE_FORMAT(CONVERT_TZ(from_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_from_date,
-                DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_to_date
+                DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_to_date,
+                CASE 
+                    WHEN from_date <= NOW() AND to_date >= NOW() THEN 'Ongoing'
+                    ELSE 'Expired'
+                END AS status
             ")
             ->where(function ($query) {
                 $query->where('id', 'like', '%' . $this->search . '%')
                     ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(from_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%'])
                     ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%'])
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%')
+                    ->orWhere(function ($query) {
+                        $query->whereRaw("(from_date <= NOW() AND to_date >= NOW())")
+                            ->whereRaw("'Ongoing' LIKE ?", ['%' . $this->search . '%'])
+                            ->orWhereRaw("(from_date > NOW() OR to_date < NOW())")
+                            ->whereRaw("'Expired' LIKE ?", ['%' . $this->search . '%']);
+                    });
             })
             ->orWhereHas('product', function ($product) {
                 $product->where('uuid', 'like', '%' . $this->search . '%')
@@ -75,6 +85,9 @@ new class extends Component {
                     <tr>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Id
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Status
                         </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Boosted Code
@@ -116,6 +129,11 @@ new class extends Component {
                     <tr class="hover:bg-gray-100" wire:key="sponsor-item-{{ $sponsor->id }}">
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->id }}
+                        </td>
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                            <div class="inline-block px-4 py-2 text-center rounded-lg shadow-sm {{ $sponsor->status == 'Ongoing' ? 'bg-green-400' : 'bg-red-400' }} text-white">
+                                {{ $sponsor->status }}
+                            </div>
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $sponsor->uuid }}

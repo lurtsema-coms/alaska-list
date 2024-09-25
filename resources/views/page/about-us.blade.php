@@ -8,7 +8,7 @@
         <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
         </div>
     </div>
-    <div class="container relative z-30 px-5 pt-10 mx-auto bg-gray-50 -top-7 rounded-2xl">
+    <div class="container relative z-30 px-10 pt-10 mx-auto bg-gray-50 -top-7 rounded-2xl">
         <div class="flex flex-col justify-between gap-8 md:flex-row">
             <div class="flex flex-col gap-8 2xl:flex-row">
                 <div class="max-w-xl overflow-hidden rounded-lg">

@@ -57,7 +57,7 @@ new class extends Component {
             $photo_width = $photo_img->getWidth();
             
             if($photo_width > 1920 || $photo_height > 1080){
-                $this->addError('image_constraint', 'The image width must not exceed 1920 pixels, and the height must not exceed 1080 pixels.');
+                $this->addError('image_constraint', 'The image width must be exceed 653 pixels, and the height must be 914 pixels.');
                 return;
             }
         }

@@ -52,7 +52,7 @@ new class extends Component {
         }
 
         if($photo_width > 1920 || $photo_height > 1080){
-            $this->addError('image_constraint', 'The image width must not exceed 1920 pixels, and the height must not exceed 1080 pixels.');
+            $this->addError('image_constraint', 'The image width must be 653 pixels, and the height must be 914 pixels.');
             return;
         }
 
@@ -73,7 +73,7 @@ new class extends Component {
 
         // Generate a new UUID for the advertisement
         $uuid = 'ad-' . substr(Str::uuid()->toString(), 0, 8);
-        dd($this->advertising_plan_id);
+        
         // Create the advertisement
         $sp = Advertisement::create([
             'uuid' => $uuid,
@@ -195,7 +195,7 @@ new class extends Component {
                             @enderror
                             <div>
                                 <p class="mb-2 text-sm text-gray-600">
-                                    For best quality in advertising, the image should have a maximum height of 1080px and a maximum width of 1920px
+                                    For best quality in advertising, the image should have a maximum height of 914px and a maximum width of 653px
                                 </p>
                             </div>
                             <div x-data="{ promoPackage: false }">

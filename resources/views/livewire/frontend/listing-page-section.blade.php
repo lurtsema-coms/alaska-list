@@ -234,7 +234,7 @@ new class extends Component {
             </div>
         </div> --}}
 
-        <div class="px-5 bg-gray-50 rounded-2xl">
+        <div class="px-10 bg-gray-50 rounded-2xl">
             <div class="flex flex-col justify-between mt-12 xl:flex-row" id="filter">
                 <div class="flex flex-wrap gap-4 mt-8">
                     <div>
@@ -295,7 +295,7 @@ new class extends Component {
             
             {{-- Small Screen Size filter categories --}}
             <div class="w-full mx-auto mt-4 lg:hidden">
-                <div class="sticky space-y-4 top-28 max-h-60">
+                <div class="space-y-4 max-h-96">
                     <div class="p-8 bg-white border rounded-lg shadow-sm border-slate-300"> 
                         @if ($sc_names)
                             <div class="inline-block px-4 py-2 mb-5 bg-white border border-gray-300 rounded-lg shadow-sm">
@@ -313,7 +313,7 @@ new class extends Component {
                             <h2 class="text-lg font-medium text-[#285680]">Filter by categories</h2>
                         </div>
 
-                        <div class="grid gap-6 overflow-y-auto sm:grid-cols-2 md:grid-cols-3 h-60">
+                        <div class="grid gap-6 overflow-y-auto sm:grid-cols-2 md:grid-cols-3 max-h-40">
                             @foreach ($categories as $category)
                                 <div class="" wire:key="{{ 'category-listing-'.$category->id }}">
                                     <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
@@ -338,7 +338,7 @@ new class extends Component {
                 </div>
             </div>
             
-            <div class="mt-36 lg:mt-0" id="list-section">
+            <div class="lg:mt-0" id="list-section">
                 <div class="flex flex-col gap-8 mt-11 md:flex-row">
                     <div class="hidden w-full mx-auto max-w-72 lg:block">
                         <div class="sticky space-y-4 top-28 max-h-96">
@@ -400,14 +400,16 @@ new class extends Component {
                                                 <div class="relative">
                                                     <img class="object-cover w-full h-56 rounded-t-xl" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
                                                     <div class="absolute px-3 py-1 text-xs font-bold text-white bg-yellow-500 rounded-full top-4 left-4">Boosted</div>
+                                                    <div class="absolute px-3 py-1 bg-white rounded-full shadow-lg bottom-4 left-4">
+                                                        <p class="text-xl font-medium text-gray-600">
+                                                            ${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                                 
                                                 <div class="flex-1 p-6 bg-gradient-to-b from-yellow-50 to-white">
-                                                    <p class="mb-2 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
-                                                    <p class="mb-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
-                                                    @if ($product->price)
-                                                        <p class="mb-4 text-lg font-semibold text-yellow-600">${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}</p>
-                                                    @endif
+                                                    <p class="text-lg font-semibold text-gray-800">{{ \Illuminate\Support\Str::words($product->name, 15, '...') }}</p>
+                                                    <p class="my-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
                                                     <div class="flex items-center my-4 space-x-2">
                                                         <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
                                                     </div>
@@ -439,14 +441,16 @@ new class extends Component {
                     
                                                     <div class="relative">
                                                         <img class="object-cover w-full h-56 rounded-t-xl" src="{{ asset($firstImage) }}" alt="{{ $product->name }}">
+                                                        <div class="absolute px-3 py-1 bg-white rounded-full shadow-lg bottom-4 left-4">
+                                                            <p class="text-xl font-medium text-gray-600">
+                                                                ${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                     
                                                     <div class="flex-1 p-6 to-white">
-                                                        <p class="mb-2 text-lg font-semibold text-gray-800">{{ $product->name }}</p>
-                                                        <p class="mb-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
-                                                        @if ($product->price)
-                                                            <p class="mb-4 text-lg font-semibold text-blue-600">${{ number_format($product->price, fmod($product->price, 1) !== 0.00 ? 2 : 0) }}</p>
-                                                        @endif
+                                                        <p class="text-lg font-semibold text-gray-800">{{ \Illuminate\Support\Str::words($product->name, 15, '...') }}</p>
+                                                        <p class="my-2 text-sm text-gray-600">{{ Str::limit($product->description, 150) }}</p>
                                                         <div class="flex items-center my-4 space-x-2">
                                                             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $product->subCategory->name }}</span>
                                                         </div>

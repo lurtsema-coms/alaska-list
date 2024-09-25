@@ -14,11 +14,11 @@ new class extends Component {
 
     public function loadSpecialBoost()
     {
-        $today = now()->toDateString();
+        $today = now();
 
         return SpecialBoost::with('product.subCategory')
-            ->whereDate('from_date', '<=', $today)
-            ->whereDate('to_date', '>=', $today)
+            ->where('from_date', '<=', $today)
+            ->where('to_date', '>=', $today)
             ->whereHas('product', function ($query) {
                 $query->where('status', '!=', 'DELETED');
             })
@@ -35,7 +35,7 @@ new class extends Component {
                     <div class="swiper-slide" wire:key="{{ str()->random(50) }}">
                         {{-- <div class="swiper-slide"> --}}
                             <a class="w-full overflow-hidden" href="{{ route('listing-page-item', $sponsor->product->id) }}" wire:navigate>
-                                <div class="w-full m-auto overflow-hidden max-h-96 max-w-[80rem] rounded-xl {{ Request::segment(1) != '' ? "border border-gray-200" : '' }} hover:border hover:border-blue-400">
+                                <div class="w-full m-auto overflow-hidden bg-white h-96 max-w-[80rem] rounded-xl {{ Request::segment(1) != '' ? "border border-gray-200" : '' }} hover:border hover:border-blue-400">
                                     <div class="relative">
                                         @if ($sponsor->file_path)
                                             <img class="object-cover w-full h-48" src="{{ asset($sponsor->file_path) }}" alt="{{ $sponsor->product->name }}" loading="lazy">

@@ -31,15 +31,26 @@ new class extends Component {
             ->selectRaw("
                 advertisements.*,
                 DATE_FORMAT(CONVERT_TZ(from_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_from_date,
-                DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_to_date
+                DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') AS formatted_to_date,
+                CASE 
+                    WHEN from_date <= NOW() AND to_date >= NOW() THEN 'Ongoing'
+                    ELSE 'Expired'
+                END AS status
             ")
             ->where(function ($query) {
                 $query->where('id', 'like', '%' . $this->search . '%')
                     ->orWhere('uuid', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%')
                     ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(from_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%'])
-                    ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%']);
+                    ->orWhereRaw("DATE_FORMAT(CONVERT_TZ(to_date, '+00:00', @@session.time_zone), '%M %d, %Y %h:%i %p') LIKE ?", ['%' . $this->search . '%'])
+                    ->orWhere(function ($query) {
+                        $query->whereRaw("(from_date <= NOW() AND to_date >= NOW())")
+                            ->whereRaw("'Ongoing' LIKE ?", ['%' . $this->search . '%'])
+                            ->orWhereRaw("(from_date > NOW() OR to_date < NOW())")
+                            ->whereRaw("'Expired' LIKE ?", ['%' . $this->search . '%']);
+                    });
             })
+
             ->orWhereHas('advertisingPlan', function ($advertisingPlan) {
                 $advertisingPlan->where('name', 'like', '%' . $this->search . '%');
             })
@@ -72,6 +83,9 @@ new class extends Component {
                     <tr>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Id
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                            Status
                         </th>
                         <th scope="col" class="px-6 py-3 text-sm tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                             Item Code
@@ -111,6 +125,11 @@ new class extends Component {
                             {{ $advertisement->id }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
+                            <div class="inline-block px-4 py-2 text-center rounded-lg shadow-sm {{ $advertisement->status == 'Ongoing' ? 'bg-green-400' : 'bg-red-400' }} text-white">
+                                {{ $advertisement->status }}
+                            </div>
+                        </td>
+                        <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             {{ $advertisement->uuid }}
                         </td>
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
@@ -141,11 +160,13 @@ new class extends Component {
                                 <livewire:backend.admin.advertisement.edit-advertisement x-on:alert-success="$refresh" wire:key="edit-boosting-{{ $advertisement->id }}" :$advertisement />
                                 <livewire:component.soft-delete-button wire:key="{{ 'soft-delete-boosting-' . $advertisement->id }}" :model="$advertisement" />
                                 @endrole
+                                @role('seller')
                                 <a href="{{ route('seller-advertisement-view', $advertisement->id) }}" wire:navigate>
                                     <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500">
                                         VIEW
                                     </button>
                                 </a>
+                                @endrole
                             </div>
                         </td>
                     </tr>
