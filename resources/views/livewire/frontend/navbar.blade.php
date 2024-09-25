@@ -36,13 +36,13 @@ new class extends Component {
                         >
                         <img 
                             :class="{'hidden': !hovered && !scrolled, 'block': hovered || scrolled}" 
-                            class="w-auto h-20 hidden transition-all" 
+                            class="hidden w-auto h-20 transition-all" 
                             src="{{ asset('img/logo/logo_light.png') }}" 
                             alt="logo-light"
                         >
                     </a>
                 </div>
-                <div class="absolute items-center hidden gap-6 font-semibold text-xl  -translate-x-1/2 left-1/2 lg:flex">
+                <div class="absolute items-center hidden gap-6 text-xl font-semibold -translate-x-1/2 left-1/2 lg:flex">
                     <a 
                         :class="{ 
                             '{{ request()->routeIs('welcome') ? 'text-[#2171a7]' : '!text-gray-600' }}': hovered || scrolled 
@@ -84,7 +84,7 @@ new class extends Component {
                 </div>
                 @guest
                     <a class="relative hidden px-1 group lg:block" href="{{ route('login') }}" wire:navigate>
-                        <div class="px-4 py-2 font-bold text-white transition duration-300 rounded-full shadow-md bg-search-gradient hover:opacity-70">
+                        <div class="px-4 py-2 text-xl font-bold text-white transition duration-300 rounded-full shadow-md bg-search-gradient hover:opacity-70">
                             Post an Ad
                         </div>
                     </a>
