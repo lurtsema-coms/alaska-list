@@ -214,7 +214,7 @@
                     <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
                     <div class="px-8 pt-8 sm:px-10 sm:pt-10">
                         <p class="mt-2 font-medium tracking-tight text-lg/7 text-gray-950 max-lg:text-center">Security</p>
-                        <p class="max-w-lg mt-2 text-gray-600 text-sm/6 max-lg:text-center">All payments are secure, ensuring that your personal and financial information is protected.</p>
+                        <p class="max-w-lg mt-2 text-gray-600 max-lg:text-center">All payments are secure, ensuring that your personal and financial information is protected.</p>
                     </div>
                     <div class="flex flex-1 items-center [container-type:inline-size] max-lg:py-6 lg:pb-2">
                         <img class="h-[min(152px,40cqw)] object-cover object-center" src="https://tailwindui.com/plus/img/component-images/bento-03-security.png" alt="">
