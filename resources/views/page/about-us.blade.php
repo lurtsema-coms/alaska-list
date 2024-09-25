@@ -7,15 +7,9 @@
         </div>
         <div class="absolute inset-0 z-20 w-full h-full bg-search-gradient opacity-70">
         </div>
-        <div class="absolute inset-0 z-30 flex items-center justify-center">
-            <div class="container px-5 mx-auto font-sans font-semibold text-white text-shadow-custom sm:text-4xl">
-                <p class="text-4xl">About Us</p>
-                <p class="text-lg">Your go-to platform for buying, selling, and connecting with Alaskans.</p>
-            </div>
-        </div>
     </div>
-    <div class="container px-5 mx-auto mt-28">
-        <div class="flex flex-col gap-8 md:flex-row">
+    <div class="container relative z-30 px-5 pt-10 mx-auto bg-gray-50 -top-7 rounded-2xl">
+        <div class="flex flex-col justify-between gap-8 md:flex-row">
             <div class="flex flex-col gap-8 2xl:flex-row">
                 <div class="max-w-xl overflow-hidden rounded-lg">
                     <img src="{{ asset('frontend/mountain.jpg') }}" alt="Our Team at Work">
