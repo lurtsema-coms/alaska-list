@@ -32,14 +32,13 @@
             background-size: cover; /* Optional: ensures the image covers the entire background */
             background-repeat: no-repeat; /* Optional: prevents the image from repeating */
         }
-        .layer3{
-            
-        }
         </style>
     </head>
     <body class="flex min-h-screen py-10 font-sans antialiased text-gray-900">
-        <div class="w-full max-w-7xl flex flex-row justify-center m-auto bg-white shadow-none sm:shadow-md overflow-hidden min-h-[45rem] bg-no-repeat sm:bg-cover sm:bg-blob rounded-2xl sm:border px-5">
-            <div class="w-full max-w-2xl p-10 m-auto mx-1 leading-none border border-sky-600 rounded-2xl bg-gray-50">
+        <div class="w-full max-w-7xl flex flex-row justify-center m-auto shadow-none sm:shadow-md overflow-hidden min-h-[45rem] bg-no-repeat bg-cover bg-center rounded-2xl sm:border px-5 relative py-5" style="background-image: url('{{ asset('frontend/mountain.jpg') }}');">
+            <!-- Watermark overlay only on the background image -->
+            <div class="absolute inset-0 z-20 bg-[#17437cf6] opacity-75"></div>
+            <div class="relative w-full max-w-2xl p-10 m-auto mx-1 leading-none border border-sky-600 rounded-2xl bg-gray-50 z-30">
                 <div class="w-full">
                     <livewire:pages.auth.register>
                 </div>
@@ -47,4 +46,5 @@
         </div>
         @livewireScripts
     </body>
+    
 </html>
