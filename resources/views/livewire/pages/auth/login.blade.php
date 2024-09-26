@@ -33,8 +33,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         <div class="mb-8">
             <div class="flex flex-col items-center justify-center mb-4">
-                <h1 class="text-3xl hidden lg:block font-extrabold text-[#17427C] sm:text-start font-poppins">LOGIN</h1>
-                <img class="block w-full lg:hidden " src="{{ asset('img/logo/logo_light.png') }}" alt="">
+                <img class="block w-auto h-44  " src="{{ asset('img/logo/logo_light.png') }}" alt="">
             </div>
             <span class="font-bold text-[#17427C]">Doesn't have an account yet? <a href="/register"  class="font-bold underline text-cyan-600 hover:text-cyan-500" wire:navigate>Sign Up</a>
         </div>
