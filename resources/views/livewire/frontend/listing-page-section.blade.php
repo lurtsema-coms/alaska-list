@@ -235,7 +235,7 @@ new class extends Component {
         </div> --}}
 
         <div class="px-10 bg-gray-50 rounded-2xl">
-            <div class="flex flex-col justify-between mt-12 xl:flex-row" id="filter">
+            <div class="flex flex-col justify-between mt-12 xl:flex-row">
                 <div class="flex flex-wrap gap-4 mt-8">
                     <div>
                         <h3 class="mb-2">Location</h3>
@@ -341,7 +341,7 @@ new class extends Component {
             <div class="lg:mt-0" id="list-section">
                 <div class="flex flex-col gap-8 mt-11 md:flex-row">
                     <div class="hidden w-full mx-auto max-w-72 lg:block">
-                        <div class="sticky space-y-4 top-28 max-h-96">
+                        <div class="sticky space-y-4 top-28">
                             <div class="p-8 bg-white border shadow-sm border-slate-300 rounded-2xl"> 
                                 @if ($sc_names)
                                     <div class="inline-block px-4 py-2 mb-5 bg-white border border-gray-300 rounded-lg shadow-sm">
@@ -359,7 +359,7 @@ new class extends Component {
                                     <h2 class="text-lg font-medium text-[#285680]">Filter by categories</h2>
                                 </div>
     
-                                <div class="grid grid-cols-1 gap-6 overflow-y-auto h-96">
+                                <div class="grid grid-cols-1 gap-6 ">
                                     @foreach ($categories as $category)
                                         <div class="" wire:key="{{ 'category-listing-'.$category->id }}">
                                             <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
@@ -476,7 +476,7 @@ new class extends Component {
                                 @endforeach
                             @endif
                         </div>
-                        {{ $products->links(data: ['scrollTo' => '#filter']) }}
+                        {{ $products->links(data: ['scrollTo' => '#list-section']) }}
                         <div class="mt-4 2xl:hidden">
                             <livewire:frontend.sidebar-sponsor>
                         </div>   
@@ -521,7 +521,7 @@ new class extends Component {
             // Get the target element by ID
             const targetElement = document.getElementById('list-section');
             if (targetElement) {
-                var topOffset = 100; // Adjust the offset as needed
+                var topOffset = 160; // Adjust the offset as needed
                 
                 // Calculate the element's position relative to the top of the page
                 var elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;

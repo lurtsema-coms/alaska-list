@@ -8,7 +8,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
         (function() {
             var targetElement = document.querySelector('{$scrollTo}');
             if (targetElement) {
-                var topOffset = 100; // Adjust the offset as needed
+                var topOffset = 160; // Adjust the offset as needed
                 var elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({
                     top: elementPosition - topOffset,
