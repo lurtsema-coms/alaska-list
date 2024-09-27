@@ -96,7 +96,7 @@ new class extends Component {
                                 'text-white': !hovered && !'{{ request()->routeIs('listing-page-item') }}', 
                                 'font-bold text-white': !hovered || !scrolled ,
                             }"
-                            class="transition-opacity group-hover:!text-teal-300"
+                            class="transition-opacity group-hover:!text-teal-300 text-xl"
                         >
                             Dashboard
                         </span>

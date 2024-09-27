@@ -15,25 +15,28 @@
         </div> --}}
     </div>
     <div class="container relative z-30 px-10 pt-10 mx-auto bg-gray-50 -top-7 rounded-2xl">
-        <div class="flex flex-col justify-between gap-8 md:flex-row">
+        <div class="flex flex-col justify-center gap-16 mx-auto md:flex-row">
             <div>
                 <div id="advertise-with-us">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-700">Advertising Plans</h3>
+                        <h3 class="text-xl font-semibold text-gray-700 sm:text-2xl">Advertising Plans</h3>
                         <p class="mt-2 text-gray-600">Boost your listing to the top and gain maximum visibility!</p>
                         
                         <div class="mt-8">
-                            <div class="max-w-4xl">
-                                <h3 class="text-xl font-semibold text-gray-700">Boosted Listings ✅</h3>
+                            <div class="max-w-4xl p-8 bg-white border shadow-xl rounded-2xl">
+                                <h3 class="text-xl font-semibold text-gray-700 sm:text-2xl">Boosted Listings ✅</h3>
                                 <p class="mt-2 text-gray-600">Enhance your visibility and drive more traffic to your product with our Boosted Listings! These packages are tailored to get your offerings in front of more potential customers, ensuring your brand stands out in a crowded market.</p>
                                 @php
                                     $plans = App\Models\AdvertisingPlan::all(); // Fetch all products
                                 @endphp
-                                <div class="mt-8 space-y-4">
+                                <div class="flex flex-wrap gap-6 mt-10">
                                     @foreach ($plans as $plan)
-                                        <div class="w-full max-w-xl p-4 border rounded-md shadow-md bg-gray-50">
-                                            <h4 class="text-lg font-semibold text-gray-800">{{ $plan->name }}</h4>
-                                            <p class="text-gray-600">{{ $plan->description }}.</p>
+                                        <div class="w-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 duration-300 max-w-72 bg-gradient-to-br from-[#457D96] to-[#285680] rounded-2xl p-6 ring-1 ring-gray-300/10 isolate">
+                                            <div class="flex flex-wrap justify-between">
+                                                <h4 class="text-xl font-bold tracking-wide text-white">{{ $plan->name }}</h4>
+                                                <h4 class="text-xl font-bold tracking-wide text-cyan-200">${{ $plan->cost }}</h4>
+                                            </div>
+                                            <p class="mt-3 leading-relaxed text-gray-200">{{ $plan->description }}</p>
                                         </div>
                                     @endforeach
                                 </div>
@@ -42,23 +45,21 @@
                         </div>
                     </div>
 
-                    <div class="max-w-4xl">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-700">Alaska Life Highlights ✅</h3>
-                            <p class="mt-2 text-gray-600">Take your marketing to the next level with our exclusive Alaska Life Highlights for $500. This premium advertising option offers unparalleled exposure through:</p>
-                            <div class="mt-4">
-                                <ul class="pl-5 space-y-2 text-gray-600 list-disc">
-                                    <li>
-                                        <span class="font-bold">Organic Posts on Our Facebook and Instagram Alaska Life Pages</span>: Leverage our engaged audience for increased visibility.
-                                    </li>
-                                    <li>
-                                        <span class="font-bold">Listing on Our Website with Backlinks</span>: Improve your search engine optimization (SEO) and drive traffic to your site.
-                                    </li>
-                                    <li>
-                                        <span class="font-bold">Personalized Marketing Consultation</span>: Get expert advice tailored to your brand to maximize your advertising impact.
-                                    </li>
-                                </ul>
-                            </div>
+                    <div class="max-w-4xl p-8 bg-white border shadow-xl rounded-2xl">
+                        <h3 class="text-xl font-semibold text-gray-700 sm:text-2xl">Alaska Life Highlights ✅</h3>
+                        <p class="mt-2 text-gray-600">Take your marketing to the next level with our exclusive Alaska Life Highlights for $500. This premium advertising option offers unparalleled exposure through:</p>
+                        <div class="mt-4">
+                            <ul class="pl-5 space-y-2 text-gray-600 list-disc">
+                                <li>
+                                    <span class="font-bold">Organic Posts on Our Facebook and Instagram Alaska Life Pages</span>: Leverage our engaged audience for increased visibility.
+                                </li>
+                                <li>
+                                    <span class="font-bold">Listing on Our Website with Backlinks</span>: Improve your search engine optimization (SEO) and drive traffic to your site.
+                                </li>
+                                <li>
+                                    <span class="font-bold">Personalized Marketing Consultation</span>: Get expert advice tailored to your brand to maximize your advertising impact.
+                                </li>
+                            </ul>
                         </div>
                         
                         <div class="mt-4">
@@ -84,9 +85,9 @@
                         <p class="mt-4 text-gray-600">These metrics demonstrate the effectiveness of our platforms in connecting you with your target audience.</p>
                     </div>
 
-                    <div class="max-w-4xl mt-8">
+                    <div class="max-w-4xl p-8 mt-8 bg-white border shadow-xl rounded-2xl">
                         <div>
-                            <h3 class="text-xl font-semibold text-gray-700">Split Test Advertising ✅</h3>
+                            <h3 class="text-xl font-semibold text-gray-700 sm:text-2xl">Split Test Advertising ✅</h3>
                             <p class="mt-2 text-gray-600">Optimize your campaign further with our Split Test Advertising for an additional $5 per day. We’ll conduct a split test to evaluate different messaging and graphics across four posts. This test will analyze key performance indicators such as engagement, click-through rates, impressions, and reach. With these insights, we can fine-tune your marketing strategy to ensure the best possible results.</p>
                             <div class="mt-4">
                                 <p class="mb-4 font-semibold text-gray-700">What’s Included:</p>
@@ -109,7 +110,7 @@
                     <div class="mt-8">
                         <div class="mx-auto max-w-7xl">
                             <div class="max-w-2xl">
-                                <h3 class="text-xl font-semibold text-gray-700">Why Choose Our Advertising Options ?</h3>
+                                <h3 class="text-xl font-semibold text-gray-700 sm:text-2xl">Why Choose Our Advertising Options ?</h3>
                             </div>
                             <div class="max-w-2xl mt-8 lg:max-w-4xl">
                             <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">

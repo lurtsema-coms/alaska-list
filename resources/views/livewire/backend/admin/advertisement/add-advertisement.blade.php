@@ -51,8 +51,8 @@ new class extends Component {
             return;
         }
 
-        if($photo_width > 1920 || $photo_height > 1080){
-            $this->addError('image_constraint', 'The image width must be 653 pixels, and the height must be 914 pixels.');
+        if($photo_width != 320 || $photo_height != 600){
+            $this->addError('image_constraint', 'The image width must be 320 pixels, and the height must be 600 pixels.');
             return;
         }
 
@@ -83,7 +83,6 @@ new class extends Component {
             'product_id' => $product_id,
             'created_by' => auth()->user()->id,
         ]);
-
 
         // Upload Photo
         if(!empty($photo)){
@@ -167,7 +166,7 @@ new class extends Component {
                                         class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
                                         id="from-date"
                                         type="datetime-local"  
-                                        min="<?=date('Y-m-d\Th:i')?>"
+                                        {{-- min="<?=date('Y-m-d\Th:i')?>" --}}
                                         required
                                     >
                                 </div>
@@ -195,7 +194,7 @@ new class extends Component {
                             @enderror
                             <div>
                                 <p class="mb-2 text-sm text-gray-600">
-                                    For best quality in advertising, the image should have a maximum height of 914px and a maximum width of 653px
+                                    For best quality in advertising, the image should have a height of 600 and a width of 320px
                                 </p>
                             </div>
                             <div x-data="{ promoPackage: false }">
@@ -240,7 +239,9 @@ new class extends Component {
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
                             <button class="px-4 py-2 rounded-lg shadow text-slate-600 hover:opacity-70" type="button"
-                                @click="addAdvertisement=false; $wire.call('resetData', ['advertising_plan_id', 'from_date', 'to_date', 'photo', 'promo_item_code']); $('#advertising-plan, #from-date, #to-date').val('');">
+                                @click="addAdvertisement=false; $wire.call('resetData', ['advertising_plan_id', 'from_date', 'to_date', 'photo', 'promo_item_code']); $('#advertising-plan, #from-date, #to-date').val('');"
+                                wire:loading.attr="disabled"
+                            >
                                 Cancel
                             </button>
                             <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Checkout</button>

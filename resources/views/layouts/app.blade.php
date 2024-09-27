@@ -104,6 +104,39 @@
                     <livewire:component.prohibited-listing-modal />
                 @endrole
                 {{ $slot }}
+                <div x-data="{ showModal: false }" 
+                    wire:offline="showModal = true" 
+                    x-show="showModal" 
+                    x-cloak 
+                    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    
+                    <!-- Modal Content -->
+                    <div class="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg">
+                        <!-- Modal Header -->
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Connection Issue</h3>
+                            <button @click="showModal = false" class="text-gray-500 hover:text-gray-700">X</button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="text-gray-600">
+                            <p class="alert alert-warning">
+                                Whoops, your device has lost connection. The web page you are viewing is offline.
+                            </p>
+                            <p class="mt-4">
+                                Please refresh the page before doing any further actions.
+                            </p>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="flex justify-end mt-4">
+                            <button @click="showModal = false" class="px-4 py-2 text-white transition bg-blue-500 rounded-md hover:bg-blue-600">
+                                Dismiss
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </main>
         </div>
     </body>

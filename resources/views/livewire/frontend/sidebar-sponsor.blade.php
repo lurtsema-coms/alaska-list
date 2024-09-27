@@ -39,7 +39,7 @@ new class extends Component {
 }; ?>
 
 <div class="w-full h-full md:w-80">
-    <div class="sticky space-y-4 top-28">
+    <div class="sticky space-y-4 top-36">
         @if (count($campaigns) != 0)
         <div class="text-right">
             <p class="font-bold">ADVERTISEMENT</p>

@@ -42,12 +42,12 @@ new class extends Component {
     });
 ">
     @if (count($campaigns) != 0)
-        <div class="w-full h-full swiper-add-listing-item swiper">
+        <div class=" swiper-add-listing-item swiper">
             <div class="swiper-wrapper">
                 @foreach ($campaigns as $campaign)
                 <div class="swiper-slide" wire:key="{{ str()->random(50) }}">
                         <a href="{{ $campaign->product_id ? route('listing-page-item', $campaign->product_id) : '#' }}" >
-                            <img class="object-cover w-full rounded-2xl" src="{{ asset($campaign->file_path) . '?' . now()->timestamp }}" alt="{{ $campaign->uuid }}">
+                            <img class="object-contain m-auto rounded-2xl" src="{{ asset($campaign->file_path) . '?' . now()->timestamp }}" alt="{{ $campaign->uuid }}">
                         </a>
                     </div>
                 @endforeach

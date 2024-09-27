@@ -13,7 +13,7 @@ trait ListingOption
         $photo_height = $photo_img->getHeight();
         $photo_width = $photo_img->getWidth();
 
-        return $photo_width == 653 || $photo_height == 914;
+        return $photo_width != 320 || $photo_height != 600;
     }
 
     public function formatISO($date)
