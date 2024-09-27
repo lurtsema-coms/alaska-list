@@ -30,7 +30,7 @@ new class extends Component {
             <span class="text-lg font-bold text-[#2171a7] underline ">{{ $currentMonthYear }}</span>
         </div>
         <!-- Days of the Week -->
-        <div class="grid grid-cols-7 gap-2 text-center font-semibold text-[#2171a7]">
+        <div class="grid grid-cols-7 gap-2 text-center font-semibold text-[#2171a7] lg-max:text-sm">
             <div>Sun</div>
             <div>Mon</div>
             <div>Tue</div>
