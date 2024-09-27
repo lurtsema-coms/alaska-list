@@ -15,7 +15,7 @@
         </div> --}}
     </div>
     <div class="container relative z-30 px-10 pt-10 mx-auto bg-gray-50 -top-7 rounded-2xl">
-        <div class="flex flex-col justify-center gap-16 mx-auto md:flex-row">
+        <div class="flex flex-col justify-center gap-16 mx-auto lg:flex-row">
             <div>
                 <div id="advertise-with-us">
                     <div class="mb-6">
@@ -40,7 +40,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <p class="mt-8 text-gray-600">For just an additional $1.00, pair any Featured Listing with a Boosted Listing. This combo maximizes your exposure, ensuring your product is not just listed, but prominently showcased!</p>
+                                <p class="mt-8 text-[#457D96] font-bold">For just an additional $1.00, pair any Featured Listing with a Boosted Listing. This combo maximizes your exposure, ensuring your product is not just listed, but prominently showcased!</p>
                             </div>
                         </div>
                     </div>
@@ -108,34 +108,34 @@
 
                     
                     <div class="mt-8">
-                        <div class="mx-auto max-w-7xl">
+                        <div class="max-w-4xl p-8 mt-8 bg-white border shadow-xl rounded-2xl">
                             <div class="max-w-2xl">
-                                <h3 class="text-xl font-semibold text-gray-700 sm:text-2xl">Why Choose Our Advertising Options ?</h3>
+                                <h3 class="text-xl font-semibold text-gray-700 sm:text-2xl">Why Choose Our Advertising Options ?</h3>   
                             </div>
                             <div class="max-w-2xl mt-8 lg:max-w-4xl">
                             <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
                                 <div class="relative pl-16">
-                                <dt class="text-base font-semibold leading-7 text-gray-700">
-                                    <div class="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-[#285680] rounded-lg">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
-                                        </svg>
-                                    </div>
-                                    Prominent Placement
-                                </dt>
-                                <dd class="mt-2 text-base leading-7 text-gray-600">Your product will be featured at the top of our listings, ensuring it grabs the attention of every visitor.</dd>
+                                    <dt class="text-base font-semibold leading-7 text-gray-700">
+                                        <div class="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-[#285680] rounded-lg">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                                            </svg>
+                                        </div>
+                                        Prominent Placement
+                                    </dt>
+                                    <dd class="mt-2 text-base leading-7 text-gray-600">Your product will be featured at the top of our listings, ensuring it grabs the attention of every visitor.</dd>
                                 </div>
                                 <div class="relative pl-16">
-                                <dt class="text-base font-semibold leading-7 text-gray-700">
-                                    <div class="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-[#285680] rounded-lg">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                        </svg>
-                                    </div>
-                                    Enhanced Exposure
-                                </dt>
-                                <dd class="mt-2 text-base leading-7 text-gray-600">Our Boosted Listings increase the likelihood of your product being seen by those actively searching for similar items, giving you a competitive edge.</dd>
+                                    <dt class="text-base font-semibold leading-7 text-gray-700">
+                                        <div class="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-[#285680] rounded-lg">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                            </svg>
+                                        </div>
+                                        Enhanced Exposure
+                                    </dt>
+                                    <dd class="mt-2 text-base leading-7 text-gray-600">Our Boosted Listings increase the likelihood of your product being seen by those actively searching for similar items, giving you a competitive edge.</dd>
                                 </div>
                                 <div class="relative pl-16">
                                 <dt class="text-base font-semibold leading-7 text-gray-700">
@@ -166,7 +166,7 @@
             
                 </div>
             </div>
-            <div>
+            <div class="flex justify-end">
                 <livewire:frontend.sidebar-sponsor>
             </div> 
         </div>
