@@ -234,7 +234,7 @@ new class extends Component {
             </div>
         </div> --}}
 
-        <div class="px-10 bg-gray-50 rounded-2xl">
+        <div class="px-2 sm:px-10 bg-gray-50 rounded-2xl">
             <div class="flex flex-col justify-between mt-12 xl:flex-row">
                 <div class="flex flex-wrap gap-4 mt-8">
                     <div>

@@ -14,7 +14,7 @@ new class extends Component {
 }; ?>
 
 <div 
-    class="fixed top-0 z-50 w-full" x-data="{ sidebarOpen: false, scrolled: window.scrollY > 0, hovered: false }" 
+    class="fixed top-0 z-50 w-full" x-data="{ sidebarOpen: false, scrolled: window.scrollY > 0, hovered: false, isListingPage: '{{ request()->routeIs('listing-page-item') }}' }" 
     @scroll.window="scrolled = window.scrollY > 0" 
     x-init="scrolled = window.scrollY > 0"
 >
@@ -29,14 +29,15 @@ new class extends Component {
                 <div class="flex items-center gap-5">
                     <a class="" href="/" wire:navigate>
                         <img 
-                            :class="{'hidden': hovered || scrolled, 'block': !hovered && !scrolled}" 
+                            :class="{'hidden': hovered || scrolled || isListingPage, 'block': !hovered && !scrolled && !isListingPage}" 
                             class="w-auto h-20 transition-all" 
                             src="{{ asset('img/logo/logo_white.png') }}" 
                             alt="logo-white"
                         >
+
                         <img 
-                            :class="{'hidden': !hovered && !scrolled, 'block': hovered || scrolled}" 
-                            class="hidden w-auto h-20 transition-all" 
+                            :class="{'hidden': !hovered && !scrolled && !isListingPage, 'block': hovered || scrolled || isListingPage}" 
+                            class="w-auto h-20 transition-all" 
                             src="{{ asset('img/logo/logo_light.png') }}" 
                             alt="logo-light"
                         >
