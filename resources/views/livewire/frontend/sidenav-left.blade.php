@@ -20,6 +20,8 @@ new class extends Component {
 <div class="flex flex-col items-center px-6 py-8 mt-10 space-y-4">
     <!-- Calendar -->
     <div class="border rounded-lg p-4 w-full">
+        <span class="text-lg font-bold text-[#2171a7] flex justify-center item-center self-center">Calendar</span>
+        <hr class=" my-2">
         <div class="flex justify-between items-center mb-4">
             @php
                 $currentDateTime = new \DateTime('now', new \DateTimeZone(config('app.timezone')));
@@ -28,7 +30,7 @@ new class extends Component {
             <span class="text-lg font-bold text-[#2171a7] underline ">{{ $currentMonthYear }}</span>
         </div>
         <!-- Days of the Week -->
-        <div class="grid grid-cols-7 gap-2 text-center font-semibold text-[#2171a7]">
+        <div class="grid grid-cols-7 gap-2 text-center font-semibold text-[#2171a7] lg-max:text-sm">
             <div>Sun</div>
             <div>Mon</div>
             <div>Tue</div>
