@@ -57,7 +57,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <div class="min-h-[55rem] container mx-auto relative mt-32" data-aos="zoom-in-up">
+    <div class="min-h-[55rem] container mx-auto relative mt-40" data-aos="zoom-in-up">
         <a class="inline-block mb-4 font-medium text-sky-600" href="{{ route('listing-page') }}" wire:navigate>
             <span class="flex items-center space-x-2 cursor-pointer hover:opacity-70">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
