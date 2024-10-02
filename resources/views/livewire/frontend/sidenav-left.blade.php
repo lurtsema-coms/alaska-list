@@ -27,7 +27,7 @@ new class extends Component {
                 $currentDateTime = new \DateTime('now', new \DateTimeZone(config('app.timezone')));
                 $currentMonthYear = $currentDateTime->format('F Y');
             @endphp
-            <span class="text-lg font-bold text-[#2171a7] underline ">{{ $currentMonthYear }}</span>
+            <span class="text-lg font-bold text-[#2171a7]  ">{{ $currentMonthYear }}</span>
         </div>
         <!-- Days of the Week -->
         <div class="grid grid-cols-7 gap-2 text-center font-semibold text-[#2171a7] lg-max:text-sm">
