@@ -136,58 +136,56 @@ new class extends Component {
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="editSpecialBoost">
                         <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Edit Boost</p>
-                        <div class="space-y-4">
-                            <div class="flex flex-col gap-4 sm:flex-row">
-                                <div class="flex-1 space-y-2">
-                                    <p class="font-medium text-slate-700">Item Code</p>
-                                    <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="uuid" readonly>
-                                </div>
-                                <div class="flex-1 space-y-2">
-                                    <p class="font-medium text-slate-700">Advertising Plan</p>
-                                    <select 
-                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
-                                        id="advertising-plan-{{ $uuid }}"
-                                        wire:model="advertising_plan" 
-                                        required>
-                                        <option value="" disabled selected>Select at least one</option>
-                                        @foreach ($plans as $plan)
-                                            <option value="{{ $plan->duration_days }}" data-advertising-id="{{ $plan->id }}">{{ $plan->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div class="flex-1 space-y-2">
+                                <p class="font-medium text-slate-700">Item Code</p>
+                                <input class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="text" wire:model="uuid" readonly>
                             </div>
-                            <div class="flex flex-col gap-4 sm:flex-row">
-                                <div 
-                                    class="flex-1 space-y-2" 
-                                    x-data="{ 
-                                        from_date: moment(new Date(`${{ $from_date }} UTC`)).format('YYYY-MM-DDTHH:mm') 
-                                    }"
+                            <div class="flex-1 space-y-2">
+                                <p class="font-medium text-slate-700">Advertising Plan</p>
+                                <select 
+                                    class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
+                                    id="advertising-plan-{{ $uuid }}"
+                                    wire:model="advertising_plan" 
+                                    required>
+                                    <option value="" disabled selected>Select at least one</option>
+                                    @foreach ($plans as $plan)
+                                        <option value="{{ $plan->duration_days }}" data-advertising-id="{{ $plan->id }}">{{ $plan->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div 
+                                class="flex-1 space-y-2" 
+                                x-data="{ 
+                                    from_date: moment(moment.utc('{{ $from_date }}').toDate()).format('YYYY-MM-DDTHH:mm') 
+                                }"
+                            >
+                                <p class="font-medium text-slate-700">From Date</p>
+                                <input 
+                                    class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
+                                    id="from-date-{{ $uuid }}"
+                                    type="datetime-local" 
+                                    x-model="from_date"
+                                    required
                                 >
-                                    <p class="font-medium text-slate-700">From Date</p>
+                            </div>
+                            <div 
+                                class="flex-1 space-y-2"
+                                x-data="{ 
+                                    to_date: moment(moment.utc('{{ $from_date }}').toDate()).format('MM/DD/YYYY')
+                                }"
+                            >
+                                <p class="font-medium text-slate-700">To Date</p>
                                     <input 
-                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
-                                        id="from-date-{{ $uuid }}"
-                                        type="datetime-local" 
-                                        x-model="from_date"
-                                        required
-                                    >
-                                </div>
-                                <div 
-                                    class="flex-1 space-y-2"
-                                    x-data="{ 
-                                        to_date: moment(new Date(`${{ $to_date }} UTC`)).format('MM/DD/YYYY') 
-                                    }"
+                                    class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
+                                    id="to-date-{{ $uuid }}"
+                                    type="text"
+                                    x-model="to_date"
+                                    required
                                 >
-                                    <p class="font-medium text-slate-700">To Date</p>
-                                        <input 
-                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
-                                        id="to-date-{{ $uuid }}"
-                                        type="text"
-                                        x-model="to_date"
-                                        required
-                                    >
-                                </div>
                             </div>
+                        </div>
+                        <div class="grid mt-4">                            
                             @if (!empty($file_path))                                
                                 <div class="flex flex-col space-y-2">
                                     <label class="font-medium text-slate-700">Current Image</label>
@@ -207,15 +205,15 @@ new class extends Component {
                                     </label>
                                 </div>
                             @enderror
-                            {{-- Loading Animation --}}
-                            <div class="w-full text-center" wire:loading>
-                                <div class="flex items-center justify-center gap-2">
-                                    <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
-                                    </svg>
-                                    <span class="font-medium text-md text-slate-600">Saving post...</span>
-                                </div>
+                        </div>
+                        {{-- Loading Animation --}}
+                        <div class="w-full mt-8 text-center" wire:loading>
+                            <div class="flex items-center justify-center gap-2">
+                                <svg class="animate-spin h-5 w-5 text-[#1F4B55]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.042.777 3.908 2.05 5.334l1.95-2.043z"></path>
+                                </svg>
+                                <span class="font-medium text-md text-slate-600">Saving post...</span>
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
