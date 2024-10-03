@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('duration_days')->nullable();
             $table->decimal('cost', 8, 2)->nullable();
+            $table->text('price_id')->nullable();
             $table->unsignedInteger('created_by')->length(10)->nullable();
             $table->unsignedInteger('updated_by')->length(10)->nullable();
             $table->timestamps();

@@ -26,6 +26,18 @@ new class extends Component {
     public $inc = 1;
     public $add_boost_modal = false;
 
+    public function mount()
+    {
+        $checkoutData = session('checkout_data');
+        if ($checkoutData) {
+            $this->item_code = $checkoutData['item_code'] ?? '';
+            $this->advertising_plan_id = $checkoutData['advertising_plan_id'] ?? '';
+            $this->from_date = $checkoutData['from_date'] ?? '';
+            $this->to_date = $checkoutData['to_date'] ?? '';
+            $this->add_boost_modal = $checkoutData['add_boost_modal'] ?? '';
+        }
+    }
+
     public function with(): array
     {
         return [
@@ -45,20 +57,41 @@ new class extends Component {
     public function addSpecialBoost()
     {
         $product = Product::find($this->item_code);
+        $product_plan = AdvertisingPlan::find($this->advertising_plan_id);
+        $productPriceId = $product_plan->price_id;
+        $user = auth()->user();
 
-        $sp = SpecialBoost::create([
-            'uuid' => 'boost-code-'.substr(Str::uuid()->toString(), 0, 10),
-            'product_id' => $product->id,
+        session()->put('checkout_data', [
+            'item_code' => $this->item_code,
             'advertising_plan_id' => $this->advertising_plan_id,
-            'from_date' => $this->formatIso($this->from_date),
-            'to_date' => $this->formatIso($this->to_date),
-            'created_by' => auth()->user()->id
+            'from_date' => $this->from_date,
+            'to_date' => $this->to_date,
+            'add_boost_modal' => $this->add_boost_modal,
         ]);
 
-        $this->resetData(['item_code', 'from_date', 'to_date', 'photo']);
-        $this->add_boost_modal = false;
-        $this->inc++;
-        $this->dispatch('alert-success');
+        return $user->checkout([$productPriceId],
+            [
+                'success_url' => route('checkout-success'),
+                'cancel_url' => route('checkout-cancel'),
+            ]);
+
+        // $sp = SpecialBoost::create([
+        //     'uuid' => 'boost-code-'.substr(Str::uuid()->toString(), 0, 10),
+        //     'product_id' => $product->id,
+        //     'advertising_plan_id' => $this->advertising_plan_id,
+        //     'from_date' => $this->formatIso($this->from_date),
+        //     'to_date' => $this->formatIso($this->to_date),
+        // ]);
+
+        // $this->resetData(['item_code', 'from_date', 'to_date', 'photo']);
+        // $this->add_boost_modal = false;
+        // $this->inc++;
+        // $this->dispatch('alert-success');
+    }
+
+    public function clearCheckoutData()
+    {
+        session()->forget('checkout_data');
     }
 
     public function resetData($data)
@@ -83,10 +116,22 @@ new class extends Component {
     <div class="fixed top-0 left-0 z-10 w-full h-full overflow-auto bg-black position bg-opacity-30"
         x-show="add_boost_modal"
         x-transition
-        x-cloak>
+        x-cloak
+        x-init="$('#item-code').selectize();"
+    >
         <div class="flex h-full p-5">
-            <div class="w-full max-w-xl m-auto overflow-hidden bg-white shadow-lg rounded-2xl"
-            @click.outside="add_boost_modal=false; $wire.call('resetData', ['item_code', 'from_date', 'to_date', 'photo']); $('#item-code').selectize()[0].selectize.clear();">
+            <div 
+                class="w-full max-w-xl m-auto overflow-hidden bg-white shadow-lg rounded-2xl"
+                @click.outside="
+                    add_boost_modal=false; 
+                    $wire.call('resetData', ['item_code', 'from_date', 'to_date', 'photo']); 
+                    $('#item-code').selectize()[0].selectize.clear();
+                    $('#from-date').val('');
+                    $('#to-date').val('');
+                    $('#advertising-plan').val('');
+                "
+                wire:click="clearCheckoutData"    
+            >
                 <div class="p-10 max-h-[35rem] overflow-auto">
                     <form wire:submit="addSpecialBoost">
                         <p class="mb-6 text-lg font-bold tracking-wide pointer-events-none text-slate-700">Add Boost</p>
@@ -101,31 +146,67 @@ new class extends Component {
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="" wire:ignore>
+                                <div 
+                                    class="" 
+                                    wire:ignore
+                                    x-data="{
+                                        advertising_plan_id: '{{ $advertising_plan_id }}'
+                                        }
+                                    "
+                                >
                                     <p class="font-medium text-slate-700">Advertising Plan <span class="text-red-400">*</span></p>
-                                    <select class="w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" id="advertising-plan" required>
+                                    <select 
+                                        class="w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
+                                        id="advertising-plan" 
+                                        x-model="advertising_plan_id"
+                                        required
+                                    >
                                             <option value="" disabled selected>Choose Plan</option>
                                             @foreach ($plans as $plan)
                                                 <option value="{{ $plan->duration_days }}" data-advertising-id="{{ $plan->id }}">{{ $plan->name }}</option>
                                             @endforeach
                                         </select>
                                 </div>
-                                <div class="">
-                                    <p class="font-medium text-slate-700">From Date <span class="text-red-400">*</span></p>
+                                <div x-data="{ 
+                                        from_date: '',
+                                        formatted_date: '',
+                                        init() {
+                                            // Set from_date based on the session variable
+                                            this.from_date = '{{ $from_date }}';
+                                            this.formatted_date = this.from_date ? moment(moment.utc(this.from_date).toDate()).format('YYYY-MM-DDTHH:mm') : '';
+                                        }
+                                    }" 
+                                    x-init="init()"
+                                >
+                                    <p class="font-medium text-slate-700">From Date</p>
+                                    
                                     <input 
-                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55] datetime-input"
-                                        id="from-date"
-                                        type="datetime-local"
-                                        min="<?=date('Y-m-d\Th:i')?>"
-                                        required
-                                    >
+                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]"
+                                        id="from-date" 
+                                        type="datetime-local" 
+                                        x-bind:value="formatted_date" 
+                                        required 
+                                        min="2024-10-03T09:48"
+                                    >   
                                 </div>
-                                <div class="">
+                                <div 
+                                    x-data="{ 
+                                        to_date: '',
+                                        formatted_date: '',
+                                        init() {
+                                            // Set to_date based on the session variable
+                                            this.to_date = '{{ $to_date }}';
+                                            this.formatted_date = this.to_date ? moment(moment.utc(this.to_date).toDate()).format('YYYY-MM-DD') : '';
+                                        }
+                                    }" 
+                                    x-init="init()"
+                                >
                                     <p class="font-medium text-slate-700">To Date</p>
                                     <input 
                                         class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]"
                                         id="to-date"
                                         type="text"
+                                        x-bind:value="formatted_date" 
                                         readonly 
                                         required
                                     >
@@ -143,8 +224,18 @@ new class extends Component {
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mt-8">
-                            <button class="px-4 py-2 rounded-lg shadow text-slate-600 hover:opacity-70" type="button"
-                                @click="add_boost_modal=false; $wire.call('resetData', ['item_code', 'from_date', 'to_date', 'photo']); $('#item-code').selectize()[0].selectize.clear();">
+                            <button 
+                                class="px-4 py-2 rounded-lg shadow text-slate-600 hover:opacity-70" type="button"
+                                @click="
+                                    add_boost_modal=false; 
+                                    $wire.call('resetData', ['item_code', 'from_date', 'to_date', 'photo']); 
+                                    $('#item-code').selectize()[0].selectize.clear();
+                                    $('#from-date').val('');
+                                    $('#to-date').val('');
+                                    $('#advertising-plan').val('');
+                                "
+                                wire:click="clearCheckoutData"    
+                            >
                                 Cancel
                             </button>
                             <button class="text-white bg-[#1F4B55] shadow py-2 px-4 rounded-lg hover:opacity-70" type="submit">Submit</button>
@@ -162,7 +253,7 @@ new class extends Component {
 
         let component = @this;
 
-        $('#item-code').selectize();
+        // $('#item-code').selectize();
 
         $('#item-code').on('change', function(){
             component.item_code = $(this).val();

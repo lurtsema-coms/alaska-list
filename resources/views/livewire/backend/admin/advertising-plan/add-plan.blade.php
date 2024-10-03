@@ -9,6 +9,7 @@ new class extends Component {
     public $name = '';
     public $duration_days = '';
     public $cost = '';
+    public $price_id = '';
     public $description = '';
     public $add_plan_modal = false;
 
@@ -18,6 +19,7 @@ new class extends Component {
             'name' => trim($this->name),
             'duration_days' => $this->duration_days,
             'cost' => $this->cost,
+            'price_id' => $this->price_id,
             'description' => $this->description,
             'created_by' => auth()->user()->id 
         ]);
@@ -85,7 +87,11 @@ new class extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div class="space-y-4">
+                                <div class="space-y-2">
+                                    <p class="font-medium text-slate-700">Price ID</p>
+                                    <input class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" required wire:model="price_id"/>
+                                </div>
                                 <div class="space-y-2">
                                     <p class="font-medium text-slate-700">Description</p>
                                     <textarea class="text-md w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" name="" id="" cols="50" rows="3" required wire:model="description"></textarea>

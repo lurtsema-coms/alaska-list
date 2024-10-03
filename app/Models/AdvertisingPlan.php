@@ -15,6 +15,7 @@ class AdvertisingPlan extends Model
         'description',
         'duration_days',
         'cost',
+        'price_id',
         'created_by',
         'updated_by',
     ];

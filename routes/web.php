@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutPaymentController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -24,6 +25,8 @@ Route::view('listing-page/item/{id}', 'page.listing-item')->name('listing-page-i
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::view('dashboard', 'page-backend.b-dashboard')->name('dashboard');
     Route::view('profile', 'profile')->name('profile');
+    Route::get('/checkout/success', [CheckoutPaymentController::class, 'paymentSuccess'])->name('checkout-success');
+    Route::get('/checkout/cancel', [CheckoutPaymentController::class, 'paymentCancel'])->name('checkout-cancel');
 
     // Routes for users with 'seller' role
     Route::middleware('role:seller')->group(function() {

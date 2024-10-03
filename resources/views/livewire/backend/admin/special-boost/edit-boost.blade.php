@@ -198,7 +198,7 @@ new class extends Component {
                             <div 
                                 class="flex-1 space-y-2"
                                 x-data="{ 
-                                    to_date: moment(moment.utc('{{ $from_date }}').toDate()).format('MM/DD/YYYY') 
+                                    to_date: moment(moment.utc('{{ $to_date }}').toDate()).format('MM/DD/YYYY') 
                                     {{-- to_date: moment(new Date(`${{ $to_date }} UTC`)).format('MM/DD/YYYY')  --}}
                                 }"
                             >

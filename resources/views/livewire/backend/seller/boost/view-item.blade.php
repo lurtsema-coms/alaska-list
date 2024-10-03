@@ -61,7 +61,7 @@ new class extends Component {
                     <div
                         class="space-y-2"
                         x-data="{ 
-                            from_date: moment(new Date(`${{ $from_date }} UTC`)).format('YYYY-MM-DDTHH:mm') 
+                            from_date: moment(moment.utc('{{ $from_date }}').toDate()).format('YYYY-MM-DDTHH:mm') 
                         }"
                     >
                         <p class="font-medium text-slate-700">From Date</p>
@@ -77,7 +77,7 @@ new class extends Component {
                     <div 
                         class="space-y-2"
                         x-data="{ 
-                            to_date: moment(new Date(`${{ $to_date }} UTC`)).format('MM/DD/YYYY') 
+                            to_date: moment(moment.utc('{{ $to_date }}').toDate()).format('MM/DD/YYYY') 
                         }"
                     >
                         <p class="font-medium text-slate-700">To Date</p>
