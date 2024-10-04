@@ -60,7 +60,7 @@ new class extends Component {
         $product_plan = AdvertisingPlan::find($this->advertising_plan_id);
         $productPriceId = $product_plan->price_id;
         $user = auth()->user();
-
+        
         session()->put('checkout_data', [
             'item_code' => $this->item_code,
             'product_id' => $product->id,
@@ -255,7 +255,7 @@ new class extends Component {
         let component = @this;
 
         // $('#item-code').selectize();
-
+        component.item_code = $('#item-code').val();
         $('#item-code').on('change', function(){
             component.item_code = $(this).val();
         })
