@@ -29,7 +29,7 @@ class CheckoutPaymentController extends Controller
             // Create the special boost record
             SpecialBoost::create([
                 'uuid' => 'boost-code-' . substr(Str::uuid()->toString(), 0, 10),
-                'product_id' => $checkoutData['item_code'],
+                'product_id' => $checkoutData['product_id'],
                 'advertising_plan_id' => $checkoutData['advertising_plan_id'],
                 'from_date' => $this->formatIso($checkoutData['from_date']),
                 'to_date' => $this->formatIso($checkoutData['to_date']),

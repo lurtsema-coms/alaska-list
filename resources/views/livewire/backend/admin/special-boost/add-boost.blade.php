@@ -63,6 +63,7 @@ new class extends Component {
 
         session()->put('checkout_data', [
             'item_code' => $this->item_code,
+            'product_id' => $product->id,
             'advertising_plan_id' => $this->advertising_plan_id,
             'from_date' => $this->from_date,
             'to_date' => $this->to_date,
