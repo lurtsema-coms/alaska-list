@@ -39,84 +39,57 @@ new class extends Component {
 
     public function addAds()
     {
+        $product_plan = AdvertisingPlan::find($this->advertising_plan_id);
+        $productPriceId = $product_plan->price_id;
         $photo = $this->photo;
-        
-        $base_photo = base64_encode(file_get_contents($photo->getRealPath()));
-        $photo_img = Image::make($base_photo);
+        $user = auth()->user();
+
+        $photo_img = Image::make($photo->getRealPath());
         $photo_height = $photo_img->getHeight();
         $photo_width = $photo_img->getWidth();
 
-        if(empty($photo)){
+        if (empty($photo)) {
             $this->dispatch('error');
             return;
         }
 
-        if($photo_width != 320 || $photo_height != 600){
+        if ($photo_width != 320 || $photo_height != 600) {
             $this->addError('image_constraint', 'The image width must be 320 pixels, and the height must be 600 pixels.');
             return;
         }
 
         if ($this->promo_item_code) {
-            // Try to find the product by UUID
             $product = Product::where('created_by', auth()->user()->id)->where('uuid', $this->promo_item_code)->first();
-            
             if (is_null($product)) {
-                // If the product is not found, add an error and return null
                 $this->addError('product_constraint', 'Item Code not found.');
-                return null;
+                return;
             }
-            
             $product_id = $product->id;
         } else {
             $product_id = null;
         }
 
-        // Generate a new UUID for the advertisement
-        $uuid = 'ad-' . substr(Str::uuid()->toString(), 0, 8);
-        
-        // Create the advertisement
-        $sp = Advertisement::create([
-            'uuid' => $uuid,
+        // Move the file to temporary storage and store the path in the session
+        $photo_temp_path = $photo->store('temp_photos');
+
+        session()->put('checkout_data', [
             'advertising_plan_id' => $this->advertising_plan_id,
-            'from_date' => $this->formatIso($this->from_date),
-            'to_date' => $this->formatIso($this->to_date),
             'product_id' => $product_id,
-            'created_by' => auth()->user()->id,
+            'from_date' => $this->from_date,
+            'to_date' => $this->to_date,
+            'photo_path' => $photo_temp_path, // Store path, not the file
         ]);
 
-        // Upload Photo
-        if(!empty($photo)){
-            $file_name = "$uuid" . "." . $photo->getClientOriginalExtension();
-            // Store the file in the public disk
-            $path = $photo->storeAs(
-                path: "public/photos/advertisement",
-                name: $file_name
-            );
-
-            // Optimize image
-            $file_path = storage_path("app/" . $path);
-            $image = Image::make($file_path);
-            $image->resize($photo_width, $photo_height, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-
-            $image->fit($photo_width, $photo_height);
-            $image->save($file_path, 80);
-
-            $f_path = "storage/photos/advertisement/$file_name";
-
-            $sp->update([
-                'file_name' => $file_name,
-                'file_path' => $f_path,
-            ]);
-        }
+        return $user->checkout([$productPriceId], [
+            'success_url' => route('checkout-success-ad'),
+            'cancel_url' => route('checkout-cancel-ad'),
+        ]);
 
         $this->resetData(['advertising_plan_id', 'from_date', 'to_date', 'photo', 'promo_item_code']);
         $this->addAdvertisement = false;
         $this->inc++;
-        $this->dispatch('alert-success');
     }
+
 
     public function resetData($data)
     {
