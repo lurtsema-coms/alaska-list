@@ -96,7 +96,7 @@ class CheckoutPaymentController extends Controller
             session()->forget('checkout_data');
     
             // Return success view
-            return view('checkout-success', compact('checkoutData'));
+            return view('checkout-success-ad', compact('checkoutData'));
         }
     }
     
