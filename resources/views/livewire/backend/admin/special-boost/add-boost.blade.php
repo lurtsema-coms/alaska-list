@@ -118,7 +118,6 @@ new class extends Component {
         x-show="add_boost_modal"
         x-transition
         x-cloak
-        x-init="$('#item-code').selectize();"
     >
         <div class="flex h-full p-5">
             <div 
@@ -150,8 +149,9 @@ new class extends Component {
                                 <div 
                                     class="" 
                                     wire:ignore
-                                    x-data="{
-                                        advertising_plan_id: '{{ $advertising_plan_id }}'
+                                    x-data="
+                                        {
+                                            advertising_plan_id: '{{ $advertising_plan_id }}'
                                         }
                                     "
                                 >
@@ -254,8 +254,10 @@ new class extends Component {
 
         let component = @this;
 
-        // $('#item-code').selectize();
+        $('#item-code').selectize();
+        
         component.item_code = $('#item-code').val();
+        
         $('#item-code').on('change', function(){
             component.item_code = $(this).val();
         })
