@@ -188,7 +188,7 @@ new class extends Component {
                     <div class="space-y-2">
                         <label class="font-medium text-slate-700">Upload Photos <span class="text-red-400">*</span></label>
                         <input class="text-md w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" type="file" multiple wire:model="photos" wire:click="resetData(['photos'])" id="upload{{ $inc }}" accept="image/*" required>
-                        <p class="text-gray-600">Note: Maximum of 4 photos</p>
+                        <p class="text-gray-600">Note: Maximum of 4 photos (hold "Ctrl" to select more photos)</p>
                         <ul class="mt-2">
                             @foreach(array_reverse($photos) as $index => $photo)
                                 <li wire:key="{{ $index }}" class="text-slate-700">
