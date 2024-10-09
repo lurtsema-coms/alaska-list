@@ -20,28 +20,32 @@ class AddAdvertisingPlan extends Seeder
                     'description' => 'A quick boost to kickstart visibility.',
                     'duration_days' => 7,
                     'cost' => 3.99,
-                    'price_id' => 'price_1Q5tm9CsTn7FILMRcMDRaWFE'
+                    'price_id' => 'price_1Q5tm9CsTn7FILMRcMDRaWFE',
+                    'with_boost_id' => null,
                 ],
                 [
                     'name' => '30 Days',
                     'description' => 'Gain sustained exposure to attract more customers.',
                     'duration_days' => 30,
                     'cost' => 4.99,
-                    'price_id' => 'price_1Q5tmlCsTn7FILMRKvC8c211'
+                    'price_id' => 'price_1Q5tmlCsTn7FILMRKvC8c211',
+                    'with_boost_id' => null,
                 ],
                 [
                     'name' => '60 Days',
                     'description' => 'A long-term boost for ongoing visibility and engagement',
                     'duration_days' => 60,
                     'cost' => 6.99,
-                    'price_id' => 'price_1Q5tnJCsTn7FILMRjtIscRGy'
+                    'price_id' => 'price_1Q5tnJCsTn7FILMRjtIscRGy',
+                    'with_boost_id' => null,
                 ],
                 [
                     'name' => '90 Days',
                     'description' => 'The best value for maximizing your reach and presence over an extended period.',
                     'duration_days' => 90,
                     'cost' => 8.99,
-                    'price_id' => 'price_1Q5to9CsTn7FILMRmsAfysh2'
+                    'price_id' => 'price_1Q5to9CsTn7FILMRmsAfysh2',
+                    'with_boost_id' => null,
                 ],
                 [
                     'name' => '7 Days with Boost',
