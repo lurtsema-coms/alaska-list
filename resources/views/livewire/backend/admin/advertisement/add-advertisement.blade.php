@@ -30,16 +30,27 @@ new class extends Component {
     {
         return [
             'plans' => $this->loadAdvertisingPlans(),
+            'product' => $this->loadUserProduct(),
         ];
     }
 
-    public function loadAdvertisingPlans(){
-        return AdvertisingPlan::get();
+    public function loadAdvertisingPlans()
+    {
+        return AdvertisingPlan::whereNull('with_boost_id')->get();
+    }
+
+    public function loadUserProduct()
+    {
+        return Product::where('created_by', auth()->user()->id)
+            ->where('status', 'ACTIVE')
+            ->count();
     }
 
     public function addAds()
     {
+        $advertising_plan_id = 0;
         $product_plan = AdvertisingPlan::find($this->advertising_plan_id);
+        $advertising_plan_id = $product_plan;
         $productPriceId = $product_plan->price_id;
         $photo = $this->photo;
         $user = auth()->user();
@@ -60,6 +71,10 @@ new class extends Component {
 
         if ($this->promo_item_code) {
             $product = Product::where('created_by', auth()->user()->id)->where('uuid', $this->promo_item_code)->first();
+            $advertising_plan = AdvertisingPlan::where('with_boost_id', $this->advertising_plan_id)->first();
+            $advertising_plan_id = $advertising_plan->id;
+            $productPriceId = $advertising_plan->price_id;
+            
             if (is_null($product)) {
                 $this->addError('product_constraint', 'Item Code not found.');
                 return;
@@ -72,12 +87,13 @@ new class extends Component {
         // Move the file to temporary storage and store the path in the session
         $photo_temp_path = $photo->store('temp_photos');
 
+
         session()->put('checkout_data', [
-            'advertising_plan_id' => $this->advertising_plan_id,
+            'advertising_plan_id' => $advertising_plan_id,
             'product_id' => $product_id,
             'from_date' => $this->from_date,
             'to_date' => $this->to_date,
-            'photo_path' => $photo_temp_path, // Store path, not the file
+            'photo_path' => $photo_temp_path,
         ]);
 
         return $user->checkout([$productPriceId], [
@@ -171,26 +187,28 @@ new class extends Component {
                                 </p>
                             </div>
                             <div x-data="{ promoPackage: false }">
-                                <input 
-                                    type="checkbox" 
-                                    class="relative top-[-1px] mr-2" 
-                                    id="promo-package" 
-                                    @change="promoPackage = !promoPackage"
-                                >
-                                <label class="text-sm font-medium text-orange-600 select-none" for="promo-package">
-                                    Boost my listing for an additional $1.00 (includes featured and boosted listing)
-                                </label>
-
-                                <div x-show="promoPackage" class="mt-4 space-y-2">
-                                    <label class="font-medium text-slate-700">Listing Item Code <span class="text-red-400">*</span></label>
+                                @if ($product > 0)
                                     <input 
-                                        class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]"
-                                        type="text"
-                                        wire:model="promo_item_code" 
-                                        placeholder="Item-Code-XXXXXXX"
-                                        :required="promoPackage"
+                                        type="checkbox" 
+                                        class="relative top-[-1px] mr-2" 
+                                        id="promo-package" 
+                                        @change="promoPackage = !promoPackage"
                                     >
-                                </div>
+                                    <label class="text-sm font-medium text-orange-600 select-none" for="promo-package">
+                                        Boost my listing for an additional $1.00 (includes featured and boosted listing)
+                                    </label>
+
+                                    <div x-show="promoPackage" class="mt-4 space-y-2">
+                                        <label class="font-medium text-slate-700">Listing Item Code <span class="text-red-400">*</span></label>
+                                        <input 
+                                            class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]"
+                                            type="text"
+                                            wire:model="promo_item_code" 
+                                            placeholder="Item-Code-XXXXXXX"
+                                            :required="promoPackage"
+                                        >
+                                    </div>
+                                @endif
                                 @error('product_constraint')                                 
                                     <div class="mt-4">
                                         <p class="mb-2 text-sm text-red-600">

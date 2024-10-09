@@ -56,7 +56,7 @@ class CheckoutPaymentController extends Controller
         $checkoutData = session('checkout_data');
     
         if (!$checkoutData) {
-            return auth()->check() ? redirect()->route('seller-featured-listing') : redirect('/login');
+            return auth()->check() ? redirect()->route('seller-advertisement') : redirect('/login');
         }
     
         if ($this->isPaymentSuccessful($checkoutData)) {
@@ -93,7 +93,7 @@ class CheckoutPaymentController extends Controller
             }
     
             // Clear the session data
-            session()->forget('checkout_data');
+            session()->forget('checkout_data'); 
     
             // Return success view
             return view('checkout-success-ad', compact('checkoutData'));
@@ -103,23 +103,23 @@ class CheckoutPaymentController extends Controller
 
     public function paymentCancel()
     {
-            session()->forget('checkout_data');
+        session()->forget('checkout_data');
 
-            if (auth()->check()) {
-                return view('checkout-cancel');
-            } else {
-                return redirect('/login');
-            }
+        if (auth()->check()) {
+            return view('checkout-cancel');
+        } else {
+            return redirect('/login');
+        }
     }
     public function paymentAdCancel()
     {
-            session()->forget('checkout_data');
+        session()->forget('checkout_data');
 
-            if (auth()->check()) {
-                return view('checkout-cancel-ad');
-            } else {
-                return redirect('/login');
-            }
+        if (auth()->check()) {
+            return view('checkout-cancel-ad');
+        } else {
+            return redirect('/login');
+        }
     }
 
     private function isPaymentSuccessful($checkoutData)

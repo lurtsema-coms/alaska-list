@@ -26,8 +26,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::view('dashboard', 'page-backend.b-dashboard')->name('dashboard');
     Route::view('profile', 'profile')->name('profile');
     Route::get('/checkout/success', [CheckoutPaymentController::class, 'paymentSuccess'])->name('checkout-success');
-    Route::get('/checkout/success/ad', [CheckoutPaymentController::class, 'paymentAdSuccess'])->name('checkout-success-ad');
     Route::get('/checkout/cancel', [CheckoutPaymentController::class, 'paymentCancel'])->name('checkout-cancel');
+    Route::get('/checkout/success/ad', [CheckoutPaymentController::class, 'paymentAdSuccess'])->name('checkout-success-ad');
     Route::get('/checkout/cancel/ad', [CheckoutPaymentController::class, 'paymentAdCancel'])->name('checkout-cancel-ad');
 
     // Routes for users with 'seller' role
