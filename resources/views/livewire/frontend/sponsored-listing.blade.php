@@ -89,15 +89,7 @@ new class extends Component {
                         <a class="w-full overflow-hidden" href="{{ route('listing-page-item', $ad->boostedProduct->id) }}" wire:navigate>
                             <div class="w-full m-auto overflow-hidden bg-white h-96 max-w-[80rem] rounded-xl {{ Request::segment(1) != '' ? 'border border-gray-200' : '' }} hover:border hover:border-blue-400">
                                 <div class="relative">
-                                    @if ($ad->file_path)
-                                        <img class="object-cover w-full h-48" src="{{ asset($ad->file_path) }}" alt="{{ $ad->boostedProduct->name }}" loading="lazy">
-                                    @elseif ($ad->boostedProduct->file_path)
-                                        @php
-                                            $paths = explode(',', $ad->boostedProduct->file_path);
-                                            $firstPath = trim($paths[0]); // Ensure there are no leading or trailing spaces
-                                        @endphp
-                                        <img class="object-cover w-full h-48" src="{{ asset($firstPath) }}" alt="{{ $ad->boostedProduct->name }}" loading="lazy">
-                                    @endif
+                                        <img class="object-cover w-full h-48" src="{{ asset($ad->boostedProduct->file_path) }}" alt="{{ $ad->boostedProduct->name }}" loading="lazy">
                                     <div class="absolute px-3 py-1 bg-white rounded-full shadow-lg bottom-4 left-4">
                                         <p class="font-medium text-gray-600">
                                             ${{ number_format($ad->boostedProduct->price, fmod($ad->boostedProduct->price, 1) !== 0.00 ? 2 : 0) }}
