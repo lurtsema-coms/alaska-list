@@ -272,7 +272,7 @@ new class extends Component {
             toDateISO.setDate(toDateISO.getDate() + duration);
 
             // Format the to_date as YYYY-MM-DD for display
-            const toDateFormatted = toDateISO.toISOString().split('T')[0];
+            const toDateFormatted = `${String(toDateISO.getDate()).padStart(2, '0')}/${String(toDateISO.getMonth() + 1).padStart(2, '0')}/${toDateISO.getFullYear()}`;
 
             // Update the component and the display
             component.from_date = fromDateISO.toISOString();
