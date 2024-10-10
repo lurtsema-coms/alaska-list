@@ -27,7 +27,7 @@
                                 <h3 class="text-xl font-semibold text-gray-700 sm:text-2xl">Boosted Listings ✅</h3>
                                 <p class="mt-2 text-gray-600">Enhance your visibility and drive more traffic to your product with our Boosted Listings! These packages are tailored to get your offerings in front of more potential customers, ensuring your brand stands out in a crowded market.</p>
                                 @php
-                                    $plans = App\Models\AdvertisingPlan::all(); // Fetch all products
+                                    $plans = App\Models\AdvertisingPlan::whereNull('with_boost_id')->get(); // Fetch all products
                                 @endphp
                                 <div class="flex flex-wrap gap-6 mt-10">
                                     @foreach ($plans as $plan)
