@@ -3,6 +3,7 @@
 use App\Traits\ListingOption;
 use App\Models\AdvertisingPlan;
 use App\Models\SpecialBoost;
+use App\Models\Advertisement;
 use App\Models\Product;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Hash;
@@ -41,13 +42,34 @@ new class extends Component {
     public function with(): array
     {
         return [
-            'products' => $this->loadProducts(),
+            'products' => $this->loadProducts()['products'],
+            'disabledProductIds' => $this->loadProducts()['disabledProductIds'],
             'plans' => $this->loadAdvertisingPlans(),
         ];
     }
 
-    public function loadProducts(){
-        return Product::belongsToUser(auth()->user()->id)->get();
+    public function loadProducts()
+    {
+        // Get all products belonging to the authenticated user
+        $products = Product::belongsToUser(auth()->user()->id)->get();
+
+        // Get the IDs of products boosted in the Special Boost module
+        $boostedProductIds = SpecialBoost::where('from_date', '<=', now())
+            ->where('to_date', '>=', now())
+            ->pluck('product_id')
+            ->toArray();
+
+        // Get the IDs of products boosted in the Advertisement module
+        $boostedAdProductIds = Advertisement::where('from_date', '<=', now())
+            ->where('to_date', '>=', now())
+            ->pluck('product_id')
+            ->toArray();
+
+        // Merge both boosted IDs
+        $disabledProductIds = array_merge($boostedProductIds, $boostedAdProductIds);
+
+        // Pass products and the combined boosted IDs to the view
+        return compact('products', 'disabledProductIds');
     }
 
     public function loadAdvertisingPlans(){
@@ -56,40 +78,42 @@ new class extends Component {
 
     public function addSpecialBoost()
     {
-        $product = Product::find($this->item_code);
-        $product_plan = AdvertisingPlan::find($this->advertising_plan_id);
-        $productPriceId = $product_plan->price_id;
-        $user = auth()->user();
-        
-        session()->put('checkout_data', [
-            'item_code' => $this->item_code,
-            'product_id' => $product->id,
-            'advertising_plan_id' => $this->advertising_plan_id,
-            'from_date' => $this->from_date,
-            'to_date' => $this->to_date,
-            'add_boost_modal' => $this->add_boost_modal,
-        ]);
+    // Ensure $this->item_code contains a valid product ID
+    $product = Product::where('id', $this->item_code)->first();  // Retrieve a single product
 
-        return $user->checkout([$productPriceId],
-            [
-                'success_url' => route('checkout-success'),
-                'cancel_url' => route('checkout-cancel'),
-            ]);
-
-        // $sp = SpecialBoost::create([
-        //     'uuid' => 'boost-code-'.substr(Str::uuid()->toString(), 0, 10),
-        //     'product_id' => $product->id,
-        //     'advertising_plan_id' => $this->advertising_plan_id,
-        //     'from_date' => $this->formatIso($this->from_date),
-        //     'to_date' => $this->formatIso($this->to_date),
-        // ]);
-
-        // $this->resetData(['item_code', 'from_date', 'to_date', 'photo']);
-        // $this->add_boost_modal = false;
-        // $this->inc++;
-        // $this->dispatch('alert-success');
+    if (!$product) {
+        // Handle the case where the product doesn't exist
+        $this->dispatch('alert-error', 'Product not found.');
+        return;
     }
 
+    $product_plan = AdvertisingPlan::find($this->advertising_plan_id);
+
+    if (!$product_plan) {
+        // Handle missing plan scenario
+        $this->dispatch('alert-error', 'Advertising plan not found.');
+        return;
+    }
+
+    $productPriceId = $product_plan->price_id;
+    $user = auth()->user();
+
+    // Store checkout data
+    session()->put('checkout_data', [
+        'item_code' => $this->item_code,
+        'product_id' => $product->id,
+        'advertising_plan_id' => $this->advertising_plan_id,
+        'from_date' => $this->from_date,
+        'to_date' => $this->to_date,
+        'add_boost_modal' => $this->add_boost_modal,
+    ]);
+
+    // Redirect user to checkout
+    return $user->checkout([$productPriceId], [
+        'success_url' => route('checkout-success'),
+        'cancel_url' => route('checkout-cancel'),
+    ]);
+}
     public function clearCheckoutData()
     {
         session()->forget('checkout_data');
@@ -140,9 +164,12 @@ new class extends Component {
                                 <div class="" wire:ignore>
                                     <p class="font-medium text-slate-700">Item Code <span class="text-red-400">*</span></p>
                                     <select class="selectize-select" id="item-code" wire:model="item_code" required>
-                                        <option value="" disabled></option>
-                                        @foreach ($products as $product)
-                                            <option value="{{ $product->id }}">{{ $product->uuid }}</option>
+                                        <option value="" disabled>Select a product</option>
+                                        @foreach($products as $product)
+                                            <option value="{{ $product->id }}" 
+                                                @if(in_array($product->id, $disabledProductIds)) disabled @endif>
+                                                {{ $product->uuid }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

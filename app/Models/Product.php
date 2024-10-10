@@ -85,4 +85,18 @@ class Product extends Model
         return $query->where('created_by', $userId)
             ->where('status', 'ACTIVE');
     }
+
+    public function scopeNotBoostedProduct($query,$userId)
+    {
+        $today = now()->toDateTimeString();
+
+        $boostedProductsIds = SpecialBoost::where('from_date', '<=', $today)
+            ->where('to_Date', '>=',$today)
+            ->pluck('product_id')
+            ->toArray();
+
+        return $query->where('created_by' , $userId)
+            ->where('status', 'ACTIVE')
+            ->whereNotIn('id',$boostedProductsIds);
+    }
 }
