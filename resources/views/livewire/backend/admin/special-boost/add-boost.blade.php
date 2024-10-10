@@ -43,7 +43,7 @@ new class extends Component {
     {
         return [
             'products' => $this->loadProducts()['products'],
-            'disabledProductIds' => $this->loadProducts()['disabledProductIds'],
+            'disabledProductIds' => $this->loadProducts()['disabledProductIds'], // Change here
             'plans' => $this->loadAdvertisingPlans(),
         ];
     }
