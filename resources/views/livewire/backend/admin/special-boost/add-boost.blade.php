@@ -73,7 +73,7 @@ new class extends Component {
     }
 
     public function loadAdvertisingPlans(){
-        return AdvertisingPlan::get();
+        return AdvertisingPlan::whereNull('with_boost_id')->get();
     }
 
     public function addSpecialBoost()
