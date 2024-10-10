@@ -62,7 +62,7 @@ class CheckoutPaymentController extends Controller
         if ($this->isPaymentSuccessful($checkoutData)) {
             $uuid = 'ad-' . substr(Str::uuid()->toString(), 0, 8);
             $photo_path = $checkoutData['photo_path']; // Retrieve the file path
-    
+            
             // Create the advertisement record
             $sp = Advertisement::create([
                 'uuid' => $uuid,

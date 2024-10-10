@@ -96,7 +96,7 @@ new class extends Component {
                                 ${{ $plan->cost }}
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
-                                {{ $plan->createdBy->first_name.' '.$plan->createdBy->last_name }}
+                                {{ $plan->createdBy ? $plan->createdBy->first_name . ' ' . $plan->createdBy->last_name : '' }}
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                                 {{ $plan->created_at }}

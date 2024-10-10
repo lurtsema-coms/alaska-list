@@ -50,7 +50,7 @@ new class extends Component {
     {
         $advertising_plan_id = 0;
         $product_plan = AdvertisingPlan::find($this->advertising_plan_id);
-        $advertising_plan_id = $product_plan;
+        $advertising_plan_id = $product_plan->id;
         $productPriceId = $product_plan->price_id;
         $photo = $this->photo;
         $user = auth()->user();
@@ -148,8 +148,8 @@ new class extends Component {
                                     </select>
                                 </div>
                             </div>
-                            <div class="flex flex-col gap-4 sm:flex-row">
-                                <div class="flex-1 space-y-2">
+                            <div class="grid gap-4 sm:grid-cols-2">
+                                <div>
                                     <p class="font-medium text-slate-700">From Date <span class="text-red-400">*</span></p>
                                     <input 
                                         class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
@@ -159,7 +159,7 @@ new class extends Component {
                                         required
                                     >
                                 </div>
-                                <div class="flex-1 space-y-2">
+                                <div>
                                     <p class="font-medium text-slate-700">To Date</p>
                                     <input 
                                         class="text-base w-full px-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-0 focus:border-[#1F4B55]" 
