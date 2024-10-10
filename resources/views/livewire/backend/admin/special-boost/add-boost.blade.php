@@ -164,7 +164,7 @@ new class extends Component {
                                 <div class="" wire:ignore>
                                     <p class="font-medium text-slate-700">Item Code <span class="text-red-400">*</span></p>
                                     <select class="selectize-select" id="item-code" wire:model="item_code" required>
-                                        <option value="" disabled>Select a product</option>
+                                        <option value="" disabled></option>
                                         @foreach($products as $product)
                                             <option value="{{ $product->id }}" 
                                                 @if(in_array($product->id, $disabledProductIds)) disabled @endif>
