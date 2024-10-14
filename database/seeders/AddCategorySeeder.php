@@ -22,7 +22,7 @@ class AddCategorySeeder extends Seeder
                     'created_at' => Date::now(),
                 ],
                 [
-                    'name' => 'Transporatation',
+                    'name' => 'Transportation',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
@@ -42,7 +42,7 @@ class AddCategorySeeder extends Seeder
                     'created_at' => Date::now(),
                 ],
                 [
-                    'name' => 'Employement',
+                    'name' => 'Employment',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
