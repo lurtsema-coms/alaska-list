@@ -36,7 +36,7 @@ class AddSubCategorySeeder extends Seeder
                 ],
                 [
                     'category_id' => 3,
-                    'name' => 'Firearms Parts | Accessories',
+                    'name' => 'Firearms Parts $ Accessories',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
