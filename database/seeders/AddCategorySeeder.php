@@ -22,7 +22,7 @@ class AddCategorySeeder extends Seeder
                     'created_at' => Date::now(),
                 ],
                 [
-                    'name' => ' Recreational Property',
+                    'name' => 'Recreational Property',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
