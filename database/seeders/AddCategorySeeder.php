@@ -17,35 +17,31 @@ class AddCategorySeeder extends Seeder
         Category::insert(
             [
                 [
-                    'name' => 'Pets',
+                    'name' => 'Alaska Real Estate',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
                 [
-                    'name' => 'Transportation',
+                    'name' => ' Recreational Property',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
                 [
-                    'name' => 'Rentals',
+                    'name' => 'Firearms',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
                 [
-                    'name' => 'Farm & Garden',
+                    'name' => 'Outdoor Transportation',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
                 [
-                    'name' => 'Real Estate',
+                    'name' => 'Sporting Goods',
                     'created_by' => 2,
                     'created_at' => Date::now(),
                 ],
-                [
-                    'name' => 'Employment',
-                    'created_by' => 2,
-                    'created_at' => Date::now(),
-                ],
+
             ]
         );
     }
