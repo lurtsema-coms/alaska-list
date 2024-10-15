@@ -2,6 +2,7 @@
 
 use App\Models\Advertisement;
 use Livewire\Volt\Component;
+use Illuminate\Http\Request;
 
 new class extends Component {
 
@@ -54,15 +55,19 @@ new class extends Component {
             </div>  
         </div>
         @else
-            <div class="p-4 overflow-auto border border-gray-200 divide-gray-200 rounded shadow max-h-96">
-                <p class="pb-4 mb-4 font-medium border-b">Location</p>
-                <div class="grid grid-cols-2 gap-2 text-slate-500">
-                    @foreach (config('global.us_states') as $location)
-                        <a href="{{ "listing-page?location=$location" }}" wire:navigate>
-                            <span>{{ $location }}</span>
-                        </a>
-                    @endforeach
-                </div>
+            <div x-data="{ isHomePage: window.location.pathname === '/' }">
+                <template x-if="!isHomePage">
+                    <div class="p-4 overflow-auto border border-gray-200 divide-gray-200 rounded shadow max-h-96">
+                        <p class="pb-4 mb-4 font-medium border-b">Location</p>
+                        <div class="grid grid-cols-2 gap-2 text-slate-500">
+                            @foreach (config('global.us_states') as $location)
+                                <a href="{{ "listing-page?location=$location" }}" wire:navigate>
+                                    <span>{{ $location }}</span>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </template>
             </div>
     @endif
 </div>
