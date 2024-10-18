@@ -62,7 +62,7 @@ new class extends Component {
         @foreach ($categories as $category)
             <div class="" wire:key="{{ 'category-listing-mobile-'.$category->id }}">
                 <button 
-                    class="py-2 w-[8rem]  font-bold  rounded-lg
+                    class="py-2 w-[12rem] px-2  font-bold  rounded-lg
                     {{ $selectedCategoryId === $category->id ? 'bg-[#2171a7] text-white' : '' }}"
                     wire:click="selectedButton({{ $category }})"
                 >
