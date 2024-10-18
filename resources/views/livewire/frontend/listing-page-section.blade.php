@@ -174,6 +174,7 @@ new class extends Component {
 
     public function oneCategory($sub_category)
     {
+        $this->dispatch('load-time-ago');
         // Toggle
         if (in_array($sub_category, $this->sc_names)) {
             $this->sc_names = array_diff($this->sc_names, [$sub_category]);

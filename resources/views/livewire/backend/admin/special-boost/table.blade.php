@@ -175,7 +175,7 @@ new class extends Component {
                         <td class="px-6 py-3 text-sm text-gray-500 whitespace-nowrap">
                             <div class="flex items-center gap-2">
                                 @role('seller')
-                                    <a href="{{  route('seller-special-boost-view', $sponsor->id) }}" wire:navigate>
+                                    <a href="{{  route('seller-special-boost-view', $sponsor->id) }}">
                                         <button class="px-4 py-2 text-sm text-white bg-blue-400 rounded-lg shadow-md hover:bg-blue-500">
                                             VIEW
                                         </button>
