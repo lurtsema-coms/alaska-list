@@ -175,6 +175,7 @@ new class extends Component {
     public function oneCategory($sub_category)
     {
         $this->dispatch('load-time-ago');
+        // dd($sub_category);
         // Toggle
         if (in_array($sub_category, $this->sc_names)) {
             $this->sc_names = array_diff($this->sc_names, [$sub_category]);
@@ -203,38 +204,6 @@ new class extends Component {
         </div>
     </div>
     <div class="relative z-30 px-5 mx-auto max-w-120 -top-28 sm:-top-20">
-        {{-- Filter Categories responsive --}}
-        {{-- <div class="p-4 mx-auto bg-white border shadow-sm max-w-8xl rounded-2xl xl:hidden">
-            <div class="space-y-4 overflow-y-auto max-h-80 sm:p-4">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-medium text-gray-700">Filter by categories</h2>
-                    <button class="text-sm text-gray-600 hover:text-gray-900 hover:underline focus:outline-none" type="button" wire:click="dispatchTimeAgo">Reset</button>
-                </div>
-
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                    @foreach ($categories as $category)
-                        <div class="p-4 bg-gray-100 rounded-lg shadow-md" wire:key="{{ 'category-listing-'.$category->id }}">
-                            <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
-                            <div class="grid gap-2 md:grid-cols-2">
-                                @foreach($category->subCategories as $sub_category)
-                                    <a class="category-anchor" wire:click="oneCategory('{{ $category->id.'-'.$sub_category->name }}')">
-                                        <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
-                                            <input type="checkbox"
-                                                class="hidden w-5 h-5"
-                                                wire:model.change="sc_names"
-                                                value="{{ $category->id.'-'.$sub_category->name }}"
-                                            >
-                                            <span class="text-gray-500 {{ in_array($category->id.'-'.$sub_category->name, $sc_names) ? "bg-white shadow-sm p-2 border rounded-lg border-[#285680] text-[#285680]" : '' }}">{{ $sub_category->name }}</span>
-                                        </label>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div> --}}
-
         <div class="px-2 sm:px-10 bg-gray-50 rounded-2xl">
             <div class="flex flex-col justify-between mt-12 xl:flex-row">
                 <div class="flex flex-wrap gap-4 mt-8">
@@ -303,7 +272,7 @@ new class extends Component {
                                 <div class="flex items-center gap-2">
                                     <span>{{ substr($sc_names[0], strpos($sc_names[0], '-') + 1) }}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-600 cursor-pointer size-5 hover:opacity-70"
-                                        wire:click="oneCategory('{{ $sc_names[0] }}')"
+                                        wire:click='oneCategory("{{ $sc_names[0] }}")'
                                     >
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                     </svg>
@@ -320,7 +289,7 @@ new class extends Component {
                                     <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
                                     <div class="grid grid-cols-1 gap-2">
                                         @foreach($category->subCategories as $sub_category)
-                                            <a class="category-anchor" wire:click="oneCategory('{{ $category->id.'-'.$sub_category->name }}')">
+                                            <a class="category-anchor" wire:click='oneCategory("{{ $category->id.'-'.$sub_category->name }}")'>
                                                 <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
                                                     <input type="checkbox"
                                                         class="hidden w-5 h-5"
@@ -349,7 +318,7 @@ new class extends Component {
                                         <div class="flex items-center gap-2">
                                             <span>{{ substr($sc_names[0], strpos($sc_names[0], '-') + 1) }}</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-600 cursor-pointer size-5 hover:opacity-70"
-                                                wire:click="oneCategory('{{ $sc_names[0] }}')"
+                                                wire:click='oneCategory("{{ $sc_names[0] }}")'
                                             >
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                             </svg>
@@ -366,7 +335,7 @@ new class extends Component {
                                             <h3 class="mb-2 text-lg font-medium text-gray-700">{{ $category->name }}</h3>
                                             <div class="grid grid-cols-1 gap-2">
                                                 @foreach($category->subCategories as $sub_category)
-                                                    <a class="category-anchor" wire:click="oneCategory('{{ $category->id.'-'.$sub_category->name }}')">
+                                                    <a class="category-anchor" wire:click='oneCategory("{{ $category->id.'-'.$sub_category->name }}")'>
                                                         <label class="flex items-center cursor-pointer min-w-fit" wire:key="{{ 'sub-categ-listing-'.$sub_category->id }}">
                                                             <input type="checkbox"
                                                                 class="hidden w-5 h-5"
