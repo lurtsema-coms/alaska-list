@@ -62,7 +62,7 @@ new class extends Component {
 
 <div class="border border-gray-200 divide-gray-200 rounded shadow w-full">
     <p class="p-4 mb-4 border-b text-lg font-bold text-[#2171a7]">Browse Items by Location</p>
-    <div class="grid grid-cols-1 gap-2 pl-6 text-gray-600 overflow-auto max-h-96  scrollbar-thumb-[#2171a7] scrollbar-track-transparent scrollbar-thin  ">
+    <div class="grid grid-cols-1 gap-2 pl-6 pb-5 text-gray-600 overflow-auto max-h-96  scrollbar-thumb-[#2171a7] scrollbar-track-transparent scrollbar-thin  ">
         @foreach (config('global.us_states') as $location)
             <a href="{{ "listing-page?location=$location" }}" wire:navigate>
                 <span>{{ $location }}</span>
