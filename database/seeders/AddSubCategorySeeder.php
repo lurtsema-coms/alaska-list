@@ -72,12 +72,6 @@ class AddSubCategorySeeder extends Seeder
                 ],
                 [
                     'category_id' => 4,
-                    'name' => 'ATV | UTV | Wheels & Tires',
-                    'created_by' => 2,
-                    'created_at' => Date::now(),
-                ],
-                [
-                    'category_id' => 4,
                     'name' => 'Boats | Part & Accessories',
                     'created_by' => 2,
                     'created_at' => Date::now(),
